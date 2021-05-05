@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AthenaApp.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:AthenaApp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="{Binding LoginPage}"
+    Shell.NavBarIsVisible="False"
+    mc:Ignorable="d">
+
+
+    <StackLayout BackgroundColor="#e6e6e6">
+        <Grid>
+            <StackLayout
+                Margin="0"
+                Padding="0"
+                HorizontalOptions="FillAndExpand">
+                <Frame
+                    Margin="0"
+                    Padding="0"
+                    HeightRequest="120">
+                    <Image
+                        Margin="0"
+                        Aspect="AspectFill"
+                        Source="{local:ImageResource AthenaApp.EmbeddedResources.athena_logo.png}" />
+                </Frame>
+            </StackLayout>
+
+            <StackLayout
+                Margin="10,120,10,0"
+                Padding="0"
+                HorizontalOptions="FillAndExpand">
+                <Frame
+                    Margin="0"
+                    Padding="0"
+                    BackgroundColor="White"
+                    HasShadow="True"
+                    HeightRequest="500">
+
+                    <StackLayout>
+
+
+                        <StackLayout Margin="10">
+                            <Label
+                                FontAttributes="Bold"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="SIGN IN"
+                                TextColor="Black" />
+                        </StackLayout>
+
+                        <StackLayout Margin="15,10" Padding="0">
+
+                            <Frame
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                BorderColor="DarkGray"
+                                CornerRadius="30"
+                                HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Horizontal">
+
+
+
+
+                                    <Entry
+                                        x:Name="Email"
+                                        Margin="10,0,0,0"
+                                        ClearButtonVisibility="WhileEditing"
+                                        FontAttributes="Italic"
+                                        Keyboard="Email"
+                                        Placeholder="youremail@mail.com"
+                                        ReturnType="Next"
+                                        Text="{Binding Email}"
+                                        TextColor="Black"
+                                        WidthRequest="300" />
+
+
+
+
+
+
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                BorderColor="DarkGray"
+                                CornerRadius="30"
+                                HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Horizontal">
+
+
+
+
+
+                                    <Entry
+                                        x:Name="Password"
+                                        Margin="10,0,0,0"
+                                        ClearButtonVisibility="WhileEditing"
+                                        FontAttributes="Italic"
+                                        IsPassword="True"
+                                        Placeholder="Password"
+                                        Text="{Binding Password}"
+                                        TextColor="Black"
+                                        WidthRequest="300" />
+
+
+
+
+
+
+                                </StackLayout>
+                            </Frame>
+
+                            <StackLayout Orientation="Horizontal">
+
+                                <Label
+                                    Margin="10,10,10,10"
+                                    FontAttributes="Bold"
+                                    FontSize="Small"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Forgot Password?"
+                                    TextColor="MidnightBlue"
+                                    VerticalTextAlignment="Center" />
+
+
+                            </StackLayout>
+
+                            <Button
+                                BackgroundColor="MidnightBlue"
+                                CornerRadius="30"
+                                Text="SIGN IN"
+                                TextColor="White" />
+                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label
+                                    FontSize="Small"
+                                    Text="Still Not Connected ?"
+                                    TextColor="DarkGray" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Small"
+                                    Text="Sign Up"
+                                    TextColor="MidnightBlue" />
+                            </StackLayout>
+
+                            <StackLayout Margin="0,25,0,0" Padding="0">
+                                <Grid>
+                                    <BoxView
+                                        BackgroundColor="DarkGray"
+                                        HeightRequest="1"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        WidthRequest="150" />
+                                    <Frame
+                                        Margin="0"
+                                        Padding="0"
+                                        BackgroundColor="White"
+                                        BorderColor="DarkGray"
+                                        CornerRadius="45"
+                                        HasShadow="False"
+                                        HeightRequest="45"
+                                        HorizontalOptions="Center"
+                                        WidthRequest="45">
+                                        <Label
+                                            FontSize="Small"
+                                            HorizontalTextAlignment="Center"
+                                            Text="OR"
+                                            TextColor="DarkGray"
+                                            VerticalTextAlignment="Center" />
+                                    </Frame>
+                                </Grid>
+                            </StackLayout>
+
+                            <StackLayout
+                                Margin="0,25"
+                                HorizontalOptions="CenterAndExpand"
+                                Orientation="Horizontal">
+                                <Frame
+                                    Margin="0"
+                                    Padding="0"
+                                    BackgroundColor="White"
+                                    BorderColor="DarkGray"
+                                    CornerRadius="45"
+                                    HasShadow="False"
+                                    HeightRequest="45"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="45">
+                                    <Image
+                                        Margin="0"
+                                        Aspect="AspectFill"
+                                        Source="https://www.pngitem.com/pimgs/m/44-440455_transparent-background-fb-logo-hd-png-download.png" />
+                                </Frame>
+                                <Frame
+                                    Margin="0"
+                                    Padding="0"
+                                    BackgroundColor="White"
+                                    BorderColor="DarkGray"
+                                    CornerRadius="45"
+                                    HasShadow="False"
+                                    HeightRequest="45"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="45">
+                                    <Image
+                                        Margin="0"
+                                        Aspect="AspectFill"
+                                        Source="https://blog.hubspot.com/hubfs/image8-2.jpg" />
+                                </Frame>
+                            </StackLayout>
+
+                        </StackLayout>
+
+
+                    </StackLayout>
+
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </StackLayout>
+</ContentPage>
