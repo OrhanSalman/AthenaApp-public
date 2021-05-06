@@ -6,7 +6,6 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:local="clr-namespace:AthenaApp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="{Binding LoginPage}"
     Shell.NavBarIsVisible="False"
     mc:Ignorable="d">
 
@@ -40,8 +39,6 @@
                     HeightRequest="500">
 
                     <StackLayout>
-
-
                         <StackLayout Margin="10">
                             <Label
                                 FontAttributes="Bold"
@@ -51,7 +48,6 @@
                         </StackLayout>
 
                         <StackLayout Margin="15,10" Padding="0">
-
                             <Frame
                                 Padding="0"
                                 BackgroundColor="Transparent"
@@ -59,10 +55,6 @@
                                 CornerRadius="30"
                                 HorizontalOptions="FillAndExpand">
                                 <StackLayout Orientation="Horizontal">
-
-
-
-
                                     <Entry
                                         x:Name="Email"
                                         Margin="10,0,0,0"
@@ -71,15 +63,8 @@
                                         Keyboard="Email"
                                         Placeholder="youremail@mail.com"
                                         ReturnType="Next"
-                                        Text="{Binding Email}"
                                         TextColor="Black"
                                         WidthRequest="300" />
-
-
-
-
-
-
                                 </StackLayout>
                             </Frame>
 
@@ -90,11 +75,6 @@
                                 CornerRadius="30"
                                 HorizontalOptions="FillAndExpand">
                                 <StackLayout Orientation="Horizontal">
-
-
-
-
-
                                     <Entry
                                         x:Name="Password"
                                         Margin="10,0,0,0"
@@ -102,20 +82,12 @@
                                         FontAttributes="Italic"
                                         IsPassword="True"
                                         Placeholder="Password"
-                                        Text="{Binding Password}"
                                         TextColor="Black"
                                         WidthRequest="300" />
-
-
-
-
-
-
                                 </StackLayout>
                             </Frame>
 
                             <StackLayout Orientation="Horizontal">
-
                                 <Label
                                     Margin="10,10,10,10"
                                     FontAttributes="Bold"
@@ -125,15 +97,15 @@
                                     Text="Forgot Password?"
                                     TextColor="MidnightBlue"
                                     VerticalTextAlignment="Center" />
-
-
                             </StackLayout>
 
                             <Button
                                 BackgroundColor="MidnightBlue"
+                                Clicked="Sign_In_Clicked"
                                 CornerRadius="30"
                                 Text="SIGN IN"
                                 TextColor="White" />
+
                             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                                 <Label
                                     FontSize="Small"
@@ -209,12 +181,8 @@
                                         Source="https://blog.hubspot.com/hubfs/image8-2.jpg" />
                                 </Frame>
                             </StackLayout>
-
                         </StackLayout>
-
-
                     </StackLayout>
-
                 </Frame>
             </StackLayout>
         </Grid>
