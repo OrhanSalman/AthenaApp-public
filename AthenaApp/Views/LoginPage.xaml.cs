@@ -17,5 +17,10 @@ namespace AthenaApp.Views
             InitializeComponent();
             this.BindingContext = new LoginViewModel();
         }
+
+        private void Sign_In_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -12,10 +12,10 @@ namespace AthenaApp.ViewModels
 
         public LoginViewModel()
         {
-            LoginCommand = new Command(OnLoginClicked);
+            LoginCommand = new Command(Sign_In_Clicked);
         }
 
-        private async void OnLoginClicked(object obj)
+        private async void Sign_In_Clicked(object obj)
         {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
             await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
