@@ -22,7 +22,8 @@ namespace AthenaWebApp.Data
             new User{UserMail="jasmin@uni-siegen.de",Nickname="Jasmin"},
             new User{UserMail="alex@uni-siegen.de",Nickname="Alex"},
             new User{UserMail="domenik@uni-siegen.de",Nickname="Domenik"},
-            new User{UserMail="raphael@uni-siegen.de",Nickname="Raphael"}
+            new User{UserMail="raphael@uni-siegen.de",Nickname="Raphael"},
+            new User{UserMail="orhan@uni-siegen.de",Nickname="Orhan"}
 
 //                        new Student{FirstMidName="raphael@uni-siegen.de",Nickname="Raphael",EnrollmentDate=DateTime.Parse("2002-09-01")},
 
