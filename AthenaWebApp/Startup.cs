@@ -4,9 +4,14 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AthenaWebApp.Controllers;
+using AthenaWebApp.Models;
 using AthenaWebApp.Data;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace AthenaWebApp
 {
@@ -22,10 +27,9 @@ namespace AthenaWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<UserContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddControllersWithViews();
+            services.AddDbContext<UserContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("ServerConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
