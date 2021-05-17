@@ -22,7 +22,7 @@ namespace AthenaWebApp.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+            return View(await _context.User.ToListAsync());
         }
 
         // GET: Users/Details/5
@@ -33,15 +33,8 @@ namespace AthenaWebApp.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
-            //.Include(s => s.Enrollments)
-            //.ThenInclude(e => e.Course)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(m => m.UserID == id);
-
-
-            //var user = await _context.Users
-            //    .FirstOrDefaultAsync(m => m.ID == id);
+            var user = await _context.User
+                .FirstOrDefaultAsync(m => m.UserID == id);
             if (user == null)
             {
                 return NotFound();
@@ -61,23 +54,13 @@ namespace AthenaWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LastName,FirstMidName,EnrollmentDate")] User user)
+        public async Task<IActionResult> Create([Bind("UserID,UserMail,Nickname")] User user)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    _context.Add(user);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-            }
-            catch (DbUpdateException /* ex */)
-            {
-                //Log the error (uncomment ex variable name and write a log.
-                ModelState.AddModelError("", "Unable to save changes. " +
-                    "Try again, and if the problem persists " +
-                    "see your system administrator.");
+                _context.Add(user);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(user);
         }
@@ -90,7 +73,7 @@ namespace AthenaWebApp.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.User.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -101,57 +84,51 @@ namespace AthenaWebApp.Controllers
         // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(int? id)
+        public async Task<IActionResult> Edit(int id, [Bind("UserID,UserMail,Nickname")] User user)
         {
-            if (id == null)
+            if (id != user.UserID)
             {
                 return NotFound();
             }
-            var userToUpdate = await _context.Users.FirstOrDefaultAsync(s => s.UserID == id);
-            if (await TryUpdateModelAsync<User>(
-                userToUpdate,
-                "",
-                s => s.UserMail, s => s.Nickname))
+
+            if (ModelState.IsValid)
             {
                 try
                 {
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateException /* ex */)
+                catch (DbUpdateConcurrencyException)
                 {
-                    //Log the error (uncomment ex variable name and write a log.)
-                    ModelState.AddModelError("", "Unable to save changes. " +
-                        "Try again, and if the problem persists, " +
-                        "see your system administrator.");
+                    if (!UserExists(user.UserID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
+                return RedirectToAction(nameof(Index));
             }
-            return View(userToUpdate);
+            return View(user);
         }
 
         // GET: Users/Delete/5
-        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .AsNoTracking()
+            var user = await _context.User
                 .FirstOrDefaultAsync(m => m.UserID == id);
             if (user == null)
             {
                 return NotFound();
-            }
-
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ViewData["ErrorMessage"] =
-                    "Delete failed. Try again, and if the problem persists " +
-                    "see your system administrator.";
             }
 
             return View(user);
@@ -162,28 +139,15 @@ namespace AthenaWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-
-            try
-            {
-                _context.Users.Remove(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            catch (DbUpdateException /* ex */)
-            {
-                //Log the error (uncomment ex variable name and write a log.)
-                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
-            }
+            var user = await _context.User.FindAsync(id);
+            _context.User.Remove(user);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(int id)
         {
-            return _context.Users.Any(e => e.UserID == id);
+            return _context.User.Any(e => e.UserID == id);
         }
     }
 }
