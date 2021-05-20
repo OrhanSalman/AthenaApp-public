@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AthenaWebApp.Models.User>
+﻿@model IEnumerable<AthenaWebApp.Models.Role>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,13 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UserMail)
+                @Html.DisplayNameFor(model => model.UserId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nickname)
+                @Html.DisplayNameFor(model => model.IsAdmin)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CompanyId)
+                @Html.DisplayNameFor(model => model.IsSupervisor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsUser)
             </th>
             <th></th>
         </tr>
@@ -28,13 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.UserMail)
+                @Html.DisplayFor(modelItem => item.UserId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Nickname)
+                @Html.DisplayFor(modelItem => item.IsAdmin)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CompanyId)
+                @Html.DisplayFor(modelItem => item.IsSupervisor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsUser)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

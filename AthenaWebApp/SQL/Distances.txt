@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Distances] (
+    [Id]     INT        IDENTITY (1, 1) NOT NULL,
+    [UserId] INT        NULL,
+    [Meters] FLOAT (53) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Distances_Users] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id])
+);
+

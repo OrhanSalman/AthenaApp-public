@@ -10,22 +10,22 @@ using AthenaWebApp.Models;
 
 namespace AthenaWebApp.Controllers
 {
-    public class UsersController : Controller
+    public class DistancesController : Controller
     {
         private readonly AthenaContext _context;
 
-        public UsersController(AthenaContext context)
+        public DistancesController(AthenaContext context)
         {
             _context = context;
         }
 
-        // GET: Users
+        // GET: Distances
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+            return View(await _context.Distances.ToListAsync());
         }
 
-        // GET: Users/Details/5
+        // GET: Distances/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace AthenaWebApp.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
+            var distance = await _context.Distances
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            if (distance == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(distance);
         }
 
-        // GET: Users/Create
+        // GET: Distances/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Distances/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserMail,Nickname,CompanyId")] User user)
+        public async Task<IActionResult> Create([Bind("Id,UserId,Meters")] Distance distance)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                _context.Add(distance);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(distance);
         }
 
-        // GET: Users/Edit/5
+        // GET: Distances/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace AthenaWebApp.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var distance = await _context.Distances.FindAsync(id);
+            if (distance == null)
             {
                 return NotFound();
             }
-            return View(user);
+            return View(distance);
         }
 
-        // POST: Users/Edit/5
+        // POST: Distances/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserMail,Nickname,CompanyId")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Meters")] Distance distance)
         {
-            if (id != user.Id)
+            if (id != distance.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace AthenaWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(distance);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Id))
+                    if (!DistanceExists(distance.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace AthenaWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(distance);
         }
 
-        // GET: Users/Delete/5
+        // GET: Distances/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace AthenaWebApp.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
+            var distance = await _context.Distances
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            if (distance == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(distance);
         }
 
-        // POST: Users/Delete/5
+        // POST: Distances/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            _context.Users.Remove(user);
+            var distance = await _context.Distances.FindAsync(id);
+            _context.Distances.Remove(distance);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool DistanceExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.Distances.Any(e => e.Id == id);
         }
     }
 }
