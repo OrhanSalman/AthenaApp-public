@@ -28,7 +28,7 @@ namespace AthenaWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<UserContext>(options =>
+            services.AddDbContext<AthenaContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("ServerConnection")));
         }
 

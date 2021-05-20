@@ -8,16 +8,18 @@ namespace AthenaWebApp.Models
 {
     public class User
     {
-        public int UserID { get; set; }
+        [Display(Name = "ID")]
+        public int Id { get; set; }
+
+        [Display(Name = "Benutzer E-Mail")]
         public string UserMail { get; set; }
         public string Nickname { get; set; }
 
+        [Display(Name = "Universität")]
+        public int CompanyId { get; set; }
 
-        /*
-                 [DataType(DataType.Date)]
-        public DateTime ReleaseDate { get; set; }
-        public string Genre { get; set; }
-        public decimal Price { get; set; }
-         */
+
+        public ICollection<Distance> Distances { get; set; }
+         
     }
 }
