@@ -12,9 +12,9 @@ namespace AthenaWebApp.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly AthenaContext _context;
+        private readonly AthenaIdentityContext _context;
 
-        public UsersController(AthenaContext context)
+        public UsersController(AthenaIdentityContext context)
         {
             _context = context;
         }

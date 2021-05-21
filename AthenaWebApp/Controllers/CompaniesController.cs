@@ -12,9 +12,9 @@ namespace AthenaWebApp.Controllers
 {
     public class CompaniesController : Controller
     {
-        private readonly AthenaContext _context;
+        private readonly AthenaIdentityContext _context;
 
-        public CompaniesController(AthenaContext context)
+        public CompaniesController(AthenaIdentityContext context)
         {
             _context = context;
         }

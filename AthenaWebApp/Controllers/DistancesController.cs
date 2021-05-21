@@ -12,9 +12,9 @@ namespace AthenaWebApp.Controllers
 {
     public class DistancesController : Controller
     {
-        private readonly AthenaContext _context;
+        private readonly AthenaIdentityContext _context;
 
-        public DistancesController(AthenaContext context)
+        public DistancesController(AthenaIdentityContext context)
         {
             _context = context;
         }
