@@ -12,6 +12,7 @@ using AthenaWebApp.Controllers;
 using AthenaWebApp.Models;
 using AthenaWebApp.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace AthenaWebApp
 {
@@ -28,6 +29,11 @@ namespace AthenaWebApp
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddMvc(options =>
+            {
+                // This pushes users to login if not authenticated
+                options.Filters.Add(new AuthorizeFilter());
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
