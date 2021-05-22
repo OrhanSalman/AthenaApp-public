@@ -26,6 +26,7 @@ namespace AthenaWebApp.Data
         }
 
 
+        // ToDo: Do we need these?
         new public DbSet<Company> Companys { get; set; }
         new public DbSet<User> Users { get; set; }
         new public DbSet<Distance> Distances { get; set; }

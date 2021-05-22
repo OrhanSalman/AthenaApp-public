@@ -1,0 +1,11 @@
+﻿Alle Ideen, Bugs, Verbesserungsvorschläge usw. hier reinwerfen
+
+
+
+1. Wir brauchen eine neue Logik für die Benutzer-Logik: Nutzerrechte (Sehen, Bearbeiten, Erstellen, Löschen)
+	- Anpassen der Db-Strukturen
+		-> Tabellen User + Role müssen in die neuen Tabellen integriert werden (Users + Roles + Claims)
+	- Admin´s dürfen alles, Supervisoren dürfen nur in Db einsehen.
+	- Normalen Athena-Usern müssen sensible Bereiche verwehrt werden
+
+2. 

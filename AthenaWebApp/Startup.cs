@@ -13,6 +13,7 @@ using AthenaWebApp.Models;
 using AthenaWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace AthenaWebApp
 {
@@ -33,6 +34,22 @@ namespace AthenaWebApp
             {
                 // This pushes users to login if not authenticated
                 options.Filters.Add(new AuthorizeFilter());
+            });
+
+            //ToDo: "RequireNonAlphanumeric" has been set to "false". Check if it works
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 1;
+
+                // Default SignIn settings.
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
             });
         }
 
