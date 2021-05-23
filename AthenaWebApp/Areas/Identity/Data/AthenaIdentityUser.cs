@@ -18,7 +18,7 @@ namespace AthenaWebApp.Areas.Identity.Data
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
+        */
 
         [Display(Name = "Nickname")]
         public string Nickname { get; set; }
@@ -28,6 +28,6 @@ namespace AthenaWebApp.Areas.Identity.Data
 
         [Display(Name = "Universität")]
         public int CompanyName { get; set; }
-        */
+        
     }
 }
