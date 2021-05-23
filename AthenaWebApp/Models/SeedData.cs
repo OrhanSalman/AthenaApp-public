@@ -10,9 +10,9 @@ namespace AthenaWebApp.Models
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new AthenaContext(
+            using (var context = new AthenaIdentityContext(
                 serviceProvider.GetRequiredService<
-                    DbContextOptions<AthenaContext>>()))
+                    DbContextOptions<AthenaIdentityContext>>()))
             {
                 // Look for any movies.
                 if (context.Users.Any())

@@ -12,9 +12,9 @@ namespace AthenaWebApp.Controllers
 {
     public class RolesController : Controller
     {
-        private readonly AthenaContext _context;
+        private readonly AthenaIdentityContext _context;
 
-        public RolesController(AthenaContext context)
+        public RolesController(AthenaIdentityContext context)
         {
             _context = context;
         }

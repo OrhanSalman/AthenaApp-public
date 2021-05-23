@@ -17,4 +17,4 @@
 
 5. Registrierung: Drop-Down Menü Uni auswählen
 
-6. Admins der Uni Siegen dürfen nur Member der Uni Siegen verwalten
+6. Admins der Uni-Siegen dürfen nur Member der eigenen Uni sehen,
