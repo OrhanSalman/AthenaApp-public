@@ -8,4 +8,7 @@
 	- Admin´s dürfen alles, Supervisoren dürfen nur in Db einsehen.
 	- Normalen Athena-Usern müssen sensible Bereiche verwehrt werden
 
-2. 
+2. Nur Uni-Siegen Leute dürfen sich registrieren
+
+
+3. Registrierungslink schon bekommen, sobald man sich registriert

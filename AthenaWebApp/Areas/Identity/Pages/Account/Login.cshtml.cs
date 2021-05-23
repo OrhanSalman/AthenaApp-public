@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Text;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace AthenaWebApp.Areas.Identity.Pages.Account
 {
@@ -97,6 +99,18 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
                     _logger.LogWarning("User account locked out.");
                     return RedirectToPage("./Lockout");
                 }
+
+                // Manually added
+                if (ModelState.IsValid)
+                {
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                    {
+                        ModelState.AddModelError(string.Empty, "E-Mail is not confirmed.");
+                        return Page();
+                    }
+                }
+
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
