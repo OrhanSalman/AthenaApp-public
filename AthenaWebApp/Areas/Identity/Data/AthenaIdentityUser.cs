@@ -11,6 +11,9 @@ namespace AthenaWebApp.Areas.Identity.Data
     public class AthenaIdentityUser : IdentityUser
     {
         /*
+         * Sind bereits in ": IdentityUser" vorhanden!
+         *
+
         [Display(Name = "ID")]
         public int Id { get; set; }
 
