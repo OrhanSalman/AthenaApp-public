@@ -69,3 +69,36 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/*dark div*/
+.dark-div, .dark-div a {
+    color: rgba(255,255,255,.75)
+}
+
+    .dark-div a:hover {
+        color: #fff;
+    }
+
+    .dark-div h1, .dark-div h2, .dark-div h3, .dark-div h4, .dark-div h5, .dark-div h6, .dark-div .btn-primary {
+        color: #fff;
+    }
+/*main color*/
+.main-color-1, .main-color-1-hover:hover {
+    color: #46a5e5;
+}
+
+.main-color-1-bg, .main-color-1-bg-hover:hover {
+    background-color: #46a5e5;
+}
+
+.main-color-1-border {
+    border-color: #46a5e5;
+}
+
+.main-color-2, .main-color-2-hover:hover {
+    color: #17376e;
+}
+
+.main-color-2-bg {
+    background-color: #17376e;
+}
