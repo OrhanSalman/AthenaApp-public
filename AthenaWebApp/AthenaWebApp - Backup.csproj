@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>2216c695-e5db-469e-b8fe-fa794469b37c</UserSecretsId>
+    <UserSecretsId>135d1319-0fd5-4715-8a9d-6763a1aab460</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +17,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="SendGrid" Version="9.23.2" />
   </ItemGroup>
 
   <ItemGroup>

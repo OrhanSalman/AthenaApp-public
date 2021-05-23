@@ -14,6 +14,9 @@ using AthenaWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using WebPWrecover.Services;
+using AthenaWebApp.Services;
 
 namespace AthenaWebApp
 {
@@ -34,6 +37,7 @@ namespace AthenaWebApp
             {
                 // This pushes users to login if not authenticated
                 options.Filters.Add(new AuthorizeFilter());
+
             });
 
             //ToDo: "RequireNonAlphanumeric" has been set to "false". Check if it works
@@ -51,6 +55,12 @@ namespace AthenaWebApp
                 options.SignIn.RequireConfirmedEmail = false;
                 options.SignIn.RequireConfirmedPhoneNumber = false;
             });
+
+            // requires
+            // using Microsoft.AspNetCore.Identity.UI.Services;
+            // using WebPWrecover.Services;
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
