@@ -12,3 +12,7 @@
 
 
 3. Registrierungslink schon bekommen, sobald man sich registriert
+
+4. Bei der Registrierung noch ein Feld "Nickname", die dann auch angezeigt wird (wer grad eingeloggt ist)
+
+5. Registrierung: Drop-Down Menü Uni auswählen

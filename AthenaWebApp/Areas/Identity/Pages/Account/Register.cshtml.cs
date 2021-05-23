@@ -51,6 +51,17 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+
+            //ToDo: Add Nickname, Company
+
+            [Required]
+            [Display(Name = "Nickname")]
+            public string Nickname { get; set; }
+
+            [Required]
+            [Display(Name = "Universität")]
+            public string Company { get; set; }
+
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
@@ -113,5 +124,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
+        // ToDo: Db durchsuchen nach Companys 
     }
 }
