@@ -10,6 +10,12 @@ namespace AthenaWebApp.Areas.Identity.Data
     // Add profile data for application users by adding properties to the AthenaIdentityUser class
     public class AthenaIdentityUser : IdentityUser
     {
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int UsernameChangeLimit { get; set; } = 10;
+        public byte[] ProfilePicture { get; set; }
+
         /*
          * Sind bereits in ": IdentityUser" vorhanden!
          *
@@ -22,15 +28,15 @@ namespace AthenaWebApp.Areas.Identity.Data
         [Display(Name = "Email")]
         public string Email { get; set; }
         */
+        /*
+                [Display(Name = "Nickname")]
+                public string Nickname { get; set; }
 
-        [Display(Name = "Nickname")]
-        public string Nickname { get; set; }
+                [Display(Name = "Uni-Kennschlüssel")]
+                public int CompanyId { get; set; }
 
-        [Display(Name = "Uni-Kennschlüssel")]
-        public int CompanyId { get; set; }
-
-        [Display(Name = "Universität")]
-        public int CompanyName { get; set; }
-        
+                [Display(Name = "Universität")]
+                public int CompanyName { get; set; }
+        */
     }
 }

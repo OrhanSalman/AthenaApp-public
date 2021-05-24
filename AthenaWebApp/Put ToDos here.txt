@@ -18,3 +18,5 @@
 5. Registrierung: Drop-Down Menü Uni auswählen
 
 6. Admins der Uni-Siegen dürfen nur Member der eigenen Uni sehen,
+
+7. Beim UserName erstellen kann man sich nicht mehr einloggen
