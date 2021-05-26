@@ -52,11 +52,11 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
 
-            //ToDo: Add Nickname, Company
+            //ToDo: Add UserName, Company
 
             [Required]
-            [Display(Name = "Nickname")]
-            public string Nickname { get; set; }
+            [Display(Name = "UserName")]
+            public string UserName { get; set; }
 
             [Required]
             [Display(Name = "Universität")]

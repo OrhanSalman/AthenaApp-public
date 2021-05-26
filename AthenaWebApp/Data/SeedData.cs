@@ -9,12 +9,15 @@ namespace AthenaWebApp.Models
     public static class SeedData
     {
         public static void Initialize(IServiceProvider serviceProvider)
+
         {
+            Console.WriteLine("Hallo");
+/*
             using (var context = new AthenaIdentityContext(
                 serviceProvider.GetRequiredService<
                     DbContextOptions<AthenaIdentityContext>>()))
             {
-                // Look for any movies.
+                // ToDo:
                 if (context.Users.Any())
                 {
                     return;   // DB has been seeded
@@ -31,52 +34,52 @@ namespace AthenaWebApp.Models
 
 
                 context.Users.AddRange(
-                    new User
+                    new UserView
                     {
                         UserMail = "lena@student.uni-siegen.de",
-                        Nickname = "Lena",
+                        UserName = "Lena",
                         CompanyId = 1
                     },
-                    new User
+                    new UserView
                     {
                         UserMail = "jasmin@student.uni-siegen.de",
-                        Nickname = "Jasmin",
+                        UserName = "Jasmin",
                         CompanyId = 1
                     },
-                    new User
+                    new UserView
                     {
                         UserMail = "domenik@student.uni-siegen.de",
-                        Nickname = "Domenik",
+                        UserName = "Domenik",
                         CompanyId = 1
                     },
-                    new User
+                    new UserView
                     {
                         UserMail = "alex@student.uni-siegen.de",
-                        Nickname = "Alex",
+                        UserName = "Alex",
                         CompanyId = 1
                     },
-                    new User
+                    new UserView
                     {
                         UserMail = "raphael@student.uni-siegen.de",
-                        Nickname = "Raphael",
+                        UserName = "Raphael",
                         CompanyId = 1
                     },
-                    new User
+                    new UserView
                     {
                         UserMail = "orhan@student.uni-siegen.de",
-                        Nickname = "Orhan",
+                        UserName = "Orhan",
                         CompanyId = 1
                     },
-                    new User
+                    new UserView
                     {
                         UserMail = "admin@student.uni-siegen.de",
-                        Nickname = "Admin",
+                        UserName = "Admin",
                         CompanyId = 1
                     },
-                    new User
+                    new UserView
                     {
                         UserMail = "supervisor@student.uni-siegen.de",
-                        Nickname = "Supervisor",
+                        UserName = "Supervisor",
                         CompanyId = 1
                     }
                 );
@@ -161,6 +164,7 @@ namespace AthenaWebApp.Models
                 );
                 context.SaveChanges();
             }
+*/
         }
     }
 }

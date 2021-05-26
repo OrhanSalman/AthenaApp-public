@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -61,6 +61,9 @@ namespace AthenaWebApp
             // using WebPWrecover.Services;
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
+
+            services.AddDbContext<AthenaWebAppContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("AthenaWebAppContext")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -37,15 +37,19 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+/*
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
+*/
             [Display(Name = "Username")]
             public string Username { get; set; }
+/*
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+*/
             [Display(Name = "Profile Picture")]
             public byte[] ProfilePicture { get; set; }
         }
@@ -54,17 +58,17 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            var firstName = user.FirstName;
-            var lastName = user.LastName;
+//            var firstName = user.FirstName;
+//            var lastName = user.LastName;
             var profilePicture = user.ProfilePicture;
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber,
-                Username = userName,
-                FirstName = firstName,
-                LastName = lastName,
+ //               PhoneNumber = phoneNumber,
+                  Username = userName,
+ //               FirstName = firstName,
+ //               LastName = lastName,
                 ProfilePicture = profilePicture
             };
         }
@@ -94,7 +98,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
-
+/*
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {
@@ -105,6 +109,9 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+*/
+
+/*
             var firstName = user.FirstName;
             var lastName = user.LastName;
             if (Input.FirstName != firstName)
@@ -118,6 +125,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
                 user.LastName = Input.LastName;
                 await _userManager.UpdateAsync(user);
             }
+*/
             if (user.UsernameChangeLimit > 0)
             {
                 if (Input.Username != user.UserName)
