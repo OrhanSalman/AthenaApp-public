@@ -1,0 +1,62 @@
+﻿             public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+               {
+                   returnUrl ??= Url.Content("~/");
+
+                   ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                     var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false); //UserName ergänzt
+                     if (result.Succeeded)
+                     {
+                         _logger.LogInformation("User logged in.");
+                         return LocalRedirect(returnUrl);
+                     }
+                     if (result.RequiresTwoFactor)
+                     {
+                         return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                     }
+                     if (result.IsLockedOut)
+                     {
+                         _logger.LogWarning("User account locked out.");
+                         return RedirectToPage("./Lockout");
+                     }
+
+                     // Manually added
+
+                     if (ModelState.IsValid)
+                     {
+
+                         var user = await _userManager.FindByEmailAsync(Input.Email);  //   var user = await _userManager.FindByEmailAsync(Input.Email);
+
+                         if (user == null)
+                         {
+                             ModelState.AddModelError(string.Empty, "User not found");                
+                             return Page();
+                         }
+                         if (!(await _userManager.IsEmailConfirmedAsync(user)))
+                         {
+                             ModelState.AddModelError(string.Empty, "Email not confirmed");
+                         }
+                     }            
+
+
+
+                     if (!string.IsNullOrEmpty(ErrorMessage))      //Mukesh
+                         {
+                             ModelState.AddModelError(string.Empty, ErrorMessage);
+                         }
+
+                             returnUrl ??= Url.Content("~/");
+
+                           // Clear the existing external cookie to ensure a clean login process
+                             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+                           ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+                           ReturnUrl = returnUrl;
+                         } 
+
+                   // If we got this far, something failed, redisplay form
+                   return Page(); 
+               }*/
+        }
+    }
+}

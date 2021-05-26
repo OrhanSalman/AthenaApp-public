@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using System.Net.Mail;
 
 namespace AthenaWebApp.Areas.Identity.Pages.Account
 {
@@ -86,7 +87,15 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AthenaIdentityUser { UserName = Input.Email, Email = Input.Email };
+                MailAddress address = new MailAddress(Input.Email); //Mukesh
+                string userName = address.User;
+                var user = new AthenaIdentityUser
+                {
+                    UserName = userName,
+                    Email = Input.Email,
+
+                };
+               // var user = new AthenaIdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
