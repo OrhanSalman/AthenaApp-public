@@ -7,6 +7,18 @@
     "mssql2": {
       "type": "mssql.local",
       "connectionId": "AthenaWebAppContext"
+    },
+    "mssql3": {
+      "type": "mssql.local",
+      "connectionId": "AhtenaCompanyContext"
+    },
+    "mssql4": {
+      "type": "mssql.local",
+      "connectionId": "AthenaWebAppContextVIEWs"
+    },
+    "mssql5": {
+      "type": "mssql.local",
+      "connectionId": "AthenaIndividualDbContext"
     }
   }
 }

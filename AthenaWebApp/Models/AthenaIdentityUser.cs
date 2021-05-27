@@ -17,6 +17,6 @@ namespace AthenaWebApp.Areas.Identity.Data
         public byte[] ProfilePicture { get; set; }
 
 
-        public virtual ICollection<UserView> UserViews { get; set; }
+//        public virtual ICollection<IdentityUser> IdentityUsers { get; set; }
     }
 }

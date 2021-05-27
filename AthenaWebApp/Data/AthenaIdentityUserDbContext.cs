@@ -10,17 +10,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AthenaWebApp.Data
 {
-    public class AthenaIdentityContext : IdentityDbContext<AthenaIdentityUser>
+    public class AthenaIdentityUserDbContext : IdentityDbContext<AthenaIdentityUser>
     {
-        public AthenaIdentityContext(DbContextOptions<AthenaIdentityContext> options)
+        public AthenaIdentityUserDbContext(DbContextOptions<AthenaIdentityUserDbContext> options)
             : base(options)
         {
         }
-
-        public DbSet<AthenaIdentityUser> IdentityUsers { get; set; }
-        public DbSet<UserView> UserViews { get; set; }
-
-
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -30,12 +25,7 @@ namespace AthenaWebApp.Data
             // Add your customizations after calling base.OnModelCreating(builder);
 
             base.OnModelCreating(builder);
-            builder.HasDefaultSchema("Identity");
-            builder.Entity<AthenaIdentityUser>(entity =>
-            {
-                entity.ToTable(name: "User");
-            });
-
+            builder.HasDefaultSchema("Athena");
             builder.Entity<IdentityRole>(entity =>
             {
                 entity.ToTable(name: "Role");
@@ -66,13 +56,5 @@ namespace AthenaWebApp.Data
                 entity.ToTable("UserTokens");
             });
         }
-
-
-        // ToDo: Do we need these?
-//        new public DbSet<Company> Companys { get; set; }
-//        new public DbSet<UserView> Users { get; set; }
-//        new public DbSet<Distance> Distances { get; set; }
-//        new public DbSet<Role> Roles { get; set; }
-
     }
 }

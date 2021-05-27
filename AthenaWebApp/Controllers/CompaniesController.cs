@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,85 +11,85 @@ using AthenaWebApp.Models;
 
 namespace AthenaWebApp.Controllers
 {
-    public class UserViewsController : Controller
+    public class CompaniesController : Controller
     {
-        private readonly AthenaIdentityUserDbContext _context;
+        private readonly AthenaIndividualDbContext _context;
 
-        public UserViewsController(AthenaIdentityUserDbContext context)
+        public CompaniesController(AthenaIndividualDbContext context)
         {
             _context = context;
         }
 
-        // GET: UserViews
+        // GET: Companies
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+            return View(await _context.Company.ToListAsync());
         }
 
-        // GET: UserViews/Details/5
-        public async Task<IActionResult> Details(string id)
+        // GET: Companies/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var userView = await _context.Users
+            var company = await _context.Company
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (userView == null)
+            if (company == null)
             {
                 return NotFound();
             }
 
-            return View(userView);
+            return View(company);
         }
 
-        // GET: UserViews/Create
+        // GET: Companies/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: UserViews/Create
+        // POST: Companies/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserName,UserMail,CompanyId,Company")] UserView userView)
+        public async Task<IActionResult> Create([Bind("Id,CompanyName,Country,CollectedDistances")] Company company)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(userView);
+                _context.Add(company);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(userView);
+            return View(company);
         }
 
-        // GET: UserViews/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        // GET: Companies/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var userView = await _context.Users.FindAsync(id);
-            if (userView == null)
+            var company = await _context.Company.FindAsync(id);
+            if (company == null)
             {
                 return NotFound();
             }
-            return View(userView);
+            return View(company);
         }
 
-        // POST: UserViews/Edit/5
+        // POST: Companies/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,UserMail,CompanyId,Company")] UserView userView)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CompanyName,Country,CollectedDistances")] Company company)
         {
-            if (id != userView.Id)
+            if (id != company.Id)
             {
                 return NotFound();
             }
@@ -97,12 +98,12 @@ namespace AthenaWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(userView);
+                    _context.Update(company);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserViewExists(userView.Id))
+                    if (!CompanyExists(company.Id))
                     {
                         return NotFound();
                     }
@@ -113,41 +114,42 @@ namespace AthenaWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(userView);
+            return View(company);
         }
 
-        // GET: UserViews/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        // GET: Companies/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var userView = await _context.Users
+            var company = await _context.Company
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (userView == null)
+            if (company == null)
             {
                 return NotFound();
             }
 
-            return View(userView);
+            return View(company);
         }
 
-        // POST: UserViews/Delete/5
+        // POST: Companies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var userView = await _context.Users.FindAsync(id);
-            _context.Users.Remove(userView);
+            var company = await _context.Company.FindAsync(id);
+            _context.Company.Remove(company);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserViewExists(string id)
+        private bool CompanyExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.Company.Any(e => e.Id == id);
         }
     }
 }
+*/

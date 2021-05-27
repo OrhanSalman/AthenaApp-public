@@ -6,25 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Companies\**" />
     <Compile Remove="Views\Distances\**" />
     <Compile Remove="Views\Roles\**" />
     <Compile Remove="Views\Users\**" />
-    <Content Remove="Views\Companies\**" />
     <Content Remove="Views\Distances\**" />
     <Content Remove="Views\Roles\**" />
     <Content Remove="Views\Users\**" />
-    <EmbeddedResource Remove="Views\Companies\**" />
     <EmbeddedResource Remove="Views\Distances\**" />
     <EmbeddedResource Remove="Views\Roles\**" />
     <EmbeddedResource Remove="Views\Users\**" />
-    <None Remove="Views\Companies\**" />
     <None Remove="Views\Distances\**" />
     <None Remove="Views\Roles\**" />
     <None Remove="Views\Users\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.6" />
