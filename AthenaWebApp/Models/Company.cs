@@ -13,7 +13,7 @@ namespace AthenaWebApp.Models
         public string Country { get; set; }
 
         // A Company has one or more Users
-        public ICollection<User> Users { get; set; }
+        public ICollection<UserView> Users { get; set; }
 
 //        public User User { get; set; }
     }

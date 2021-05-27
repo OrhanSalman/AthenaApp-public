@@ -13,8 +13,10 @@
 
 3. Registrierungslink schon bekommen, sobald man sich registriert
 
-4. Bei der Registrierung noch ein Feld "Nickname", die dann auch angezeigt wird (wer grad eingeloggt ist)
+4. Bei der Registrierung noch ein Feld "UserName", die dann auch angezeigt wird (wer grad eingeloggt ist)
 
 5. Registrierung: Drop-Down Menü Uni auswählen
 
 6. Admins der Uni-Siegen dürfen nur Member der eigenen Uni sehen,
+
+7. Beim UserName erstellen kann man sich nicht mehr einloggen
