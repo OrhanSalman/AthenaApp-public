@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace AthenaWebApp.Areas.Identity.Data
@@ -15,5 +16,7 @@ namespace AthenaWebApp.Areas.Identity.Data
         public int UsernameChangeLimit { get; set; } = 10;
         public byte[] ProfilePicture { get; set; }
 
+
+        public virtual ICollection<UserView> UserViews { get; set; }
     }
 }

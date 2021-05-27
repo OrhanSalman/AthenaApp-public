@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AthenaWebApp.Migrations
 {
     [DbContext(typeof(AthenaIdentityContext))]
-    [Migration("20210526204825_InitialCreate")]
+    [Migration("20210527101532_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,6 +97,33 @@ namespace AthenaWebApp.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Models.UserView", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AthenaIdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Company")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserMail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AthenaIdentityUserId");
+
+                    b.ToTable("UserViews");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -234,6 +261,13 @@ namespace AthenaWebApp.Migrations
                     b.ToTable("UserTokens");
                 });
 
+            modelBuilder.Entity("AthenaWebApp.Models.UserView", b =>
+                {
+                    b.HasOne("AthenaWebApp.Areas.Identity.Data.AthenaIdentityUser", null)
+                        .WithMany("UserViews")
+                        .HasForeignKey("AthenaIdentityUserId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -283,6 +317,11 @@ namespace AthenaWebApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Areas.Identity.Data.AthenaIdentityUser", b =>
+                {
+                    b.Navigation("UserViews");
                 });
 #pragma warning restore 612, 618
         }

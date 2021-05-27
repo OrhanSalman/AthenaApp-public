@@ -17,6 +17,11 @@ namespace AthenaWebApp.Data
         {
         }
 
+        public DbSet<AthenaIdentityUser> IdentityUsers { get; set; }
+        public DbSet<UserView> UserViews { get; set; }
+
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

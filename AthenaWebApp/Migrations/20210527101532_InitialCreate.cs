@@ -172,6 +172,30 @@ namespace AthenaWebApp.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserViews",
+                schema: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserMail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyId = table.Column<int>(type: "int", nullable: false),
+                    Company = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AthenaIdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserViews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserViews_User_AthenaIdentityUserId",
+                        column: x => x.AthenaIdentityUserId,
+                        principalSchema: "Identity",
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 schema: "Identity",
@@ -217,6 +241,12 @@ namespace AthenaWebApp.Migrations
                 schema: "Identity",
                 table: "UserRoles",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserViews_AthenaIdentityUserId",
+                schema: "Identity",
+                table: "UserViews",
+                column: "AthenaIdentityUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -239,6 +269,10 @@ namespace AthenaWebApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserTokens",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "UserViews",
                 schema: "Identity");
 
             migrationBuilder.DropTable(

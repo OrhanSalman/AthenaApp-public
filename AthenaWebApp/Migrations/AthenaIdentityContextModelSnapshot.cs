@@ -97,6 +97,33 @@ namespace AthenaWebApp.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("AthenaWebApp.Models.UserView", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AthenaIdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Company")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserMail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AthenaIdentityUserId");
+
+                    b.ToTable("UserViews");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -232,6 +259,13 @@ namespace AthenaWebApp.Migrations
                     b.ToTable("UserTokens");
                 });
 
+            modelBuilder.Entity("AthenaWebApp.Models.UserView", b =>
+                {
+                    b.HasOne("AthenaWebApp.Areas.Identity.Data.AthenaIdentityUser", null)
+                        .WithMany("UserViews")
+                        .HasForeignKey("AthenaIdentityUserId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -281,6 +315,11 @@ namespace AthenaWebApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Areas.Identity.Data.AthenaIdentityUser", b =>
+                {
+                    b.Navigation("UserViews");
                 });
 #pragma warning restore 612, 618
         }
