@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AthenaWebApp.Areas.Identity.Data;
+using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -56,5 +56,7 @@ namespace AthenaWebApp.Data
                 entity.ToTable("UserTokens");
             });
         }
+            public DbSet<AthenaWebApp.Models.Company> Company { get; set; }
     }
+    
 }

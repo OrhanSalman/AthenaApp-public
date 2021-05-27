@@ -1,5 +1,5 @@
 ﻿using System;
-using AthenaWebApp.Areas.Identity.Data;
+using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+using AthenaWebApp.Areas.Identity.IdentityModels;
 
 namespace AthenaWebApp.Controllers
 {
@@ -54,7 +55,7 @@ namespace AthenaWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserName,UserMail,CompanyId,Company")] UserView userView)
+        public async Task<IActionResult> Create([Bind("UserName,UserMail,CompanyId,Company")] AthenaIdentityUser userView)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +87,7 @@ namespace AthenaWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,UserMail,CompanyId,Company")] UserView userView)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,UserMail,CompanyId,Company")] AthenaIdentityUser userView)
         {
             if (id != userView.Id)
             {
