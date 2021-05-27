@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +13,9 @@ namespace AthenaWebApp.Controllers
 {
     public class CompaniesController : Controller
     {
-        private readonly AthenaIndividualDbContext _context;
+        private readonly AthenaIdentityUserDbContext _context;
 
-        public CompaniesController(AthenaIndividualDbContext context)
+        public CompaniesController(AthenaIdentityUserDbContext context)
         {
             _context = context;
         }
@@ -152,4 +152,3 @@ namespace AthenaWebApp.Controllers
         }
     }
 }
-*/
