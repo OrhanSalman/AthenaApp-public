@@ -69,11 +69,6 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
             {
                 return false;
             }
-            catch (FormatException)
-            {
-                return false;
-            }
-
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null) 
