@@ -7,14 +7,23 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using AthenaWebApp.Areas.Identity.Data;
+using AthenaWebApp.Areas.Identity.IdentityModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using System.Net.Mail;
+using AthenaWebApp.Data;
+using AthenaWebApp.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http;
+using AthenaWebApp.Data;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using AthenaWebApp.Controllers;
+//using AthenaWebApp.Repositories.PatternInterfaces;
 
 namespace AthenaWebApp.Areas.Identity.Pages.Account
 {
@@ -25,18 +34,24 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
         private readonly UserManager<AthenaIdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+//        private readonly ICompanyRepository _companyRepository;
 
         public RegisterModel(
             UserManager<AthenaIdentityUser> userManager,
             SignInManager<AthenaIdentityUser> signInManager,
+            IEnumerable<Company> context,
             ILogger<RegisterModel> logger,
+//            ICompanyRepository companyRepository,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+//            _companyRepository = companyRepository;
         }
+
+        
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -53,11 +68,11 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
 
-            //ToDo: Add Nickname, Company
+            //ToDo: Add UserName, Company
 
             [Required]
-            [Display(Name = "Nickname")]
-            public string Nickname { get; set; }
+            [Display(Name = "UserName")]
+            public string UserName { get; set; }
 
             [Required]
             [Display(Name = "Universität")]
@@ -81,21 +96,43 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+
+        //
+        //
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+/*
+            string userInput = Input.Company.ToString();
+            Company company = new Company();
+
+            company.Id = 1;
+            company.CompanyName = "TestCompany";
+            company.Country = "Deutschland";
+            company.CollectedDistances = 10;
+
+           var findId = _context.Select(x => x.Id)
+                              .Where(i => company.CompanyName.Contains(userInput))
+                              .ToList();
+
+            List<int> IdList = _context.Select(x => x.Id)
+                              .Where(i => company.CompanyName.Contains(userInput))
+                              .ToList();
+            
+            foreach (int value in findId)
+            {
+                idList.Add(value);
+            }
+  */
+
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                MailAddress address = new MailAddress(Input.Email); //Mukesh
-                string userName = address.User;
-                var user = new AthenaIdentityUser
-                {
-                    UserName = userName,
-                    Email = Input.Email,
+                // ToDo
+//                var id = _companyRepository.Search(Input.Company);
 
-                };
-               // var user = new AthenaIdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new AthenaIdentityUser { UserName = Input.UserName, Email = Input.Email, Company = Input.Company, CompanyId = 1 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -133,7 +170,6 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
-
-        // ToDo: Db durchsuchen nach Companys 
     }
 }
+

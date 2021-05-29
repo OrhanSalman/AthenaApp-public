@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +28,7 @@ namespace AthenaWebApp
         }
 
         public IConfiguration Configuration { get; }
+
 
         public void ConfigureServices(IServiceCollection services)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,22 +8,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+//using AthenaWebApp.Repositories.PatternInterfaces;
 
 namespace AthenaWebApp.Controllers
 {
     public class CompaniesController : Controller
     {
-        private readonly AthenaIdentityContext _context;
+        private readonly AthenaIdentityUserDbContext _context;
 
-        public CompaniesController(AthenaIdentityContext context)
+        public CompaniesController(AthenaIdentityUserDbContext context)
         {
             _context = context;
         }
 
-        // GET: Companies
-        public async Task<IActionResult> Index()
+
+            // GET: Companies
+            public async Task<IActionResult> Index()
         {
-            return View(await _context.Companys.ToListAsync());
+            return View(await _context.Company.ToListAsync());
         }
 
         // GET: Companies/Details/5
@@ -33,7 +36,7 @@ namespace AthenaWebApp.Controllers
                 return NotFound();
             }
 
-            var company = await _context.Companys
+            var company = await _context.Company
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (company == null)
             {
@@ -54,7 +57,7 @@ namespace AthenaWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CompanyName,Country")] Company company)
+        public async Task<IActionResult> Create([Bind("Id,CompanyName,Country,CollectedDistances")] Company company)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +76,7 @@ namespace AthenaWebApp.Controllers
                 return NotFound();
             }
 
-            var company = await _context.Companys.FindAsync(id);
+            var company = await _context.Company.FindAsync(id);
             if (company == null)
             {
                 return NotFound();
@@ -86,7 +89,7 @@ namespace AthenaWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CompanyName,Country")] Company company)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CompanyName,Country,CollectedDistances")] Company company)
         {
             if (id != company.Id)
             {
@@ -124,7 +127,7 @@ namespace AthenaWebApp.Controllers
                 return NotFound();
             }
 
-            var company = await _context.Companys
+            var company = await _context.Company
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (company == null)
             {
@@ -139,15 +142,15 @@ namespace AthenaWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var company = await _context.Companys.FindAsync(id);
-            _context.Companys.Remove(company);
+            var company = await _context.Company.FindAsync(id);
+            _context.Company.Remove(company);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CompanyExists(int id)
         {
-            return _context.Companys.Any(e => e.Id == id);
+            return _context.Company.Any(e => e.Id == id);
         }
     }
 }

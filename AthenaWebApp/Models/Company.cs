@@ -3,18 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AthenaWebApp.Models
 {
     public class Company
     {
+        
+        [Key, ForeignKey("CompanyId"), Display(Name = "ID")]
         public int Id { get; set; }
+
+        [Display(Name = "Organisation")]
         public string CompanyName { get; set; }
+
+        [Display(Name = "Land")]
         public string Country { get; set; }
 
         // A Company has one or more Users
-        public ICollection<User> Users { get; set; }
+//        [Display(Name = "Teilnehmer")]
+//        public ICollection<IdentityUser> UserCount { get; set; }
 
-//        public User User { get; set; }
+        [Display(Name = "Erreichte Distanzen")]
+        public int CollectedDistances { get; set; }
+
+
+        
+
+        //        public User User { get; set; }
+
     }
 }

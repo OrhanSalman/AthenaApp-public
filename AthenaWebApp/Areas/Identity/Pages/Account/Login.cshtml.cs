@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using AthenaWebApp.Areas.Identity.Data;
+using AthenaWebApp.Areas.Identity.IdentityModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -46,9 +46,9 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-   
+
             [Required]
-            [Display(Name = "Email / Username")]    
+            [Display(Name = "Email / Username")]
             public string Email { get; set; }
 
             [Required]
@@ -58,7 +58,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
         }
-        public bool IsValidEmail(string emailaddress)              
+        public bool IsValidEmail(string emailaddress)
         {
             try
             {
@@ -69,13 +69,17 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
             {
                 return false;
             }
+            catch (FormatException)
+            {
+                return false;
+            }
 
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null) 
         {
-            
-            returnUrl ??=  Url.Content("~/");
+
+            returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -113,7 +117,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
                 return Page();
             }
 
-            return Page();           
+            return Page();
         }
     }
 }
