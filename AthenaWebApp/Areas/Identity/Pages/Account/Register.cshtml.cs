@@ -15,10 +15,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using AthenaWebApp.Data;
-using Microsoft.EntityFrameworkCore;
 using AthenaWebApp.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http;
+using AthenaWebApp.Data;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using AthenaWebApp.Controllers;
+//using AthenaWebApp.Repositories.PatternInterfaces;
 
 namespace AthenaWebApp.Areas.Identity.Pages.Account
 {
@@ -29,20 +34,24 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
         private readonly UserManager<AthenaIdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-
-        private readonly AthenaIdentityUserDbContext _context;
+//        private readonly ICompanyRepository _companyRepository;
 
         public RegisterModel(
             UserManager<AthenaIdentityUser> userManager,
             SignInManager<AthenaIdentityUser> signInManager,
+            IEnumerable<Company> context,
             ILogger<RegisterModel> logger,
+//            ICompanyRepository companyRepository,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+//            _companyRepository = companyRepository;
         }
+
+        
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -87,19 +96,41 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+
+        //
+        //
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+/*
+            string userInput = Input.Company.ToString();
+            Company company = new Company();
 
+            company.Id = 1;
+            company.CompanyName = "TestCompany";
+            company.Country = "Deutschland";
+            company.CollectedDistances = 10;
 
+           var findId = _context.Select(x => x.Id)
+                              .Where(i => company.CompanyName.Contains(userInput))
+                              .ToList();
 
-
+            List<int> IdList = _context.Select(x => x.Id)
+                              .Where(i => company.CompanyName.Contains(userInput))
+                              .ToList();
+            
+            foreach (int value in findId)
+            {
+                idList.Add(value);
+            }
+  */
 
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                // ToDo: Added in the underline some var´s
-//                await SearchCompany(Input.Company);
+                // ToDo
+//                var id = _companyRepository.Search(Input.Company);
 
                 var user = new AthenaIdentityUser { UserName = Input.UserName, Email = Input.Email, Company = Input.Company, CompanyId = 1 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -139,45 +170,6 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
-
-
-/*
-
-        // GET: Companies/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var company = await _context.Company
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (company == null)
-            {
-                return NotFound();
-            }
-
-            return _context.Company.Find(id);
-        }
-
-
-        [Route("{Id}")]
-        public IActionResult GetCompanyId(int Id)
-        {
-            var listEmployees = new Company();
-
-            var companyId = listEmployees.Id.ToString();
-//            var employee = listEmployees.FirstOrDefault(emp => emp.Id == Id);
-            if (companyId != null)
-            {
-                return _context.Company.Any(e => e.Id == id);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
-*/
     }
 }
+

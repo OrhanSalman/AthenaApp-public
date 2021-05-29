@@ -140,7 +140,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
                     var setUserName = await _userManager.SetUserNameAsync(user, Input.Username);
                     if (!setUserName.Succeeded)
                     {
-                        StatusMessage = "Unexpected error when trying to set user name.";
+                        StatusMessage = "Unexpected error when trying to set user name. Maybe you used spaces.";
                         return RedirectToPage();
                     }
                     else

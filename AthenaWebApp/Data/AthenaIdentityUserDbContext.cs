@@ -55,8 +55,25 @@ namespace AthenaWebApp.Data
             {
                 entity.ToTable("UserTokens");
             });
+
+            builder.Entity<IdentityUser<string>>(entity =>
+            {
+                entity.ToTable("Users");
+            });
+/*
+            base.OnModelCreating(modelBuilder);
+
+            builder.Entity<IdentityUser>()
+                .Property(e => e.firstName)
+                .HasMaxLength(250);
+
+            builder.Entity<ApplicationUser>()
+                .Property(e => e.lastName)
+                .HasMaxLength(250);
+*/
         }
             public DbSet<AthenaWebApp.Models.Company> Company { get; set; }
+//            public DbSet<AthenaWebApp.Models.Role> Role { get; set; }
     }
     
 }

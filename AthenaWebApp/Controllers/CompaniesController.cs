@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+//using AthenaWebApp.Repositories.PatternInterfaces;
 
 namespace AthenaWebApp.Controllers
 {
@@ -20,8 +21,9 @@ namespace AthenaWebApp.Controllers
             _context = context;
         }
 
-        // GET: Companies
-        public async Task<IActionResult> Index()
+
+            // GET: Companies
+            public async Task<IActionResult> Index()
         {
             return View(await _context.Company.ToListAsync());
         }
