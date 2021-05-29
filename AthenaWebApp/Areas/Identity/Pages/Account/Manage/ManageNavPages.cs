@@ -14,7 +14,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
 
         public static string ChangePassword => "ChangePassword";
 
-        public static string DownloadPersonalData => "DownloadPersonFalData";
+        public static string DownloadPersonalData => "DownloadPersonalData";
 
         public static string DeletePersonalData => "DeletePersonalData";
 
