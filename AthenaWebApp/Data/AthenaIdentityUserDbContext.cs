@@ -55,11 +55,6 @@ namespace AthenaWebApp.Data
             {
                 entity.ToTable("UserTokens");
             });
-
-            builder.Entity<IdentityUser<string>>(entity =>
-            {
-                entity.ToTable("Users");
-            });
 /*
             base.OnModelCreating(modelBuilder);
 
