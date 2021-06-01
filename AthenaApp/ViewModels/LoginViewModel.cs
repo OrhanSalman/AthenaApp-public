@@ -11,6 +11,8 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Linq;
+
 
 namespace AthenaApp.ViewModels
 {
@@ -52,21 +54,30 @@ namespace AthenaApp.ViewModels
         private async void OnLoginClicked(object obj)
         {
 
-            var content = await WebService.ServiceClientInstance.AuthenticateUserAsync(UserInputMail, UserInputPw);
-            Console.WriteLine(content.ToString());
-            await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
-            /*
-            if (!string.IsNullOrEmpty(content.authenticationToken))
+            LoginService services = new LoginService();
+            var getLoginDetails = await services.CheckLoginIfExists(UserInputMail, UserInputPw);
+
+            if (getLoginDetails)
             {
                 await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
-//                await Navigation.PushAsync(new DashboardPage());
-
             }
             else
             {
-//                DisplayInvalidLoginPrompt();
-                await App.Current.MainPage.DisplayAlert("Alert", "Something Went Worng", "Ok");
+                DisplayInvalidLoginPrompt();
+            }
 
+
+            /*
+            if (userInputMail != "athena@uni.de" || userInputPw != "athena")
+            {
+                DisplayInvalidLoginPrompt();
+            }
+            else
+            {
+
+//                await Shell.Current.GoToAsync("//AboutPage");
+                // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
             }
             */
         }

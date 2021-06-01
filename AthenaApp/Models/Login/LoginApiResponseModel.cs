@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 
 namespace AthenaApp.Models.Login
 {
@@ -14,3 +15,4 @@ namespace AthenaApp.Models.Login
         public User user { get; set; }
     }
 }
+*/
