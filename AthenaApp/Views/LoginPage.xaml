@@ -10,6 +10,7 @@
     mc:Ignorable="d">
 
 
+
     <StackLayout BackgroundColor="#e6e6e6">
         <Grid>
             <StackLayout
@@ -56,13 +57,14 @@
                                 HorizontalOptions="FillAndExpand">
                                 <StackLayout Orientation="Horizontal">
                                     <Entry
-                                        x:Name="Email"
+                                        x:Name="UserInputMail"
                                         Margin="10,0,0,0"
                                         ClearButtonVisibility="WhileEditing"
                                         FontAttributes="Italic"
                                         Keyboard="Email"
                                         Placeholder="youremail@mail.com"
                                         ReturnType="Next"
+                                        Text="{Binding UserInputMail}"
                                         TextColor="Black"
                                         WidthRequest="300" />
                                 </StackLayout>
@@ -76,12 +78,13 @@
                                 HorizontalOptions="FillAndExpand">
                                 <StackLayout Orientation="Horizontal">
                                     <Entry
-                                        x:Name="Password"
+                                        x:Name="UserInputPw"
                                         Margin="10,0,0,0"
                                         ClearButtonVisibility="WhileEditing"
                                         FontAttributes="Italic"
                                         IsPassword="True"
                                         Placeholder="Password"
+                                        Text="{Binding UserInputPw}"
                                         TextColor="Black"
                                         WidthRequest="300" />
                                 </StackLayout>
@@ -101,7 +104,7 @@
 
                             <Button
                                 BackgroundColor="MidnightBlue"
-                                Clicked="Sign_In_Clicked"
+                                Command="{Binding LoginComand}"
                                 CornerRadius="30"
                                 Text="SIGN IN"
                                 TextColor="White" />
