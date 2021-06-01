@@ -20,6 +20,8 @@ namespace AthenaApp.ViewModels
         }
 
         string title = string.Empty;
+
+        
         public string Title
         {
             get { return title; }
