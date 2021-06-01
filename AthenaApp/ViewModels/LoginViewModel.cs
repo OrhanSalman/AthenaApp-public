@@ -51,17 +51,24 @@ namespace AthenaApp.ViewModels
 
         private async void OnLoginClicked(object obj)
         {
-            if (userInputMail != "athena@uni.de" || userInputPw != "athena")
+
+            var content = await WebService.ServiceClientInstance.AuthenticateUserAsync(UserInputMail, UserInputPw);
+            Console.WriteLine(content.ToString());
+            await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            /*
+            if (!string.IsNullOrEmpty(content.authenticationToken))
             {
-                DisplayInvalidLoginPrompt();
+                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+//                await Navigation.PushAsync(new DashboardPage());
+
             }
             else
             {
+//                DisplayInvalidLoginPrompt();
+                await App.Current.MainPage.DisplayAlert("Alert", "Something Went Worng", "Ok");
 
-//                await Shell.Current.GoToAsync("//AboutPage");
-                // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
             }
+            */
         }
     }
 }
