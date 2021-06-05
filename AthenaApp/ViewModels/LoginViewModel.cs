@@ -1,4 +1,5 @@
-﻿using AthenaApp.Services;
+﻿/*
+using AthenaApp.Services;
 using AthenaApp.Views;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Linq;
+
 
 namespace AthenaApp.ViewModels
 {
@@ -51,6 +54,21 @@ namespace AthenaApp.ViewModels
 
         private async void OnLoginClicked(object obj)
         {
+
+            LoginService services = new LoginService();
+            var getLoginDetails = await services.CheckLoginIfExists(UserInputMail, UserInputPw);
+
+            if (getLoginDetails)
+            {
+                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            }
+            else
+            {
+                DisplayInvalidLoginPrompt();
+            }
+
+
+            /*
             if (userInputMail != "athena@uni.de" || userInputPw != "athena")
             {
                 DisplayInvalidLoginPrompt();
@@ -62,6 +80,8 @@ namespace AthenaApp.ViewModels
                 // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
                 await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
             }
+            
         }
     }
 }
+*/

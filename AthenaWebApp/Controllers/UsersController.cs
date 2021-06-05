@@ -11,22 +11,22 @@ using AthenaWebApp.Areas.Identity.IdentityModels;
 
 namespace AthenaWebApp.Controllers
 {
-    public class UserViewsController : Controller
+    public class UsersController : Controller
     {
-        private readonly AthenaIdentityUserDbContext _context;
+        private readonly AthenaDbContext _context;
 
-        public UserViewsController(AthenaIdentityUserDbContext context)
+        public UsersController(AthenaDbContext context)
         {
             _context = context;
         }
 
-        // GET: UserViews
+        // GET: Users
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.ToListAsync());
         }
 
-        // GET: UserViews/Details/5
+        // GET: Users/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -34,39 +34,39 @@ namespace AthenaWebApp.Controllers
                 return NotFound();
             }
 
-            var userView = await _context.Users
+            var user = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (userView == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(userView);
+            return View(user);
         }
 
-        // GET: UserViews/Create
+        // GET: Users/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: UserViews/Create
+        // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserName,UserMail,CompanyId,Company")] AthenaIdentityUser userView)
+        public async Task<IActionResult> Create([Bind("UserName,Email,CompanyId,Company")] AthenaIdentityUser user)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(userView);
+                _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(userView);
+            return View(user);
         }
 
-        // GET: UserViews/Edit/5
+        // GET: Users/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -74,22 +74,22 @@ namespace AthenaWebApp.Controllers
                 return NotFound();
             }
 
-            var userView = await _context.Users.FindAsync(id);
-            if (userView == null)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return View(userView);
+            return View(user);
         }
 
-        // POST: UserViews/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,UserMail,CompanyId,Company")] AthenaIdentityUser userView)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,Email,CompanyId,Company")] AthenaIdentityUser user)
         {
-            if (id != userView.Id)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace AthenaWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(userView);
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserViewExists(userView.Id))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +114,10 @@ namespace AthenaWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(userView);
+            return View(user);
         }
 
-        // GET: UserViews/Delete/5
+        // GET: Users/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -125,28 +125,28 @@ namespace AthenaWebApp.Controllers
                 return NotFound();
             }
 
-            var userView = await _context.Users
+            var user = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (userView == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(userView);
+            return View(user);
         }
 
-        // POST: UserViews/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var userView = await _context.Users.FindAsync(id);
-            _context.Users.Remove(userView);
+            var user = await _context.Users.FindAsync(id);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserViewExists(string id)
+        private bool UserExists(string id)
         {
             return _context.Users.Any(e => e.Id == id);
         }

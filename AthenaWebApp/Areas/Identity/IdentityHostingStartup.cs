@@ -16,12 +16,12 @@ namespace AthenaWebApp.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<AthenaIdentityUserDbContext>(options =>
+                services.AddDbContext<AthenaDbContext>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("ServerConnection")));
 
                 services.AddDefaultIdentity<AthenaIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<AthenaIdentityUserDbContext>();
+                    .AddEntityFrameworkStores<AthenaDbContext>();
             });
         }
     }

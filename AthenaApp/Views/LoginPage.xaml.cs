@@ -1,4 +1,5 @@
 ﻿using AthenaApp.Models;
+using AthenaApp.Services;
 using AthenaApp.ViewModels;
 using Newtonsoft.Json;
 using System;
@@ -19,20 +20,26 @@ namespace AthenaApp.Views
 
         public LoginPage()
         {
-            var viewModel = new LoginViewModel();
-            this.BindingContext = viewModel;
-            viewModel.DisplayInvalidLoginPrompt += () => DisplayAlert("Error", "Invalid Login, try again", "OK");
             InitializeComponent();
+        }
 
-            UserInputMail.Completed += (object sender, EventArgs e) =>
-            {
-                UserInputPw.Focus();
-            };
+        private async void ButtonLogin_Clicked(object sender, EventArgs e)
+        {
+            LoginService services = new LoginService();
+            var getLoginDetails = await services.CheckLoginIfExists(UserInputMail.Text, UserInputPw.Text);
 
-            UserInputPw.Completed += (object sender, EventArgs e) =>
+            if (getLoginDetails)
             {
-                viewModel.LoginComand.Execute(null);
-            };
+                await DisplayAlert("Login Successfull", "Username or Password is correct", "Okay", "Cancel");
+            }
+            else if (UserInputMail.Text == null && UserInputPw.Text == null)
+            {
+                await DisplayAlert("Login failed", "Enter your Email and Password before login", "Okay", "Cancel");
+            }
+            else
+            {
+                await DisplayAlert("Login failed", "Username or Password is incorrect or not exists", "Okay", "Cancel");
+            }
         }
     }
 }

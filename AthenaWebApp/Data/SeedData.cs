@@ -12,9 +12,9 @@ namespace AthenaWebApp.Models
 
         {
             
-                        using (var context = new AthenaIdentityUserDbContext(
+                        using (var context = new AthenaDbContext(
                             serviceProvider.GetRequiredService<
-                                DbContextOptions<AthenaIdentityUserDbContext>>()))
+                                DbContextOptions<AthenaDbContext>>()))
                         {
                             // ToDo:
                             if (context.Company.Any())
@@ -35,52 +35,52 @@ namespace AthenaWebApp.Models
 
                 /*
                                 context.Users.AddRange(
-                                    new UserView
+                                    new User
                                     {
 
-                                        UserMail = "lena@student.uni-siegen.de",
+                                        Email = "lena@student.uni-siegen.de",
                                         UserName = "Lena",
                                         CompanyId = 1
                                     },
                                     new IdentityUser
                                     {
-                                        UserMail = "jasmin@student.uni-siegen.de",
+                                        Email = "jasmin@student.uni-siegen.de",
                                         UserName = "Jasmin",
                                         CompanyId = 1
                                     },
                                     new IdentityUser
                                     {
-                                        UserMail = "domenik@student.uni-siegen.de",
+                                        Email = "domenik@student.uni-siegen.de",
                                         UserName = "Domenik",
                                         CompanyId = 1
                                     },
                                     new IdentityUser
                                     {
-                                        UserMail = "alex@student.uni-siegen.de",
+                                        Email = "alex@student.uni-siegen.de",
                                         UserName = "Alex",
                                         CompanyId = 1
                                     },
                                     new IdentityUser
                                     {
-                                        UserMail = "raphael@student.uni-siegen.de",
+                                        Email = "raphael@student.uni-siegen.de",
                                         UserName = "Raphael",
                                         CompanyId = 1
                                     },
                                     new IdentityUser
                                     {
-                                        UserMail = "orhan@student.uni-siegen.de",
+                                        Email = "orhan@student.uni-siegen.de",
                                         UserName = "Orhan",
                                         CompanyId = 1
                                     },
                                     new IdentityUser
                                     {
-                                        UserMail = "admin@student.uni-siegen.de",
+                                        Email = "admin@student.uni-siegen.de",
                                         UserName = "Admin",
                                         CompanyId = 1
                                     },
                                     new IdentityUser
                                     {
-                                        UserMail = "supervisor@student.uni-siegen.de",
+                                        Email = "supervisor@student.uni-siegen.de",
                                         UserName = "Supervisor",
                                         CompanyId = 1
                                     }

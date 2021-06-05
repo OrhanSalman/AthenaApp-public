@@ -34,24 +34,24 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
         private readonly UserManager<AthenaIdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-//        private readonly ICompanyRepository _companyRepository;
+        //        private readonly ICompanyRepository _companyRepository;
 
         public RegisterModel(
             UserManager<AthenaIdentityUser> userManager,
             SignInManager<AthenaIdentityUser> signInManager,
             IEnumerable<Company> context,
             ILogger<RegisterModel> logger,
-//            ICompanyRepository companyRepository,
+            //            ICompanyRepository companyRepository,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-//            _companyRepository = companyRepository;
+            //            _companyRepository = companyRepository;
         }
 
-        
+
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -102,35 +102,35 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-/*
-            string userInput = Input.Company.ToString();
-            Company company = new Company();
+            /*
+                        string userInput = Input.Company.ToString();
+                        Company company = new Company();
 
-            company.Id = 1;
-            company.CompanyName = "TestCompany";
-            company.Country = "Deutschland";
-            company.CollectedDistances = 10;
+                        company.Id = 1;
+                        company.CompanyName = "TestCompany";
+                        company.Country = "Deutschland";
+                        company.CollectedDistances = 10;
 
-           var findId = _context.Select(x => x.Id)
-                              .Where(i => company.CompanyName.Contains(userInput))
-                              .ToList();
+                       var findId = _context.Select(x => x.Id)
+                                          .Where(i => company.CompanyName.Contains(userInput))
+                                          .ToList();
 
-            List<int> IdList = _context.Select(x => x.Id)
-                              .Where(i => company.CompanyName.Contains(userInput))
-                              .ToList();
-            
-            foreach (int value in findId)
-            {
-                idList.Add(value);
-            }
-  */
+                        List<int> IdList = _context.Select(x => x.Id)
+                                          .Where(i => company.CompanyName.Contains(userInput))
+                                          .ToList();
+
+                        foreach (int value in findId)
+                        {
+                            idList.Add(value);
+                        }
+              */
 
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
                 // ToDo
-//                var id = _companyRepository.Search(Input.Company);
+                //                var id = _companyRepository.Search(Input.Company);
 
                 var user = new AthenaIdentityUser { UserName = Input.UserName, Email = Input.Email, Company = Input.Company, CompanyId = 1 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -172,4 +172,3 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
         }
     }
 }
-

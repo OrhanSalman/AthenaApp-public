@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
 using Microsoft.EntityFrameworkCore;
@@ -11,26 +11,41 @@ namespace AthenaWebApp.Repositories.PatternInterfaces
 {
     public class CompanyRepository : ICompanyRepository
     {
-        private readonly AthenaIdentityUserDbContext _context;
+        private readonly AthenaDbContext _context;
 
-        public CompanyRepository(AthenaIdentityUserDbContext _context)
+        public CompanyRepository(AthenaDbContext _context)
         {
             this._context = _context;
         }
 
-
-
-        public async Task<IEnumerable<Company>> Search(string CompanyName)
+        public Task<IEnumerable<Company>> GetCompanies()
         {
-            IQueryable<Company> query = _context.Company;
-
-            if (!string.IsNullOrEmpty(CompanyName))
-            {
-                query = query.Where(e => e.CompanyName.Contains(CompanyName));
-            }
-
-            return await query.ToListAsync();
+            throw new NotImplementedException();
         }
+
+        public Task<Company> GetCompanyById(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Company> GetCompanyByName(string CompanyName)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        /*
+                public async Task<IEnumerable<Company>> Search(string CompanyName)
+                {
+                    IQueryable<Company> query = _context.Company;
+
+                    if (!string.IsNullOrEmpty(CompanyName))
+                    {
+                        query = query.Where(e => e.CompanyName.Contains(CompanyName));
+                    }
+
+                    return await query.ToListAsync();
+                }
+        */
     }
 }
-*/

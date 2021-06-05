@@ -4,10 +4,10 @@ using System.Text;
 
 namespace AthenaApp.Models
 {
-    class User
+    public class User
     {
-
-        public string email { get; set; }
-        public string pw { get; set; }
+        public string Id { get; set; }
+        public string Email { get; set; }
+        public string PasswordHash { get; set; }
     }
 }

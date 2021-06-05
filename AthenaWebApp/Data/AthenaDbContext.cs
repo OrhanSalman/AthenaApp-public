@@ -10,22 +10,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AthenaWebApp.Data
 {
-    public class AthenaIdentityUserDbContext : IdentityDbContext<AthenaIdentityUser>
+    public class AthenaDbContext : IdentityDbContext<AthenaIdentityUser>
     {
-        public AthenaIdentityUserDbContext(DbContextOptions<AthenaIdentityUserDbContext> options)
+        public AthenaDbContext(DbContextOptions<AthenaDbContext> options)
             : base(options)
         {
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
 
             base.OnModelCreating(builder);
-            builder.HasDefaultSchema("Athena");
+//            builder.HasDefaultSchema("Athena");
             builder.Entity<IdentityRole>(entity =>
             {
                 entity.ToTable(name: "Role");
@@ -55,20 +54,20 @@ namespace AthenaWebApp.Data
             {
                 entity.ToTable("UserTokens");
             });
-/*
-            base.OnModelCreating(modelBuilder);
+            /*
+                        base.OnModelCreating(modelBuilder);
 
-            builder.Entity<IdentityUser>()
-                .Property(e => e.firstName)
-                .HasMaxLength(250);
+                        builder.Entity<IdentityUser>()
+                            .Property(e => e.firstName)
+                            .HasMaxLength(250);
 
-            builder.Entity<ApplicationUser>()
-                .Property(e => e.lastName)
-                .HasMaxLength(250);
-*/
+                        builder.Entity<ApplicationUser>()
+                            .Property(e => e.lastName)
+                            .HasMaxLength(250);
+            */
         }
-            public DbSet<AthenaWebApp.Models.Company> Company { get; set; }
-//            public DbSet<AthenaWebApp.Models.Role> Role { get; set; }
+        public DbSet<AthenaWebApp.Models.Company> Company { get; set; }
+        //            public DbSet<AthenaWebApp.Models.Role> Role { get; set; }
     }
-    
+
 }

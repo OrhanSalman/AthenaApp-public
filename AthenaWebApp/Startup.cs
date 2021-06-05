@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using WebPWrecover.Services;
 using AthenaWebApp.Services;
+using AthenaWebApp.Repositories.PatternInterfaces;
 
 namespace AthenaWebApp
 {
@@ -37,7 +38,7 @@ namespace AthenaWebApp
             services.AddMvc(options =>
             {
                 // This pushes users to login if not authenticated
-                options.Filters.Add(new AuthorizeFilter());
+//                options.Filters.Add(new AuthorizeFilter());
 
             });
 
@@ -62,6 +63,7 @@ namespace AthenaWebApp
             // using WebPWrecover.Services;
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
