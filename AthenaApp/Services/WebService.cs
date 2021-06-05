@@ -56,7 +56,7 @@ namespace AthenaApp.Services
 
 
 
-                var response = await client.PostAsync("UserViews", content);
+                var response = await client.PostAsync("Users", content);
                 if (response.IsSuccessStatusCode)
                 {
                     content = await response.Content.ReadAsStringAsync();
@@ -99,7 +99,7 @@ namespace AthenaApp.Services
                 };
                 var content = new StringContent(JsonConvert.SerializeObject(loginRequestModel), Encoding.UTF8, "application/json");
                 //Change your base address tail part here and post it. 
-                var response = await client.PostAsync("UserViews", content);
+                var response = await client.PostAsync("Users", content);
                 response.EnsureSuccessStatusCode();
                 using (var stream = await response.Content.ReadAsStreamAsync())
                 using (var reader = new StreamReader(stream))

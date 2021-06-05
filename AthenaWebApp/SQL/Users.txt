@@ -1,9 +1,0 @@
-﻿CREATE TABLE [dbo].[Users] (
-    [Id]       INT           IDENTITY (1, 1) NOT NULL,
-    [UserMail] VARCHAR (MAX) NOT NULL,
-    [UserName] VARCHAR (MAX) NOT NULL,
-    [CompanyId]    INT           NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Users_Companys] FOREIGN KEY ([CompanyId]) REFERENCES [dbo].[Companys] ([Id])
-);
-

@@ -9,7 +9,10 @@ namespace AthenaWebApp.Models
 {
     public class Company
     {
-        
+        /*
+         * Id sollte [Key, ForeignKey("CompanyId"), DatabaseGenerated(DatabaseGeneratedOption.None)] sein
+         * 
+         */
         [Key, ForeignKey("CompanyId"), Display(Name = "ID")]
         public int Id { get; set; }
 

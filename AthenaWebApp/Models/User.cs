@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AthenaWebApp.Models
 {
-    public class UserView
+    public class User
     {
         [Display(Name = "ID")]
         public string Id { get; set; }
@@ -15,7 +15,7 @@ namespace AthenaWebApp.Models
         public string UserName { get; set; }
 
         [Display(Name = "E-Mail")]
-        public string UserMail { get; set; }
+        public string Email { get; set; }
 
         [Display(Name = "Universität-Id")]
         public int CompanyId { get; set; }

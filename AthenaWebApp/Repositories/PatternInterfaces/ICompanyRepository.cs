@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using AthenaWebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -10,16 +10,8 @@ namespace AthenaWebApp.Repositories.PatternInterfaces
     public interface ICompanyRepository
     {
 
-//        Task<Company> GetCompanyById(int Id);
-//        Task<Company> GetCompanyByName(string CompanyName);
-        Task<IEnumerable<Company>> Search(string CompanyName);
-
-
-
-        //        Task<IEnumerable<Company>> GetCompanies();
-        //        void DeleteCompany(int Id);
-        //        Task<Company> AddCompany(Company company);
-        //        Task<Company> UpdateCompany(Company company);
+        Task<IEnumerable<Company>> GetCompanies();
+        Task<Company> GetCompanyById(int Id);
+        Task<Company> GetCompanyByName(string CompanyName);
     }
 }
-*/

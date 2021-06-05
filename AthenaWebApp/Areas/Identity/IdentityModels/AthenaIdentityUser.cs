@@ -12,10 +12,11 @@ namespace AthenaWebApp.Areas.Identity.IdentityModels
     // Add profile data for application users by adding properties to the AthenaIdentityUser class
     public class AthenaIdentityUser : IdentityUser
     {
-        public Company company { get; set; }
+        // Company MUSS hier stehen, sonst gibts Ärger mit Identity Insert!
+//        public Company company { get; set; }
 
         //        [Key, ForeignKey("ProfileMeta")]
-        [ForeignKey("CompanyId"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [ForeignKey("CompanyId"), DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CompanyId { get; set; }
         public string Company { get; set; }
         public int UsernameChangeLimit { get; set; } = 10;
@@ -24,6 +25,6 @@ namespace AthenaWebApp.Areas.Identity.IdentityModels
 
 
 
-//        public virtual ICollection<IdentityUser> IdentityUsers { get; set; }
+        //        public virtual ICollection<IdentityUser> IdentityUsers { get; set; }
     }
 }

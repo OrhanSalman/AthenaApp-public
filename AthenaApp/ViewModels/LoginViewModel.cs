@@ -1,4 +1,5 @@
-﻿using AthenaApp.Services;
+﻿/*
+using AthenaApp.Services;
 using AthenaApp.Views;
 using System;
 using System.Collections.Generic;
@@ -79,7 +80,8 @@ namespace AthenaApp.ViewModels
                 // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
                 await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
             }
-            */
+            
         }
     }
 }
+*/
