@@ -12,7 +12,7 @@ namespace AthenaApp.Services
 {
     public class LoginService
     {
-        RestClient<LoginApiRequestModel> _restClient = new RestClient<LoginApiRequestModel>();
+        RestClient<User> _restClient = new RestClient<User>();
 
         public async Task<bool> CheckLoginIfExists(string Email, string PasswordHash)
         {
