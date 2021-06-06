@@ -23,7 +23,7 @@ namespace AthenaApp.Views
             InitializeComponent();
         }
 
-        private async void ButtonLoginClicked(object sender, EventArgs e)
+        private async void ButtonLogin_Clicked(object sender, EventArgs e)
         {
             LoginService services = new LoginService();
             var getLoginDetails = await services.CheckLoginIfExists(UserInputMail.Text, UserInputPw.Text);

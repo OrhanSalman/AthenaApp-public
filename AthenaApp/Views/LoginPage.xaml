@@ -105,7 +105,8 @@
 
                             <Button
                                 BackgroundColor="MidnightBlue"
-                                Clicked="ButtonLoginClicked"
+                                Clicked="ButtonLogin_Clicked"
+                                Command="{Binding LoginComand}"
                                 CornerRadius="30"
                                 Text="SIGN IN"
                                 TextColor="White" />
