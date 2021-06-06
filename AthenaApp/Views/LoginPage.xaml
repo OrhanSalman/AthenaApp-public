@@ -13,23 +13,21 @@
 
     <StackLayout BackgroundColor="#e6e6e6">
         <Grid>
-            <StackLayout
-                Margin="10,10,10,10"
-                Padding="0"
-                HorizontalOptions="FillAndExpand">
-                <Frame
-                    Margin="0"
-                    Padding="0"
-                    HeightRequest="120">
-                    <Image
-                        Margin="0"
-                        Aspect="AspectFill"
-                        Source="{local:ImageResource AthenaApp.EmbeddedResources.athena_logo.png}" />
-                </Frame>
-            </StackLayout>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout BackgroundColor="#203984" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                        <Image Source="athena_logo.png" VerticalOptions="Center" HeightRequest="64" />
+                    </ContentView>
+                </StackLayout>
+
+            </StackLayout> 
 
             <StackLayout
-                Margin="10,120,10,0"
+                Margin="30,120,30,0"
                 Padding="0"
                 HorizontalOptions="FillAndExpand">
                 <Frame
@@ -37,10 +35,10 @@
                     Padding="0"
                     BackgroundColor="White"
                     HasShadow="True"
-                    HeightRequest="500">
+                    HeightRequest="700">
 
                     <StackLayout>
-                        <StackLayout Margin="10">
+                        <StackLayout Margin="55">
                             <Label
                                 FontAttributes="Bold"
                                 HorizontalOptions="CenterAndExpand"
