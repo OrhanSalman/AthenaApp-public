@@ -106,6 +106,7 @@
                                 CornerRadius="30"
                                 Text="SIGN IN"
                                 TextColor="White" />
+                            
 
                             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                                 <Label
