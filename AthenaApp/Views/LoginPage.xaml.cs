@@ -23,14 +23,14 @@ namespace AthenaApp.Views
             InitializeComponent();
         }
 
-        private async void ButtonLogin_Clicked(object sender, EventArgs e)
+        private async void ButtonLoginClicked(object sender, EventArgs e)
         {
             LoginService services = new LoginService();
             var getLoginDetails = await services.CheckLoginIfExists(UserInputMail.Text, UserInputPw.Text);
 
             if (getLoginDetails)
             {
-                await DisplayAlert("Login Successfull", "Username or Password is correct", "Okay", "Cancel");
+                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
             }
             else if (UserInputMail.Text == null && UserInputPw.Text == null)
             {

@@ -6,6 +6,7 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:local="clr-namespace:AthenaApp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:AthenaApp.ViewModels"
     Shell.NavBarIsVisible="False"
     mc:Ignorable="d">
 
@@ -104,7 +105,7 @@
 
                             <Button
                                 BackgroundColor="MidnightBlue"
-                                Clicked="ButtonLogin_Clicked"
+                                Clicked="ButtonLoginClicked"
                                 CornerRadius="30"
                                 Text="SIGN IN"
                                 TextColor="White" />
