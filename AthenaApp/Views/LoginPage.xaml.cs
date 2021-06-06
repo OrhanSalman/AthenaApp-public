@@ -30,7 +30,7 @@ namespace AthenaApp.Views
 
             if (getLoginDetails)
             {
-                await DisplayAlert("Login Successfull", "Username or Password is correct", "Okay", "Cancel");
+                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
             }
             else if (UserInputMail.Text == null && UserInputPw.Text == null)
             {
