@@ -1,5 +1,4 @@
-﻿/*
-using AthenaApp.Services;
+﻿using AthenaApp.Services;
 using AthenaApp.Views;
 using System;
 using System.Collections.Generic;
@@ -48,11 +47,11 @@ namespace AthenaApp.ViewModels
         public Command LoginComand { get; }
         public LoginViewModel()
         {
-            LoginComand = new Command(OnLoginClicked);
+            LoginComand = new Command(ButtonLogin_Clicked);
         }
 
 
-        private async void OnLoginClicked(object obj)
+        private async void ButtonLogin_Clicked(object obj)
         {
 
 
@@ -64,21 +63,20 @@ namespace AthenaApp.ViewModels
                 await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
             }
 
-            /*
+            
             if (userInputMail != "athena@uni.de" || userInputPw != "athena")
             {
-                DisplayInvalidLoginPrompt();
+
+                 DisplayInvalidLoginPrompt();
             }
             else
             {
-
-//                await Shell.Current.GoToAsync("//AboutPage");
-                // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+               // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+               await Shell.Current.GoToAsync("//DashboardPage");               
+               await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
             }
             
 
         }
     }
 }
-*/

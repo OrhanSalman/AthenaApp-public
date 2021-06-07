@@ -8,8 +8,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:AthenaApp.ViewModels"
     Shell.NavBarIsVisible="False"
-    mc:Ignorable="d">
 
+
+    mc:Ignorable="d">
+    <Shell.TitleView>
+        <Image Source="athena_logo.png"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+    </Shell.TitleView>
 
 
     <StackLayout BackgroundColor="#e6e6e6">
@@ -21,8 +27,10 @@
             <StackLayout BackgroundColor="#203984" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                     <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                        <Image Source="athena_logo.png" VerticalOptions="Center" HeightRequest="64" />
+                        <Image Source="athena_logo.png" VerticalOptions="Center" HeightRequest="65" />
                     </ContentView>
+
+
                 </StackLayout>
 
             </StackLayout> 

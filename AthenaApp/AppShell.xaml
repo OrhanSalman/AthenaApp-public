@@ -86,10 +86,13 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
-
-
-    <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
+    <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" Route="AboutPage" />
     <ShellContent ContentTemplate="{DataTemplate local:RegisterPage}" Route="RegisterPage" />
+    <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
+    <ShellContent ContentTemplate="{DataTemplate local:DashboardPage}" Route="DashboardPage" />
+    <ShellContent ContentTemplate="{DataTemplate local:MapPage}" Route="MapPage" />
+
+
 
 
 
