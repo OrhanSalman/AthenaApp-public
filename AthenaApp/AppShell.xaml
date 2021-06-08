@@ -14,6 +14,8 @@
 
     <Shell.Resources>
         <ResourceDictionary>
+            <Color
+            x:Key="Primary">#F87412</Color>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="Shell.ForegroundColor" Value="White" />
@@ -32,7 +34,7 @@
                 Default Styles for all Flyout Items
                 https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
             -->
-            <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+            <Style Class="FlyoutItemLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="White" />
             </Style>
             <Style
