@@ -22,7 +22,10 @@ namespace AthenaApp.Views
         {
             var locator = CrossGeolocator.Current;
             locator.DesiredAccuracy = 5;
-            var position = await locator.GetPositionAsync();
+            var position = await locator.GetPositionAsync(TimeSpan.FromMilliseconds(100));
+            LongitudeLabel.Text = position.Longitude.ToString();        // Test
+            LatitudeLabel.Text = position.Latitude.ToString();          // Test
         }
+        
     }
 }
