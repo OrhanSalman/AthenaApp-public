@@ -25,7 +25,7 @@
                     <Image
                         Margin="0"
                         Aspect="AspectFill"
-                        Source="{local:ImageResource AthenaApp.EmbeddedResources.athena_logo.png}" />
+                        Source="" />
                 </Frame>
             </StackLayout>
 

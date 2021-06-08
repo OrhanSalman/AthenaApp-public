@@ -166,4 +166,7 @@
       <Name>AthenaApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\peoplegroup.png" />
+  </ItemGroup>
 </Project>

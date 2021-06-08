@@ -9,27 +9,37 @@
     <StackLayout>
         <Label FontSize="Title">Dashboard</Label>
         <Label FontSize="Subtitle">Fortschritt</Label>
-        <Frame>
+            <Frame CornerRadius="10">
             <forms:ChartView x:Name="Chart1" HeightRequest="150" />
         </Frame>
         <Label FontSize="Subtitle">Persönliche Aktivität</Label>
-        <Frame>
+            <Frame CornerRadius="10">
             <forms:ChartView x:Name="Chart2" HeightRequest="150" />
         </Frame>
-        <Label FontSize="Subtitle">Neustes Abzeichen</Label>
-        <Label FontSize="Subtitle">Gesamtübersicht</Label>
-           
+            <Label FontSize="Subtitle">Neustes Abzeichen</Label>
+            <Frame CornerRadius="10">
+                <Grid Margin="20,50,20,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*" />
+                        <ColumnDefinition Width="0.7*"/>
+                    </Grid.ColumnDefinitions>
 
+                </Grid>
+            </Frame>
+        
+            <Label FontSize="Subtitle">Gesamtübersicht</Label>
+
+            <Frame CornerRadius="10">
             <Grid Margin="20,50,20,20">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.25*" />
-                    <ColumnDefinition Width="0.25*" />
-                    <ColumnDefinition Width="0.25*" />
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="0.3*" />
 
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100" />
-                    <RowDefinition Height="100" />
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="120" />
                 </Grid.RowDefinitions>
              
                 <BoxView Color="DarkBlue" CornerRadius="10" />
@@ -40,32 +50,84 @@
                 <BoxView Color="DarkBlue" Grid.Column="2" Grid.Row="0" CornerRadius="10" />
 
                 <Image
-                        Margin="10"
-                        Aspect="AspectFill"
+                        Margin="25"
+                        HeightRequest="30"
+                        WidthRequest="20"
+                        BackgroundColor="DarkTurquoise"
                          Grid.Row="0"
                         Grid.Column="0"
-                        Source="{local:ImageResource AthenaApp.EmbeddedResources.stop.png}" />
+                        Source="awesome_running.png" 
+                        VerticalOptions="StartAndExpand"/>
+                <Image
+                        Margin="25"
+                        HeightRequest="30"
+                        WidthRequest="20"
+                        BackgroundColor="DarkTurquoise"
+                         Grid.Row="0"
+                        Grid.Column="1"
+                        Source="awesome_swimmer.png"
+                        VerticalOptions="StartAndExpand"
+                        />
+                
+                <Image
+                        Margin="25"
+                        HeightRequest="30"
+                        WidthRequest="20"
+                        BackgroundColor="DarkTurquoise"
+                         Grid.Row="0"
+                        Grid.Column="2"
+                        Source="material_directions_bike.png"
+                        VerticalOptions="StartAndExpand"/>
+                <Image
+                        Margin="25"
+                        HeightRequest="10"
+                         Grid.Row="1"
+                        Grid.Column="0"
+                        Source="peoplegroup.png" />
+                
+                <Image
+                        Margin="25"
+                        HeightRequest="10"
+                         Grid.Row="1"
+                        Grid.Column="0"
+                        BackgroundColor="DarkBlue"
+                        Source="peoplegroup.png" />
+                <Image
+                        Margin="25"
+                        HeightRequest="10"
+                         Grid.Row="1"
+                        Grid.Column="1"
+                        Source="awesome_tachometer_alt.png" />
+            
+                <Image
+                        Margin="25"
+                        HeightRequest="10"
+                         Grid.Row="1"
+                        Grid.Column="2"
+                        
+                        Source="ionic_ios_person.png" />
 
-                <Label Text="Column 0, Row 0"  />
+                 <Label Text="Jogging" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
 
                 <Label Grid.Column="1"
-           Text="Column 1, Row 0" />
-                <Label Grid.Row="1"
-           Text="Column 0, Row 1" />
-                <Label Grid.Column="1"
-             Grid.Row="1"
-           Text="Column 1, Row 1" />
+           Text="Swimming" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
                 <Label Grid.Column="2"
              Grid.Row="0"
-           Text="Column 2, Row 0" />
+           Text="Biking" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Row="1"
+           Text="Members" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center" />
+                <Label Grid.Column="1"
+             Grid.Row="1"
+           Text="Km/Day" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center"/>
+                
                 <Label Grid.Column="2"
              Grid.Row="1"
-           Text="Column 2, Row 1" />
+           Text="Km Personal" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center"/>
 
 
             </Grid>
 
-
+            </Frame>
         </StackLayout>
        
     </ScrollView>
