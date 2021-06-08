@@ -86,8 +86,13 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
+
+
     <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
-    <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" Route="AboutPage" />
+    <ShellContent ContentTemplate="{DataTemplate local:RegisterPage}" Route="RegisterPage" />
+
+
+
     <!---
     <FlyoutItem Title="About" Icon="icon_about.png">
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
@@ -106,11 +111,11 @@
         content you can do so by calling
         await Shell.Current.GoToAsync("//LoginPage");
     -->
-
+    <!--
     <TabBar>
         <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
     </TabBar>
-
+    -->
     <!-- Optional Templates
     // These may be provided inline as below or as separate classes.
 

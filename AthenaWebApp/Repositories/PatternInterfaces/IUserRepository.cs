@@ -15,7 +15,7 @@ namespace AthenaWebApp.Repositories.PatternInterfaces
         Task<IEnumerable<AthenaIdentityUser>> GetUsers();
         Task<AthenaIdentityUser> GetUserLogin(string Email, string PasswordHash);
         Task<AthenaIdentityUser> GetUserByEmail(string Email);
-        Task<AthenaIdentityUser> AddUser(AthenaIdentityUser user);
+        Task<AthenaIdentityUser> PostRegisterUser(AthenaIdentityUser user);
 //        Task<AthenaIdentityUser> UpdateUser(AthenaIdentityUser employee);
         void DeleteUser(string Id);
     }

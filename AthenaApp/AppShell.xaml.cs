@@ -12,14 +12,15 @@ namespace AthenaApp
         {
             InitializeComponent();
 
-            // Alle wartenden Pages
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+            // Alle wartenden Pages, die nicht unmittelbar bevorstehen
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
         }
-
+/*
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("//LoginPage");
         }
+*/
     }
 }
