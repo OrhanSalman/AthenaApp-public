@@ -20,7 +20,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http;
-using AthenaWebApp.Data;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using AthenaWebApp.Controllers;
 //using AthenaWebApp.Repositories.PatternInterfaces;
@@ -31,7 +30,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<AthenaIdentityUser> _signInManager;
-        private readonly UserManager<AthenaIdentityUser> _userManager;
+        private readonly UserManager<AthenaIdentityUser> _userManager; 
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         //        private readonly ICompanyRepository _companyRepository;

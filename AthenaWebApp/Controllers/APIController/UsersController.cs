@@ -9,6 +9,11 @@ using AthenaWebApp.Data;
 using AthenaWebApp.Models;
 using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Repositories.PatternInterfaces;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
 
 namespace AthenaWebApp.Controllers.APIController
 {
@@ -17,10 +22,15 @@ namespace AthenaWebApp.Controllers.APIController
     public class UsersController : ControllerBase
     {
         private readonly IUserRepository _context;
+        private readonly IEmailSender _emailSender;
+        private readonly UserManager<AthenaIdentityUser> _userManager; 
+        //        private readonly ICompanyRepository _companyRepository;
 
-        public UsersController(IUserRepository context)
+        public UsersController(IUserRepository context, IEmailSender emailSender, UserManager<AthenaIdentityUser> userManager)
         {
             _context = context;
+            _emailSender = emailSender;
+            _userManager = userManager;
         }
 /*
         // GET: api/Users
@@ -110,20 +120,33 @@ namespace AthenaWebApp.Controllers.APIController
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<AthenaIdentityUser>> PostUser(AthenaIdentityUser user)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult<AthenaIdentityUser>> PostRegisterUser([Bind("UserName,Email,CompanyId,Company")] AthenaIdentityUser user, string returnUrl = null)
         {
             try
             {
-                if (user == null)
+                if (!ModelState.IsValid || user == null)
                     return BadRequest();
 
-                var newUser = await _context.AddUser(user);
+                var newUser = await _context.PostRegisterUser(user);
+
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var callbackUrl = Url.Page(
+                    "/Account/ConfirmEmail",
+                    pageHandler: null,
+                    values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                    protocol: Request.Scheme);
+
+
+                await _emailSender.SendEmailAsync("Email", "Confirm your email",
+                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
                 return CreatedAtAction("GetUser", new { id = user.Id }, user);
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error creating new employee record");
+                    "Error creating new user record");
             }
             /*
             catch (DbUpdateException)
