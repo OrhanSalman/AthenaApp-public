@@ -14,6 +14,8 @@
 
     <Shell.Resources>
         <ResourceDictionary>
+            <Color
+            x:Key="Primary">#F87412</Color>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="Shell.ForegroundColor" Value="White" />
@@ -32,7 +34,7 @@
                 Default Styles for all Flyout Items
                 https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
             -->
-            <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+            <Style Class="FlyoutItemLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="White" />
             </Style>
             <Style
@@ -86,8 +88,16 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
-    <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
     <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" Route="AboutPage" />
+    <ShellContent ContentTemplate="{DataTemplate local:RegisterPage}" Route="RegisterPage" />
+    <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
+    <ShellContent ContentTemplate="{DataTemplate local:DashboardPage}" Route="DashboardPage" />
+    <ShellContent ContentTemplate="{DataTemplate local:MapPage}" Route="MapPage" />
+
+
+
+
+
     <!---
     <FlyoutItem Title="About" Icon="icon_about.png">
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
@@ -106,11 +116,11 @@
         content you can do so by calling
         await Shell.Current.GoToAsync("//LoginPage");
     -->
-
+    <!--
     <TabBar>
         <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
     </TabBar>
-
+    -->
     <!-- Optional Templates
     // These may be provided inline as below or as separate classes.
 
