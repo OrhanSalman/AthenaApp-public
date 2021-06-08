@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Geolocator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,13 @@ namespace AthenaApp.Views
         public MapPage()
         {
             InitializeComponent();
+        }
+
+        private async void Run_Button(object sender, EventArgs e)
+        {
+            var locator = CrossGeolocator.Current;
+            locator.DesiredAccuracy = 5;
+            var position = await locator.GetPositionAsync();
         }
     }
 }
