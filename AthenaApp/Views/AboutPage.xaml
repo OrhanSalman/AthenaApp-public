@@ -4,11 +4,12 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:AthenaApp.ViewModels"
-    Title="Athena Running App">
+    Title="Athena Running App"
+    Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Color x:Key="Accent">#96d1ff</Color>
+            <Color x:Key="Accent">#203984</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -27,10 +28,12 @@
                 VerticalOptions="Center">
                 <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
                     <Image
-                        HeightRequest="64"
+                        HeightRequest="65"
                         Source="athena_logo.png"
                         VerticalOptions="Center" />
                 </ContentView>
+
+
             </StackLayout>
         </StackLayout>
         <ScrollView Grid.Row="1">
@@ -60,14 +63,16 @@
                     Clicked="GoToSignUp"
                     CornerRadius="30"
                     Text="sign up"
-                    TextColor="White" />
+                    TextColor="White"
+                    />
                 <Button
                     Margin="0,5,0,0"
                     BackgroundColor="#203984"
                     Clicked="GoToSignIn"
                     CornerRadius="30"
                     Text="I already have a profile"
-                    TextColor="White" />
+                    TextColor="White"
+                  />
 
 
             </StackLayout>

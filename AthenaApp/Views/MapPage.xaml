@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AthenaApp.Views.MapPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mymap="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
+    <Grid Margin="0">
+
+        <Grid>
+            <mymap:Map>
+                <mymap:Map.ItemTemplate>
+                    <DataTemplate>
+                        <mymap:Pin Position="{Binding Position}" />
+                    </DataTemplate>
+                </mymap:Map.ItemTemplate>
+            </mymap:Map>
+        </Grid>
+        <StackLayout
+            Margin="20"
+            Orientation="Vertical"
+            VerticalOptions="End">
+            <Button
+                Margin="0,5,0,0"
+                BackgroundColor="#203984"
+                Clicked="Run_Button"
+                CornerRadius="30"
+                Text="Run!" />
+
+            <!--  Test um die Werte zu sehen a  -->
+            <Label
+                FontSize="10"
+                Text="Latitude"
+                TextColor="Gray" />
+            <Label x:Name="LatitudeLabel" FontSize="10" />
+            <Label
+                FontSize="10"
+                Text="Longitude"
+                TextColor="Gray" />
+            <Label x:Name="LongitudeLabel" FontSize="10" />
+
+        </StackLayout>
+
+    </Grid>
+
+</ContentPage>
+
+
+
+
