@@ -16,7 +16,7 @@ namespace AthenaApp.Views
         public RegisterPage()
         {
             InitializeComponent();
-//            UserName = Input.UserName, Email = Input.Email, Company = Input.Company, CompanyId = 1
+//    a        UserName = Input.UserName, Email = Input.Email, Company = Input.Company, CompanyId = 1
         }
 
         private async void RegisterButton(object sender, EventArgs e)
