@@ -14,7 +14,7 @@ namespace AthenaApp
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+            MainPage = new Dashboard();
         }
 
         protected override void OnStart()

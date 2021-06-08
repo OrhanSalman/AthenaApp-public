@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="AthenaApp.Views.Dashboard"
+             xmlns:local="clr-namespace:AthenaApp">
+
+    <ScrollView>
+    <StackLayout>
+        <Label FontSize="Title">Dashboard</Label>
+        <Label FontSize="Subtitle">Fortschritt</Label>
+        <Frame>
+            <forms:ChartView x:Name="Chart1" HeightRequest="150" />
+        </Frame>
+        <Label FontSize="Subtitle">Persönliche Aktivität</Label>
+        <Frame>
+            <forms:ChartView x:Name="Chart2" HeightRequest="150" />
+        </Frame>
+        <Label FontSize="Subtitle">Neustes Abzeichen</Label>
+        <Label FontSize="Subtitle">Gesamtübersicht</Label>
+           
+
+            <Grid Margin="20,50,20,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.25*" />
+                    <ColumnDefinition Width="0.25*" />
+                    <ColumnDefinition Width="0.25*" />
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+             
+                <BoxView Color="DarkBlue" CornerRadius="10" />
+                <BoxView Color="DarkBlue" Grid.Column="0" Grid.Row="1" CornerRadius="10"/>
+                <BoxView Color="DarkBlue" Grid.Column="1" Grid.Row="0" CornerRadius="10"/>
+                <BoxView Color="DarkBlue" Grid.Column="1" Grid.Row="1" CornerRadius="10"/>
+                <BoxView Color="DarkBlue" Grid.Column="2" Grid.Row="1" CornerRadius="10"/>
+                <BoxView Color="DarkBlue" Grid.Column="2" Grid.Row="0" CornerRadius="10" />
+
+                <Image
+                        Margin="10"
+                        Aspect="AspectFill"
+                         Grid.Row="0"
+                        Grid.Column="0"
+                        Source="{local:ImageResource AthenaApp.EmbeddedResources.stop.png}" />
+
+                <Label Text="Column 0, Row 0"  />
+
+                <Label Grid.Column="1"
+           Text="Column 1, Row 0" />
+                <Label Grid.Row="1"
+           Text="Column 0, Row 1" />
+                <Label Grid.Column="1"
+             Grid.Row="1"
+           Text="Column 1, Row 1" />
+                <Label Grid.Column="2"
+             Grid.Row="0"
+           Text="Column 2, Row 0" />
+                <Label Grid.Column="2"
+             Grid.Row="1"
+           Text="Column 2, Row 1" />
+
+
+            </Grid>
+
+
+        </StackLayout>
+       
+    </ScrollView>
+     
+</ContentPage>
