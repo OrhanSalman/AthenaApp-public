@@ -12,7 +12,7 @@
                     <mymap:Pin Position="{Binding Position}"></mymap:Pin>
                 </DataTemplate>
             </mymap:Map.ItemTemplate>
-        </mymap:Map>
+        </mymap:Map> 
     </Grid>
     <StackLayout Margin="20" Orientation="Vertical" VerticalOptions="End">
             <Button Text="Run!"
@@ -21,8 +21,21 @@
                 Clicked="Run_Button"
                 CornerRadius="30">
             </Button>
+
+            <!-- Test um die Werte zu sehen -->
+            <Label Text="Latitude"              
+            TextColor="Gray"
+               FontSize="10"/>
+            <Label x:Name="LatitudeLabel"
+               FontSize="10"/>
+            <Label Text="Longitude"
+               TextColor="Gray"
+               FontSize="10"/>
+            <Label x:Name="LongitudeLabel"
+               FontSize="10"/>           
+
+        </StackLayout>
         
-    </StackLayout>
     </Grid>
 
 </ContentPage>
