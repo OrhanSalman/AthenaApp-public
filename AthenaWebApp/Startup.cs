@@ -64,6 +64,7 @@ namespace AthenaWebApp
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

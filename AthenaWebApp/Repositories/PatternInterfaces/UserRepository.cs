@@ -34,7 +34,7 @@ namespace AthenaWebApp.Repositories.PatternInterfaces
                 .FirstOrDefaultAsync(e => e.Email == Email);
         }
 
-        public async Task<AthenaIdentityUser> PostRegisterUser(AthenaIdentityUser user)
+        public async Task<AthenaIdentityUser> PostNewUser(AthenaIdentityUser user)
         {
             var result = await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();

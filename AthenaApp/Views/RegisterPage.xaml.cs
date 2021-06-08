@@ -16,16 +16,18 @@ namespace AthenaApp.Views
         public RegisterPage()
         {
             InitializeComponent();
-//    a        UserName = Input.UserName, Email = Input.Email, Company = Input.Company, CompanyId = 1
+            this.BindingContext = this;
         }
 
         private async void RegisterButton(object sender, EventArgs e)
         {
-            RegisterService services = new RegisterService();
-            var postRegisterUser = await services.CheckRegisterIfExists(UserInputName.Text, UserInputUniversity.Text, UserInputMail.Text, UserInputPw.Text);
-
+            
+            RegisterService registerService = new RegisterService();
+            var postRegisterUser = await registerService.CheckRegisterIfExists(UserInputName.Text, UserInputUniversity.Text, UserInputMail.Text, UserInputPw.Text);
+            
             if (postRegisterUser)
             {
+                await DisplayAlert("Registration succeeded", "Welcome new user!", "Okay", "Cancel");
                 await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
             }
             else if (UserInputMail.Text == null && UserInputPw.Text == null)
@@ -36,6 +38,7 @@ namespace AthenaApp.Views
             {
                 await DisplayAlert("Registration failed", "Username or Password is incorrect or not exists", "Okay", "Cancel");
             }
+            
         }
     }
 }

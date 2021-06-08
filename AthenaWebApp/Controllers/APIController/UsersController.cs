@@ -14,6 +14,8 @@ using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
+using Microsoft.Extensions.Configuration;
+using AthenaApp.Models;
 
 namespace AthenaWebApp.Controllers.APIController
 {
@@ -23,31 +25,59 @@ namespace AthenaWebApp.Controllers.APIController
     {
         private readonly IUserRepository _context;
         private readonly IEmailSender _emailSender;
-        private readonly UserManager<AthenaIdentityUser> _userManager; 
-        //        private readonly ICompanyRepository _companyRepository;
+        private readonly UserManager<AthenaIdentityUser> userManager;
+        private readonly AthenaDbContext _dbContext;
+        private readonly IConfiguration _configuration;
 
-        public UsersController(IUserRepository context, IEmailSender emailSender, UserManager<AthenaIdentityUser> userManager)
+        public UsersController(IUserRepository context, IEmailSender emailSender, UserManager<AthenaIdentityUser> userManager, AthenaDbContext dbContext, IConfiguration configuration)
         {
             _context = context;
             _emailSender = emailSender;
-            _userManager = userManager;
+            this.userManager = userManager;
+            _dbContext = dbContext;
+            _configuration = configuration;
         }
-/*
-        // GET: api/Users
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<AthenaIdentityUser>>> GetUser()
+
+//        [HttpPost("/Register")]
+        public async Task<IActionResult> Register([FromBody] User user)
         {
-            try
+            var userExists = await userManager.FindByEmailAsync(user.Email);
+            if(userExists != null)
             {
-                return (await _context.GetUsers()).ToList();
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "The user with this E-Mail already exists. Choose another one." });
             }
-            catch (Exception)
+            AthenaIdentityUser athenaIdentityUser = new AthenaIdentityUser()
             {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error retrieving data from the database");
+                Email = user.Email,
+                UserName = user.UserName,
+                CompanyId = user.CompanyId,
+                Company = user.Company,
+            };
+
+            var result = await userManager.CreateAsync(athenaIdentityUser, user.Password);
+            if(!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Irgendein Error" });
             }
+            return Ok(new Response { Status = "Success", Message = "User created successfully" });
         }
-*/
+
+        /*
+                // GET: api/Users
+                [HttpGet("{id}")]
+                public async Task<ActionResult<IEnumerable<AthenaIdentityUser>>> GetUser()
+                {
+                    try
+                    {
+                        return (await _context.GetUsers()).ToList();
+                    }
+                    catch (Exception)
+                    {
+                        return StatusCode(StatusCodes.Status500InternalServerError,
+                            "Error retrieving data from the database");
+                    }
+                }
+        */
         // GET: api/Users/5
         [HttpGet("{Email}")]
         public async Task<ActionResult<AthenaIdentityUser>> GetUserByEmail(string Email)
@@ -119,36 +149,22 @@ namespace AthenaWebApp.Controllers.APIController
         
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult<AthenaIdentityUser>> PostRegisterUser([Bind("UserName,Email,CompanyId,Company")] AthenaIdentityUser user, string returnUrl = null)
+        [HttpPost("/Register")]
+        public async Task<ActionResult<User>> PostUser(AthenaIdentityUser user)
         {
+            
+            
+
             try
             {
-                if (!ModelState.IsValid || user == null)
-                    return BadRequest();
+                //                user = new AthenaIdentityUser { UserName = Input.UserName, Email = Input.Email, Company = Input.Company, CompanyId = 1 };
+                //                var result = await _userManager.CreateAsync(user, Input.Password);
+                user = new AthenaIdentityUser();
+                
 
-                var newUser = await _context.PostRegisterUser(user);
+                var result = await _context.PostNewUser(user);
 
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                var callbackUrl = Url.Page(
-                    "/Account/ConfirmEmail",
-                    pageHandler: null,
-                    values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                    protocol: Request.Scheme);
-
-
-                await _emailSender.SendEmailAsync("Email", "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-                return CreatedAtAction("GetUser", new { id = user.Id }, user);
             }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error creating new user record");
-            }
-            /*
             catch (DbUpdateException)
             {
                 if (UserExists(user.Id))
@@ -160,9 +176,9 @@ namespace AthenaWebApp.Controllers.APIController
                     throw;
                 }
             }
-            */
-        }
-/*
+
+            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+        }/*
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(string id)
@@ -179,10 +195,10 @@ namespace AthenaWebApp.Controllers.APIController
             return NoContent();
         }
 
+*/
         private bool UserExists(string id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _dbContext.Users.Any(e => e.Id == id);
         }
-*/
     }
 }

@@ -19,8 +19,11 @@ namespace AthenaWebApp.Models
 
         [Display(Name = "Universität-Id")]
         public int CompanyId { get; set; }
+
         [Display(Name = "Universität")]
         public string Company { get; set; }
+
+        public string Password { get; set; }
 
         
 
