@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mymap="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             x:Class="AthenaApp.Views.MapPage">
+    <Grid Margin="0">
+
+        <Grid >
+        <mymap:Map>
+            <mymap:Map.ItemTemplate>
+                <DataTemplate>
+                    <mymap:Pin Position="{Binding Position}"></mymap:Pin>
+                </DataTemplate>
+            </mymap:Map.ItemTemplate>
+        </mymap:Map>
+    </Grid>
+    <StackLayout Margin="20" Orientation="Vertical" VerticalOptions="End">
+            <Button Text="Run!"
+                Margin="0,5,0,0"
+                BackgroundColor="#203984"
+                Clicked="Run_Button"
+                CornerRadius="30">
+            </Button>
+        
+    </StackLayout>
+    </Grid>
+
+</ContentPage>
+    
+    
+    
+    
+    

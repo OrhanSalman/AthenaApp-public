@@ -14,8 +14,8 @@ namespace AthenaApp
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new AboutPage();
-
+            MainPage = new AppShell();
+         
 
         }
 
