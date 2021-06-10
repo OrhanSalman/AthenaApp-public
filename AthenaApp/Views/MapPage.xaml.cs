@@ -7,25 +7,43 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace AthenaApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MapPage : ContentPage
     {
+        bool isGettingLocation;
         public MapPage()
         {
             InitializeComponent();
         }
 
-        private async void Run_Button(object sender, EventArgs e)
+        async void StartLocationTrackingButton_Clicked(System.Object sender, System.EventArgs e)
         {
-            var locator = CrossGeolocator.Current;
-            locator.DesiredAccuracy = 5;
-            var position = await locator.GetPositionAsync(TimeSpan.FromMilliseconds(100));
-            LongitudeLabel.Text = position.Longitude.ToString();        // Test
-            LatitudeLabel.Text = position.Latitude.ToString();          // Test
+            isGettingLocation = true;
+
+            while (isGettingLocation) {
+                var result = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Default, TimeSpan.FromMinutes(1)));
+
+                resultLocation.Text += $"lat: {result.Latitude}. lng: {result.Longitude} {Environment.NewLine}";
+
+                
+            }           // Test
+        }
+        void StopLocationTrackingButton_Clicked(System.Object sender, System.EventArgs e)
+        {
+            isGettingLocation = false;
         }
         
     }
 }
+
+
+
+/*var locator = CrossGeolocator.Current;
+locator.DesiredAccuracy = 5;
+var position = await locator.GetPositionAsync(TimeSpan.FromMilliseconds(100));
+LongitudeLabel.Text = position.Longitude.ToString();        // Test
+LatitudeLabel.Text = position.Latitude.ToString();*/
