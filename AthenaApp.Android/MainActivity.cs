@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.OS;
 using Android;
 
+using ImageCircle.Forms.Plugin.Droid;
+
 namespace AthenaApp.Droid
 {
     [Activity(Label = "AthenaApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
@@ -48,6 +50,7 @@ namespace AthenaApp.Droid
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            ImageCircleRenderer.Init();
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             LoadApplication(new App());
         }

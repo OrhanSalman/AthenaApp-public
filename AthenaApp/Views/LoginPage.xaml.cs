@@ -30,7 +30,7 @@ namespace AthenaApp.Views
 
         private async void ButtonLogin_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"//{nameof(Dashboard)}");   // Testversion, später entfernen
+            await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");   // Testversion, später entfernen
             
 
             LoginService services = new LoginService();
@@ -38,7 +38,7 @@ namespace AthenaApp.Views
 
             if (getLoginDetails)
             {
-                await Shell.Current.GoToAsync($"//{nameof(Dashboard)}");
+                await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
             }
             else if (UserInputMail.Text == null && UserInputPw.Text == null)
             {

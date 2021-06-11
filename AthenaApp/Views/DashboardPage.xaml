@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             x:Class="AthenaApp.Views.Dashboard"
-             xmlns:local="clr-namespace:AthenaApp">
+             x:Class="AthenaApp.Views.DashboardPage"
+             xmlns:local="clr-namespace:AthenaApp"
+             xmlns:Image="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin">
 
     <ScrollView>
     <StackLayout>
@@ -16,6 +17,7 @@
             <Frame CornerRadius="10">
             <forms:ChartView x:Name="Chart2" HeightRequest="150" />
         </Frame>
+            
             <Label FontSize="Subtitle">Neustes Abzeichen</Label>
             <Frame CornerRadius="10">
                 <Grid Margin="20,50,20,20">
@@ -23,7 +25,23 @@
                         <ColumnDefinition Width="0.3*" />
                         <ColumnDefinition Width="0.7*"/>
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120" />
 
+                    </Grid.RowDefinitions>
+
+                   
+                    <Image:CircleImage Grid.Column="0" Grid.Row="0" Source="ionic_ios_person" BackgroundColor="DarkBlue" Opacity="0.7"></Image:CircleImage>
+                    <Frame Grid.Column="1" Grid.Row="0" CornerRadius="15" Opacity="0.7" >
+                        <Frame.Background>
+                            <LinearGradientBrush>
+                                <GradientStop Color="DarkBlue"
+                          Offset="0.1" />
+                                <GradientStop Color="White"
+                          Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Frame.Background>
+                    </Frame>
                 </Grid>
             </Frame>
         
@@ -41,13 +59,13 @@
                     <RowDefinition Height="120" />
                     <RowDefinition Height="120" />
                 </Grid.RowDefinitions>
-             
-                <BoxView Color="DarkBlue" CornerRadius="10" />
-                <BoxView Color="DarkBlue" Grid.Column="0" Grid.Row="1" CornerRadius="10"/>
-                <BoxView Color="DarkBlue" Grid.Column="1" Grid.Row="0" CornerRadius="10"/>
-                <BoxView Color="DarkBlue" Grid.Column="1" Grid.Row="1" CornerRadius="10"/>
-                <BoxView Color="DarkBlue" Grid.Column="2" Grid.Row="1" CornerRadius="10"/>
-                <BoxView Color="DarkBlue" Grid.Column="2" Grid.Row="0" CornerRadius="10" />
+
+                    <BoxView Color="DarkBlue" CornerRadius="10" Opacity="0.7" />
+                    <BoxView Color="DarkBlue" Grid.Column="0" Grid.Row="1" CornerRadius="10" Opacity="0.7"/>
+                    <BoxView Color="DarkBlue" Grid.Column="1" Grid.Row="0" CornerRadius="10" Opacity="0.7"/>
+                    <BoxView Color="DarkBlue" Grid.Column="1" Grid.Row="1" CornerRadius="10" Opacity="0.7"/>
+                    <BoxView Color="DarkBlue" Grid.Column="2" Grid.Row="1" CornerRadius="10" Opacity="0.7"/>
+                    <BoxView Color="DarkBlue" Grid.Column="2" Grid.Row="0" CornerRadius="10" Opacity="0.7" />
 
                 <Image
                         Margin="25"
@@ -90,6 +108,7 @@
                         HeightRequest="10"
                          Grid.Row="1"
                         Grid.Column="0"
+                        Opacity="0.5"
                         BackgroundColor="DarkBlue"
                         Source="peoplegroup.png" />
                 <Image

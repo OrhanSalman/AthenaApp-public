@@ -14,7 +14,7 @@ using Microcharts;
 namespace AthenaApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Dashboard : ContentPage
+    public partial class DashboardPage : ContentPage
     {
         
         List<Entry> entries = new List<Entry>
@@ -156,7 +156,7 @@ namespace AthenaApp.Views
                 ValueLabel = "1500"
             },
         };
-        public Dashboard()
+        public DashboardPage()
         {
             InitializeComponent();
             Chart1.Chart = new LineChart()  {Entries = entriesAccumulated};

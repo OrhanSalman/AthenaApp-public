@@ -4,6 +4,7 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 namespace AthenaApp
 {
     public partial class App : Application
@@ -14,8 +15,9 @@ namespace AthenaApp
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
-         
+            MainPage = new DashboardPage();
+          
+
 
         }
 
