@@ -12,12 +12,12 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
 {
     public class ExternalLoginsModel : PageModel
     {
-        private readonly UserManager<AthenaIdentityUser> _userManager;
-        private readonly SignInManager<AthenaIdentityUser> _signInManager;
+        private readonly UserManager<UserExtension> _userManager;
+        private readonly SignInManager<UserExtension> _signInManager;
 
         public ExternalLoginsModel(
-            UserManager<AthenaIdentityUser> userManager,
-            SignInManager<AthenaIdentityUser> signInManager)
+            UserManager<UserExtension> userManager,
+            SignInManager<UserExtension> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

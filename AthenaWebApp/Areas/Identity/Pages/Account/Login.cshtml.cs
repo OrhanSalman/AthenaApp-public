@@ -21,13 +21,13 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<AthenaIdentityUser> _userManager;
-        private readonly SignInManager<AthenaIdentityUser> _signInManager;
+        private readonly UserManager<UserExtension> _userManager;
+        private readonly SignInManager<UserExtension> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<AthenaIdentityUser> signInManager,
+        public LoginModel(SignInManager<UserExtension> signInManager,
             ILogger<LoginModel> logger,
-            UserManager<AthenaIdentityUser> userManager)
+            UserManager<UserExtension> userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -71,7 +71,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
             }
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null) 
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
 
             returnUrl ??= Url.Content("~/");

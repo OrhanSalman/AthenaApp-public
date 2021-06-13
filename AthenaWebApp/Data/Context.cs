@@ -10,9 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AthenaWebApp.Data
 {
-    public class AthenaDbContext : IdentityDbContext<AthenaIdentityUser>
+    public class Context : IdentityDbContext<UserExtension>
     {
-        public AthenaDbContext(DbContextOptions<AthenaDbContext> options)
+        public Context(DbContextOptions<Context> options)
             : base(options)
         {
         }
@@ -24,7 +24,7 @@ namespace AthenaWebApp.Data
             // Add your customizations after calling base.OnModelCreating(builder);
 
             base.OnModelCreating(builder);
-//            builder.HasDefaultSchema("Athena");
+            //            builder.HasDefaultSchema("Athena");
             builder.Entity<IdentityRole>(entity =>
             {
                 entity.ToTable(name: "Role");
@@ -47,27 +47,17 @@ namespace AthenaWebApp.Data
             builder.Entity<IdentityRoleClaim<string>>(entity =>
             {
                 entity.ToTable("RoleClaims");
-
             });
 
             builder.Entity<IdentityUserToken<string>>(entity =>
             {
                 entity.ToTable("UserTokens");
             });
-            /*
-                        base.OnModelCreating(modelBuilder);
 
-                        builder.Entity<IdentityUser>()
-                            .Property(e => e.firstName)
-                            .HasMaxLength(250);
-
-                        builder.Entity<ApplicationUser>()
-                            .Property(e => e.lastName)
-                            .HasMaxLength(250);
-            */
         }
+
         public DbSet<AthenaWebApp.Models.Company> Company { get; set; }
-        //            public DbSet<AthenaWebApp.Models.Role> Role { get; set; }
+
     }
 
 }

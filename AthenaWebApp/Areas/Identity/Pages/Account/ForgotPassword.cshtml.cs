@@ -17,10 +17,10 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<AthenaIdentityUser> _userManager;
+        private readonly UserManager<UserExtension> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<AthenaIdentityUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<UserExtension> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

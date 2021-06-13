@@ -29,15 +29,15 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<AthenaIdentityUser> _signInManager;
-        private readonly UserManager<AthenaIdentityUser> _userManager; 
+        private readonly SignInManager<UserExtension> _signInManager;
+        private readonly UserManager<UserExtension> _userManager; 
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         //        private readonly ICompanyRepository _companyRepository;
 
         public RegisterModel(
-            UserManager<AthenaIdentityUser> userManager,
-            SignInManager<AthenaIdentityUser> signInManager,
+            UserManager<UserExtension> userManager,
+            SignInManager<UserExtension> signInManager,
             IEnumerable<Company> context,
             ILogger<RegisterModel> logger,
             //            ICompanyRepository companyRepository,
@@ -75,7 +75,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Universität")]
-            public string Company { get; set; }
+            public string CompanyName { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -131,7 +131,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
                 // ToDo
                 //                var id = _companyRepository.Search(Input.Company);
 
-                var user = new AthenaIdentityUser { UserName = Input.UserName, Email = Input.Email, Company = Input.Company, CompanyId = 1 };
+                var user = new UserExtension { UserName = Input.UserName, Email = Input.Email, CompanyName = Input.CompanyName };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
