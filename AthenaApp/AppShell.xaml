@@ -15,7 +15,7 @@
     <Shell.Resources>
         <ResourceDictionary>
             <Color
-            x:Key="Primary">#F87412</Color>
+            x:Key="Primary">#203984</Color>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="Shell.ForegroundColor" Value="White" />
@@ -23,7 +23,7 @@
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
                 <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
                 <Setter Property="Shell.TabBarTitleColor" Value="White" />
             </Style>
@@ -82,18 +82,25 @@
         </ResourceDictionary>
     </Shell.Resources>
 
+
     <!--
         When the Flyout is visible this defines the content to display in the flyout.
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
+    <FlyoutItem Title="About" Icon="icon_about.png">
+        <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" Route="AboutPage" />
+    </FlyoutItem>
 
-    <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" Route="AboutPage" />
-    <ShellContent ContentTemplate="{DataTemplate local:RegisterPage}" Route="RegisterPage" />
-    <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
-    <ShellContent ContentTemplate="{DataTemplate local:DashboardPage}" Route="DashboardPage" />
-    <ShellContent ContentTemplate="{DataTemplate local:MapPage}" Route="MapPage" />
-    <ShellContent ContentTemplate="{DataTemplate local:LoginRegisterPage}" Route="LoginRegisterPage" />
+    <FlyoutItem Title="Dashboard" >
+        <ShellContent ContentTemplate="{DataTemplate local:DashboardPage}" Route="DashboardPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Map" >
+            <ShellContent ContentTemplate="{DataTemplate local:MapPage}" Route="MapPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Login/Register" >
+        <ShellContent ContentTemplate="{DataTemplate local:LoginRegisterPage}" Route="LoginRegisterPage" />
+    </FlyoutItem>
 
 
 
