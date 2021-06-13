@@ -28,8 +28,8 @@ namespace AthenaApp.Views
         private async void ButtonLogin_Clicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");   // Testversion, später entfernen
-            
-/*
+            /*
+
             LoginService services = new LoginService();
             var getLoginDetails = await services.CheckLoginIfExists(UserInputMail.Text, UserInputPw.Text);
 
@@ -44,9 +44,9 @@ namespace AthenaApp.Views
             else
             {
                 await DisplayAlert("Login failed", "Username or Password is incorrect or not exists", "Okay", "Cancel");
-            }
-*/            
+            }*/
+           
 
         }
     }
-}
+} 

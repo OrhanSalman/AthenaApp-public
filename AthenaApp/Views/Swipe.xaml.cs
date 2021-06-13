@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace AthenaApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SISUPage : ContentPage
+    public partial class Swipe : ContentPage
     {
-        public SISUPage()
+        public Swipe()
         {
             InitializeComponent();
         }

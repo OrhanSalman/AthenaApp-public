@@ -45,15 +45,40 @@
                     BackgroundColor="White"
                     HasShadow="True"
                     HeightRequest="700">
-
+                    
+                    
                     <StackLayout>
-                        <StackLayout Margin="55">
-                            <Label
-                                FontAttributes="Bold"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="SIGN IN"
-                                TextColor="Black" />
-                        </StackLayout>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="Auto" />
+                                
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <BoxView Grid.Row="0"
+                                     Grid.Column="0"
+                                     Color="White"/>
+                            <Label Grid.Column="0"
+                                   Text="Sign In"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="CenterAndExpand"/>
+
+                            <BoxView Grid.Row="0"
+                                     Grid.Column="1"
+                                     Color="White"/>
+                            <Label Grid.Column="1"
+                                   Text="Register"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="CenterAndExpand"/>
+                  
+
+                        </Grid>
+
+
 
                         <StackLayout Margin="15,10" Padding="0">
                             <Frame
@@ -199,4 +224,4 @@
             </StackLayout>
         </Grid>
     </StackLayout>
-</ContentPage>
+</ContentPage>  
