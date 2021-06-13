@@ -35,9 +35,22 @@
             <!--  Test um die Werte zu sehen a  -->
             <Label
                 FontSize="10"
-                Text="resultLocation"
+                Text="result1Location"
                 TextColor="Gray" />
-            <Label x:Name="resultLocation" FontSize="10" />
+            <Label x:Name="result1Location" FontSize="10" />
+
+            <Label
+                FontSize="10"
+                Text="result2Location"
+                TextColor="Gray" />
+            <Label x:Name="result2Location" FontSize="10" />
+
+            <Label
+                FontSize="10"
+                Text="Distance"
+                TextColor="Gray" />
+            <Label x:Name="DistanceInfo" FontSize="10" />
+
 
 
         </StackLayout>

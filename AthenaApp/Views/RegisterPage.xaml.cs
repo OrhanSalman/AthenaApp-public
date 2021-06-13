@@ -19,6 +19,8 @@ namespace AthenaApp.Views
             this.BindingContext = this;
         }
 
+
+
         private async void RegisterButton(object sender, EventArgs e)
         {
             

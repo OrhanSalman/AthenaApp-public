@@ -60,19 +60,12 @@
                 <Button
                     Margin="0,200,0,0"
                     BackgroundColor="#203984"
-                    Clicked="GoToSignUp"
-                    CornerRadius="30"
-                    Text="sign up"
-                    TextColor="White"
-                    />
-                <Button
-                    Margin="0,5,0,0"
-                    BackgroundColor="#203984"
                     Clicked="GoToSignIn"
                     CornerRadius="30"
-                    Text="I already have a profile"
+                    Text="Login/Regsiter"
                     TextColor="White"
-                  />
+                    />
+
 
 
             </StackLayout>
