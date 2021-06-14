@@ -14,10 +14,10 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LogoutModel : PageModel
     {
-        private readonly SignInManager<AthenaIdentityUser> _signInManager;
+        private readonly SignInManager<UserExtension> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
 
-        public LogoutModel(SignInManager<AthenaIdentityUser> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(SignInManager<UserExtension> signInManager, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

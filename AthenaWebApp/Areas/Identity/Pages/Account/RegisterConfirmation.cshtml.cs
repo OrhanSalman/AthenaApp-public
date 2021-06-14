@@ -13,10 +13,10 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
     {
-        private readonly UserManager<AthenaIdentityUser> _userManager;
+        private readonly UserManager<UserExtension> _userManager;
         private readonly IEmailSender _sender;
 
-        public RegisterConfirmationModel(UserManager<AthenaIdentityUser> userManager, IEmailSender sender)
+        public RegisterConfirmationModel(UserManager<UserExtension> userManager, IEmailSender sender)
         {
             _userManager = userManager;
             _sender = sender;

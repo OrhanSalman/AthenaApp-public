@@ -12,13 +12,13 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
 {
     public class ChangePasswordModel : PageModel
     {
-        private readonly UserManager<AthenaIdentityUser> _userManager;
-        private readonly SignInManager<AthenaIdentityUser> _signInManager;
+        private readonly UserManager<UserExtension> _userManager;
+        private readonly SignInManager<UserExtension> _signInManager;
         private readonly ILogger<ChangePasswordModel> _logger;
 
         public ChangePasswordModel(
-            UserManager<AthenaIdentityUser> userManager,
-            SignInManager<AthenaIdentityUser> signInManager,
+            UserManager<UserExtension> userManager,
+            SignInManager<UserExtension> signInManager,
             ILogger<ChangePasswordModel> logger)
         {
             _userManager = userManager;

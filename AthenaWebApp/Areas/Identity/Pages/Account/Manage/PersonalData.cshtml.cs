@@ -9,11 +9,11 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
 {
     public class PersonalDataModel : PageModel
     {
-        private readonly UserManager<AthenaIdentityUser> _userManager;
+        private readonly UserManager<UserExtension> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;
 
         public PersonalDataModel(
-            UserManager<AthenaIdentityUser> userManager,
+            UserManager<UserExtension> userManager,
             ILogger<PersonalDataModel> logger)
         {
             _userManager = userManager;

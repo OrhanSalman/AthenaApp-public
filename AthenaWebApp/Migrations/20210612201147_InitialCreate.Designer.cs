@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AthenaWebApp.Migrations
 {
-    [DbContext(typeof(AthenaDbContext))]
-    [Migration("20210606172612_Initial-Create")]
+    [DbContext(typeof(Context))]
+    [Migration("20210612201147_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace AthenaWebApp.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AthenaWebApp.Areas.Identity.IdentityModels.AthenaIdentityUser", b =>
+            modelBuilder.Entity("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -29,11 +29,9 @@ namespace AthenaWebApp.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Company")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -46,11 +44,17 @@ namespace AthenaWebApp.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("LastActivity")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("LoggedIn")
+                        .HasColumnType("bit");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -72,6 +76,9 @@ namespace AthenaWebApp.Migrations
                     b.Property<byte[]>("ProfilePicture")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<DateTime>("RegisteredSince")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -87,6 +94,8 @@ namespace AthenaWebApp.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyName");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -100,21 +109,16 @@ namespace AthenaWebApp.Migrations
 
             modelBuilder.Entity("AthenaWebApp.Models.Company", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CollectedDistances")
-                        .HasColumnType("int");
-
                     b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("EmailContext")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CompanyName");
 
                     b.ToTable("Company");
                 });
@@ -254,6 +258,17 @@ namespace AthenaWebApp.Migrations
                     b.ToTable("UserTokens");
                 });
 
+            modelBuilder.Entity("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", b =>
+                {
+                    b.HasOne("AthenaWebApp.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -265,7 +280,7 @@ namespace AthenaWebApp.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.AthenaIdentityUser", null)
+                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -274,7 +289,7 @@ namespace AthenaWebApp.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.AthenaIdentityUser", null)
+                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -289,7 +304,7 @@ namespace AthenaWebApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.AthenaIdentityUser", null)
+                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -298,7 +313,7 @@ namespace AthenaWebApp.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.AthenaIdentityUser", null)
+                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

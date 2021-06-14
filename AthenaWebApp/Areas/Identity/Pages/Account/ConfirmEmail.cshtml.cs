@@ -15,9 +15,9 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<AthenaIdentityUser> _userManager;
+        private readonly UserManager<UserExtension> _userManager;
 
-        public ConfirmEmailModel(UserManager<AthenaIdentityUser> userManager)
+        public ConfirmEmailModel(UserManager<UserExtension> userManager)
         {
             _userManager = userManager;
         }

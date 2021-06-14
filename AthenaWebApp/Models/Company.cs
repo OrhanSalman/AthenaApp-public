@@ -1,38 +1,23 @@
-﻿using System;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AthenaWebApp.Models
 {
     public class Company
     {
-        /*
-         * Id sollte [Key, ForeignKey("CompanyId"), DatabaseGenerated(DatabaseGeneratedOption.None)] sein
-         * 
-         */
-        [Key, ForeignKey("CompanyId"), Display(Name = "ID")]
-        public int Id { get; set; }
 
-        [Display(Name = "Organisation")]
+        [Key, Display(Name = "Company")]
         public string CompanyName { get; set; }
 
-        [Display(Name = "Land")]
+        [Display(Name = "Country")]
         public string Country { get; set; }
 
-        // A Company has one or more Users
-//        [Display(Name = "Teilnehmer")]
-//        public ICollection<IdentityUser> UserCount { get; set; }
-
-        [Display(Name = "Erreichte Distanzen")]
-        public int CollectedDistances { get; set; }
-
-
-        
-
-        //        public User User { get; set; }
-
+        [Display(Name = "E-Mail Header")]
+        public string EmailContext { get; set; }
     }
 }
