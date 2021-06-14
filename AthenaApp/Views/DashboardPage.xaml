@@ -11,7 +11,19 @@
     <StackLayout>
 
                 <Label FontSize="40" TextColor="#002563" HorizontalTextAlignment="Start" FontFamily="Myriad Pro"  >Dashboard</Label>
-        
+                <Label FontSize= "25" TextColor="#002563" >Start Activity</Label>
+                <Frame CornerRadius="10"  Padding="0" HeightRequest="100" WidthRequest="50" >
+                    <ImageButton HorizontalOptions="Fill" Source="stopwatch" Opacity="0.8"></ImageButton>
+                    
+                    <Frame.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Color="#D2E5F5"
+                          Offset="0.01" />
+                            <GradientStop Color="#0076B9"
+                          Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                </Frame>
                 <Label FontSize= "25" TextColor="#002563" >Progress</Label>
             <Frame CornerRadius="10"  Padding="0">
                     <forms:ChartView x:Name="Chart1" HeightRequest="150"  />
@@ -38,7 +50,7 @@
                 </Frame>
                 <Label FontSize="25" TextColor="#002563" >Newest Trophy</Label>
             
-                <Grid Margin="20,50,20,20">
+                <Grid Margin="5,5,5,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.3*" />
                         <ColumnDefinition Width="0.7*"/>
@@ -67,7 +79,7 @@
                 <Label FontSize="25" TextColor="MidnightBlue">Overview</Label>
 
             
-                <Grid Margin="20,50,20,20" >
+                <Grid Margin="5,5,5,5" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.3*" />
                     <ColumnDefinition Width="0.3*" />
@@ -144,10 +156,11 @@
                    
                 <Image
                         Margin="25"
-                        HeightRequest="10"
+                        HeightRequest="60"
                          Grid.Row="1"
                         Grid.Column="0"
-                        Source="peoplegroup.png" />
+                        Source="peoplegroup.png"
+                        VerticalOptions="Start"/>
                 
                 <Image
                         Margin="25"
@@ -156,38 +169,41 @@
                         Grid.Column="0"
                         Opacity="0"
                         BackgroundColor="#00063C"
-                        Source="peoplegroup.png" />
+                        Source="peoplegroup.png" 
+                        VerticalOptions="Start"/>
                 <Image
                         Margin="25"
-                        HeightRequest="10"
+                        HeightRequest="50"
                          Grid.Row="1"
                         Grid.Column="1"
-                        Source="awesome_tachometer_alt.png" />
+                        Source="awesome_tachometer_alt.png"
+                        VerticalOptions="Start"/>
             
                 <Image
                         Margin="25"
-                        HeightRequest="10"
+                        HeightRequest="50"
                          Grid.Row="1"
                         Grid.Column="2"
+                        VerticalOptions="Start"
                         
                         Source="ionic_ios_person.png" />
 
-                 <Label Text="Jogging" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                    <Label Text="Jogging" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
 
                 <Label Grid.Column="1"
-           Text="Swimming" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+           Text="Swimming" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
                 <Label Grid.Column="2"
              Grid.Row="0"
-           Text="Biking" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+           Text="Biking" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
                     <Label Grid.Row="1"
-           Text="Members" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center" />
+           Text="Members" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center" FontSize="16"/>
                 <Label Grid.Column="1"
              Grid.Row="1"
-           Text="Km/Day" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center"/>
+           Text="Km/Day" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center" FontSize="16"/>
                 
                 <Label Grid.Column="2"
              Grid.Row="1"
-           Text="Km Personal" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center"/>
+           Text="Km Personal" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center" FontSize="16"/>
 
 
             </Grid>
