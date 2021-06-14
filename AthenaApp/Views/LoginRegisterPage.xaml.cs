@@ -47,14 +47,14 @@ namespace AthenaApp.Views
         {
 
             RegisterService registerService = new RegisterService();
-            var postRegisterUser = await registerService.CheckRegisterIfExists(UserInputName.Text, UserInputUniversity.Text, UserInputNewMail.Text, UserInputNewPw.Text);
+            var postRegisterUser = await registerService.CheckRegisterIfExists(UserInputName.Text, UserInputUniversity.Text, UserInputNewMail.Text);
 
             if (postRegisterUser)
             {
                 await DisplayAlert("Registration succeeded", "Welcome new user!", "Okay", "Cancel");
                 await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
             }
-            else if (UserInputMail.Text == null && UserInputNewPw.Text == null)
+            else if (UserInputMail.Text == null )
             {
                 await DisplayAlert("Registration failed", "Enter your Email and Password before login", "Okay", "Cancel");
             }

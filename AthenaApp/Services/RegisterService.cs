@@ -36,7 +36,7 @@ namespace AthenaApp.Services
 
 
 
-        public async Task<bool> CheckRegisterIfExists(string userName, string universityId, string email, string passwordHash)
+        public async Task<bool> CheckRegisterIfExists(string userName, string universityId, string email)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace AthenaApp.Services
                     UserName = userName,
                     CompanyId = intUniversityId,
                     Email = email,
-                    PasswordHash = passwordHash
+                   
                 };
 
 /*
