@@ -11,6 +11,8 @@ using AthenaWebApp.Areas.Identity.IdentityModels;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using AthenaWebApp.Models.Claims;
+using AthenaWebApp.Pagings;
+
 
 namespace AthenaWebApp.Controllers.MVC
 {
@@ -27,10 +29,78 @@ namespace AthenaWebApp.Controllers.MVC
             _roleManager = roleManager;
         }
 
-        // GET: Users
-        public async Task<IActionResult> Index()
+/*
+        public async Task<IActionResult> GetUserCount()
         {
-            return View(await _context.Users.ToListAsync());
+            var x = _context.Employees
+    .Include("Department")
+    .GroupBy(e => e.Department.Name)
+    .Select(y => new MyViewModel
+    {
+        Department = y.Key,
+        count = y.Count()
+    }).ToList();
+
+            return await _context.Users.FromSqlRaw("SELECT COUNT(*) FROM [dbo].[AspNetUsers]");
+        }
+*/
+        // GET: Users
+        [HttpGet]
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CompanySortParm"] = String.IsNullOrEmpty(sortOrder) ? "company_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["RegisteredSinceSortParm"] = sortOrder == "RegisteredSince" ? "RegisteredSince_desc" : "RegisteredSince";
+            ViewData["CurrentFilter"] = searchString;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+
+            var users = from s in _context.Users
+                     select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(s => s.UserName.Contains(searchString)
+                                       || s.Email.Contains(searchString)
+                                       || s.CompanyName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    users = users.OrderByDescending(s => s.UserName);
+                    break;
+                case "company_desc":
+                    users = users.OrderByDescending(s => s.CompanyName);
+                    break;
+                case "Date":
+                    users = users.OrderBy(s => s.LastActivity);
+                    break;
+                case "date_desc":
+                    users = users.OrderByDescending(s => s.LastActivity);
+                    break;
+                case "RegisteredSince":
+                    users = users.OrderBy(s => s.RegisteredSince);
+                    break;
+                case "RegisteredSince_desc":
+                    users = users.OrderByDescending(s => s.RegisteredSince);
+                    break;
+                default:
+                    users = users.OrderBy(s => s.UserName);
+                    break;
+            }
+            int pageSize = 3;
+            return View(await UserPaginatedList<UserExtension>.CreateAsync(users.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Users/Details/5
@@ -243,5 +313,6 @@ namespace AthenaWebApp.Controllers.MVC
 
         }
 */
+
     }
 }

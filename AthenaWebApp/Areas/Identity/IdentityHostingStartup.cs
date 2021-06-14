@@ -23,6 +23,12 @@ namespace AthenaWebApp.Areas.Identity
                 services.AddDefaultIdentity<UserExtension>(options => options.SignIn.RequireConfirmedAccount = true)
                     .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<Context>();
+                services.AddAuthorization(opts => {
+                    opts.AddPolicy("Admin", policy => {
+                        policy.RequireRole("Admin");
+                        policy.RequireClaim("Admin");
+                    });
+                });
 
                 //ToDo: "RequireNonAlphanumeric" has been set to "false". Check if it works
                 services.Configure<IdentityOptions>(options =>

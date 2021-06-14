@@ -87,7 +87,7 @@ namespace AthenaWebApp.Models
                     {
                         Email = "admin@athena.com",
                         EmailConfirmed = true,
-                        PasswordHash = "Test-123",
+                        PasswordHash = "Test_123",
                         UserName = "Admin",
                         CompanyName = "Universität Siegen"
                     },
@@ -95,7 +95,7 @@ namespace AthenaWebApp.Models
                     {
                         Email = "supervisor@uni-siegen.de",
                         EmailConfirmed = true,
-                        PasswordHash = "Test-123",
+                        PasswordHash = "Test_123",
                         UserName = "Supervisor",
                         CompanyName = "Universität Siegen"
                     }
@@ -120,6 +120,8 @@ namespace AthenaWebApp.Models
                     }
                  );
                  context.SaveChanges();
+
+                // ToDo: Set Users to Roles
             }
         }
     }

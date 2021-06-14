@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using AthenaWebApp.Models;
 using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AthenaWebApp.Controllers.MVC
 {
+    [Authorize("Admin")]
     public class RoleController : Controller
     {
         private readonly Context _context;

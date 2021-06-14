@@ -1,72 +1,129 @@
-﻿@model IEnumerable<AthenaWebApp.Areas.Identity.IdentityModels.UserExtension>
+﻿@model AthenaWebApp.Pagings.UserPaginatedList<AthenaWebApp.Areas.Identity.IdentityModels.UserExtension>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Overview - Users";
 }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">New User</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompanyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastActivity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LoggedIn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProfilePicture)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p style="margin-top:20px">
+            <input type="text" name="SearchString" placeholder="Name | Email | Company" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<br />
+<!-- Count all users -->
+
+
+
+
+@if (Model == null)
+{
+    <h1 style="color:red;text-align:center">No data Found</h1>
+
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CompanyName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastActivity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LoggedIn)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProfilePicture)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">
-                        <input type="submit" value="Edit" class="btn btn-primary" />
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">
+                        <span class="glyphicon glyphicon-sort">Name</span>
                     </a>
-                    <a asp-action="Details" asp-route-id="@item.Id">
-                        <input type="submit" value="Details" class="btn btn-primary" />
-                    </a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">
-                        <input type="submit" value="Delete" class="btn btn-danger" />
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CompanySortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                        <span class="glyphicon glyphicon-sort">Company</span>
                     </a>
-                </td>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                        <span class="glyphicon glyphicon-sort">Last activity</span>
+                    </a>
+                </th>
+                <th>
+                    Logged in
+                </th>
+                <th>
+                    Picture
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["RegisteredSinceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                        <span class="glyphicon glyphicon-sort">Registration</span>
+                    </a>
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastActivity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LoggedIn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProfilePicture)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegisteredSince)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">
+                            <input type="submit" value="Edit" class="btn btn-primary" />
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id">
+                            <input type="submit" value="Details" class="btn btn-primary" />
+                        </a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,14 +13,14 @@ namespace AthenaWebApp.Areas.Identity.IdentityModels
     // Add profile data for application users by adding properties to the UserExtension class
     public class UserExtension : IdentityUser
     {
-        [ForeignKey("CompanyName")]
+        [ForeignKey("CompanyName"), DisplayName("Associated Company")]
         public Company Company { get; set; }
 
-        [Display(Name = "Company")]
+        [Display(Name = "Company"), Required]
         public string CompanyName { get; set; }
 
-        [Display(Name = "Registered since")]
-        public DateTime RegisteredSince { get; set; } = DateTime.Now;
+        [Display(Name = "Registered since"), DataType(DataType.Date)]
+        public DateTime RegisteredSince { get; set; } = DateTime.Now.Date;
 
         [Display(Name = "Last session")]
         public DateTime LastActivity { get; set; }
