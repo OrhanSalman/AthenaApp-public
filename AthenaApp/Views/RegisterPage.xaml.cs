@@ -25,7 +25,7 @@ namespace AthenaApp.Views
         {
             
             RegisterService registerService = new RegisterService();
-            var postRegisterUser = await registerService.CheckRegisterIfExists(UserInputName.Text, UserInputUniversity.Text, UserInputMail.Text, UserInputPw.Text);
+            var postRegisterUser = await registerService.CheckRegisterIfExists(UserInputName.Text, UserInputUniversity.Text, UserInputMail.Text);
             
             if (postRegisterUser)
             {

@@ -2,13 +2,16 @@
 <TabbedPage  Shell.NavBarIsVisible="False" 
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AthenaApp.Views.LoginRegisterPage">
+             x:Class="AthenaApp.Views.LoginRegisterPage"
+             BackgroundColor="{DynamicResource ThemeBackGroundColor}"
+             BarBackgroundColor="#203984">
+    
 
-    <!--Pages can be added as references or inline-->
+   
     
     
     <ContentPage Title="Login"  >
-
+        
         <Shell.TitleView>
             <Image Source="athena_logo.png"
                HorizontalOptions="Center"
@@ -25,7 +28,7 @@
                 <StackLayout BackgroundColor="#203984" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                         <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                            <Image Source="athena_logo.png" VerticalOptions="Center" HeightRequest="65" />
+                            <Image Source="AthenaLogo.png" VerticalOptions="Center" HeightRequest="65" />
                         </ContentView>
 
 
@@ -34,7 +37,7 @@
                 </StackLayout>
 
                 <StackLayout
-                Margin="30,120,30,0"
+                Margin="30,250,30,0"
                 Padding="0"
                 HorizontalOptions="FillAndExpand">
                     <Frame
@@ -46,39 +49,7 @@
 
 
                         <StackLayout>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="50"/>
-                                    <RowDefinition Height="Auto" />
-
-
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <BoxView Grid.Row="0"
-                                     Grid.Column="0"
-                                     Color="White"/>
-                                <Label Grid.Column="0"
-                                   Text="Sign In"
-                                   HorizontalOptions="CenterAndExpand"
-                                   VerticalOptions="CenterAndExpand"/>
-
-                                <BoxView Grid.Row="0"
-                                     Grid.Column="1"
-                                     Color="White"/>
-                                <Label Grid.Column="1"
-                                   Text="Register"
-                                   HorizontalOptions="CenterAndExpand"
-                                   VerticalOptions="CenterAndExpand"/>
-
-
-                            </Grid>
-
-
-
-                            <StackLayout Margin="15,10" Padding="0">
+                            <StackLayout Margin="15,50" Padding="0">
                                 <Frame
                                 Padding="0"
                                 BackgroundColor="Transparent"
@@ -100,29 +71,10 @@
                                     </StackLayout>
                                 </Frame>
 
-                                <Frame
-                                Padding="0"
-                                BackgroundColor="Transparent"
-                                BorderColor="DarkGray"
-                                CornerRadius="30"
-                                HorizontalOptions="FillAndExpand">
-                                    <StackLayout Orientation="Horizontal">
-                                        <Entry
-                                        x:Name="UserInputPw"
-                                        Margin="10,0,0,0"
-                                        ClearButtonVisibility="WhileEditing"
-                                        FontAttributes="Italic"
-                                        IsPassword="True"
-                                        Placeholder="Password"
-                                        Text="{Binding UserInputPw}"
-                                        TextColor="Black"
-                                        WidthRequest="300" />
-                                    </StackLayout>
-                                </Frame>
 
                                 <StackLayout Orientation="Horizontal">
                                     <Label
-                                    Margin="10,10,10,10"
+                                    Margin="10,50,10,10"
                                     FontAttributes="Bold"
                                     FontSize="Small"
                                     HorizontalOptions="CenterAndExpand"
@@ -139,20 +91,7 @@
                                 CornerRadius="30"
                                 Text="SIGN IN"
                                 TextColor="White" />
-
-
-                                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                                    <Label
-                                    FontSize="Small"
-                                    Text="Still Not Connected ?"
-                                    TextColor="DarkGray" />
-                                    <Label
-                                    FontAttributes="Bold"
-                                    FontSize="Small"
-                                    Text="Sign Up"
-                                    TextColor="MidnightBlue" />
-                                </StackLayout>
-
+                                
                                 <StackLayout Margin="0,25,0,0" Padding="0">
                                     <Grid>
                                         <BoxView
@@ -253,7 +192,7 @@
                 </StackLayout>
 
                 <StackLayout
-                    Margin="30,120,30,0"
+                    Margin="30,250,30,0"
                     Padding="0"
                     HorizontalOptions="FillAndExpand">
                     <Frame
@@ -264,15 +203,9 @@
                         HeightRequest="700">
 
                         <StackLayout>
-                            <StackLayout Margin="10">
-                                <Label
-                                    FontAttributes="Bold"
-                                    HorizontalOptions="CenterAndExpand"
-                                    Text="SIGN UP"
-                                    TextColor="Black" />
-                            </StackLayout>
 
-                            <StackLayout Margin="15,10" Padding="0">
+
+                            <StackLayout Margin="15,50" Padding="0">
                                 <Frame
                                     Padding="0"
                                     BackgroundColor="Transparent"
@@ -353,47 +286,6 @@
                                             WidthRequest="300" />
                                     </StackLayout>
                                 </Frame>
-                                <Frame
-                                    Padding="0"
-                                    BackgroundColor="Transparent"
-                                    BorderColor="DarkGray"
-                                    CornerRadius="30"
-                                    HorizontalOptions="FillAndExpand">
-                                    <StackLayout Orientation="Horizontal">
-                                        <Entry
-                                            x:Name="UserInputNewPw"
-                                            Margin="10,0,0,0"
-                                            ClearButtonVisibility="WhileEditing"
-                                            FontAttributes="Italic"
-                                            Keyboard="Email"
-                                            Placeholder="Password"
-                                            ReturnType="Next"
-                                            Text="{Binding UserInputNewPw}"
-                                            TextColor="Black"
-                                            WidthRequest="300" />
-                                    </StackLayout>
-                                </Frame>
-
-                                <Frame
-                                    Padding="0"
-                                    BackgroundColor="Transparent"
-                                    BorderColor="DarkGray"
-                                    CornerRadius="30"
-                                    HorizontalOptions="FillAndExpand">
-                                    <StackLayout Orientation="Horizontal">
-                                        <Entry
-                                            x:Name="UserInputConfirmPw"
-                                            Margin="10,0,0,0"
-                                            ClearButtonVisibility="WhileEditing"
-                                            FontAttributes="Italic"
-                                            IsPassword="True"
-                                            Placeholder="Confirm Password"
-                                            Text="{Binding UserInputConfirmPw}"
-                                            TextColor="Black"
-                                            WidthRequest="300" />
-                                    </StackLayout>
-                                </Frame>
-
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         Margin="10,50,10,10"
