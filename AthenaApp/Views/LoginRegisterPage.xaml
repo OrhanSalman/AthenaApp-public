@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage  Shell.NavBarIsVisible="False" 
-             xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage  xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AthenaApp.Views.LoginRegisterPage"
              BackgroundColor="{DynamicResource ThemeBackGroundColor}"
-             BarBackgroundColor="#203984">
+             BarBackgroundColor="#203984"
+             Shell.NavBarIsVisible="False">
     
 
    
@@ -49,7 +49,39 @@
 
 
                         <StackLayout>
-                            <StackLayout Margin="15,50" Padding="0">
+                            
+                            <StackLayout Margin="15,0" Padding="0">
+                                <!-- Grid for the logos of the universities -->
+                                <Grid x:Name="UniPicturesLogin" HeightRequest="175">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+
+
+                                    <ContentView Grid.Row="0" Grid.Column="0" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniMaribor" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="0" Grid.Column="1" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniSiegen" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="0" Grid.Column="2" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniVilnius" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="0" Grid.Column="3" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniHellenic" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="0" Padding="0,0,0,40" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniPorto" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="1" Padding="0,0,0,40" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniCusano" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="2" Padding="0,0,0,40" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniOrleans" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                </Grid>
                                 <Frame
                                 Padding="0"
                                 BackgroundColor="Transparent"
@@ -74,14 +106,8 @@
 
                                 <StackLayout Orientation="Horizontal">
                                     <Label
-                                    Margin="10,50,10,10"
-                                    FontAttributes="Bold"
-                                    FontSize="Small"
-                                    HorizontalOptions="CenterAndExpand"
-                                    HorizontalTextAlignment="Center"
-                                    Text="Forgot Password?"
-                                    TextColor="MidnightBlue"
-                                    VerticalTextAlignment="Center" />
+                                    Margin="10,2,10,10"
+             />
                                 </StackLayout>
 
                                 <Button
@@ -89,71 +115,16 @@
                                 Clicked="ButtonLogin_Clicked"
                                 Command="{Binding LoginComand}"
                                 CornerRadius="30"
-                                Text="SIGN IN"
+                                Text="Send Login Mail"
                                 TextColor="White" />
-                                
-                                <StackLayout Margin="0,25,0,0" Padding="0">
-                                    <Grid>
-                                        <BoxView
-                                        BackgroundColor="DarkGray"
-                                        HeightRequest="1"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="Center"
-                                        WidthRequest="150" />
-                                        <Frame
-                                        Margin="0"
-                                        Padding="0"
-                                        BackgroundColor="White"
-                                        BorderColor="DarkGray"
-                                        CornerRadius="45"
-                                        HasShadow="False"
-                                        HeightRequest="45"
-                                        HorizontalOptions="Center"
-                                        WidthRequest="45">
-                                            <Label
-                                            FontSize="Small"
-                                            HorizontalTextAlignment="Center"
-                                            Text="OR"
-                                            TextColor="DarkGray"
-                                            VerticalTextAlignment="Center" />
-                                        </Frame>
-                                    </Grid>
-                                </StackLayout>
+
 
                                 <StackLayout
                                 Margin="0,25"
                                 HorizontalOptions="CenterAndExpand"
                                 Orientation="Horizontal">
-                                    <Frame
-                                    Margin="0"
-                                    Padding="0"
-                                    BackgroundColor="White"
-                                    BorderColor="DarkGray"
-                                    CornerRadius="45"
-                                    HasShadow="False"
-                                    HeightRequest="45"
-                                    HorizontalOptions="Center"
-                                    WidthRequest="45">
-                                        <Image
-                                        Margin="0"
-                                        Aspect="AspectFill"
-                                        Source="https://www.pngitem.com/pimgs/m/44-440455_transparent-background-fb-logo-hd-png-download.png" />
-                                    </Frame>
-                                    <Frame
-                                    Margin="0"
-                                    Padding="0"
-                                    BackgroundColor="White"
-                                    BorderColor="DarkGray"
-                                    CornerRadius="45"
-                                    HasShadow="False"
-                                    HeightRequest="45"
-                                    HorizontalOptions="Center"
-                                    WidthRequest="45">
-                                        <Image
-                                        Margin="0"
-                                        Aspect="AspectFill"
-                                        Source="https://blog.hubspot.com/hubfs/image8-2.jpg" />
-                                    </Frame>
+                                    
+                       
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
@@ -205,7 +176,38 @@
                         <StackLayout>
 
 
-                            <StackLayout Margin="15,50" Padding="0">
+                            <StackLayout Margin="15,0" Padding="0">
+                                <!-- Grid for the logos of the universities -->
+                                <Grid x:Name="UniPicturesRegister" HeightRequest="175">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                  
+                                      
+                                    <ContentView Grid.Row="0" Grid.Column="0" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniMaribor" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="0" Grid.Column="1" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniSiegen" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="0" Grid.Column="2" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniVilnius" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="0" Grid.Column="3" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniHellenic" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="0" Padding="0,0,0,40" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniPorto" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="1" Padding="0,0,0,40" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniCusano" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="2" Padding="0,0,0,40" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniOrleans" VerticalOptions="Center" HeightRequest="65" />
+                                    </ContentView>
+                                </Grid>
                                 <Frame
                                     Padding="0"
                                     BackgroundColor="Transparent"
@@ -232,19 +234,7 @@
                                     BorderColor="DarkGray"
                                     CornerRadius="30"
                                     HorizontalOptions="FillAndExpand">
-                                    <StackLayout Orientation="Horizontal">
-                                        <Entry
-                                            x:Name="UserInputUniversity"
-                                            Margin="10,0,0,0"
-                                            ClearButtonVisibility="WhileEditing"
-                                            FontAttributes="Italic"
-                                            Keyboard="Email"
-                                            Placeholder="Your University"
-                                            ReturnType="Next"
-                                            Text="{Binding UserInputUniversity}"
-                                            TextColor="Black"
-                                            WidthRequest="300" />
-                                    </StackLayout>
+      
                                 </Frame>
                                 <Frame
                                     Padding="0"
@@ -272,31 +262,9 @@
                                     BorderColor="DarkGray"
                                     CornerRadius="30"
                                     HorizontalOptions="FillAndExpand">
-                                    <StackLayout Orientation="Horizontal">
-                                        <Entry
-                                            x:Name="UserInputConfirmationMail"
-                                            Margin="10,0,0,0"
-                                            ClearButtonVisibility="WhileEditing"
-                                            FontAttributes="Italic"
-                                            Keyboard="Email"
-                                            Placeholder="Confirm youremail@mail.com"
-                                            ReturnType="Next"
-                                            Text="{Binding UserInputConfirmationMail}"
-                                            TextColor="Black"
-                                            WidthRequest="300" />
-                                    </StackLayout>
+
                                 </Frame>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label
-                                        Margin="10,50,10,10"
-                                        FontAttributes="Bold"
-                                        FontSize="Small"
-                                        HorizontalOptions="CenterAndExpand"
-                                        HorizontalTextAlignment="Center"
-                                        Text="Everything Correct?"
-                                        TextColor="MidnightBlue"
-                                        VerticalTextAlignment="Center" />
-                                </StackLayout>
+
 
                                 <Button
                                     BackgroundColor="MidnightBlue"

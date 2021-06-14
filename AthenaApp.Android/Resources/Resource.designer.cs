@@ -16557,7 +16557,28 @@ namespace AthenaApp.Droid
 			public const int tooltip_frame_light = 2131165562;
 			
 			// aapt resource value: 0x7F07017B
-			public const int xamarin_logo = 2131165563;
+			public const int UniCusano = 2131165563;
+			
+			// aapt resource value: 0x7F07017C
+			public const int UniHellenic = 2131165564;
+			
+			// aapt resource value: 0x7F07017D
+			public const int UniMaribor = 2131165565;
+			
+			// aapt resource value: 0x7F07017E
+			public const int UniOrleans = 2131165566;
+			
+			// aapt resource value: 0x7F07017F
+			public const int UniPorto = 2131165567;
+			
+			// aapt resource value: 0x7F070180
+			public const int UniSiegen = 2131165568;
+			
+			// aapt resource value: 0x7F070181
+			public const int UniVilnius = 2131165569;
+			
+			// aapt resource value: 0x7F070182
+			public const int xamarin_logo = 2131165570;
 			
 			static Drawable()
 			{

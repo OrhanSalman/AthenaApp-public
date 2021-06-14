@@ -36,16 +36,16 @@ namespace AthenaApp.Services
 
 
 
-        public async Task<bool> CheckRegisterIfExists(string userName, string universityId, string email)
+        public async Task<bool> CheckRegisterIfExists(string userName, string email)
         {
             try
             {
-                int intUniversityId = Int32.Parse(universityId);
+                
 
                 User user = new User
                 {
                     UserName = userName,
-                    CompanyId = intUniversityId,
+                    
                     Email = email,
                    
                 };
