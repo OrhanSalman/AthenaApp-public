@@ -7,19 +7,37 @@
              xmlns:Image="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin">
 
     <ScrollView>
+        <Frame CornerRadius="20">
     <StackLayout>
-        <Label FontSize="Title">Dashboard</Label>
-        <Label FontSize="Subtitle">Fortschritt</Label>
-            <Frame CornerRadius="10">
-            <forms:ChartView x:Name="Chart1" HeightRequest="150" />
-        </Frame>
-        <Label FontSize="Subtitle">Persönliche Aktivität</Label>
-            <Frame CornerRadius="10">
-            <forms:ChartView x:Name="Chart2" HeightRequest="150" />
-        </Frame>
+
+                <Label FontSize="40" TextColor="#002563" HorizontalTextAlignment="Start" FontFamily="Myriad Pro"  >Dashboard</Label>
+        
+                <Label FontSize= "25" TextColor="#002563" >Progress</Label>
+            <Frame CornerRadius="10"  Padding="0">
+                    <forms:ChartView x:Name="Chart1" HeightRequest="150"  />
+                <Frame.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Color="#D2E5F5"
+                          Offset="0.01" />
+                            <GradientStop Color="#0076B9"
+                          Offset="1.0" />
+                    </LinearGradientBrush>
+                </Frame.Background>
+            </Frame>
+            <Label FontSize="25" TextColor="#002563">Personal Activity</Label>
+                <Frame CornerRadius="10"  Padding="0">
+                    <forms:ChartView x:Name="Chart2" HeightRequest="150" />
+                    <Frame.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Color="#D2E5F5"
+                          Offset="0.01" />
+                            <GradientStop Color="#0076B9"
+                          Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                </Frame>
+                <Label FontSize="25" TextColor="#002563" >Newest Trophy</Label>
             
-            <Label FontSize="Subtitle">Neustes Abzeichen</Label>
-            <Frame CornerRadius="10">
                 <Grid Margin="20,50,20,20">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.3*" />
@@ -31,24 +49,25 @@
                     </Grid.RowDefinitions>
 
                    
-                    <Image:CircleImage Grid.Column="0" Grid.Row="0" Source="ionic_ios_person" BackgroundColor="DarkBlue" Opacity="0.7"></Image:CircleImage>
+                    <Image:CircleImage Grid.Column="0" Grid.Row="0" Source="iron_man.png" BackgroundColor="White" ></Image:CircleImage>
                     <Frame Grid.Column="1" Grid.Row="0" CornerRadius="15" Opacity="0.7" >
+                        <Label FontSize="Title" TextColor="White" >Iron Man 200km</Label>
                         <Frame.Background>
-                            <LinearGradientBrush>
-                                <GradientStop Color="DarkBlue"
+                            <LinearGradientBrush EndPoint="0,1">
+                                <GradientStop Color="#00122E"
                           Offset="0.1" />
-                                <GradientStop Color="White"
+                                <GradientStop Color="#006CAA"
                           Offset="1.0" />
                             </LinearGradientBrush>
                         </Frame.Background>
                     </Frame>
                 </Grid>
-            </Frame>
-        
-            <Label FontSize="Subtitle">Gesamtübersicht</Label>
 
-            <Frame CornerRadius="10">
-            <Grid Margin="20,50,20,20">
+
+                <Label FontSize="25" TextColor="MidnightBlue">Overview</Label>
+
+            
+                <Grid Margin="20,50,20,20" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.3*" />
                     <ColumnDefinition Width="0.3*" />
@@ -60,42 +79,69 @@
                     <RowDefinition Height="120" />
                 </Grid.RowDefinitions>
 
-                    <BoxView Color="DarkBlue" CornerRadius="10" Opacity="0.7" />
-                    <BoxView Color="DarkBlue" Grid.Column="0" Grid.Row="1" CornerRadius="10" Opacity="0.7"/>
-                    <BoxView Color="DarkBlue" Grid.Column="1" Grid.Row="0" CornerRadius="10" Opacity="0.7"/>
-                    <BoxView Color="DarkBlue" Grid.Column="1" Grid.Row="1" CornerRadius="10" Opacity="0.7"/>
-                    <BoxView Color="DarkBlue" Grid.Column="2" Grid.Row="1" CornerRadius="10" Opacity="0.7"/>
-                    <BoxView Color="DarkBlue" Grid.Column="2" Grid.Row="0" CornerRadius="10" Opacity="0.7" />
-
-                <Image
-                        Margin="25"
-                        HeightRequest="30"
-                        WidthRequest="20"
-                        BackgroundColor="DarkTurquoise"
-                         Grid.Row="0"
+                    <BoxView Color="#00063C" CornerRadius="10" />
+                    <BoxView Color="#00063C" Grid.Column="0" Grid.Row="1" CornerRadius="10" />
+                    <BoxView Color="#00063C" Grid.Column="1" Grid.Row="0" CornerRadius="10" />
+                    <BoxView Color="#00063C" Grid.Column="1" Grid.Row="1" CornerRadius="10" />
+                    <BoxView Color="#00063C" Grid.Column="2" Grid.Row="1" CornerRadius="10" />
+                    <BoxView Color="#00063C" Grid.Column="2" Grid.Row="0" CornerRadius="10" />
+                    <Frame  Grid.Row="0"
                         Grid.Column="0"
+                        
+
+                        
+                        CornerRadius="10"
+                        Padding="0"
+                            Margin="16"
+                        HeightRequest="30"
+                            WidthRequest="35"
+                        VerticalOptions="Start">
+                        
+                <Image
+                        
+                       
+                        BackgroundColor="#0076B9"
+                        Aspect="Fill"
                         Source="awesome_running.png" 
-                        VerticalOptions="StartAndExpand"/>
-                <Image
-                        Margin="25"
-                        HeightRequest="30"
-                        WidthRequest="20"
-                        BackgroundColor="DarkTurquoise"
-                         Grid.Row="0"
-                        Grid.Column="1"
-                        Source="awesome_swimmer.png"
-                        VerticalOptions="StartAndExpand"
+                      
                         />
-                
-                <Image
-                        Margin="25"
+                   </Frame >
+                    <Frame  
+                        Padding="0"
+                        CornerRadius="10"
+                        Grid.Row="0"
+                        Margin="16"
                         HeightRequest="30"
-                        WidthRequest="20"
-                        BackgroundColor="DarkTurquoise"
-                         Grid.Row="0"
+                        Grid.Column="1"
+                        VerticalOptions="StartAndExpand"
+                        
+                        >
+                       
+                    <Image
+
+                   
+                        BackgroundColor="#0076B9"
+                        Source="awesome_swimmer.png"
+                        
+                       
+                        />
+                    </Frame>
+                    <Frame 
+                        Padding="0"
+                        CornerRadius="10"
+                        Grid.Row="0"
                         Grid.Column="2"
+                        Margin="17"
+                        HeightRequest="30"
+                        
+                        VerticalOptions="Start">
+                        <Image
+
+                        BackgroundColor="#0076B9"
                         Source="material_directions_bike.png"
-                        VerticalOptions="StartAndExpand"/>
+                        />
+                    </Frame>
+                   
                 <Image
                         Margin="25"
                         HeightRequest="10"
@@ -108,8 +154,8 @@
                         HeightRequest="10"
                          Grid.Row="1"
                         Grid.Column="0"
-                        Opacity="0.5"
-                        BackgroundColor="DarkBlue"
+                        Opacity="0"
+                        BackgroundColor="#00063C"
                         Source="peoplegroup.png" />
                 <Image
                         Margin="25"
@@ -146,9 +192,9 @@
 
             </Grid>
 
-            </Frame>
+            
         </StackLayout>
-       
+        </Frame>
     </ScrollView>
      
 </ContentPage>

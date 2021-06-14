@@ -7,10 +7,12 @@
 
   <ItemGroup>
     <None Remove="EmbeddedResources\athena_logo.png" />
+    <None Remove="EmbeddedResources\fonts\myriadpro.otf" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="EmbeddedResources\athena_logo.png" />
+    <EmbeddedResource Include="EmbeddedResources\fonts\myriadpro.otf" />
   </ItemGroup>
 
   <ItemGroup>

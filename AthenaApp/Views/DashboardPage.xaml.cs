@@ -21,67 +21,67 @@ namespace AthenaApp.Views
         {
             new Entry (200)
             {
-                Color = SKColor.Parse("#FF1493"),
+                Color = SKColor.Parse("#081764"),
                 Label = "January",
                 ValueLabel = "200"
             },
             new Entry (400)
             {
-                Color = SKColor.Parse("#00BFFF"),
+                Color = SKColor.Parse("#081764"),
                 Label = "February",
                 ValueLabel = "400"
             },
-            new Entry (-100)
+            new Entry (100)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#081764"),
                 Label = "March",
-                ValueLabel = "-100"
+                ValueLabel = "100"
             },
             new Entry (200)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#081764"),
                 Label = "April",
                 ValueLabel = "200"
             },
              new Entry (200)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#081764"),
                 Label = "May",
                 ValueLabel = "200"
             },
             new Entry (200)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#081764"),
                 Label = "June",
                 ValueLabel = "200"
             },
             new Entry (200)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#081764"),
                 Label = "August",
                 ValueLabel = "200"
             },
             new Entry (200)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#081764"),
                 Label = "September",
                 ValueLabel = "200"
             },
              new Entry (100)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#081764"),
                 Label = "October",
                 ValueLabel = "100"
             },
              new Entry (200)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#081764"),
                 Label = "November",
                 ValueLabel = "200"
             },
              new Entry (200)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#081764"),
                 Label = "December",
                 ValueLabel = "200"
             },
@@ -91,67 +91,68 @@ namespace AthenaApp.Views
         {
             new Entry (200)
             {
-                Color = SKColor.Parse("#FF1493"),
+                Color = SKColor.Parse("#FFFFFF"),
                 Label = "January",
                 ValueLabel = "200"
             },
             new Entry (400)
             {
-                Color = SKColor.Parse("#00BFFF"),
+                Color = SKColor.Parse("#FFFFFF"),
                 Label = "February",
                 ValueLabel = "400"
             },
             new Entry (300)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#FFFFFF"),
                 Label = "March",
                 ValueLabel = "300"
             },
             new Entry (500)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#FFFFFF"),
                 Label = "April",
                 ValueLabel = "500"
             },
              new Entry (700)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#FFFFFF"),
                 Label = "May",
                 ValueLabel = "700"
             },
             new Entry (800)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#FFFFFF"),
                 Label = "June",
                 ValueLabel = "800"
             },
             new Entry (800)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#FFFFFF"),
                 Label = "August",
                 ValueLabel = "800"
+               
             },
             new Entry (1000)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#FFFFFF"),
                 Label = "September",
                 ValueLabel = "1000"
             },
              new Entry (1100)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#FFFFFF"),
                 Label = "October",
                 ValueLabel = "1100"
             },
              new Entry (1200)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#FFFFFF"),
                 Label = "November",
                 ValueLabel = "1200"
             },
              new Entry (1500)
             {
-                Color = SKColor.Parse("#00CED1"),
+                Color = SKColor.Parse("#FFFFFF"),
                 Label = "December",
                 ValueLabel = "1500"
             },
@@ -159,8 +160,9 @@ namespace AthenaApp.Views
         public DashboardPage()
         {
             InitializeComponent();
-            Chart1.Chart = new LineChart()  {Entries = entriesAccumulated};
-            Chart2.Chart = new BarChart() { Entries = entries };
+            Chart1.Chart = new LineChart()  {Entries = entriesAccumulated , BackgroundColor = SKColors.Transparent,LineSize = 20, PointSize = 20, LabelOrientation = Orientation.Horizontal};
+            Chart2.Chart = new BarChart() { Entries = entries , BackgroundColor = SKColors.Transparent ,BarAreaAlpha = 30, IsAnimated = true, LabelOrientation = Orientation.Horizontal };
+            
             
         }
     }
