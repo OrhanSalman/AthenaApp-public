@@ -37,7 +37,7 @@
                 </StackLayout>
 
                 <StackLayout
-                Margin="30,250,30,0"
+                Margin="30,150,30,0"
                 Padding="0"
                 HorizontalOptions="FillAndExpand">
                     <Frame
@@ -50,38 +50,9 @@
 
                         <StackLayout>
                             
-                            <StackLayout Margin="15,0" Padding="0">
+                            <StackLayout Margin="15,30" Padding="0">
                                 <!-- Grid for the logos of the universities -->
-                                <Grid x:Name="UniPicturesLogin" HeightRequest="175">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-
-
-
-                                    <ContentView Grid.Row="0" Grid.Column="0" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniMaribor" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                    <ContentView Grid.Row="0" Grid.Column="1" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniSiegen" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                    <ContentView Grid.Row="0" Grid.Column="2" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniVilnius" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                    <ContentView Grid.Row="0" Grid.Column="3" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniHellenic" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                    <ContentView Grid.Row="1" Grid.Column="0" Padding="0,0,0,40" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniPorto" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                    <ContentView Grid.Row="1" Grid.Column="1" Padding="0,0,0,40" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniCusano" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                    <ContentView Grid.Row="1" Grid.Column="2" Padding="0,0,0,40" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniOrleans" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                </Grid>
+                               
                                 <Frame
                                 Padding="0"
                                 BackgroundColor="Transparent"
@@ -93,7 +64,7 @@
                                         x:Name="UserInputMail"
                                         Margin="10,0,0,0"
                                         ClearButtonVisibility="WhileEditing"
-                                        FontAttributes="Italic"
+                                        FontAttributes="None"
                                         Keyboard="Email"
                                         Placeholder="youremail@mail.com"
                                         ReturnType="Next"
@@ -106,7 +77,7 @@
 
                                 <StackLayout Orientation="Horizontal">
                                     <Label
-                                    Margin="10,2,10,10"
+                                    Margin="10,2,10,95"
              />
                                 </StackLayout>
 
@@ -120,12 +91,64 @@
 
 
                                 <StackLayout
-                                Margin="0,25"
+                                Margin="0,30"
                                 HorizontalOptions="CenterAndExpand"
                                 Orientation="Horizontal">
-                                    
-                       
                                 </StackLayout>
+                                <!-- Grid for the logos of the universities -->
+                                <Grid x:Name="UniPicturesLogin" HeightRequest="50">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+
+
+                                    <ContentView Grid.Row="0" Grid.Column="1" Padding="0,40,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniSiegen" VerticalOptions="Center" HeightRequest="40" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="0" Grid.Column="2" Padding="0,40,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniVilnius" VerticalOptions="Center" HeightRequest="40" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="0" Grid.Column="3" Padding="0,40,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniHellenic" VerticalOptions="Center" HeightRequest="40" />
+                                    </ContentView>
+
+
+                                </Grid>
+                                <Grid x:Name="UniPicturesLogin1" HeightRequest="100">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.25*"/>
+                                        <ColumnDefinition Width="0.25*"/>
+                                        <ColumnDefinition Width="0.25*"/>
+                                        <ColumnDefinition Width="0.25*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+
+
+
+
+
+                                    <ContentView Grid.Row="1" Grid.Column="0" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniPorto" VerticalOptions="Center" HeightRequest="100" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="1" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniCusano" VerticalOptions="Center" HeightRequest="100" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="2" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniOrleans" VerticalOptions="Center" HeightRequest="100" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="3" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniMaribor" VerticalOptions="Center" HeightRequest="100" />
+                                    </ContentView>
+
+                                </Grid>
                             </StackLayout>
                         </StackLayout>
                     </Frame>
@@ -163,7 +186,7 @@
                 </StackLayout>
 
                 <StackLayout
-                    Margin="30,250,30,0"
+                    Margin="30,150,30,0"
                     Padding="0"
                     HorizontalOptions="FillAndExpand">
                     <Frame
@@ -176,38 +199,9 @@
                         <StackLayout>
 
 
-                            <StackLayout Margin="15,0" Padding="0">
-                                <!-- Grid for the logos of the universities -->
-                                <Grid x:Name="UniPicturesRegister" HeightRequest="175">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    
-                                  
-                                      
-                                    <ContentView Grid.Row="0" Grid.Column="0" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniMaribor" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                    <ContentView Grid.Row="0" Grid.Column="1" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniSiegen" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                    <ContentView Grid.Row="0" Grid.Column="2" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniVilnius" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                    <ContentView Grid.Row="0" Grid.Column="3" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniHellenic" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                    <ContentView Grid.Row="1" Grid.Column="0" Padding="0,0,0,40" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniPorto" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                    <ContentView Grid.Row="1" Grid.Column="1" Padding="0,0,0,40" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniCusano" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                    <ContentView Grid.Row="1" Grid.Column="2" Padding="0,0,0,40" VerticalOptions="FillAndExpand">
-                                        <Image Source="UniOrleans" VerticalOptions="Center" HeightRequest="65" />
-                                    </ContentView>
-                                </Grid>
+                            <StackLayout Margin="15,30" Padding="0">
+                                
+                                
                                 <Frame
                                     Padding="0"
                                     BackgroundColor="Transparent"
@@ -219,7 +213,7 @@
                                             x:Name="UserInputName"
                                             Margin="10,0,0,0"
                                             ClearButtonVisibility="WhileEditing"
-                                            FontAttributes="Italic"
+                                            FontAttributes="None"
                                             Keyboard="Email"
                                             Placeholder="Choose Username"
                                             ReturnType="Next"
@@ -236,6 +230,11 @@
                                     HorizontalOptions="FillAndExpand">
       
                                 </Frame>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                    Margin="10,2,10,0"
+                                    />
+                                </StackLayout>
                                 <Frame
                                     Padding="0"
                                     BackgroundColor="Transparent"
@@ -247,7 +246,7 @@
                                             x:Name="UserInputNewMail"
                                             Margin="10,0,0,0"
                                             ClearButtonVisibility="WhileEditing"
-                                            FontAttributes="Italic"
+                                            FontAttributes="None"
                                             Keyboard="Email"
                                             Placeholder="youremail@mail.com"
                                             ReturnType="Next"
@@ -264,7 +263,11 @@
                                     HorizontalOptions="FillAndExpand">
 
                                 </Frame>
-
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                    Margin="10,2,10,5"
+                                    />
+                                </StackLayout>
 
                                 <Button
                                     BackgroundColor="MidnightBlue"
@@ -273,6 +276,66 @@
                                     Text="SIGN UP"
                                     TextColor="White" />
                             </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    Margin="10,2,10,10"
+                                    />
+                            </StackLayout>
+
+                            <!-- Grid for the logos of the universities -->
+                            <Grid x:Name="UniPicturesRegister1" HeightRequest="50">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.3*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+
+
+                                <ContentView Grid.Row="0" Grid.Column="1" Padding="0,40,0,0" VerticalOptions="FillAndExpand">
+                                    <Image Source="UniSiegen" VerticalOptions="Center" HeightRequest="40" />
+                                </ContentView>
+                                <ContentView Grid.Row="0" Grid.Column="2" Padding="0,40,0,0" VerticalOptions="FillAndExpand">
+                                    <Image Source="UniVilnius" VerticalOptions="Center" HeightRequest="40" />
+                                </ContentView>
+                                <ContentView Grid.Row="0" Grid.Column="3" Padding="0,40,0,0" VerticalOptions="FillAndExpand">
+                                    <Image Source="UniHellenic" VerticalOptions="Center" HeightRequest="40" />
+                                </ContentView>
+                      
+
+                            </Grid>
+                            <Grid x:Name="UniPicturesRegister" HeightRequest="100">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.25*"/>
+                                    <ColumnDefinition Width="0.25*"/>
+                                    <ColumnDefinition Width="0.25*"/>
+                                    <ColumnDefinition Width="0.25*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
+
+
+                             
+                               
+                                
+                                <ContentView Grid.Row="1" Grid.Column="0" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                    <Image Source="UniPorto" VerticalOptions="Center" HeightRequest="100" />
+                                </ContentView>
+                                <ContentView Grid.Row="1" Grid.Column="1" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                    <Image Source="UniCusano" VerticalOptions="Center" HeightRequest="100" />
+                                </ContentView>
+                                <ContentView Grid.Row="1" Grid.Column="2" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                    <Image Source="UniOrleans" VerticalOptions="Center" HeightRequest="100" />
+                                </ContentView>
+                                <ContentView Grid.Row="1" Grid.Column="3" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                    <Image Source="UniMaribor" VerticalOptions="Center" HeightRequest="100" />
+                                </ContentView>
+
+                            </Grid>
                         </StackLayout>
                     </Frame>
                 </StackLayout>
