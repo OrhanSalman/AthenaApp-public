@@ -131,6 +131,8 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
                 // ToDo
                 //                var id = _companyRepository.Search(Input.Company);
 
+                string message = "Dear" + Input.UserName + "," + "\n Please confirm your email. \n Your efford will be rewarded :)";
+
                 var user = new AthenaIdentityUser { UserName = Input.UserName, Email = Input.Email, Company = Input.Company, CompanyId = 1 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
@@ -147,7 +149,8 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
 
 
                     // ToDo: Implement "E-Mail-Provider-Send-Mail-Logic"
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    await _emailSender.SendEmailAsync(Input.Email,
+                        message,
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)

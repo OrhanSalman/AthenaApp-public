@@ -11,12 +11,14 @@ using Microcharts.Forms;
 using Entry = Microcharts.ChartEntry;
 using Microcharts;
 
+
 namespace AthenaApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    // Raphael: Class that sits behind the HTML and delivers the data
     public partial class DashboardPage : ContentPage
     {
-        
+        // Raphael: Creates a Entry List with entries for Chart2, a Bar Chart with monthly kilometers
         List<Entry> entries = new List<Entry>
         {
             new Entry (200)
@@ -86,7 +88,8 @@ namespace AthenaApp.Views
                 ValueLabel = "200"
             },
         };
-
+        // Raphael: Creates a Entry List with entries for Chart1, a Line Chart with Accumulated kilometers
+        // Raphael: Every entry consists of a value, Bar/Line color, Month Name
         List<Entry> entriesAccumulated = new List<Entry>
         {
             new Entry (200)
@@ -159,8 +162,10 @@ namespace AthenaApp.Views
         };
         public DashboardPage()
         {
+
             InitializeComponent();
-            Chart1.Chart = new LineChart()  {Entries = entriesAccumulated , BackgroundColor = SKColors.Transparent,LineSize = 20, PointSize = 20, LabelOrientation = Orientation.Horizontal};
+            // Raphael: With start of app Charts are created with the implemented Lists. The Background is transparent for the coloured frame -> Additional Options for the appearance are made
+            Chart1.Chart = new LineChart()  {Entries = entriesAccumulated , BackgroundColor = SKColors.Transparent,LineSize = 20, PointSize = 20, LabelOrientation = Orientation.Horizontal, IsAnimated=true};
             Chart2.Chart = new BarChart() { Entries = entries , BackgroundColor = SKColors.Transparent ,BarAreaAlpha = 30, IsAnimated = true, LabelOrientation = Orientation.Horizontal };
             
             

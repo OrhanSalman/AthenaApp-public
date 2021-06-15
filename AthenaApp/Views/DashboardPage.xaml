@@ -6,15 +6,17 @@
              xmlns:local="clr-namespace:AthenaApp"
              xmlns:Image="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin">
 
+    <!-- Raphael: Here starts the Scrollview of the App. Makes the App Scrolable from one End to another -->
     <ScrollView>
         <Frame CornerRadius="20">
     <StackLayout>
-
+                <!-- Raphael: Here starts the Main Title and the first Subtitle-->
                 <Label FontSize="40" TextColor="#002563" HorizontalTextAlignment="Start" FontFamily="Myriad Pro"  >Dashboard</Label>
                 <Label FontSize= "25" TextColor="#002563" >Start Activity</Label>
+                <!-- Raphael: Here starts an imageButton in a coloured Frame with Linear Gradient-->
                 <Frame CornerRadius="10"  Padding="0" HeightRequest="100" WidthRequest="50" >
                     <ImageButton HorizontalOptions="Fill" Source="stopwatch" Opacity="0.8"></ImageButton>
-                    
+                    <!-- Raphael: Linear Gradient creates a colour Fade out in the Background between two colours-->
                     <Frame.Background>
                         <LinearGradientBrush EndPoint="0,1">
                             <GradientStop Color="#D2E5F5"
@@ -23,9 +25,11 @@
                           Offset="1.0" />
                         </LinearGradientBrush>
                     </Frame.Background>
+                    <!-- Raphael: Here starts the Subtitle Progress-->
                 </Frame>
                 <Label FontSize= "25" TextColor="#002563" >Progress</Label>
-            <Frame CornerRadius="10"  Padding="0">
+                <!-- Raphael:Here starts a Chart1 from the DashboardPage.cs that is linked here. The Chart shows the total amount of run Kilometer of one University Again with a coloured Background-->
+                <Frame CornerRadius="10"  Padding="0">
                     <forms:ChartView x:Name="Chart1" HeightRequest="150"  />
                 <Frame.Background>
                         <LinearGradientBrush EndPoint="0,1">
@@ -36,7 +40,8 @@
                     </LinearGradientBrush>
                 </Frame.Background>
             </Frame>
-            <Label FontSize="25" TextColor="#002563">Personal Activity</Label>
+                <!-- Raphael:Here starts the second Chart with the KM values for seperate months-->
+                <Label FontSize="25" TextColor="#002563">Personal Activity</Label>
                 <Frame CornerRadius="10"  Padding="0">
                     <forms:ChartView x:Name="Chart2" HeightRequest="150" />
                     <Frame.Background>
@@ -48,8 +53,9 @@
                         </LinearGradientBrush>
                     </Frame.Background>
                 </Frame>
+                <!-- Raphael:Shows the latest Trophy of a user and the total Kilometers-->
                 <Label FontSize="25" TextColor="#002563" >Newest Trophy</Label>
-            
+                <!-- Raphael: The Trophy Area is split into a picture and a coloured Frame with description-->
                 <Grid Margin="5,5,5,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.3*" />
@@ -60,7 +66,7 @@
 
                     </Grid.RowDefinitions>
 
-                   
+                    <!-- Raphael: The Picture of the Trophy is bound to a CircleImage frame-->
                     <Image:CircleImage Grid.Column="0" Grid.Row="0" Source="iron_man.png" BackgroundColor="White" ></Image:CircleImage>
                     <Frame Grid.Column="1" Grid.Row="0" CornerRadius="15" Opacity="0.7" >
                         <Label FontSize="Title" TextColor="White" >Iron Man 200km</Label>
@@ -75,7 +81,7 @@
                     </Frame>
                 </Grid>
 
-
+                <!-- Raphael: Shows a grid with 6 fields to show stats to running, cycling, swimming and personal, group, daily-->
                 <Label FontSize="25" TextColor="MidnightBlue">Overview</Label>
 
             
