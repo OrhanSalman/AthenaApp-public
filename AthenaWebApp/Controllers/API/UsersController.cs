@@ -94,6 +94,7 @@ namespace AthenaWebApp.Controllers.API
             // ToDo: Check if Email contains the EmailContext of an Company (Unterscheidung zw. @uni-siegen / @student.uni-siegen
             var companyName = _context.Company.FirstOrDefault(c => c.EmailContext == splittedMail).CompanyName;
 
+
             // Check if the company exists (it has to be a valid University-Domain
             if (companyName == null)
             {

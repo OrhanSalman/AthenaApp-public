@@ -51,7 +51,7 @@ namespace AthenaApp.Views
             }
             else if (response.StatusCode == HttpStatusCode.NotFound)
             {
-                await DisplayAlert("Login failed", "The E-Mail you entered was not found.", "Okay");
+                await DisplayAlert("Login failed", "The E-Mail you entered was not found or not confirmed.", "Okay", "Resend ConfirmationMail");
             }
             else
             {

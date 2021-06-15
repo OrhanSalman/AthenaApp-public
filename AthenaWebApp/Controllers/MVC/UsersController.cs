@@ -99,7 +99,7 @@ namespace AthenaWebApp.Controllers.MVC
                     users = users.OrderBy(s => s.UserName);
                     break;
             }
-            int pageSize = 3;
+            int pageSize = 6;
             return View(await UserPaginatedList<UserExtension>.CreateAsync(users.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
