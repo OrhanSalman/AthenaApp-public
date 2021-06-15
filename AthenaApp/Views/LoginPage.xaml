@@ -8,13 +8,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:AthenaApp.ViewModels"
     Shell.NavBarIsVisible="False"
-
-
     mc:Ignorable="d">
     <Shell.TitleView>
-        <Image Source="athena_logo.png"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" />
+        <Image
+            HorizontalOptions="Center"
+            Source="athena_logo.png"
+            VerticalOptions="Center" />
     </Shell.TitleView>
 
 
@@ -24,16 +23,25 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <StackLayout BackgroundColor="#203984" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+            <StackLayout
+                BackgroundColor="#203984"
+                HorizontalOptions="Fill"
+                VerticalOptions="FillAndExpand">
+                <StackLayout
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal"
+                    VerticalOptions="Center">
                     <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                        <Image Source="athena_logo.png" VerticalOptions="Center" HeightRequest="65" />
+                        <Image
+                            HeightRequest="65"
+                            Source="athena_logo.png"
+                            VerticalOptions="Center" />
                     </ContentView>
 
 
                 </StackLayout>
 
-            </StackLayout> 
+            </StackLayout>
 
             <StackLayout
                 Margin="30,120,30,0"
@@ -45,36 +53,40 @@
                     BackgroundColor="White"
                     HasShadow="True"
                     HeightRequest="700">
-                    
-                    
+
+
                     <StackLayout>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50" />
                                 <RowDefinition Height="Auto" />
-                                
+
 
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <BoxView Grid.Row="0"
-                                     Grid.Column="0"
-                                     Color="White"/>
-                            <Label Grid.Column="0"
-                                   Text="Sign In"
-                                   HorizontalOptions="CenterAndExpand"
-                                   VerticalOptions="CenterAndExpand"/>
+                            <BoxView
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Color="White" />
+                            <Label
+                                Grid.Column="0"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Sign In"
+                                VerticalOptions="CenterAndExpand" />
 
-                            <BoxView Grid.Row="0"
-                                     Grid.Column="1"
-                                     Color="White"/>
-                            <Label Grid.Column="1"
-                                   Text="Register"
-                                   HorizontalOptions="CenterAndExpand"
-                                   VerticalOptions="CenterAndExpand"/>
-                  
+                            <BoxView
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Color="White" />
+                            <Label
+                                Grid.Column="1"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Register"
+                                VerticalOptions="CenterAndExpand" />
+
 
                         </Grid>
 
@@ -136,12 +148,11 @@
 
                             <Button
                                 BackgroundColor="MidnightBlue"
-                                Clicked="ButtonLogin_Clicked"
                                 Command="{Binding LoginComand}"
                                 CornerRadius="30"
                                 Text="SIGN IN"
                                 TextColor="White" />
-                            
+
 
                             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                                 <Label

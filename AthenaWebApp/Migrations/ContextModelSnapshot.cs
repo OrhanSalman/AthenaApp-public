@@ -28,7 +28,6 @@ namespace AthenaWebApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CompanyName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -260,9 +259,7 @@ namespace AthenaWebApp.Migrations
                 {
                     b.HasOne("AthenaWebApp.Models.Company", "Company")
                         .WithMany()
-                        .HasForeignKey("CompanyName")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CompanyName");
 
                     b.Navigation("Company");
                 });

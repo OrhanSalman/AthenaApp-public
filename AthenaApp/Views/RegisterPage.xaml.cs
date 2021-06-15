@@ -25,9 +25,9 @@ namespace AthenaApp.Views
         {
             
             RegisterService registerService = new RegisterService();
-            var postRegisterUser = await registerService.CheckRegisterIfExists(UserInputName.Text, UserInputUniversity.Text, UserInputMail.Text);
+            var postRegisterUser = await registerService.AppRegistration(UserInputName.Text, UserInputMail.Text);
             
-            if (postRegisterUser)
+            if (postRegisterUser != null)
             {
                 await DisplayAlert("Registration succeeded", "Welcome new user!", "Okay", "Cancel");
                 await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");

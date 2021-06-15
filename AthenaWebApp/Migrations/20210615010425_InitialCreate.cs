@@ -39,7 +39,7 @@ namespace AthenaWebApp.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CompanyName = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     RegisteredSince = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastActivity = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LoggedIn = table.Column<bool>(type: "bit", nullable: false),
@@ -68,7 +68,7 @@ namespace AthenaWebApp.Migrations
                         column: x => x.CompanyName,
                         principalTable: "Company",
                         principalColumn: "CompanyName",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

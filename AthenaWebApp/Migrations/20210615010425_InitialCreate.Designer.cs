@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AthenaWebApp.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210614001927_InitialCreate")]
+    [Migration("20210615010425_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,7 +30,6 @@ namespace AthenaWebApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CompanyName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -262,9 +261,7 @@ namespace AthenaWebApp.Migrations
                 {
                     b.HasOne("AthenaWebApp.Models.Company", "Company")
                         .WithMany()
-                        .HasForeignKey("CompanyName")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CompanyName");
 
                     b.Navigation("Company");
                 });

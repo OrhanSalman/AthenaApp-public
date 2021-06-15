@@ -57,14 +57,29 @@ namespace AthenaApp.ViewModels
 
 
             LoginService services = new LoginService();
-            var getLoginDetails = await services.CheckLoginIfExists(UserInputMail, UserInputPw);
+            var getLoginDetails = await services.CheckLoginIfExists(UserInputMail);
+
+/*
+            if(getLoginDetails.)
+            {
+
+            }
+            else if()
+            {
+
+            }
+            else
+            {
+
+            }
 
             if (getLoginDetails)
+                DisplayInvalidLoginPrompt();
             {
                 await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
             }
 
-            /*
+            
             if (userInputMail != "athena@uni.de" || userInputPw != "athena")
             {
                 DisplayInvalidLoginPrompt();

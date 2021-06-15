@@ -21,14 +21,7 @@ namespace AthenaWebApp.Models
             {
                 return;
             }
-
-
-                context.Roles.AddRange(
-                    new IdentityRole
-                    {
-                        Name = "Admin"
-                    });
-
+           
                 context.Company.AddRange(
                     new Company
                     {

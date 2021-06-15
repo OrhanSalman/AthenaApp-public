@@ -35,6 +35,7 @@ namespace AthenaWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddRazorPages();
 
             services.AddMvc(options =>

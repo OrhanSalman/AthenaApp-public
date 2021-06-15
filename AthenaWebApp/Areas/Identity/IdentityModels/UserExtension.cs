@@ -16,7 +16,7 @@ namespace AthenaWebApp.Areas.Identity.IdentityModels
         [ForeignKey("CompanyName"), DisplayName("Associated Company")]
         public Company Company { get; set; }
 
-        [Display(Name = "Company"), Required]
+        [Display(Name = "Company")]
         public string CompanyName { get; set; }
 
         [Display(Name = "Registered since"), DataType(DataType.Date)]
