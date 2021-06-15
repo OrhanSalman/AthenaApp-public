@@ -15,9 +15,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using WebPWrecover.Services;
 using AthenaWebApp.Services;
-using AthenaWebApp.Repositories.PatternInterfaces;
+//using AthenaWebApp.Repositories.PatternInterfaces;
+using AthenaWebApp.Areas.Identity.IdentityModels;
+using Newtonsoft.Json.Serialization;
 
 namespace AthenaWebApp
 {
@@ -34,7 +35,9 @@ namespace AthenaWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddRazorPages();
+
             services.AddMvc(options =>
             {
                 // This pushes users to login if not authenticated
@@ -42,28 +45,11 @@ namespace AthenaWebApp
 
             });
 
-            //ToDo: "RequireNonAlphanumeric" has been set to "false". Check if it works
-            services.Configure<IdentityOptions>(options =>
-            {
-                // Default Password settings.
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 8;
-                options.Password.RequiredUniqueChars = 1;
-
-                // Default SignIn settings.
-                options.SignIn.RequireConfirmedEmail = false;
-                options.SignIn.RequireConfirmedPhoneNumber = false;
-            });
-
-            // requires
-            // using Microsoft.AspNetCore.Identity.UI.Services;
-            // using WebPWrecover.Services;
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
-            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddDbContext<Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ServerConnection")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -94,5 +80,7 @@ namespace AthenaWebApp
                 endpoints.MapRazorPages();
             });
         }
+
+
     }
 }

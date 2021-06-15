@@ -1,4 +1,4 @@
-﻿@inject SignInManager<AthenaIdentityUser> SignInManager
+﻿@inject SignInManager<UserExtension> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

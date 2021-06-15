@@ -3,172 +3,119 @@ using Microsoft.Extensions.DependencyInjection;
 using AthenaWebApp.Data;
 using System;
 using System.Linq;
+using AthenaWebApp.Areas.Identity.IdentityModels;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace AthenaWebApp.Models
 {
     public static class SeedData
     {
         public static void Initialize(IServiceProvider serviceProvider)
-
         {
-            
-                        using (var context = new AthenaDbContext(
-                            serviceProvider.GetRequiredService<
-                                DbContextOptions<AthenaDbContext>>()))
-                        {
-                            // ToDo:
-                            if (context.Company.Any())
-                            {
-                                return;   // DB has been seeded
-                            }
-            
-            
-                            context.Company.AddRange(
-                                new Company
-                                {
-                                    CompanyName = "Universität Siegen",
-                                    Country = "Germany",
-                                    CollectedDistances = 500
-                                 }
-                              );
-                            context.SaveChanges();
+            using (var context = new Context(
+                serviceProvider.GetRequiredService<DbContextOptions<Context>>()))
+            {
 
-                /*
-                                context.Users.AddRange(
-                                    new User
-                                    {
-
-                                        Email = "lena@student.uni-siegen.de",
-                                        UserName = "Lena",
-                                        CompanyId = 1
-                                    },
-                                    new IdentityUser
-                                    {
-                                        Email = "jasmin@student.uni-siegen.de",
-                                        UserName = "Jasmin",
-                                        CompanyId = 1
-                                    },
-                                    new IdentityUser
-                                    {
-                                        Email = "domenik@student.uni-siegen.de",
-                                        UserName = "Domenik",
-                                        CompanyId = 1
-                                    },
-                                    new IdentityUser
-                                    {
-                                        Email = "alex@student.uni-siegen.de",
-                                        UserName = "Alex",
-                                        CompanyId = 1
-                                    },
-                                    new IdentityUser
-                                    {
-                                        Email = "raphael@student.uni-siegen.de",
-                                        UserName = "Raphael",
-                                        CompanyId = 1
-                                    },
-                                    new IdentityUser
-                                    {
-                                        Email = "orhan@student.uni-siegen.de",
-                                        UserName = "Orhan",
-                                        CompanyId = 1
-                                    },
-                                    new IdentityUser
-                                    {
-                                        Email = "admin@student.uni-siegen.de",
-                                        UserName = "Admin",
-                                        CompanyId = 1
-                                    },
-                                    new IdentityUser
-                                    {
-                                        Email = "supervisor@student.uni-siegen.de",
-                                        UserName = "Supervisor",
-                                        CompanyId = 1
-                                    }
-                                );
-                                context.SaveChanges();
-                */
-                /*
-                                context.Distances.AddRange(
-                                    new Distance
-                                    {
-                                        Meters = 1500,
-                                        UserId = 1
-                                    },
-                                    new Distance
-                                    {
-                                        Meters = 2500,
-                                        UserId = 2
-                                    },
-                                    new Distance
-                                    {
-                                        Meters = 3000,
-                                        UserId = 3
-                                    },
-                                    new Distance
-                                    {
-                                        Meters = 1500,
-                                        UserId = 4
-                                    },
-                                    new Distance
-                                    {
-                                        Meters = 2500,
-                                        UserId = 5
-                                    },
-                                    new Distance
-                                    {
-                                        Meters = 3000,
-                                        UserId = 6
-                                    }
-                                );
-                                context.SaveChanges();
-                */
-                /*                context.Roles.AddRange(
-
-                                    new Role
-                                    {
-                                        UserId = 1,
-                                        IsUser = 1
-                                    },
-                                    new Role
-                                    {
-                                        UserId = 2,
-                                        IsUser = 1
-                                    },
-                                    new Role
-                                    {
-                                        UserId = 3,
-                                        IsUser = 1
-                                    },
-                                    new Role
-                                    {
-                                        UserId = 4,
-                                        IsUser = 1
-                                    },
-                                    new Role
-                                    {
-                                        UserId = 5,
-                                        IsUser = 1
-                                    },
-                                    new Role
-                                    {
-                                        UserId = 6,
-                                        IsUser = 1
-                                    },
-                                    new Role
-                                    {
-                                        UserId = 7,
-                                        IsAdmin = 1
-                                    },
-                                    new Role
-                                    {
-                                        UserId = 8,
-                                        IsSupervisor = 1
-                                    }
-                                );
-                                context.SaveChanges();
-                */
+            if(context.Users.Any())
+            {
+                return;
             }
+           
+                context.Company.AddRange(
+                    new Company
+                    {
+                        CompanyName = "Universität Siegen",
+                        Country = "Germany",
+                        EmailContext = "uni-siegen.de"
+                    }
+                );
+                context.SaveChanges();
 
+                context.Users.AddRange(
+                    new UserExtension
+                    {
+
+                        Email = "lena@student.uni-siegen.de",
+                        EmailConfirmed = true,
+                        UserName = "Lena",
+                        CompanyName = "Universität Siegen"
+                    },
+                    new UserExtension
+                    {
+                        Email = "jasmin@student.uni-siegen.de",
+                        EmailConfirmed = true,
+                        UserName = "Jasmin",
+                        CompanyName = "Universität Siegen"
+                    },
+                    new UserExtension
+                    {
+                        Email = "domenik@student.uni-siegen.de",
+                        EmailConfirmed = true,
+                        UserName = "Domenik",
+                        CompanyName = "Universität Siegen"
+                    },
+                    new UserExtension
+                    {
+                        Email = "alex@student.uni-siegen.de",
+                        EmailConfirmed = true,
+                        UserName = "Alex",
+                        CompanyName = "Universität Siegen"
+                    },
+                    new UserExtension
+                    {
+                        Email = "raphael@student.uni-siegen.de",
+                        EmailConfirmed = true,
+                        UserName = "Raphael",
+                        CompanyName = "Universität Siegen"
+                    },
+                    new UserExtension
+                    {
+                        Email = "orhan@student.uni-siegen.de",
+                        EmailConfirmed = true,
+                        UserName = "Orhan",
+                        CompanyName = "Universität Siegen"
+                    },
+                    new UserExtension
+                    {
+                        Email = "admin@athena.com",
+                        EmailConfirmed = true,
+                        PasswordHash = "Test_123",
+                        UserName = "Admin",
+                        CompanyName = "Universität Siegen"
+                    },
+                    new UserExtension
+                    {
+                        Email = "supervisor@uni-siegen.de",
+                        EmailConfirmed = true,
+                        PasswordHash = "Test_123",
+                        UserName = "Supervisor",
+                        CompanyName = "Universität Siegen"
+                    }
+                );
+                context.SaveChanges();
+
+                context.Roles.AddRange(
+                    new IdentityRole
+                    {
+                        Name = "Admin",
+                        NormalizedName = "ADMIN"
+                    },
+                    new IdentityRole
+                    {
+                        Name = "Supervisor",
+                        NormalizedName = "SUPERVISOR"
+                    },
+                    new IdentityRole
+                    {
+                        Name = "MobileUser",
+                        NormalizedName = "MOBILEUSER"
+                    }
+                 );
+                 context.SaveChanges();
+
+                // ToDo: Set Users to Roles
+            }
         }
     }
 }

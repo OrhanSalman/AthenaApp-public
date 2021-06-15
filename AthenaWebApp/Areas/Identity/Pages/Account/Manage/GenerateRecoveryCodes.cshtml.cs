@@ -12,11 +12,11 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
 {
     public class GenerateRecoveryCodesModel : PageModel
     {
-        private readonly UserManager<AthenaIdentityUser> _userManager;
+        private readonly UserManager<UserExtension> _userManager;
         private readonly ILogger<GenerateRecoveryCodesModel> _logger;
 
         public GenerateRecoveryCodesModel(
-            UserManager<AthenaIdentityUser> userManager,
+            UserManager<UserExtension> userManager,
             ILogger<GenerateRecoveryCodesModel> logger)
         {
             _userManager = userManager;

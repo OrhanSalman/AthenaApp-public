@@ -12,13 +12,13 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
 {
     public class ResetAuthenticatorModel : PageModel
     {
-        UserManager<AthenaIdentityUser> _userManager;
-        private readonly SignInManager<AthenaIdentityUser> _signInManager;
+        UserManager<UserExtension> _userManager;
+        private readonly SignInManager<UserExtension> _signInManager;
         ILogger<ResetAuthenticatorModel> _logger;
 
         public ResetAuthenticatorModel(
-            UserManager<AthenaIdentityUser> userManager,
-            SignInManager<AthenaIdentityUser> signInManager,
+            UserManager<UserExtension> userManager,
+            SignInManager<UserExtension> signInManager,
             ILogger<ResetAuthenticatorModel> logger)
         {
             _userManager = userManager;

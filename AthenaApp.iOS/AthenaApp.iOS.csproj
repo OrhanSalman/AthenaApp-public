@@ -132,6 +132,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
+      <Version>2.6.3</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration">
       <Version>2.2.1</Version>
     </PackageReference>

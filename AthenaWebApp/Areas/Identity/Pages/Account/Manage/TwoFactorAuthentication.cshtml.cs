@@ -14,13 +14,13 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
     {
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}";
 
-        private readonly UserManager<AthenaIdentityUser> _userManager;
-        private readonly SignInManager<AthenaIdentityUser> _signInManager;
+        private readonly UserManager<UserExtension> _userManager;
+        private readonly SignInManager<UserExtension> _signInManager;
         private readonly ILogger<TwoFactorAuthenticationModel> _logger;
 
         public TwoFactorAuthenticationModel(
-            UserManager<AthenaIdentityUser> userManager,
-            SignInManager<AthenaIdentityUser> signInManager,
+            UserManager<UserExtension> userManager,
+            SignInManager<UserExtension> signInManager,
             ILogger<TwoFactorAuthenticationModel> logger)
         {
             _userManager = userManager;

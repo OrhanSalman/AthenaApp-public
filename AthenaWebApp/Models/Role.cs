@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,11 +10,24 @@ namespace AthenaWebApp.Models
 {
     public class Role
     {
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public int IsAdmin { get; set; }
-        public int IsSupervisor { get; set; }
-        public int IsUser { get; set; }
-//        public int UserId { get; set; }
+
+        [DisplayName("Role")]
+        [Required(ErrorMessage = "Choose Role")]
+        public string RoleId { get; set; }
+
+        public List<SelectListItem> ListRole { get; set; }
+
+        [DisplayName("User")]
+        [Required(ErrorMessage = "Choose Username")]
+        public string UserId { get; set; }
+
+        [Required(ErrorMessage = "Choose Username")]
+        public string Username { get; set; }
+
+        /*
+        public string Id { get; set; }
+        public string UserName { get; set; }
+        public bool Selected { get; set; }
+        */
     }
 }

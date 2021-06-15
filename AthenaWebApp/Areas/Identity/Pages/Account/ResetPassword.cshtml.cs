@@ -16,9 +16,9 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ResetPasswordModel : PageModel
     {
-        private readonly UserManager<AthenaIdentityUser> _userManager;
+        private readonly UserManager<UserExtension> _userManager;
 
-        public ResetPasswordModel(UserManager<AthenaIdentityUser> userManager)
+        public ResetPasswordModel(UserManager<UserExtension> userManager)
         {
             _userManager = userManager;
         }

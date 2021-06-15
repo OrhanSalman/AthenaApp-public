@@ -14,12 +14,12 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<AthenaIdentityUser> _userManager;
-        private readonly SignInManager<AthenaIdentityUser> _signInManager;
+        private readonly UserManager<UserExtension> _userManager;
+        private readonly SignInManager<UserExtension> _signInManager;
 
         public IndexModel(
-            UserManager<AthenaIdentityUser> userManager,
-            SignInManager<AthenaIdentityUser> signInManager)
+            UserManager<UserExtension> userManager,
+            SignInManager<UserExtension> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -54,7 +54,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account.Manage
             public byte[] ProfilePicture { get; set; }
         }
 
-        private async Task LoadAsync(AthenaIdentityUser user)
+        private async Task LoadAsync(UserExtension user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

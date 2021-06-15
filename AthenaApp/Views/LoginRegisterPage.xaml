@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AthenaApp.Views.LoginRegisterPage"
+             BackgroundColor="{DynamicResource ThemeBackGroundColor}"
+             BarBackgroundColor="#203984"
+             Shell.NavBarIsVisible="False">
+    
+
+   
+    
+    
+    <ContentPage Title="Login">
+        
+        <Shell.TitleView>
+            <Image Source="athena_logo.png"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+        </Shell.TitleView>
+
+        
+        <StackLayout BackgroundColor="#e6e6e6">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackLayout BackgroundColor="#203984" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                        <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                            <Image Source="AthenaLogo.png" VerticalOptions="Center" HeightRequest="65" />
+                        </ContentView>
+
+
+                    </StackLayout>
+
+                </StackLayout>
+
+                <StackLayout
+                Margin="30,150,30,0"
+                Padding="0"
+                HorizontalOptions="FillAndExpand">
+                    <Frame
+                    Margin="0"
+                    Padding="0"
+                    BackgroundColor="White"
+                    HasShadow="True"
+                    HeightRequest="700">
+
+
+                        <StackLayout>
+                            
+                            <StackLayout Margin="15,30" Padding="0">
+                                <!-- Grid for the logos of the universities -->
+                               
+                                <Frame
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                BorderColor="DarkGray"
+                                CornerRadius="30"
+                                HorizontalOptions="FillAndExpand">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Entry
+                                        x:Name="UserInputMail"
+                                        Margin="10,0,0,0"
+                                        ClearButtonVisibility="WhileEditing"
+                                        FontAttributes="None"
+                                        Keyboard="Email"
+                                        Placeholder="youremail@mail.com"
+                                        ReturnType="Next"
+                                        Text="{Binding UserInputMail}"
+                                        TextColor="Black"
+                                        WidthRequest="300" />
+                                    </StackLayout>
+                                </Frame>
+
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                    Margin="10,2,10,95"
+                                     />
+                                </StackLayout>
+
+                                <Button
+                                BackgroundColor="MidnightBlue"
+                                Clicked="LoginButton"
+                                Command="{Binding LoginComand}"
+                                CornerRadius="30"
+                                Text="Send Login Mail"
+                                TextColor="White" />
+
+
+                                <StackLayout
+                                Margin="0,30"
+                                HorizontalOptions="CenterAndExpand"
+                                Orientation="Horizontal">
+                                </StackLayout>
+                                <!-- Grid for the logos of the universities -->
+                                <Grid x:Name="UniPicturesLogin" HeightRequest="50">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        
+                                    </Grid.RowDefinitions>
+
+
+
+                                    <ContentView Grid.Row="0" Grid.Column="1" Padding="0,40,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
+                                        <Image Source="UniSiegen" VerticalOptions="Center" HeightRequest="40" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="0" Grid.Column="2" Padding="0,40,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Center">
+                                        <Image Source="UniHellenic" VerticalOptions="Center" HeightRequest="40" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="0" Grid.Column="3" Padding="0,40,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start">
+                                        <Image Source="UniVilnius" VerticalOptions="Center" HeightRequest="40" />
+                                    </ContentView>
+
+
+                                </Grid>
+                                <Grid x:Name="UniPicturesLogin1" HeightRequest="100" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.25*"/>
+                                        <ColumnDefinition Width="0.25*"/>
+                                        <ColumnDefinition Width="0.25*"/>
+                                        <ColumnDefinition Width="0.25*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+
+
+
+
+
+                                    <ContentView Grid.Row="1" Grid.Column="0" Padding="0,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="End">
+                                        <Image Source="UniPorto" VerticalOptions="Center" HeightRequest="100" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="1" Padding="0,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
+                                        <Image Source="UniOrleans" VerticalOptions="Center" HeightRequest="100" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="2" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniCusano" VerticalOptions="Center" HeightRequest="100" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="3" Padding="0,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="End">
+                                        <Image Source="UniMaribor" VerticalOptions="Center" HeightRequest="100" />
+                                    </ContentView>
+
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+
+    </ContentPage>
+
+
+    <ContentPage Title="Register" >
+
+        <StackLayout BackgroundColor="#e6e6e6">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackLayout
+                    BackgroundColor="#203984"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                            <Image
+                                HeightRequest="64"
+                                Source="athena_logo.png"
+                                VerticalOptions="Center" />
+                        </ContentView>
+                    </StackLayout>
+
+                </StackLayout>
+
+                <StackLayout
+                    Margin="30,150,30,0"
+                    Padding="0"
+                    HorizontalOptions="FillAndExpand">
+                    <Frame
+                        Margin="0"
+                        Padding="0"
+                        BackgroundColor="White"
+                        HasShadow="True"
+                        HeightRequest="700">
+
+                        <StackLayout>
+
+
+                            <StackLayout Margin="15,30" Padding="0">
+                                
+                                
+                                <Frame
+                                    Padding="0"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="DarkGray"
+                                    CornerRadius="30"
+                                    HorizontalOptions="FillAndExpand">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Entry
+                                            x:Name="UserInputName"
+                                            Margin="10,0,0,0"
+                                            ClearButtonVisibility="WhileEditing"
+                                            FontAttributes="None"
+                                            Keyboard="Email"
+                                            Placeholder="Choose Username"
+                                            ReturnType="Next"
+                                            Text="{Binding UserInputName}"
+                                            TextColor="Black"
+                                            WidthRequest="300" />
+                                    </StackLayout>
+                                </Frame>
+                                <Frame
+                                    Padding="0"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="DarkGray"
+                                    CornerRadius="30"
+                                    HorizontalOptions="FillAndExpand">
+      
+                                </Frame>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                    Margin="10,2,10,0"
+                                    />
+                                </StackLayout>
+                                <Frame
+                                    Padding="0"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="DarkGray"
+                                    CornerRadius="30"
+                                    HorizontalOptions="FillAndExpand">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Entry
+                                            x:Name="UserInputNewMail"
+                                            Margin="10,0,0,0"
+                                            ClearButtonVisibility="WhileEditing"
+                                            FontAttributes="None"
+                                            Keyboard="Email"
+                                            Placeholder="youremail@mail.com"
+                                            ReturnType="Next"
+                                            Text="{Binding UserInputNewMail}"
+                                            TextColor="Black"
+                                            WidthRequest="300" />
+                                    </StackLayout>
+                                </Frame>
+                                <Frame
+                                    Padding="0"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="DarkGray"
+                                    CornerRadius="30"
+                                    HorizontalOptions="FillAndExpand">
+
+                                </Frame>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                    Margin="10,2,10,5"
+                                    />
+                                </StackLayout>
+
+                                <Button
+                                    BackgroundColor="MidnightBlue"
+                                    Clicked="RegisterButton"
+                                    CornerRadius="30"
+                                    Text="SIGN UP"
+                                    TextColor="White" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    Margin="10,2,10,10"
+                                    />
+                            </StackLayout>
+                            <StackLayout Margin="15,0" Padding="0">
+                            <!-- Grid for the logos of the universities -->
+                                <Grid x:Name="UniPicturesRegister1" HeightRequest="50">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+
+
+                                    <ContentView Grid.Row="0" Grid.Column="1" Padding="0,40,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
+                                        <Image Source="UniSiegen" VerticalOptions="Center" HeightRequest="40" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="0" Grid.Column="2" Padding="0,40,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Center">
+                                        <Image Source="UniHellenic" VerticalOptions="Center" HeightRequest="40" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="0" Grid.Column="3" Padding="0,40,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Start">
+                                        <Image Source="UniVilnius" VerticalOptions="Center" HeightRequest="40" />
+                                    </ContentView>
+
+
+                                </Grid>
+                                <Grid x:Name="UniPicturesRegister" HeightRequest="100">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.25*"/>
+                                        <ColumnDefinition Width="0.25*"/>
+                                        <ColumnDefinition Width="0.25*"/>
+                                        <ColumnDefinition Width="0.25*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+
+
+
+
+
+                                    <ContentView Grid.Row="1" Grid.Column="0" Padding="0,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="End">
+                                        <Image Source="UniPorto" VerticalOptions="Center" HeightRequest="100" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="1" Padding="0,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
+                                        <Image Source="UniOrleans" VerticalOptions="Center" HeightRequest="100" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="2" Padding="0,0,0,0" VerticalOptions="FillAndExpand">
+                                        <Image Source="UniCusano" VerticalOptions="Center" HeightRequest="100" />
+                                    </ContentView>
+                                    <ContentView Grid.Row="1" Grid.Column="3" Padding="0,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="End">
+                                        <Image Source="UniMaribor" VerticalOptions="Center" HeightRequest="100" />
+                                    </ContentView>
+
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+
+    </ContentPage>
+</TabbedPage>

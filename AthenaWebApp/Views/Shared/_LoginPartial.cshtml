@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using AthenaWebApp.Areas.Identity.IdentityModels;
 
-@inject SignInManager<AthenaIdentityUser> SignInManager
-@inject UserManager<AthenaIdentityUser> UserManager
+@inject SignInManager<UserExtension> SignInManager
+@inject UserManager<UserExtension> UserManager
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))

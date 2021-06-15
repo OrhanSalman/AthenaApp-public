@@ -20,14 +20,14 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ExternalLoginModel : PageModel
     {
-        private readonly SignInManager<AthenaIdentityUser> _signInManager;
-        private readonly UserManager<AthenaIdentityUser> _userManager;
+        private readonly SignInManager<UserExtension> _signInManager;
+        private readonly UserManager<UserExtension> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
 
         public ExternalLoginModel(
-            SignInManager<AthenaIdentityUser> signInManager,
-            UserManager<AthenaIdentityUser> userManager,
+            SignInManager<UserExtension> signInManager,
+            UserManager<UserExtension> userManager,
             ILogger<ExternalLoginModel> logger,
             IEmailSender emailSender)
         {
@@ -122,7 +122,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new AthenaIdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new UserExtension { UserName = Input.Email, Email = Input.Email };
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)

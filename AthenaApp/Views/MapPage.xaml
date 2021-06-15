@@ -22,21 +22,36 @@
             <Button
                 Margin="0,5,0,0"
                 BackgroundColor="#203984"
-                Clicked="Run_Button"
+                Clicked="StartLocationTrackingButton_Clicked"
                 CornerRadius="30"
-                Text="Run!" />
+                Text="Start Tracking!" />
+            <Button
+                Margin="0,5,0,0"
+                BackgroundColor="#203984"
+                Clicked="StopLocationTrackingButton_Clicked"
+                CornerRadius="30"
+                Text="Stop Tracking!" />
 
             <!--  Test um die Werte zu sehen a  -->
             <Label
                 FontSize="10"
-                Text="Latitude"
+                Text="result1Location"
                 TextColor="Gray" />
-            <Label x:Name="LatitudeLabel" FontSize="10" />
+            <Label x:Name="result1Location" FontSize="10" />
+
             <Label
                 FontSize="10"
-                Text="Longitude"
+                Text="result2Location"
                 TextColor="Gray" />
-            <Label x:Name="LongitudeLabel" FontSize="10" />
+            <Label x:Name="result2Location" FontSize="10" />
+
+            <Label
+                FontSize="10"
+                Text="Distance"
+                TextColor="Gray" />
+            <Label x:Name="DistanceInfo" FontSize="10" />
+
+
 
         </StackLayout>
 
