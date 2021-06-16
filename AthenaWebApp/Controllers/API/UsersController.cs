@@ -91,16 +91,13 @@ namespace AthenaWebApp.Controllers.API
         {
             // Split E-Mail 
             string splittedMail = recievedUserData.Email.Split('@').Last();
-            // ToDo: Check if Email contains the EmailContext of an Company (Unterscheidung zw. @uni-siegen / @student.uni-siegen
-//            var companyName = _context.Company.FirstOrDefault(c => c.EmailContext == splittedMail).CompanyName.ToList();
-            //            var companyName = _context.Company.Where(i => i.EmailContext == splittedMail).FirstOrDefault();
 
+            // ToDo: Check if Email contains the EmailContext of an Company (Unterscheidung zw. @uni-siegen / @student.uni-siegen
             string companyName = _context.Company
                                 .Where(a => a.EmailContext == splittedMail)
                                 .Select(a => a.CompanyName)
                                 .FirstOrDefault();
 
-            //            var a = await _context.Company.Include(b => b.EmailContext == splittedMail)
             // Check if the company exists (it has to be a valid University-Domain
             if (companyName == null)
             {
