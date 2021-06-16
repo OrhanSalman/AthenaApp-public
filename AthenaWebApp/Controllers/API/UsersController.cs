@@ -90,67 +90,76 @@ namespace AthenaWebApp.Controllers.API
         public async Task<ActionResult<UserExtension>> AppRegisterRequest([FromBody] UserExtension recievedUserData)
         {
             // Split E-Mail 
-            var splittedMail = recievedUserData.Email.Split('@').Last();
+            string splittedMail = recievedUserData.Email.Split('@').Last();
             // ToDo: Check if Email contains the EmailContext of an Company (Unterscheidung zw. @uni-siegen / @student.uni-siegen
-            var companyName = _context.Company.FirstOrDefault(c => c.EmailContext == splittedMail).CompanyName;
+//            var companyName = _context.Company.FirstOrDefault(c => c.EmailContext == splittedMail).CompanyName.ToList();
+            //            var companyName = _context.Company.Where(i => i.EmailContext == splittedMail).FirstOrDefault();
 
+            string companyName = _context.Company
+                                .Where(a => a.EmailContext == splittedMail)
+                                .Select(a => a.CompanyName)
+                                .FirstOrDefault();
 
+            //            var a = await _context.Company.Include(b => b.EmailContext == splittedMail)
             // Check if the company exists (it has to be a valid University-Domain
             if (companyName == null)
             {
                 return BadRequest("Registration failed. Please register with an accepted Company E-Mail");
             }
-
-            var user = new UserExtension()
+            else
             {
-                Email = recievedUserData.Email,
-                UserName = recievedUserData.UserName,
-                CompanyName = companyName.ToString()
-            };
-            _context.Users.Add(user);
-
-            try
-            {
+                var user = new UserExtension()
+                {
+                    Email = recievedUserData.Email,
+                    UserName = recievedUserData.UserName,
+                    CompanyName = companyName.ToString()
+                };
                 _context.Users.Add(user);
 
-                if (EmailExists(user.Email))     // Check if E-Mail is already in use
+                try
                 {
-                    return Conflict("The E-Mail you entered is already in use.");
-                }
-                else if (UserExists(user.UserName))  // Check if UserName is already in use
-                {
-                    return Conflict("The Username is already in use.");
-                }
-                else
-                {
-                    await _context.SaveChangesAsync();                                      // Save User
-                    var newUserId = CreatedAtAction("GetUser", new { id = user.Id });       // Create Auto Id
-                    await _userManager.AddToRoleAsync(user, "MobileUser");                  // Add new User to Role
-                }
-            }
-            catch (DbUpdateException)
-            {
-                throw;
-            }
+                    _context.Users.Add(user);
 
-            string returnUrl = null;
-            returnUrl ??= Url.Content("~/");
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var callbackUrl = Url.Page(
-                "/Account/ConfirmEmail",
-                pageHandler: null,
-                values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(user.Email, "Confirm your registration",
-            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(returnUrl)}'>clicking here</a>.");
-            // ToDo: return Token
-            // ToDo: Send E-Mail-Verification + automaticly login (maybe AppLoginRequest method?)
-            // ToDo: Check + Set Company in UserTable, but also FK in CompanyTable
-            // ToDo: Set UserRole + UserClaims
+                    if (EmailExists(user.Email))     // Check if E-Mail is already in use
+                    {
+                        return Conflict("The E-Mail you entered is already in use.");
+                    }
+                    else if (UserExists(user.UserName))  // Check if UserName is already in use
+                    {
+                        return Conflict("The Username is already in use.");
+                    }
+                    else
+                    {
+                        await _context.SaveChangesAsync();                                      // Save User
+                        var newUserId = CreatedAtAction("GetUser", new { id = user.Id });       // Create Auto Id
+                        await _userManager.AddToRoleAsync(user, "MobileUser");                  // Add new User to Role
+                    }
+                }
+                catch (DbUpdateException)
+                {
+                    throw;
+                }
 
-            // Gives Code 200 + Company-Data + the hole User data (but return user give's the same return) 
-            return Ok(user);
+                string returnUrl = null;
+                returnUrl ??= Url.Content("~/");
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var callbackUrl = Url.Page(
+                    "/Account/ConfirmEmail",
+                    pageHandler: null,
+                    values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                    protocol: Request.Scheme);
+                await _emailSender.SendEmailAsync(user.Email, "Confirm your registration",
+                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(returnUrl)}'>clicking here</a>.");
+                // ToDo: return Token
+                // ToDo: Send E-Mail-Verification + automaticly login (maybe AppLoginRequest method?)
+                // ToDo: Check + Set Company in UserTable, but also FK in CompanyTable
+                // ToDo: Set UserRole + UserClaims
+
+                // Gives Code 200 + Company-Data + the hole User data (but return user give's the same return) 
+                return Ok(user);
+
+            }
         }
 
 
