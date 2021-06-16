@@ -111,6 +111,10 @@ namespace AthenaApp.Views
                 {
                     await DisplayAlert("Registration failed", "Username or Email is already forgiven.", "What a pity");
                 }
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    await DisplayAlert("Registration failed", "Registration failed. Please register with an accepted Company E-Mail", "Gotit");
+                }
                 else if(response.StatusCode == HttpStatusCode.GatewayTimeout)
                 {
                     await DisplayAlert("Please try again later", "The Server did not respond. Maybe there are some maintainces. Please try again later", "I will do");
