@@ -10,6 +10,8 @@ namespace AthenaWebApp.Models
 {
     public class Company
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string Id { get; set; }
 
         [Key, Display(Name = "Company")]
         public string CompanyName { get; set; }

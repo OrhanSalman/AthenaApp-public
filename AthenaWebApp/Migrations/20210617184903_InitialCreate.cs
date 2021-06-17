@@ -12,6 +12,7 @@ namespace AthenaWebApp.Migrations
                 columns: table => new
                 {
                     CompanyName = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmailContext = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },

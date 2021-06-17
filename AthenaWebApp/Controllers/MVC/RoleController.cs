@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AthenaWebApp.Controllers.MVC
 {
-    [Authorize("Admin")]
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         private readonly Context _context;

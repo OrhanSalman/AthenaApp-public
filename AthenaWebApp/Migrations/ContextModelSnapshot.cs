@@ -115,6 +115,10 @@ namespace AthenaWebApp.Migrations
                     b.Property<string>("EmailContext")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("CompanyName");
 
                     b.ToTable("Company");

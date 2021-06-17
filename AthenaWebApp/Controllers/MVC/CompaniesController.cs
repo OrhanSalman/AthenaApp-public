@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AthenaWebApp.Controllers.MVC
 {
+    [Authorize(Roles = "Admin")]
     public class CompaniesController : Controller
     {
         private readonly Context _context;

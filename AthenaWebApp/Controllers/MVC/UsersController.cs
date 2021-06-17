@@ -12,21 +12,20 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using AthenaWebApp.Models.Claims;
 using AthenaWebApp.Pagings;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace AthenaWebApp.Controllers.MVC
 {
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private readonly Context _context;
-        private readonly UserManager<UserExtension> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UsersController(Context context, UserManager<UserExtension> userManager, RoleManager<IdentityRole> roleManager)
+
+        public UsersController(Context context)
         {
             _context = context;
-            _userManager = userManager;
-            _roleManager = roleManager;
+
         }
 
 /*
@@ -169,7 +168,7 @@ namespace AthenaWebApp.Controllers.MVC
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,Email,EmailConfirmed,Company,LockoutEnabled")] UserExtension user)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,Email,EmailConfirmed,Company")] UserExtension user)
         {
             if (id != user.Id)
             {

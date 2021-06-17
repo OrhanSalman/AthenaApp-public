@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AthenaWebApp.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210615010425_InitialCreate")]
+    [Migration("20210617184903_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,6 +115,10 @@ namespace AthenaWebApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmailContext")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CompanyName");
