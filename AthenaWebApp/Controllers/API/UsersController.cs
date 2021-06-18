@@ -45,21 +45,19 @@ namespace AthenaWebApp.Controllers.API
             var user = await _context.Users
                     .FirstOrDefaultAsync(e => e.Email == email);
 
-            // Check if Email is confirmed
-            if (user.EmailConfirmed == false)
-            {
-                return NotFound("Please confirm your Email first.");
-            }     
-            // ToDo: New Handler, for Email confirm check
-
             // Check if User exists
             if (user == null)
             {
                 return NotFound("User doesn't exists.");
             }
-
+            // Check if Email is confirmed
+            else if (user.EmailConfirmed == false)
+            {
+                return NotFound("Please confirm your Email first.");
+            }     
+            // ToDo: New Handler, for Email confirm check
             // Check if User is blocked
-            if (user.LockoutEnabled == true)
+            else if (user.LockoutEnabled == true)
             {
                 return NotFound("Unfortunately you are blocked. Please contact your administrator: admin@athena.com");
             }
