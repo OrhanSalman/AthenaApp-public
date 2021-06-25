@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+using System.Threading;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace AthenaApp.Views
 {
@@ -36,11 +39,11 @@ namespace AthenaApp.Views
             {
                 DistanceStart = DistanceEnd;                    // Setting Start Distance to End Distance to sum Distance up afterwards, in first loop round DistanceStart == 0
                                                                 // Get Latitude and Longitude through Geolocation
-                var result1 = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(10)));
-                var result2 = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(10)));
+                var result1 = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(2)));
+                var result2 = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(5)));
                                                                 // Visualization of Latitude and Longitude -> delete in final version
-                result1Location.Text += $"lat: {result1.Latitude}. lng: {result1.Longitude} {Environment.NewLine}";
-                result2Location.Text += $"lat: {result2.Latitude}. lng: {result2.Longitude} {Environment.NewLine}";
+//                result1Location.Text += $"lat: {result1.Latitude}. lng: {result1.Longitude} {Environment.NewLine}";
+//                result2Location.Text += $"lat: {result2.Latitude}. lng: {result2.Longitude} {Environment.NewLine}";
 
                                                                 // Calculate Distance between two measurement Points of Latitude and Longitude
                 double distanceCalc = Location.CalculateDistance(result1.Latitude, result1.Longitude, result2.Latitude, result2.Longitude, DistanceUnits.Kilometers );
@@ -51,15 +54,39 @@ namespace AthenaApp.Views
                                                                 // Visualization of Distance -> delete in final version
                 DistanceInfo.Text += $"Distance: {DistanceEnd} {Environment.NewLine}";
 
+//                Thread.Sleep(3000);
             }
         }
 
  
 
-        void StopLocationTrackingButton_Clicked(System.Object sender, System.EventArgs e)
+        private async void StopLocationTrackingButton_Clicked(System.Object sender, System.EventArgs e)
         {
+
+            // ToDo:
+            // PopUp, "X-Meter gelaufen, XX:XX, Senden, Cancel"
+            await DisplayAlert("", "", "", "");
             isGettingLocation = false;
+
+            var serializedRawData = JsonConvert.SerializeObject("");
+            var requestContent = new StringContent(serializedRawData, Encoding.UTF8, "application/json");
+
+            HttpClientHandler handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+                {
+                    if (cert.Issuer.Equals("CN=localhost"))
+                        return true;
+                    return errors == System.Net.Security.SslPolicyErrors.None;
+                }
+            };
+            HttpClient client = new HttpClient(handler);
+            Uri uri = new Uri(string.Format("https://10.0.2.2:5001/api/Users/AppRegisterRequestiohio/"));
+
+
+            HttpResponseMessage response = await client.PostAsync(uri, requestContent);
+
         }
-        
+
     }
 }

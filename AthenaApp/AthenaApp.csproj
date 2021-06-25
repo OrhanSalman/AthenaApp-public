@@ -7,10 +7,42 @@
 
   <ItemGroup>
     <None Remove="EmbeddedResources\athena_logo.png" />
+    <None Remove="EmbeddedResources\awesome-tachometer-alt.png" />
+    <None Remove="EmbeddedResources\awesome_running.png" />
+    <None Remove="EmbeddedResources\awesome_swimmer.png" />
+    <None Remove="EmbeddedResources\awesome_tachometer_alt.png" />
+    <None Remove="EmbeddedResources\bycicle.png" />
+    <None Remove="EmbeddedResources\Icon awesome-tachometer-alt.png" />
+    <None Remove="EmbeddedResources\ionic_ios_person.png" />
+    <None Remove="EmbeddedResources\iron_man.png" />
+    <None Remove="EmbeddedResources\material_directions_bike.png" />
+    <None Remove="EmbeddedResources\peoplegroup.png" />
+    <None Remove="EmbeddedResources\Pfad37.png" />
+    <None Remove="EmbeddedResources\Pfad38.png" />
+    <None Remove="EmbeddedResources\Pfad39.png" />
+    <None Remove="EmbeddedResources\stop.png" />
+    <None Remove="EmbeddedResources\stopwatch.png" />
+    <None Remove="EmbeddedResources\triathlet.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="EmbeddedResources\athena_logo.png" />
+    <EmbeddedResource Include="EmbeddedResources\awesome-tachometer-alt.png" />
+    <EmbeddedResource Include="EmbeddedResources\awesome_running.png" />
+    <EmbeddedResource Include="EmbeddedResources\awesome_swimmer.png" />
+    <EmbeddedResource Include="EmbeddedResources\awesome_tachometer_alt.png" />
+    <EmbeddedResource Include="EmbeddedResources\bycicle.png" />
+    <EmbeddedResource Include="EmbeddedResources\Icon awesome-tachometer-alt.png" />
+    <EmbeddedResource Include="EmbeddedResources\ionic_ios_person.png" />
+    <EmbeddedResource Include="EmbeddedResources\iron_man.png" />
+    <EmbeddedResource Include="EmbeddedResources\material_directions_bike.png" />
+    <EmbeddedResource Include="EmbeddedResources\peoplegroup.png" />
+    <EmbeddedResource Include="EmbeddedResources\Pfad37.png" />
+    <EmbeddedResource Include="EmbeddedResources\Pfad38.png" />
+    <EmbeddedResource Include="EmbeddedResources\Pfad39.png" />
+    <EmbeddedResource Include="EmbeddedResources\stop.png" />
+    <EmbeddedResource Include="EmbeddedResources\stopwatch.png" />
+    <EmbeddedResource Include="EmbeddedResources\triathlet.png" />
   </ItemGroup>
 
   <ItemGroup>

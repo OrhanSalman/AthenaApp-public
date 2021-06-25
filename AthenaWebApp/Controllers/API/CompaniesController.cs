@@ -42,36 +42,6 @@ namespace AthenaWebApp.Controllers.API
             return company;
         }
 
-        // PUT: api/Companies/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCompany(string id, Company company)
-        {
-            if (id != company.CompanyName)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(company).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CompanyExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
 
         // POST: api/Companies
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -98,21 +68,6 @@ namespace AthenaWebApp.Controllers.API
             return CreatedAtAction("GetCompany", new { id = company.CompanyName }, company);
         }
 
-        // DELETE: api/Companies/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCompany(string id)
-        {
-            var company = await _context.Company.FindAsync(id);
-            if (company == null)
-            {
-                return NotFound();
-            }
-
-            _context.Company.Remove(company);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
 
         private bool CompanyExists(string id)
         {

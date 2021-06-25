@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:AthenaApp.ViewModels"
     Title="Athena Running App"
-    Shell.NavBarIsVisible="False">
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -63,13 +64,8 @@
                     Clicked="GoToSignIn"
                     CornerRadius="30"
                     Text="Login/Regsiter"
-                    TextColor="White"
-                    />
-
-
-
+                    TextColor="White" />
             </StackLayout>
         </ScrollView>
     </Grid>
-
 </ContentPage>

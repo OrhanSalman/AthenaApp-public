@@ -26,8 +26,8 @@ namespace AthenaApp.Views
 
         private async void LoginButton(object sender, EventArgs e)
         {
-//            await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");   // Testversion, später entfernen
-
+            await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");   // Testversion, später entfernen
+/*
             HttpClientHandler handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
             {
@@ -40,7 +40,7 @@ namespace AthenaApp.Views
             Uri uri = new Uri(string.Format(Api + "?Email=" + UserInputMail.Text));
             HttpResponseMessage response = await client.GetAsync(uri);
 
-            if (UserInputMail.Text == "")
+            if (UserInputMail.Text == null)
             {
                 await DisplayAlert("Login failed", "Enter your Email before login", "Okay");
             }
@@ -57,6 +57,7 @@ namespace AthenaApp.Views
             {
                 await DisplayAlert("Error", "An error has occured. Please try again later.", "Okay");
             }
+*/
         }
 
         private async void RegisterButton (object sender, EventArgs e)
