@@ -21,13 +21,14 @@
                     <Label HorizontalOptions="CenterAndExpand">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span  x:Name="status_textH" FontSize="25" />
+                                <Span  x:Name="status_textTime" FontSize="25" />
+                                <!-- <Span  x:Name="status_textH" FontSize="25" />
                                 <Span Text=":" FontSize="23"/>
                                 <Span  x:Name="status_textM" FontSize="25" />
                                 <Span Text=":" FontSize="23"/>
                                 <Span x:Name="status_textS" FontSize="25" />
                                 <Span Text=":" FontSize="18"/>
-                                <Span x:Name="status_textMS" FontSize="20" />
+                                <Span x:Name="status_textMS" FontSize="20" />-->
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

@@ -23,7 +23,10 @@ namespace AthenaApp.Views
         double DistanceSum;
         double DistanceStart;
         double DistanceEnd;
+        string FinalTime;
+        double FinalTimeData;
         
+
 
         Stopwatch AcvtivityTime = new Stopwatch();
 
@@ -49,10 +52,15 @@ namespace AthenaApp.Views
                 double elapsedSeconds = AcvtivityTime.Elapsed.Seconds;
                 double elapsedMilliseconds = AcvtivityTime.Elapsed.Milliseconds;
                 // Converting of time units to string for displaying: hours:minutes:seconds:milliseconds
-                status_textH.Text = elapsedHours.ToString();
-                status_textM.Text = elapsedMinutes.ToString();
+               
+                /* status_textH.Text = elapsedHours.ToString();                   delete
+                status_textM.Text = elapsedMinutes.ToString();                      
                 status_textS.Text = elapsedSeconds.ToString();
-                status_textMS.Text = elapsedMilliseconds.ToString();
+                status_textMS.Text = elapsedMilliseconds.ToString();*/             
+                
+                status_textTime.Text = elapsedHours.ToString() + ":" + elapsedMinutes.ToString() + ":" + elapsedSeconds.ToString() + ":" + elapsedMilliseconds.ToString();
+                FinalTimeData = elapsedHours + elapsedMinutes + elapsedSeconds + elapsedMilliseconds;
+                FinalTime = elapsedHours.ToString() + ":" + elapsedMinutes.ToString() + ":" + elapsedSeconds.ToString() + ":" + elapsedMilliseconds.ToString();
                 DistanceStart = DistanceEnd;                    // Setting Start Distance to End Distance to sum Distance up afterwards, in first loop round DistanceStart == 0
                                                                 // Get Latitude and Longitude through Geolocation
                 var result1 = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(2)));
@@ -71,16 +79,29 @@ namespace AthenaApp.Views
                 DistanceInfo.Text = DistanceEnd.ToString();
                 // DistanceInfo.Text += $"Distance: {DistanceEnd} {Environment.NewLine}";
                 
-
+                
 
                 //                Thread.Sleep(3000);
             }
+            
         }
 
 
         private async void StopLocationTrackingButton_Clicked(System.Object sender, System.EventArgs e)
         {
+            isGettingLocation = false;
             AcvtivityTime.Stop();                   // Stop Stopwatch
+
+
+            bool answer = await DisplayAlert("Activity Tracker", "Would you like to send your Activity: " + "Distance: " + DistanceEnd + " " + "Your Time: " + FinalTime, "Yes", "No");
+            Debug.WriteLine("Answer: " + answer);
+
+            // await DisplayAlert("Your Avtivity: ", DistanceEnd.ToString(), "Your Time: ", FinalTime);
+            // ToDo: Send Data to Database
+            // Data == double FinalTimeData(check for correctness), double DistanceEnd
+            
+
+
             AcvtivityTime.Reset();                  // Reset Stopwatch to 0
 
 
@@ -88,7 +109,7 @@ namespace AthenaApp.Views
             // ToDo:
             // PopUp, "X-Meter gelaufen, XX:XX, Senden, Cancel"
             //await DisplayAlert("", "", "", "");
-            isGettingLocation = false;
+            
 
             var serializedRawData = JsonConvert.SerializeObject("");
             var requestContent = new StringContent(serializedRawData, Encoding.UTF8, "application/json");
