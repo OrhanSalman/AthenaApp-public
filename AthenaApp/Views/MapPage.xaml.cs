@@ -11,6 +11,8 @@ using Xamarin.Essentials;
 using System.Threading;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Timers;
+using System.Diagnostics;
 
 namespace AthenaApp.Views
 {
@@ -21,6 +23,9 @@ namespace AthenaApp.Views
         double DistanceSum;
         double DistanceStart;
         double DistanceEnd;
+        
+
+        Stopwatch AcvtivityTime = new Stopwatch();
 
         public MapPage()
         {
@@ -29,6 +34,7 @@ namespace AthenaApp.Views
 
         async void StartLocationTrackingButton_Clicked(System.Object sender, System.EventArgs e)
         {
+            AcvtivityTime.Start();                              // Start Stopwatch
             isGettingLocation = true;
             DistanceSum = 0;
             DistanceStart = 0;
@@ -37,6 +43,16 @@ namespace AthenaApp.Views
                                                                 // While loop to calculate distance by tracking latitude and longitude
             while (isGettingLocation)    
             {
+                // Definition of time units: hours:minutes:seconds:milliseconds
+                double elapsedHours = AcvtivityTime.Elapsed.Hours;          
+                double elapsedMinutes = AcvtivityTime.Elapsed.Minutes;
+                double elapsedSeconds = AcvtivityTime.Elapsed.Seconds;
+                double elapsedMilliseconds = AcvtivityTime.Elapsed.Milliseconds;
+                // Converting of time units to string for displaying: hours:minutes:seconds:milliseconds
+                status_textH.Text = elapsedHours.ToString();
+                status_textM.Text = elapsedMinutes.ToString();
+                status_textS.Text = elapsedSeconds.ToString();
+                status_textMS.Text = elapsedMilliseconds.ToString();
                 DistanceStart = DistanceEnd;                    // Setting Start Distance to End Distance to sum Distance up afterwards, in first loop round DistanceStart == 0
                                                                 // Get Latitude and Longitude through Geolocation
                 var result1 = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(2)));
@@ -52,20 +68,26 @@ namespace AthenaApp.Views
                 DistanceSum = DistanceStart + DistanceEnd;      // summing up Distances
                 DistanceEnd = DistanceSum;                      // setting Distance End as the Sum of Start and End Distance
                                                                 // Visualization of Distance -> delete in final version
-                DistanceInfo.Text += $"Distance: {DistanceEnd} {Environment.NewLine}";
+                DistanceInfo.Text = DistanceEnd.ToString();
+                // DistanceInfo.Text += $"Distance: {DistanceEnd} {Environment.NewLine}";
+                
 
-//                Thread.Sleep(3000);
+
+                //                Thread.Sleep(3000);
             }
         }
 
- 
 
         private async void StopLocationTrackingButton_Clicked(System.Object sender, System.EventArgs e)
         {
+            AcvtivityTime.Stop();                   // Stop Stopwatch
+            AcvtivityTime.Reset();                  // Reset Stopwatch to 0
+
+
 
             // ToDo:
             // PopUp, "X-Meter gelaufen, XX:XX, Senden, Cancel"
-            await DisplayAlert("", "", "", "");
+            //await DisplayAlert("", "", "", "");
             isGettingLocation = false;
 
             var serializedRawData = JsonConvert.SerializeObject("");

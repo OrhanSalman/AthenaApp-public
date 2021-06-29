@@ -36,19 +36,36 @@
         </ResourceDictionary>
     </Shell.Resources>
 
+    
+    <ShellItem Route="LoginRegisterPage">
+        <ShellContent ContentTemplate="{DataTemplate local:LoginRegisterPage}"/>
+    </ShellItem>
 
-
+    <!--
+        TabBar Pages
+    -->
     <TabBar>
         <ShellContent
             Title="About"
+            ContentTemplate="{DataTemplate local:AboutPage}"
+            Icon="icon_about.png"
+            Route="AboutPage" />
+        <ShellContent
+            Title="Map"
+            ContentTemplate="{DataTemplate local:MapPage}"
+            Icon="icon_feed.png"
+            Route="MapPage" />
+        <ShellContent
+            Title="Dashboard"
             ContentTemplate="{DataTemplate local:DashboardPage}"
             Icon="icon_about.png"
             Route="DashboardPage" />
         <ShellContent
-            Title="Browse"
-            ContentTemplate="{DataTemplate local:MapPage}"
-            Icon="icon_feed.png"
-            Route="MapPage" />
+            Title="Activities"
+            ContentTemplate="{DataTemplate local:ActivitiesPage}"
+            Icon="icon_about.png"
+            Route="ActivitiesPage" />
+        
     </TabBar>
 
     <!--

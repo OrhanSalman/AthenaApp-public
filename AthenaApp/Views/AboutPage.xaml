@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:AthenaApp.ViewModels"
     Title="Athena Running App"
-    Shell.NavBarIsVisible="False"
-    Shell.TabBarIsVisible="False">
+    Shell.NavBarIsVisible="False">
+
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -57,14 +57,6 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-
-                <Button
-                    Margin="0,200,0,0"
-                    BackgroundColor="#203984"
-                    Clicked="GoToSignIn"
-                    CornerRadius="30"
-                    Text="Login/Regsiter"
-                    TextColor="White" />
             </StackLayout>
         </ScrollView>
     </Grid>

@@ -27,37 +27,38 @@ namespace AthenaApp.Views
         private async void LoginButton(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");   // Testversion, später entfernen
-/*
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
-            {
-                if (cert.Issuer.Equals("CN=localhost"))
-                    return true;
-                return errors == System.Net.Security.SslPolicyErrors.None;
-            };
-            HttpClient client = client = new HttpClient(handler);
+            
+            /*
+                        HttpClientHandler handler = new HttpClientHandler();
+                        handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+                        {
+                            if (cert.Issuer.Equals("CN=localhost"))
+                                return true;
+                            return errors == System.Net.Security.SslPolicyErrors.None;
+                        };
+                        HttpClient client = client = new HttpClient(handler);
 
-            Uri uri = new Uri(string.Format(Api + "?Email=" + UserInputMail.Text));
-            HttpResponseMessage response = await client.GetAsync(uri);
+                        Uri uri = new Uri(string.Format(Api + "?Email=" + UserInputMail.Text));
+                        HttpResponseMessage response = await client.GetAsync(uri);
 
-            if (UserInputMail.Text == null)
-            {
-                await DisplayAlert("Login failed", "Enter your Email before login", "Okay");
-            }
-            else if (response.IsSuccessStatusCode)
-            {
-                // ToDo: Check if user is blocked
-                await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
-            }
-            else if (response.StatusCode == HttpStatusCode.NotFound)
-            {
-                await DisplayAlert("Login failed", "The E-Mail you entered was not found or not confirmed.", "Okay", "Resend ConfirmationMail");
-            }
-            else
-            {
-                await DisplayAlert("Error", "An error has occured. Please try again later.", "Okay");
-            }
-*/
+                        if (UserInputMail.Text == null)
+                        {
+                            await DisplayAlert("Login failed", "Enter your Email before login", "Okay");
+                        }
+                        else if (response.IsSuccessStatusCode)
+                        {
+                            // ToDo: Check if user is blocked
+                            await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
+                        }
+                        else if (response.StatusCode == HttpStatusCode.NotFound)
+                        {
+                            await DisplayAlert("Login failed", "The E-Mail you entered was not found or not confirmed.", "Okay", "Resend ConfirmationMail");
+                        }
+                        else
+                        {
+                            await DisplayAlert("Error", "An error has occured. Please try again later.", "Okay");
+                        }
+            */
         }
 
         private async void RegisterButton (object sender, EventArgs e)
