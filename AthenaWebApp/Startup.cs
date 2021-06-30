@@ -50,6 +50,7 @@ namespace AthenaWebApp
 
             services.AddDbContext<Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ServerConnection")));
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

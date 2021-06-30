@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,8 +8,14 @@ using System.Threading.Tasks;
 
 namespace AthenaWebApp.Models
 {
-    public class User
+    public class User 
     {
+        public User()
+        {
+            UserTemplates = new HashSet<Template>();
+          }
+
+
         [Display(Name = "Id")]
         public string Id { get; set; }
 
@@ -38,5 +45,9 @@ namespace AthenaWebApp.Models
 
         [Display(Name = "Picture")]
         public byte[] ProfilePicture { get; set; }
-    }
+
+        public virtual ICollection<Template> UserTemplates { get; set; }
+        
+}
+    
 }
