@@ -5,23 +5,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mymap="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
     <Grid Margin="0">
-        <!-- Activity Tracker UI -->
+        <!--  Activity Tracker UI  -->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1"/>
+                <RowDefinition Height="1" />
                 <!-- <RowDefinition Height="60"/>    remove comment after ActivityId Test-->
             </Grid.RowDefinitions>
-            <!-- Time Display Frame -->
-            <Frame VerticalOptions="StartAndExpand" HorizontalOptions="Center"  Grid.Row="1" Grid.Column="0">
+            <!--  Time Display Frame  -->
+            <Frame
+                Grid.Row="1"
+                Grid.Column="0"
+                HorizontalOptions="Center"
+                VerticalOptions="StartAndExpand">
                 <StackLayout>
                     <Label HorizontalOptions="CenterAndExpand">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span  x:Name="status_textTime" FontSize="25" />
+                                <Span x:Name="status_textTime" FontSize="25" />
                                 <!-- <Span  x:Name="status_textH" FontSize="25" />
                                 <Span Text=":" FontSize="23"/>
                                 <Span  x:Name="status_textM" FontSize="25" />
@@ -34,22 +38,26 @@
                     </Label>
                 </StackLayout>
             </Frame>
-            <!-- Distance Display Frame -->
-            <Frame VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Grid.Row="1" Grid.Column="1">
+            <!--  Distance Display Frame  -->
+            <Frame
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="StartAndExpand">
                 <StackLayout>
                     <Label HorizontalOptions="Center">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="Distance: " FontSize="25"/>
-                                <Span x:Name="DistanceInfo" FontSize="25"/>
-                                <Span Text="Activity: " FontSize="25"/>
-                                <Span x:Name="Activity_Id" FontSize="25"/>
+                                <Span FontSize="25" Text="Distance: " />
+                                <Span x:Name="DistanceInfo" FontSize="25" />
+                                <Span FontSize="25" Text="Activity: " />
+                                <Span x:Name="Activity_Id" FontSize="25" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
                 </StackLayout>
             </Frame>
-            <!-- Map -->
+            <!--  Map  -->
             <mymap:Map Grid.Row="2" Grid.ColumnSpan="2">
                 <mymap:Map.ItemTemplate>
                     <DataTemplate>
@@ -62,20 +70,20 @@
             Margin="20"
             Orientation="Vertical"
             VerticalOptions="End">
-            <Button 
+            <Button
                 Margin="0,5,0,0"
                 BackgroundColor="#203984"
                 Clicked="StartLocationTrackingButton_Clicked"
                 CornerRadius="30"
                 Text="Start Tracking!" />
-            <Button 
+            <Button
                 Margin="0,5,0,0"
                 BackgroundColor="#203984"
                 Clicked="StopLocationTrackingButton_Clicked"
                 CornerRadius="30"
                 Text="Stop Tracking!" />
 
-            <!--  Test um die Werte zu sehen a  
+            <!--  Test um die Werte zu sehen a
             <Label
                 FontSize="10"
                 Text="result1Location"
@@ -92,10 +100,10 @@
                 FontSize="10"
                 Text="Distance"
                 TextColor="Gray" />
-            <Label x:Name="DistanceInfo" FontSize="10" /> --> 
+            <Label x:Name="DistanceInfo" FontSize="10" />-->
 
-            <!-- Stopwatch UI -->
-            
+            <!--  Stopwatch UI  -->
+
             <!-- <Label
                 FontSize="10"
                 Text="statusH"
@@ -120,7 +128,7 @@
                 TextColor="Gray" />
             <Label x:Name="status_textMS" FontSize="10" />-->
 
-            
+
 
 
         </StackLayout>

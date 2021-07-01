@@ -27,7 +27,7 @@ namespace AthenaWebApp.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("CompanyName")
+                    b.Property<string>("CompanyId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -91,7 +91,7 @@ namespace AthenaWebApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyName");
+                    b.HasIndex("CompanyId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -104,10 +104,37 @@ namespace AthenaWebApp.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("AthenaWebApp.Models.Activity", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ActivityType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("MaxSpeed")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("SetManualyByUser")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Activity");
+                });
+
             modelBuilder.Entity("AthenaWebApp.Models.Company", b =>
                 {
-                    b.Property<string>("CompanyName")
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
@@ -115,13 +142,41 @@ namespace AthenaWebApp.Migrations
                     b.Property<string>("EmailContext")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CompanyName");
+                    b.HasKey("Id");
 
                     b.ToTable("Company");
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Models.UserActivity", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ActivityId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StopTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("SumDistance")
+                        .HasColumnType("float");
+
+                    b.Property<TimeSpan>("SumTime")
+                        .HasColumnType("time");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserActivity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -263,7 +318,7 @@ namespace AthenaWebApp.Migrations
                 {
                     b.HasOne("AthenaWebApp.Models.Company", "Company")
                         .WithMany()
-                        .HasForeignKey("CompanyName");
+                        .HasForeignKey("CompanyId");
 
                     b.Navigation("Company");
                 });

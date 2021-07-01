@@ -42,22 +42,27 @@ namespace AthenaWebApp.Controllers.API
             return company;
         }
 
-
-        // POST: api/Companies
+        // PUT: api/Companies/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Company>> PostCompany(Company company)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCompany(string id, Company company)
         {
-            _context.Company.Add(company);
+            if (id != company.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(company).State = EntityState.Modified;
+
             try
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateConcurrencyException)
             {
-                if (CompanyExists(company.CompanyName))
+                if (!CompanyExists(id))
                 {
-                    return Conflict();
+                    return NotFound();
                 }
                 else
                 {
@@ -65,13 +70,39 @@ namespace AthenaWebApp.Controllers.API
                 }
             }
 
-            return CreatedAtAction("GetCompany", new { id = company.CompanyName }, company);
+            return NoContent();
         }
 
+        // POST: api/Companies
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Company>> PostCompany(Company company)
+        {
+            _context.Company.Add(company);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetCompany", new { id = company.Id }, company);
+        }
+
+        // DELETE: api/Companies/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCompany(string id)
+        {
+            var company = await _context.Company.FindAsync(id);
+            if (company == null)
+            {
+                return NotFound();
+            }
+
+            _context.Company.Remove(company);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
 
         private bool CompanyExists(string id)
         {
-            return _context.Company.Any(e => e.CompanyName == id);
+            return _context.Company.Any(e => e.Id == id);
         }
     }
 }

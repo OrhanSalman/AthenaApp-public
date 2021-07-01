@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AthenaWebApp.Controllers.API
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class ActivitiesController : ControllerBase

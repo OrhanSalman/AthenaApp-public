@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AthenaWebApp.Controllers.API
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class UserActivitiesController : ControllerBase
@@ -49,7 +51,7 @@ namespace AthenaWebApp.Controllers.API
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [Route("PostUserActivity")]
-        public async Task<ActionResult<UserActivity>> PostUserActivity(UserActivity userActivity)
+        public async Task<ActionResult<UserActivity>> PostUserActivity([FromBody] UserActivity userActivity)
         {
             _context.UserActivity.Add(userActivity);
             await _context.SaveChangesAsync();

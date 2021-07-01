@@ -111,7 +111,7 @@ namespace AthenaWebApp.Controllers.API
                 {
                     Email = recievedUserData.Email,
                     UserName = recievedUserData.UserName,
-                    CompanyName = companyName.ToString()
+                    CompanyId = companyName.ToString()
                 };
                 _context.Users.Add(user);
 

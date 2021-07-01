@@ -7,11 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace AthenaWebApp.Controllers.MVC
 {
-    [Authorize(Roles = "Admin")]
     public class CompaniesController : Controller
     {
         private readonly Context _context;
@@ -36,7 +34,7 @@ namespace AthenaWebApp.Controllers.MVC
             }
 
             var company = await _context.Company
-                .FirstOrDefaultAsync(m => m.CompanyName == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (company == null)
             {
                 return NotFound();
@@ -56,7 +54,7 @@ namespace AthenaWebApp.Controllers.MVC
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CompanyName,Country,EmailContext")] Company company)
+        public async Task<IActionResult> Create([Bind("Id,CompanyName,Country,EmailContext")] Company company)
         {
             if (ModelState.IsValid)
             {
@@ -88,9 +86,9 @@ namespace AthenaWebApp.Controllers.MVC
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("CompanyName,Country,EmailContext")] Company company)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,CompanyName,Country,EmailContext")] Company company)
         {
-            if (id != company.CompanyName)
+            if (id != company.Id)
             {
                 return NotFound();
             }
@@ -104,7 +102,7 @@ namespace AthenaWebApp.Controllers.MVC
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CompanyExists(company.CompanyName))
+                    if (!CompanyExists(company.Id))
                     {
                         return NotFound();
                     }
@@ -127,7 +125,7 @@ namespace AthenaWebApp.Controllers.MVC
             }
 
             var company = await _context.Company
-                .FirstOrDefaultAsync(m => m.CompanyName == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (company == null)
             {
                 return NotFound();
@@ -149,7 +147,7 @@ namespace AthenaWebApp.Controllers.MVC
 
         private bool CompanyExists(string id)
         {
-            return _context.Company.Any(e => e.CompanyName == id);
+            return _context.Company.Any(e => e.Id == id);
         }
     }
 }

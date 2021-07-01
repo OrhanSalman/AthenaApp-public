@@ -13,11 +13,11 @@ namespace AthenaWebApp.Areas.Identity.IdentityModels
     // Add profile data for application users by adding properties to the UserExtension class
     public class UserExtension : IdentityUser
     {
-        [ForeignKey("CompanyName"), DisplayName("Associated Company")]
+        [ForeignKey("CompanyId"), DisplayName("Associated Company")]
         public Company Company { get; set; }
 
         [Display(Name = "Company")]
-        public string CompanyName { get; set; }
+        public string CompanyId { get; set; }
 
         [Display(Name = "Registered since"), DataType(DataType.Date)]
         public DateTime RegisteredSince { get; set; } = DateTime.Now.Date;

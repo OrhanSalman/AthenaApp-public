@@ -71,7 +71,7 @@ namespace AthenaWebApp.Controllers.MVC
             {
                 users = users.Where(s => s.UserName.Contains(searchString)
                                        || s.Email.Contains(searchString)
-                                       || s.CompanyName.Contains(searchString));
+                                       || s.CompanyId.Contains(searchString));
             }
 
             switch (sortOrder)
@@ -80,7 +80,7 @@ namespace AthenaWebApp.Controllers.MVC
                     users = users.OrderByDescending(s => s.UserName);
                     break;
                 case "company_desc":
-                    users = users.OrderByDescending(s => s.CompanyName);
+                    users = users.OrderByDescending(s => s.CompanyId);
                     break;
                 case "Date":
                     users = users.OrderBy(s => s.LastActivity);

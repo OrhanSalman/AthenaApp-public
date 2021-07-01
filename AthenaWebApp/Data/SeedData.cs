@@ -46,6 +46,7 @@ namespace AthenaWebApp.Models
                 context.Company.AddRange(
                     new Company
                     {
+
                         CompanyName = "Universität Siegen",
                         Country = "Germany",
                         EmailContext = "uni-siegen.de"
@@ -69,7 +70,7 @@ namespace AthenaWebApp.Models
                         PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
                         UserName = "Admin",
                         NormalizedUserName = "ADMIN",
-                        CompanyName = "Universität Siegen"
+                        CompanyId = "d33df339-1c29-42e3-bb45-6d7e6c990f1e"
                     });
                 context.SaveChanges();
 
