@@ -15,14 +15,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.TemplateTitle)
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.User)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DateTimeCreated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
             </th>
             <th></th>
         </tr>
@@ -33,14 +31,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TemplateTitle)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.User.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateTimeCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.TemplateId">Edit</a> |

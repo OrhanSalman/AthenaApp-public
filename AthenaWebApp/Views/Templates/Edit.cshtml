@@ -1,49 +1,50 @@
 ﻿@model AthenaWebApp.Models.Template
-
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Template";
 }
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/ckeditor/ckeditor.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-<h1>Edit</h1>
+<div class="card" style="padding:10px 50px 50px 50px">
 
-<h4>Template</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="TemplateId" />
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-                <span asp-validation-for="UserId" class="text-danger"></span>
+    <h3>Edit your Template here</h3>
+
+    <div>
+        <form asp-controller="Templates" asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+
+            <input asp-for="TemplateId" type="hidden" />
+            <input asp-for="UserId" type="hidden" />
+
+            <label asp-for="TemplateTitle" class="control-label"></label>
+            <div ass="col-md-10">
+                <textarea style="border-color:grey;" asp-for="TemplateTitle" id="TemplateTitle" name="TemplateTitle" cols="70" placeholder="Add Title"></textarea>
             </div>
-            <div class="form-group">
-                <label asp-for="TemplateTitle" class="control-label"></label>
-                <input asp-for="TemplateTitle" class="form-control" />
-                <span asp-validation-for="TemplateTitle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div ass="col-md-10">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <textarea asp-for="Description" id="Description" class="ckeditor" name="Description" rows="200"></textarea>
             </div>
-            <div class="form-group">
-                <label asp-for="DateTimeCreated" class="control-label"></label>
-                <input asp-for="DateTimeCreated" class="form-control" />
-                <span asp-validation-for="DateTimeCreated" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div style="padding-top:10px">
+                <button class="btn btn-outline-primary" type="submit" value="submit">Save</button>
+                <a class="nav-link" asp-area="" asp-controller="Templates" asp-action="Index">See my Templates</a>
             </div>
         </form>
     </div>
 </div>
+<style>
+    body {
+        background-color: #eee;
+        font-family: "Poppins", sans-serif;
+        font-weight: 300
+    }
+</style>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<script>
+    $(document).ready(function () {
+        CKEDITOR.replace('#Description');
+    });
+</script>
+
