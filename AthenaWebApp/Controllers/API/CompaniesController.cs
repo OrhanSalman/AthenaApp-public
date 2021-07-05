@@ -47,7 +47,7 @@ namespace AthenaWebApp.Controllers.API
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCompany(string id, Company company)
         {
-            if (id != company.CompanyName)
+            if (id != company.Id)
             {
                 return BadRequest();
             }
@@ -79,23 +79,9 @@ namespace AthenaWebApp.Controllers.API
         public async Task<ActionResult<Company>> PostCompany(Company company)
         {
             _context.Company.Add(company);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (CompanyExists(company.CompanyName))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCompany", new { id = company.CompanyName }, company);
+            return CreatedAtAction("GetCompany", new { id = company.Id }, company);
         }
 
         // DELETE: api/Companies/5
@@ -116,7 +102,7 @@ namespace AthenaWebApp.Controllers.API
 
         private bool CompanyExists(string id)
         {
-            return _context.Company.Any(e => e.CompanyName == id);
+            return _context.Company.Any(e => e.Id == id);
         }
     }
 }

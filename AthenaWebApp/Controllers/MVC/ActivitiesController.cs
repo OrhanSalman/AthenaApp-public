@@ -10,22 +10,22 @@ using AthenaWebApp.Models;
 
 namespace AthenaWebApp.Controllers.MVC
 {
-    public class CompaniesController : Controller
+    public class ActivitiesController : Controller
     {
         private readonly Context _context;
 
-        public CompaniesController(Context context)
+        public ActivitiesController(Context context)
         {
             _context = context;
         }
 
-        // GET: Companies
+        // GET: Activities
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Company.ToListAsync());
+            return View(await _context.Activity.ToListAsync());
         }
 
-        // GET: Companies/Details/5
+        // GET: Activities/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
-            var company = await _context.Company
+            var activity = await _context.Activity
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (company == null)
+            if (activity == null)
             {
                 return NotFound();
             }
 
-            return View(company);
+            return View(activity);
         }
 
-        // GET: Companies/Create
+        // GET: Activities/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Companies/Create
+        // POST: Activities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CompanyName,Country,EmailContext")] Company company)
+        public async Task<IActionResult> Create([Bind("Id,ActivityType,MaxSpeed,Description,SetManualyByUser")] Activity activity)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(company);
+                _context.Add(activity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(company);
+            return View(activity);
         }
 
-        // GET: Companies/Edit/5
+        // GET: Activities/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
-            var company = await _context.Company.FindAsync(id);
-            if (company == null)
+            var activity = await _context.Activity.FindAsync(id);
+            if (activity == null)
             {
                 return NotFound();
             }
-            return View(company);
+            return View(activity);
         }
 
-        // POST: Companies/Edit/5
+        // POST: Activities/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,CompanyName,Country,EmailContext")] Company company)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,ActivityType,MaxSpeed,Description,SetManualyByUser")] Activity activity)
         {
-            if (id != company.Id)
+            if (id != activity.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace AthenaWebApp.Controllers.MVC
             {
                 try
                 {
-                    _context.Update(company);
+                    _context.Update(activity);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CompanyExists(company.Id))
+                    if (!ActivityExists(activity.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace AthenaWebApp.Controllers.MVC
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(company);
+            return View(activity);
         }
 
-        // GET: Companies/Delete/5
+        // GET: Activities/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
-            var company = await _context.Company
+            var activity = await _context.Activity
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (company == null)
+            if (activity == null)
             {
                 return NotFound();
             }
 
-            return View(company);
+            return View(activity);
         }
 
-        // POST: Companies/Delete/5
+        // POST: Activities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var company = await _context.Company.FindAsync(id);
-            _context.Company.Remove(company);
+            var activity = await _context.Activity.FindAsync(id);
+            _context.Activity.Remove(activity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CompanyExists(string id)
+        private bool ActivityExists(string id)
         {
-            return _context.Company.Any(e => e.Id == id);
+            return _context.Activity.Any(e => e.Id == id);
         }
     }
 }

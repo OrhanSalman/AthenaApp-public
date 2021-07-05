@@ -1,4 +1,4 @@
-﻿@model AthenaWebApp.Areas.Identity.IdentityModels.UserExtension
+﻿@model AthenaWebApp.Models.UserActivity
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,20 +8,20 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>User</h4>
+    <h4>UserActivity</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.DisplayNameFor(model => model.UserId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserName)
+            @Html.DisplayFor(model => model.UserId)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.ActivityId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.ActivityId)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CompanyId)
@@ -30,28 +30,28 @@
             @Html.DisplayFor(model => model.CompanyId)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RegisteredSince)
+            @Html.DisplayNameFor(model => model.StartTime)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RegisteredSince)
+            @Html.DisplayFor(model => model.StartTime)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastActivity)
+            @Html.DisplayNameFor(model => model.StopTime)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastActivity)
+            @Html.DisplayFor(model => model.StopTime)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LoggedIn)
+            @Html.DisplayNameFor(model => model.SumTime)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LoggedIn)
+            @Html.DisplayFor(model => model.SumTime)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProfilePicture)
+            @Html.DisplayNameFor(model => model.SumDistance)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProfilePicture)
+            @Html.DisplayFor(model => model.SumDistance)
         </dd>
     </dl>
     

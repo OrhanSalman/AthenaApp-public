@@ -86,6 +86,10 @@ namespace AthenaWebApp.Data
         public DbSet<AthenaWebApp.Models.Company> Company { get; set; }
         public DbSet<AthenaWebApp.Models.Template> Template { get; set; }
 
+        public DbSet<AthenaWebApp.Models.Activity> Activity { get; set; }
+
+        public DbSet<AthenaWebApp.Models.UserActivity> UserActivity { get; set; }
+
     }
 
 }

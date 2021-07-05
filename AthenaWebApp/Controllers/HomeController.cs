@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Activity = System.Diagnostics.Activity;
 
 namespace AthenaWebApp.Controllers
 {

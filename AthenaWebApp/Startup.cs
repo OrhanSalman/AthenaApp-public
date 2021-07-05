@@ -37,11 +37,21 @@ namespace AthenaWebApp
             services.AddControllersWithViews();
             services.AddControllers().AddNewtonsoftJson();
             services.AddRazorPages();
-
+            services.AddDefaultIdentity<UserExtension>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<Context>();
+            /*
+            services.AddAuthorization(opts => {
+                opts.AddPolicy("Admin", policy => {
+                    policy.RequireRole("Admin");
+//                    policy.RequireClaim("Admin");
+                });
+            });
+            */
             services.AddMvc(options =>
             {
                 // This pushes users to login if not authenticated
-//                options.Filters.Add(new AuthorizeFilter());
+                options.Filters.Add(new AuthorizeFilter());
 
             });
 
