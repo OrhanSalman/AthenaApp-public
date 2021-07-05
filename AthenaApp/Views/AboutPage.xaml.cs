@@ -16,7 +16,8 @@ namespace AthenaApp.Views
         private async void GoToSignIn(object sender, EventArgs e)
         {
             // AppShell laden für Login/Register
-            await Shell.Current.GoToAsync($"//{nameof(LoginRegisterPage)}");
+           // await Navigation.PushAsync(new LoginRegisterPage());
+            // await Shell.Current.GoToAsync($"//{nameof(LoginRegisterPage)}");
         }
 
         /*

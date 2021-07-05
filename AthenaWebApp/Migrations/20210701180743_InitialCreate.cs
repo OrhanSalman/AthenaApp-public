@@ -8,16 +8,32 @@ namespace AthenaWebApp.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Activity",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ActivityType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MaxSpeed = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SetManualyByUser = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Activity", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Company",
                 columns: table => new
                 {
-                    CompanyName = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmailContext = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Company", x => x.CompanyName);
+                    table.PrimaryKey("PK_Company", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -35,11 +51,29 @@ namespace AthenaWebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserActivity",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ActivityId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StopTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SumTime = table.Column<TimeSpan>(type: "time", nullable: false),
+                    SumDistance = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserActivity", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CompanyName = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CompanyId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     RegisteredSince = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastActivity = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LoggedIn = table.Column<bool>(type: "bit", nullable: false),
@@ -64,10 +98,10 @@ namespace AthenaWebApp.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_Company_CompanyName",
-                        column: x => x.CompanyName,
+                        name: "FK_AspNetUsers_Company_CompanyId",
+                        column: x => x.CompanyId,
                         principalTable: "Company",
-                        principalColumn: "CompanyName",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -183,9 +217,9 @@ namespace AthenaWebApp.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_CompanyName",
+                name: "IX_AspNetUsers_CompanyId",
                 table: "AspNetUsers",
-                column: "CompanyName");
+                column: "CompanyId");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
@@ -225,7 +259,13 @@ namespace AthenaWebApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Activity");
+
+            migrationBuilder.DropTable(
                 name: "RoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "UserActivity");
 
             migrationBuilder.DropTable(
                 name: "UserClaims");

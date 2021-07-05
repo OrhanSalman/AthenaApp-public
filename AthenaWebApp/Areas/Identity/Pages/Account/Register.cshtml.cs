@@ -131,7 +131,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
                 // ToDo
                 //                var id = _companyRepository.Search(Input.Company);
 
-                var user = new UserExtension { UserName = Input.UserName, Email = Input.Email, CompanyName = Input.CompanyName };
+                var user = new UserExtension { UserName = Input.UserName, Email = Input.Email, CompanyId = Input.CompanyName };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

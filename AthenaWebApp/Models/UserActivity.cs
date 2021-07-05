@@ -7,18 +7,19 @@ using System.Threading.Tasks;
 
 namespace AthenaWebApp.Models
 {
-    public class UserDistance
+    public class UserActivity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
-
-        [ForeignKey("Company")]
         public string UserId { get; set; }
         public string ActivityId { get; set; }
-        public double Meter { get; set; }
-        public DateTime dateTime { get; set; } = DateTime.Now;
+        public string CompanyId { get; set; }
 
-        // Counter: Daily activities
-        
+        // Distanzen
+        public DateTime StartTime { get; set; }
+        public DateTime StopTime { get; set; }
+        public TimeSpan SumTime { get; set; }
+        public double SumDistance { get; set; }
+
     }
 }

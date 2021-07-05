@@ -81,6 +81,8 @@ namespace AthenaWebApp.Controllers.API
             //           var userSerialize = new JsonSerializer();
             //           userSerialize.Serialize(UserExtension);
             //           return JsonString(user.SecurityStamp);
+
+            // ToDo: Return CompanyId
             return user;
         }
 
@@ -109,7 +111,7 @@ namespace AthenaWebApp.Controllers.API
                 {
                     Email = recievedUserData.Email,
                     UserName = recievedUserData.UserName,
-                    CompanyName = companyName.ToString()
+                    CompanyId = companyName.ToString()
                 };
                 _context.Users.Add(user);
 

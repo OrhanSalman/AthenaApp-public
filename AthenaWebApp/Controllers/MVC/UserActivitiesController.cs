@@ -10,22 +10,22 @@ using AthenaWebApp.Models;
 
 namespace AthenaWebApp.Controllers.MVC
 {
-    public class CompaniesController : Controller
+    public class UserActivitiesController : Controller
     {
         private readonly Context _context;
 
-        public CompaniesController(Context context)
+        public UserActivitiesController(Context context)
         {
             _context = context;
         }
 
-        // GET: Companies
+        // GET: UserActivities
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Company.ToListAsync());
+            return View(await _context.UserActivity.ToListAsync());
         }
 
-        // GET: Companies/Details/5
+        // GET: UserActivities/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
-            var company = await _context.Company
+            var userActivity = await _context.UserActivity
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (company == null)
+            if (userActivity == null)
             {
                 return NotFound();
             }
 
-            return View(company);
+            return View(userActivity);
         }
 
-        // GET: Companies/Create
+        // GET: UserActivities/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Companies/Create
+        // POST: UserActivities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CompanyName,Country,EmailContext")] Company company)
+        public async Task<IActionResult> Create([Bind("Id,UserId,ActivityId,CompanyId,StartTime,StopTime,SumTime,SumDistance")] UserActivity userActivity)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(company);
+                _context.Add(userActivity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(company);
+            return View(userActivity);
         }
 
-        // GET: Companies/Edit/5
+        // GET: UserActivities/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
-            var company = await _context.Company.FindAsync(id);
-            if (company == null)
+            var userActivity = await _context.UserActivity.FindAsync(id);
+            if (userActivity == null)
             {
                 return NotFound();
             }
-            return View(company);
+            return View(userActivity);
         }
 
-        // POST: Companies/Edit/5
+        // POST: UserActivities/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,CompanyName,Country,EmailContext")] Company company)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,UserId,ActivityId,CompanyId,StartTime,StopTime,SumTime,SumDistance")] UserActivity userActivity)
         {
-            if (id != company.Id)
+            if (id != userActivity.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace AthenaWebApp.Controllers.MVC
             {
                 try
                 {
-                    _context.Update(company);
+                    _context.Update(userActivity);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CompanyExists(company.Id))
+                    if (!UserActivityExists(userActivity.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace AthenaWebApp.Controllers.MVC
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(company);
+            return View(userActivity);
         }
 
-        // GET: Companies/Delete/5
+        // GET: UserActivities/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
-            var company = await _context.Company
+            var userActivity = await _context.UserActivity
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (company == null)
+            if (userActivity == null)
             {
                 return NotFound();
             }
 
-            return View(company);
+            return View(userActivity);
         }
 
-        // POST: Companies/Delete/5
+        // POST: UserActivities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var company = await _context.Company.FindAsync(id);
-            _context.Company.Remove(company);
+            var userActivity = await _context.UserActivity.FindAsync(id);
+            _context.UserActivity.Remove(userActivity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CompanyExists(string id)
+        private bool UserActivityExists(string id)
         {
-            return _context.Company.Any(e => e.Id == id);
+            return _context.UserActivity.Any(e => e.Id == id);
         }
     }
 }
