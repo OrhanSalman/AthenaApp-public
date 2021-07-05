@@ -211,6 +211,12 @@ namespace AthenaWebApp.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+                });
 
             modelBuilder.Entity("AthenaWebApp.Models.UserActivity", b =>
                 {
@@ -237,7 +243,11 @@ namespace AthenaWebApp.Migrations
                         .HasColumnType("time");
 
                     b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("Id");
+
+                    b.ToTable("UserActivity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -31,7 +31,7 @@ namespace AthenaWebApp.Areas.Identity
                         policy.RequireClaim("Admin");
                     });
                 });
-                */
+                
                 //ToDo: "RequireNonAlphanumeric" has been set to "false". Check if it works
                 services.Configure<IdentityOptions>(options =>
                 {
