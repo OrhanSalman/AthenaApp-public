@@ -105,7 +105,7 @@ namespace AthenaApp.Views
                     await DisplayAlert("Check your Mail's", "Welcome! Just confirm your E-Mail to run for the Athenaton", "Great!");
 
                     // Lade-PopUp, dass auf Bestätigung wartet, um dann auf nächste Page weiterzuverlinken
-                    await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
+                    await Shell.Current.GoToAsync($"//{nameof(LoginRegisterPage)}");
                     // ToDo: Save the user credentials and automatic login
 //                    return apiResponse;
                 }

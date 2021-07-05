@@ -17,6 +17,7 @@ namespace AthenaWebApp.Data
         {
         }
 
+        public virtual DbSet<Template> UserTemplates { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             // Customize the ASP.NET Identity model and override the defaults if needed.
@@ -54,9 +55,36 @@ namespace AthenaWebApp.Data
                 entity.ToTable("UserTokens");
             });
 
+            builder.Entity<Template>(entity =>
+            {
+                entity.HasKey(e => e.TemplateId)
+                    .HasName("PK__UserTemplate");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.Property(e => e.TemplateId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("template_id");
+
+                entity.Property(e => e.TemplateTitle)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("template_title");
+
+                entity.Property(e => e.DateTimeCreated)
+                    .HasDefaultValueSql("getdate()");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserTemplates)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("UserTemplate_fk_User");
+            });
+
         }
 
         public DbSet<AthenaWebApp.Models.Company> Company { get; set; }
+        public DbSet<AthenaWebApp.Models.Template> Template { get; set; }
 
         public DbSet<AthenaWebApp.Models.Activity> Activity { get; set; }
 
