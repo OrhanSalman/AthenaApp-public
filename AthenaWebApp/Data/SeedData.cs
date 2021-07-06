@@ -53,6 +53,7 @@ namespace AthenaWebApp.Models
                     },
                     new Company
                     {
+                        Id = "d33df339-1c29-42e3-bb45-6d7e6c990f1e",
                         CompanyName = "Athena",
                         Country = "International",
                         EmailContext = "athena.com"

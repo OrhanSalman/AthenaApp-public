@@ -55,6 +55,7 @@ namespace AthenaWebApp.Data
                 entity.ToTable("UserTokens");
             });
 
+            /*
             builder.Entity<Template>(entity =>
             {
                 entity.HasKey(e => e.TemplateId)
@@ -80,7 +81,7 @@ namespace AthenaWebApp.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("UserTemplate_fk_User");
             });
-
+            */
         }
 
         public DbSet<AthenaWebApp.Models.Company> Company { get; set; }

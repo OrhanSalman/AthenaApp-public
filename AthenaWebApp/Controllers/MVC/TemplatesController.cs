@@ -33,7 +33,7 @@ namespace AthenaWebApp.Controllers.MVC
         // GET: Templates
         public async Task<IActionResult> Index()
         {
-            var athenaWebAppContext = _context.Template.Include(t => t.User);
+            var athenaWebAppContext = _context.Template.Include(t => t.UserId);
             return View(await athenaWebAppContext.ToListAsync());
         }
 
@@ -46,7 +46,7 @@ namespace AthenaWebApp.Controllers.MVC
             }
 
             var template = await _context.Template
-                .Include(t => t.User)
+                .Include(t => t.UserId)
                 .FirstOrDefaultAsync(m => m.TemplateId == id);
             if (template == null)
             {
@@ -155,7 +155,7 @@ namespace AthenaWebApp.Controllers.MVC
             }
 
             var template = await _context.Template
-                .Include(t => t.User)
+                .Include(t => t.UserId)
                 .FirstOrDefaultAsync(m => m.TemplateId == id);
             if (template == null)
             {
