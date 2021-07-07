@@ -17,7 +17,7 @@ namespace AthenaWebApp.Data
         {
         }
 
-        public virtual DbSet<Template> UserTemplates { get; set; }
+//        public virtual DbSet<Template> UserTemplates { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             // Customize the ASP.NET Identity model and override the defaults if needed.

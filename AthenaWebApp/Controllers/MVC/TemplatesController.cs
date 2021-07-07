@@ -33,8 +33,15 @@ namespace AthenaWebApp.Controllers.MVC
         // GET: Templates
         public async Task<IActionResult> Index()
         {
+            /*
             var athenaWebAppContext = _context.Template.Include(t => t.UserId);
             return View(await athenaWebAppContext.ToListAsync());
+            */
+
+            var theUser =  _userManager.GetUserId(User);
+            return View(await _context.Template
+                .Where(i => i.UserId == theUser)
+                .ToListAsync());
         }
 
         // GET: Templates/Details/5
@@ -190,13 +197,13 @@ namespace AthenaWebApp.Controllers.MVC
             {
                 throw new ArgumentNullException(nameof(template));
             }
-            _context.UserTemplates.Add(template);
+            _context.Template.Add(template);
         }
 
         //Method to update the template
         public void UpdateTemplate(Template template)
         {
-            _context.UserTemplates.Update(template);
+            _context.Template.Update(template);
         }
 
 
@@ -212,7 +219,7 @@ namespace AthenaWebApp.Controllers.MVC
         //Method to get all Templates in the database
         public IEnumerable<Template> GetAllTemplates()
         {
-            return _context.UserTemplates.ToList();
+            return _context.Template.ToList();
         }
 
 
@@ -240,7 +247,7 @@ namespace AthenaWebApp.Controllers.MVC
         //Method to delete the template from the database
         public void DeleteTemplate(int id)
         {
-            _context.UserTemplates.Remove(GetTemplateById(id));
+            _context.Template.Remove(GetTemplateById(id));
         }
 
 
@@ -249,7 +256,7 @@ namespace AthenaWebApp.Controllers.MVC
         //To get Templates by TemplateID
         public Template GetTemplateById(int id)
         {
-            return _context.UserTemplates.FirstOrDefault(a => a.TemplateId == id);
+            return _context.Template.FirstOrDefault(a => a.TemplateId == id);
         }
 
         //Method to save the changes in the database
