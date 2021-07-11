@@ -1,5 +1,4 @@
 ﻿using AthenaApp.ViewModels;
-using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace AthenaApp.Views

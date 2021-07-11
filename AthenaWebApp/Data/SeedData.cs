@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
-using AthenaWebApp.Areas.Identity.IdentityModels;
-using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
 
 namespace AthenaWebApp.Models
 {

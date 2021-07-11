@@ -1,7 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace AthenaApp.Views
 {
@@ -16,7 +14,7 @@ namespace AthenaApp.Views
         private async void GoToSignIn(object sender, EventArgs e)
         {
             // AppShell laden für Login/Register
-           // await Navigation.PushAsync(new LoginRegisterPage());
+            // await Navigation.PushAsync(new LoginRegisterPage());
             // await Shell.Current.GoToAsync($"//{nameof(LoginRegisterPage)}");
         }
 

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
-using AthenaWebApp.Models;
-using AthenaWebApp.Areas.Identity.IdentityModels;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
-using AthenaWebApp.Models.Claims;
 using AthenaWebApp.Pagings;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
 {
@@ -20,33 +15,64 @@ namespace AthenaWebApp.Controllers.MVC
     public class UsersController : Controller
     {
         private readonly Context _context;
+        private readonly UserManager<UserExtension> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
 
-        public UsersController(Context context)
+
+
+        public UsersController(Context context, UserManager<UserExtension> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
-
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
-/*
-        public async Task<IActionResult> GetUserCount()
-        {
-            var x = _context.Employees
-    .Include("Department")
-    .GroupBy(e => e.Department.Name)
-    .Select(y => new MyViewModel
-    {
-        Department = y.Key,
-        count = y.Count()
-    }).ToList();
+        /*
+                public async Task<IActionResult> GetUserCount()
+                {
+                    var x = _context.Employees
+            .Include("Department")
+            .GroupBy(e => e.Department.Name)
+            .Select(y => new MyViewModel
+            {
+                Department = y.Key,
+                count = y.Count()
+            }).ToList();
 
-            return await _context.Users.FromSqlRaw("SELECT COUNT(*) FROM [dbo].[AspNetUsers]");
-        }
-*/
+                    return await _context.Users.FromSqlRaw("SELECT COUNT(*) FROM [dbo].[AspNetUsers]");
+                }
+        */
         // GET: Users
         [HttpGet]
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
+
+            // ToDo: Check if ROLE HAS THE RIGHT CLAIMS, if yes, just show users for the company
+
+            // Default
+            var isSupervisor = false;
+            /*
+            // Get the actual UserId
+            var userId = _userManager.GetUserId(User);
+            // Check the role of the user
+            var roleIdofUser = _context.UserRoles
+                .Where(r => r.UserId == userId) // userId.Contains(r.UserId))
+                .Select(r => r.RoleId)
+                .ToString();
+
+            var getRole = _roleManager.Roles
+                .Where(r => r.Id == roleIdofUser)
+                .Select(r => r.)
+            var roles = _context.Roles.Where(r => r.userRoleIds ==
+
+
+            string loggedInUserId = _userManager.GetUserId(User);
+            template.UserId = loggedInUserId;
+
+            var userRoleIds = _roleManager.Roles.Select(r => r.Id);
+            */
+
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["CompanySortParm"] = String.IsNullOrEmpty(sortOrder) ? "company_desc" : "";
@@ -65,7 +91,7 @@ namespace AthenaWebApp.Controllers.MVC
 
 
             var users = from s in _context.Users
-                     select s;
+                        select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -142,7 +168,7 @@ namespace AthenaWebApp.Controllers.MVC
             }
 
             // Create Role
-            
+
 
             return View(user);
         }
@@ -201,6 +227,8 @@ namespace AthenaWebApp.Controllers.MVC
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
+
+            // ToDo: If User is deleted, first check where the UserId is in relation
             if (id == null)
             {
                 return NotFound();
@@ -232,86 +260,86 @@ namespace AthenaWebApp.Controllers.MVC
             return _context.Users.Any(e => e.Id == id);
         }
 
-/*
-        // Claims
-        [HttpGet]
-        [Route("Users/ManageUserClaims/{userId}")]
-        public async Task<IActionResult> ManageUserClaims(string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
-                return View("NotFound");
-            }
-
-            // UserManager service GetClaimsAsync method gets all the current claims of the user
-            var existingUserClaims = await _userManager.GetClaimsAsync(user);
-
-            var model = new UserClaimsViewModel
-            {
-                UserId = userId
-            };
-
-            // Loop through each claim we have in our application
-            foreach (Claim claim in ClaimsStore.AllClaims)
-            {
-                UserClaim userClaim = new UserClaim
+        /*
+                // Claims
+                [HttpGet]
+                [Route("Users/ManageUserClaims/{userId}")]
+                public async Task<IActionResult> ManageUserClaims(string userId)
                 {
-                    ClaimType = claim.Type
-                };
+                    var user = await _userManager.FindByIdAsync(userId);
 
-                // If the user has the claim, set IsSelected property to true, so the checkbox
-                // next to the claim is checked on the UI
-                if (existingUserClaims.Any(c => c.Type == claim.Type))
-                {
-                    userClaim.IsSelected = true;
+                    if (user == null)
+                    {
+                        ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
+                        return View("NotFound");
+                    }
+
+                    // UserManager service GetClaimsAsync method gets all the current claims of the user
+                    var existingUserClaims = await _userManager.GetClaimsAsync(user);
+
+                    var model = new UserClaimsViewModel
+                    {
+                        UserId = userId
+                    };
+
+                    // Loop through each claim we have in our application
+                    foreach (Claim claim in ClaimsStore.AllClaims)
+                    {
+                        UserClaim userClaim = new UserClaim
+                        {
+                            ClaimType = claim.Type
+                        };
+
+                        // If the user has the claim, set IsSelected property to true, so the checkbox
+                        // next to the claim is checked on the UI
+                        if (existingUserClaims.Any(c => c.Type == claim.Type))
+                        {
+                            userClaim.IsSelected = true;
+                        }
+
+                        model.Claims.Add(userClaim);
+                    }
+
+                    return View(model);
+
                 }
 
-                model.Claims.Add(userClaim);
-            }
+                [HttpPost]
+                [Route("Users/ManageUserClaims/{userId}")]
+                public async Task<IActionResult> ManageUserClaims(UserClaimsViewModel model)
+                {
+                    var user = await _userManager.FindByIdAsync(model.UserId);
 
-            return View(model);
+                    if (user == null)
+                    {
+                        ViewBag.ErrorMessage = $"User with Id = {model.UserId} cannot be found";
+                        return View("NotFound");
+                    }
 
-        }
+                    // Get all the user existing claims and delete them
+                    var claims = await _userManager.GetClaimsAsync(user);
+                    var result = await _userManager.RemoveClaimsAsync(user, claims);
 
-        [HttpPost]
-        [Route("Users/ManageUserClaims/{userId}")]
-        public async Task<IActionResult> ManageUserClaims(UserClaimsViewModel model)
-        {
-            var user = await _userManager.FindByIdAsync(model.UserId);
+                    if (!result.Succeeded)
+                    {
+                        ModelState.AddModelError("", "Cannot remove user existing claims");
+                        return View(model);
+                    }
 
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"User with Id = {model.UserId} cannot be found";
-                return View("NotFound");
-            }
+                    // Add all the claims that are selected on the UI
+                    result = await _userManager.AddClaimsAsync(user,
+                        model.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.ClaimType)));
 
-            // Get all the user existing claims and delete them
-            var claims = await _userManager.GetClaimsAsync(user);
-            var result = await _userManager.RemoveClaimsAsync(user, claims);
+                    if (!result.Succeeded)
+                    {
+                        ModelState.AddModelError("", "Cannot add selected claims to user");
+                        return View(model);
+                    }
 
-            if (!result.Succeeded)
-            {
-                ModelState.AddModelError("", "Cannot remove user existing claims");
-                return View(model);
-            }
+                    return RedirectToAction("EditUser", new { Id = model.UserId });
 
-            // Add all the claims that are selected on the UI
-            result = await _userManager.AddClaimsAsync(user,
-                model.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.ClaimType)));
-
-            if (!result.Succeeded)
-            {
-                ModelState.AddModelError("", "Cannot add selected claims to user");
-                return View(model);
-            }
-
-            return RedirectToAction("EditUser", new { Id = model.UserId });
-
-        }
-*/
+                }
+        */
 
     }
 }

@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
+using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using AthenaWebApp.Areas.Identity.IdentityModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using AthenaWebApp.Data;
-using AthenaWebApp.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using AthenaWebApp.Controllers;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 //using AthenaWebApp.Repositories.PatternInterfaces;
 
 namespace AthenaWebApp.Areas.Identity.Pages.Account
@@ -30,7 +22,7 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<UserExtension> _signInManager;
-        private readonly UserManager<UserExtension> _userManager; 
+        private readonly UserManager<UserExtension> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         //        private readonly ICompanyRepository _companyRepository;

@@ -1,4 +1,5 @@
-﻿using AthenaWebApp.Areas.Identity.IdentityModels;
+﻿/*
+using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
 using AthenaWebApp.Models.Claims;
@@ -50,7 +51,7 @@ namespace AthenaWebApp.Controllers
             };
 
             // Loop through each claim we have in our application
-            foreach (Claim claim in ClaimsStore.AllClaims)
+            foreach (System.Security.Claims.Claim claim in ClaimsStore.AllClaims)
             {
                 UserClaim userClaim = new UserClaim
                 {
@@ -68,7 +69,6 @@ namespace AthenaWebApp.Controllers
             }
 
             return View(model);
-
         }
 
         [HttpPost]
@@ -94,7 +94,7 @@ namespace AthenaWebApp.Controllers
 
             // Add all the claims that are selected on the UI
             result = await _userManager.AddClaimsAsync(user,
-                model.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.ClaimType)));
+                model.Claims.Where(c => c.IsSelected).Select(c => new System.Security.Claims.Claim(c.ClaimType, c.ClaimType)));
 
             if (!result.Succeeded)
             {
@@ -107,3 +107,4 @@ namespace AthenaWebApp.Controllers
         }
     }
 }
+*/

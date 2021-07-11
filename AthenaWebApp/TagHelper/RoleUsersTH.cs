@@ -1,5 +1,4 @@
 ﻿using AthenaWebApp.Areas.Identity.IdentityModels;
-using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.Collections.Generic;

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
+using AthenaWebApp.Data;
+using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using AthenaWebApp.Models;
-using AthenaWebApp.Areas.Identity.IdentityModels;
-using AthenaWebApp.Data;
-using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
 {
@@ -62,7 +60,7 @@ namespace AthenaWebApp.Controllers.MVC
 
         public async Task<IActionResult> Update(string id)
         {
-            
+
             IdentityRole role = await roleManager.FindByIdAsync(id);
             List<UserExtension> members = new List<UserExtension>();
             List<UserExtension> nonMembers = new List<UserExtension>();

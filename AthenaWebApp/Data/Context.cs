@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AthenaWebApp.Areas.Identity.IdentityModels;
-using AthenaWebApp.Models;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using AthenaWebApp.Models;
 
 namespace AthenaWebApp.Data
 {
@@ -17,7 +13,7 @@ namespace AthenaWebApp.Data
         {
         }
 
-//        public virtual DbSet<Template> UserTemplates { get; set; }
+        //        public virtual DbSet<Template> UserTemplates { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             // Customize the ASP.NET Identity model and override the defaults if needed.
@@ -90,6 +86,8 @@ namespace AthenaWebApp.Data
         public DbSet<AthenaWebApp.Models.Activity> Activity { get; set; }
 
         public DbSet<AthenaWebApp.Models.UserActivity> UserActivity { get; set; }
+
+        public DbSet<AthenaWebApp.Models.Badge> Badge { get; set; }
 
     }
 

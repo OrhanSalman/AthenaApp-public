@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Identity;
-using AthenaWebApp.Areas.Identity.IdentityModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
 {
@@ -17,13 +17,13 @@ namespace AthenaWebApp.Controllers.MVC
         private readonly Context _context;
         private readonly UserManager<UserExtension> _userManager;
 
-     /*      public IActionResult Index
-            ()
-        {
-            return View();
-        } */
+        /*      public IActionResult Index
+               ()
+           {
+               return View();
+           } */
 
-        public TemplatesController(Context context , UserManager<UserExtension> userManager)
+        public TemplatesController(Context context, UserManager<UserExtension> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -38,7 +38,7 @@ namespace AthenaWebApp.Controllers.MVC
             return View(await athenaWebAppContext.ToListAsync());
             */
 
-            var theUser =  _userManager.GetUserId(User);
+            var theUser = _userManager.GetUserId(User);
             return View(await _context.Template
                 .Where(i => i.UserId == theUser)
                 .ToListAsync());

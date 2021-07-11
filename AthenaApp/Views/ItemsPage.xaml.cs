@@ -1,14 +1,5 @@
-﻿using AthenaApp.Models;
-using AthenaApp.ViewModels;
-using AthenaApp.Views;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AthenaApp.ViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace AthenaApp.Views
 {

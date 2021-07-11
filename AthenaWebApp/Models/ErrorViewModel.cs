@@ -1,5 +1,3 @@
-using System;
-
 namespace AthenaWebApp.Models
 {
     public class ErrorViewModel

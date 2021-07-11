@@ -1,9 +1,8 @@
+using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using AthenaWebApp.Data;
-using AthenaWebApp.Models;
 using System;
 
 namespace AthenaWebApp

@@ -1,0 +1,29 @@
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace AthenaWebApp.Models
+{
+    public class UserBadges
+    {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string Id { get; set; }
+
+
+        [ForeignKey("ActivityId")]
+        public Activity Activity { get; set; }
+        public string ActivityId { get; set; }
+
+        [ForeignKey("BadgeId")]
+        public Badge Badge { get; set; }
+        public string BadgeId { get; set; }
+
+        [ForeignKey("UserId")]
+        public UserExtension UserExtension { get; set; }
+        public string UserId { get; set; }
+    }
+}

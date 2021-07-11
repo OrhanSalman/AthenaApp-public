@@ -1,8 +1,5 @@
 ﻿using AthenaApp.Services;
-using AthenaApp.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 
 namespace AthenaApp
@@ -16,14 +13,12 @@ namespace AthenaApp
 
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
-          
-
 
         }
 
         protected override void OnStart()
         {
-            
+            // ToDo: Load everything necesarry from Server
         }
 
         protected override void OnSleep()

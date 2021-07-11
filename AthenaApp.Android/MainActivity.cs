@@ -1,16 +1,14 @@
-﻿using System;
-
+﻿
+using Android;
 using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
 using Android.OS;
-using Android;
-
+using Android.Runtime;
 using ImageCircle.Forms.Plugin.Droid;
 
 namespace AthenaApp.Droid
 {
-    [Activity(Label = "AthenaApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
+    [Activity(Label = "AthenaApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         const int RequestLocationId = 0;
@@ -41,7 +39,7 @@ namespace AthenaApp.Droid
         public override void OnBackPressed()
         {
             base.OnBackPressed();
-            
+
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
