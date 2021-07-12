@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace AthenaWebApp.Models
+namespace AthenaWebApp.Models.ClaimModels
 {
     public class ClaimsStore
     {
