@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AthenaWebApp.Models.ClaimData
+namespace AthenaWebApp.Models
 {
     public class RoleClaim
     {
@@ -11,7 +12,13 @@ namespace AthenaWebApp.Models.ClaimData
         [ForeignKey("RoleId")]
         public Role Role { get; set; }
         public string RoleId { get; set; }
-        public string ClaimType { get; set; }
-        public string ClaimValue { get; set; }
+
+        public RoleClaim()
+        {
+            Claims = new List<RoleClaimValues>();
+        }
+
+        public List<RoleClaimValues> Claims { get; set; }
+
     }
 }

@@ -6,12 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Claims\**" />
     <Compile Remove="Views\Distances\**" />
     <Compile Remove="Views\Roles\**" />
+    <Content Remove="Views\Claims\**" />
     <Content Remove="Views\Distances\**" />
     <Content Remove="Views\Roles\**" />
+    <EmbeddedResource Remove="Views\Claims\**" />
     <EmbeddedResource Remove="Views\Distances\**" />
     <EmbeddedResource Remove="Views\Roles\**" />
+    <None Remove="Views\Claims\**" />
     <None Remove="Views\Distances\**" />
     <None Remove="Views\Roles\**" />
   </ItemGroup>

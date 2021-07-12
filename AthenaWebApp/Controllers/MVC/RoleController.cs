@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
@@ -109,6 +111,50 @@ namespace AthenaWebApp.Controllers.MVC
                 return RedirectToAction(nameof(Index));
             else
                 return await Update(model.RoleId);
+        }
+
+
+        // ToDo: Claim Controller
+        [HttpGet]
+        public async Task<IActionResult> Claims(string roleId)
+        {
+            Debug.WriteLine("Id is: " + roleId);
+            // First, get the RoleId where on clicked
+            var role = await roleManager.FindByIdAsync(roleId);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
+                return View("NotFound");
+            }
+
+            // UserManager service GetClaimsAsync method gets all the current claims of the role
+            var existingRoleClaims = await roleManager.GetClaimsAsync(role);
+
+            var model = new RoleClaim
+            {
+                RoleId = roleId
+            };
+
+            // Loop through each claim we have in our application
+            foreach (System.Security.Claims.Claim claim in ClaimsStore.Claims)
+            {
+                RoleClaimValues roleClaim = new RoleClaimValues
+                {
+                    ClaimType = claim.Type
+                };
+
+                // If the role has the claim, set IsSelected property to true, so the checkbox
+                // next to the claim is checked on the UI
+                if (existingRoleClaims.Any(c => c.Type == claim.Type))
+                {
+                    roleClaim.IsSelected = true;
+                }
+
+                model.Claims.Add(roleClaim);
+            }
+
+            return View(model);
         }
 
         private void Errors(IdentityResult result)

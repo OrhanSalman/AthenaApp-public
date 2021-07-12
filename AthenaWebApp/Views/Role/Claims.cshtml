@@ -1,4 +1,4 @@
-﻿@model AthenaWebApp.Models.Claims.UserClaimsViewModel
+﻿@model AthenaWebApp.Models.RoleClaim
 
 <form method="post">
     <div class="card">
@@ -21,7 +21,7 @@
         <div class="card-footer">
             <input type="submit" value="Update" class="btn btn-primary"
                    style="width:auto" />
-            <a asp-action="Edit" asp-route-id="@Model.UserId"
+            <a asp-action="Edit" asp-route-id="@Model.RoleId"
                class="btn btn-primary" style="width:auto">Cancel</a>
         </div>
     </div>

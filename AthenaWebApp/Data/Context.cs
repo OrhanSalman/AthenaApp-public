@@ -89,6 +89,7 @@ namespace AthenaWebApp.Data
 
         public DbSet<AthenaWebApp.Models.Badge> Badge { get; set; }
 
+
     }
 
 }
