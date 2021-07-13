@@ -106,7 +106,33 @@ namespace AthenaWebApp.Models
                     );
                 context.SaveChanges();
 
+                // Später löschen
+                context.Users.AddRange(
+                    new UserExtension
+                    {
+                        Id = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
+                        Email = "admin@athena.com",
+                        NormalizedEmail = "ADMIN@ATHENA.COM",
+                        EmailConfirmed = true,
+                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
+                        UserName = "Admin",
+                        NormalizedUserName = "ADMIN",
+                        CompanyId = "fca9a2af-1ed2-430c-b9ae-e5476d36ca77"
+                    });
+                context.SaveChanges();
 
+                context.UserRoles.AddRange(
+                    new IdentityUserRole<string>
+                    {
+                        UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
+                        RoleId = "9d5107d5-5edd-49ae-adee-240acf8c9af1"
+                    });
+                context.SaveChanges();
+                // Später löschen
+
+
+
+                /*
                 context.Users.AddRange(
                     new UserExtension
                     {
@@ -661,6 +687,7 @@ namespace AthenaWebApp.Models
                     );
                 context.SaveChanges();
 
+
                 context.UserRoles.AddRange(
                     new IdentityUserRole<string>
                     {
@@ -909,7 +936,7 @@ namespace AthenaWebApp.Models
                     }
                     );
                 context.SaveChanges();
-
+                */
 
 
                 // Activites 
