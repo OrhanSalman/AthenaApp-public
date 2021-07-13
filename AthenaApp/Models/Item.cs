@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AthenaApp.Models
+﻿namespace AthenaApp.Models
 {
     public class Item
     {

@@ -1,24 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿//using AthenaWebApp.Repositories.PatternInterfaces;
+using AthenaWebApp.Areas.Identity.IdentityModels;
+using AthenaWebApp.Data;
+using AthenaWebApp.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AthenaWebApp.Controllers;
-using AthenaWebApp.Models;
-using AthenaWebApp.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using AthenaWebApp.Services;
-//using AthenaWebApp.Repositories.PatternInterfaces;
-using AthenaWebApp.Areas.Identity.IdentityModels;
-using Newtonsoft.Json.Serialization;
 
 namespace AthenaWebApp
 {

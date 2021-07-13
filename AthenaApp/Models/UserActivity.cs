@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AthenaApp.Models
 {
     class UserActivity
     {
-//        public string Id { get; set; }
+        //        public string Id { get; set; }
         public string UserId { get; set; }
         public string ActivityId { get; set; }
         public string CompanyId { get; set; }

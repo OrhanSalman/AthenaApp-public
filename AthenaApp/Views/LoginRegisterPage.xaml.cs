@@ -1,14 +1,9 @@
-﻿using AthenaApp.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AthenaApp.Models;
+﻿using AthenaApp.Models;
 using Newtonsoft.Json;
+using System;
 using System.Net;
 using System.Net.Http;
-using System.Text.Json;
+using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -27,7 +22,7 @@ namespace AthenaApp.Views
         private async void LoginButton(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");   // Testversion, später entfernen
-            
+
             /*
                         HttpClientHandler handler = new HttpClientHandler();
                         handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
@@ -61,10 +56,10 @@ namespace AthenaApp.Views
             */
         }
 
-        private async void RegisterButton (object sender, EventArgs e)
+        private async void RegisterButton(object sender, EventArgs e)
         {
-//            RegisterService registerService = new RegisterService();
-//            var postRegisterUser = await registerService.AppRegistration(UserInputName.Text, UserInputNewMail.Text);
+            //            RegisterService registerService = new RegisterService();
+            //            var postRegisterUser = await registerService.AppRegistration(UserInputName.Text, UserInputNewMail.Text);
 
             try
             {
@@ -107,7 +102,7 @@ namespace AthenaApp.Views
                     // Lade-PopUp, dass auf Bestätigung wartet, um dann auf nächste Page weiterzuverlinken
                     await Shell.Current.GoToAsync($"//{nameof(LoginRegisterPage)}");
                     // ToDo: Save the user credentials and automatic login
-//                    return apiResponse;
+                    //                    return apiResponse;
                 }
                 else if (response.StatusCode == HttpStatusCode.Conflict)
                 {
@@ -117,7 +112,7 @@ namespace AthenaApp.Views
                 {
                     await DisplayAlert("Registration failed", "Registration failed. Please register with an accepted Company E-Mail", "Gotit");
                 }
-                else if(response.StatusCode == HttpStatusCode.GatewayTimeout)
+                else if (response.StatusCode == HttpStatusCode.GatewayTimeout)
                 {
                     await DisplayAlert("Please try again later", "The Server did not respond. Maybe there are some maintainces. Please try again later", "I will do");
                 }

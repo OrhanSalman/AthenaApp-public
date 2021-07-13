@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AthenaWebApp.Data;
+using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AthenaWebApp.Data;
-using AthenaWebApp.Models;
 
 namespace AthenaWebApp.Controllers.MVC
 {

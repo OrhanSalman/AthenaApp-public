@@ -127,6 +127,37 @@ namespace AthenaWebApp.Migrations
                     b.ToTable("Activity");
                 });
 
+            modelBuilder.Entity("AthenaWebApp.Models.Badge", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ActivityId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BadgeDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("BadgeImage")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("BadgeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("DistanceIntervallBegin")
+                        .HasColumnType("float");
+
+                    b.Property<double>("DistanceIntervallEnd")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
+
+                    b.ToTable("Badge");
+                });
+
             modelBuilder.Entity("AthenaWebApp.Models.Company", b =>
                 {
                     b.Property<string>("Id")
@@ -152,70 +183,25 @@ namespace AthenaWebApp.Migrations
                     b.Property<int>("TemplateId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("template_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateTimeCreated")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TemplateTitle")
-                        .HasMaxLength(1000)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(1000)")
-                        .HasColumnName("template_title");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("user_id");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("TemplateId")
-                        .HasName("PK__UserTemplate");
+                    b.HasKey("TemplateId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Template");
-                });
-
-            modelBuilder.Entity("AthenaWebApp.Models.User", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Company")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmailConfirmed")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LastActivity")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Locked")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LoggedIn")
-                        .HasColumnType("bit");
-
-                    b.Property<byte[]>("ProfilePicture")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<DateTime>("RegisteredSince")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("AthenaWebApp.Models.UserActivity", b =>
@@ -394,14 +380,22 @@ namespace AthenaWebApp.Migrations
                     b.Navigation("Company");
                 });
 
+            modelBuilder.Entity("AthenaWebApp.Models.Badge", b =>
+                {
+                    b.HasOne("AthenaWebApp.Models.Activity", "Activity")
+                        .WithMany()
+                        .HasForeignKey("ActivityId");
+
+                    b.Navigation("Activity");
+                });
+
             modelBuilder.Entity("AthenaWebApp.Models.Template", b =>
                 {
-                    b.HasOne("AthenaWebApp.Models.User", "User")
-                        .WithMany("UserTemplates")
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("UserTemplate_fk_User");
+                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", "UserExtension")
+                        .WithMany()
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("User");
+                    b.Navigation("UserExtension");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -453,11 +447,6 @@ namespace AthenaWebApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AthenaWebApp.Models.User", b =>
-                {
-                    b.Navigation("UserTemplates");
                 });
 #pragma warning restore 612, 618
         }

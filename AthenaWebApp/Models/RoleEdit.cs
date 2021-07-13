@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using AthenaWebApp.Areas.Identity.IdentityModels;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace AthenaWebApp.Models
 {

@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
-using AthenaWebApp.Models;
-using AthenaWebApp.Areas.Identity.IdentityModels;
-using System.Net.Mail;
-using System.Text.Json;
-using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.API
 {
@@ -54,7 +47,7 @@ namespace AthenaWebApp.Controllers.API
             else if (user.EmailConfirmed == false)
             {
                 return NotFound("Please confirm your Email first.");
-            }     
+            }
             // ToDo: New Handler, for Email confirm check
             // Check if User is blocked
             else if (user.LockoutEnabled == true)

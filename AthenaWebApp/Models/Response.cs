@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AthenaApp.Models
+﻿namespace AthenaApp.Models
 {
     public class Response
     {

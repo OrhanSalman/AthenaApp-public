@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Identity;
-using AthenaWebApp.Areas.Identity.IdentityModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
 {
@@ -17,13 +17,13 @@ namespace AthenaWebApp.Controllers.MVC
         private readonly Context _context;
         private readonly UserManager<UserExtension> _userManager;
 
-     /*      public IActionResult Index
-            ()
-        {
-            return View();
-        } */
+        /*      public IActionResult Index
+               ()
+           {
+               return View();
+           } */
 
-        public TemplatesController(Context context , UserManager<UserExtension> userManager)
+        public TemplatesController(Context context, UserManager<UserExtension> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -33,8 +33,15 @@ namespace AthenaWebApp.Controllers.MVC
         // GET: Templates
         public async Task<IActionResult> Index()
         {
-            var athenaWebAppContext = _context.Template.Include(t => t.User);
+            /*
+            var athenaWebAppContext = _context.Template.Include(t => t.UserId);
             return View(await athenaWebAppContext.ToListAsync());
+            */
+
+            var theUser = _userManager.GetUserId(User);
+            return View(await _context.Template
+                .Where(i => i.UserId == theUser)
+                .ToListAsync());
         }
 
         // GET: Templates/Details/5
@@ -46,7 +53,7 @@ namespace AthenaWebApp.Controllers.MVC
             }
 
             var template = await _context.Template
-                .Include(t => t.User)
+                .Include(t => t.UserId)
                 .FirstOrDefaultAsync(m => m.TemplateId == id);
             if (template == null)
             {
@@ -106,7 +113,7 @@ namespace AthenaWebApp.Controllers.MVC
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", template.UserId);
+            ViewData["UserId"] = new SelectList(_context.Set<UserExtension>(), "Id", "Id", template.UserId);
             return View(template);
         }
 
@@ -142,7 +149,7 @@ namespace AthenaWebApp.Controllers.MVC
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", template.UserId);
+            ViewData["UserId"] = new SelectList(_context.Set<UserExtension>(), "Id", "Id", template.UserId);
             return View(template);
         }
 
@@ -155,7 +162,7 @@ namespace AthenaWebApp.Controllers.MVC
             }
 
             var template = await _context.Template
-                .Include(t => t.User)
+                .Include(t => t.UserId)
                 .FirstOrDefaultAsync(m => m.TemplateId == id);
             if (template == null)
             {
@@ -190,13 +197,13 @@ namespace AthenaWebApp.Controllers.MVC
             {
                 throw new ArgumentNullException(nameof(template));
             }
-            _context.UserTemplates.Add(template);
+            _context.Template.Add(template);
         }
 
         //Method to update the template
         public void UpdateTemplate(Template template)
         {
-            _context.UserTemplates.Update(template);
+            _context.Template.Update(template);
         }
 
 
@@ -212,7 +219,7 @@ namespace AthenaWebApp.Controllers.MVC
         //Method to get all Templates in the database
         public IEnumerable<Template> GetAllTemplates()
         {
-            return _context.UserTemplates.ToList();
+            return _context.Template.ToList();
         }
 
 
@@ -240,7 +247,7 @@ namespace AthenaWebApp.Controllers.MVC
         //Method to delete the template from the database
         public void DeleteTemplate(int id)
         {
-            _context.UserTemplates.Remove(GetTemplateById(id));
+            _context.Template.Remove(GetTemplateById(id));
         }
 
 
@@ -249,7 +256,7 @@ namespace AthenaWebApp.Controllers.MVC
         //To get Templates by TemplateID
         public Template GetTemplateById(int id)
         {
-            return _context.UserTemplates.FirstOrDefault(a => a.TemplateId == id);
+            return _context.Template.FirstOrDefault(a => a.TemplateId == id);
         }
 
         //Method to save the changes in the database

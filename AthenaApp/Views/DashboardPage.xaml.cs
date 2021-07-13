@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Microcharts;
 using SkiaSharp;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Microcharts.Forms;
 using Entry = Microcharts.ChartEntry;
-using Microcharts;
 
 
 namespace AthenaApp.Views
@@ -133,7 +127,7 @@ namespace AthenaApp.Views
                 Color = SKColor.Parse("#FFFFFF"),
                 Label = "August",
                 ValueLabel = "800"
-               
+
             },
             new Entry (1000)
             {
@@ -165,10 +159,10 @@ namespace AthenaApp.Views
 
             InitializeComponent();
             // Raphael: With start of app Charts are created with the implemented Lists. The Background is transparent for the coloured frame -> Additional Options for the appearance are made
-            Chart1.Chart = new LineChart()  {Entries = entriesAccumulated , BackgroundColor = SKColors.Transparent,LineSize = 20, PointSize = 20, LabelOrientation = Orientation.Horizontal, IsAnimated=true};
-            Chart2.Chart = new BarChart() { Entries = entries , BackgroundColor = SKColors.Transparent ,BarAreaAlpha = 30, IsAnimated = true, LabelOrientation = Orientation.Horizontal };
-            
-            
+            Chart1.Chart = new LineChart() { Entries = entriesAccumulated, BackgroundColor = SKColors.Transparent, LineSize = 20, PointSize = 20, LabelOrientation = Orientation.Horizontal, IsAnimated = true };
+            Chart2.Chart = new BarChart() { Entries = entries, BackgroundColor = SKColors.Transparent, BarAreaAlpha = 30, IsAnimated = true, LabelOrientation = Orientation.Horizontal };
+
+
         }
     }
 }

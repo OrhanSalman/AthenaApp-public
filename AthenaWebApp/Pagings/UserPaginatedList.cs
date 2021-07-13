@@ -1,10 +1,9 @@
-﻿using System;
+﻿using AthenaWebApp.Data;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AthenaWebApp.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace AthenaWebApp.Pagings
 {

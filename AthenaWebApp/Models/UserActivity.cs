@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AthenaWebApp.Models
 {
@@ -11,6 +8,8 @@ namespace AthenaWebApp.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
+        // ToDo: set ForeignKeys
         public string UserId { get; set; }
         public string ActivityId { get; set; }
         public string CompanyId { get; set; }

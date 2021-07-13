@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using AthenaWebApp.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace AthenaWebApp.Areas.Identity.IdentityModels
 {
