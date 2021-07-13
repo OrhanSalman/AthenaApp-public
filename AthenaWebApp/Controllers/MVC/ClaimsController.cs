@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Linq;
+using System.Diagnostics;
 
 namespace AthenaWebApp.Controllers.MVC
 {
@@ -31,6 +32,7 @@ namespace AthenaWebApp.Controllers.MVC
             if (string.IsNullOrEmpty(Id))
             {
                 //Redirect to NotFound
+                Debug.WriteLine("The Id was null or empty.");
                 return RedirectToPage("/");
             }
             IdentityRole role = await _roleManager.FindByIdAsync(Id);

@@ -4,6 +4,7 @@ using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
@@ -116,7 +117,7 @@ namespace AthenaWebApp.Controllers.MVC
 
 
 
-
+        /*
         public void ClaimsModel(RoleManager<IdentityRole> mgr)
         {
             RoleManager = mgr;
@@ -127,7 +128,43 @@ namespace AthenaWebApp.Controllers.MVC
         public string Id { get; set; }
 
         public IEnumerable<Claim> Claims { get; set; }
+        */
 
+
+        public async Task<IActionResult> Claims(string id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+
+            var role = await roleManager.Roles.FirstOrDefaultAsync(m => m.Id == id);
+            var roleClaims = await roleManager.GetClaimsAsync(role);
+//                .FirstOrDefaultAsync(m => m.RoleId == id);
+            if (roleClaims == null)
+            {
+                return NotFound();
+            }
+
+            return View(roleClaims);
+            /*
+            IdentityRole role = await roleManager.FindByIdAsync(id);
+            foreach (UserExtension user in userManager.Users)
+            {
+                var list = await userManager.IsInRoleAsync(user, role.Name) ? members : nonMembers;
+                list.Add(user);
+            }
+            return View(new RoleEdit
+            {
+                Role = role,
+                Members = members,
+                NonMembers = nonMembers
+            });
+            */
+        }
+        /*
         public async Task<IActionResult> OnGetAsync()
         {
             if (string.IsNullOrEmpty(Id))
@@ -162,7 +199,7 @@ namespace AthenaWebApp.Controllers.MVC
             return View();
         }
 
-        /*
+        
         public async Task<IActionResult> OnPostEditClaimAsync([Required] string type,
                                                               [Required] string value,
                                                               [Required] string oldValue)
@@ -177,7 +214,7 @@ namespace AthenaWebApp.Controllers.MVC
             Claims = await RoleManager.GetClaimsAsync(role);
             return Page();
         }
-        */
+        
 
         public async Task<IActionResult> OnPostDeleteClaimAsync([Required] string type,
                                                                 [Required] string value)
@@ -192,7 +229,7 @@ namespace AthenaWebApp.Controllers.MVC
             return View();
 
         }
-
+        */
 
 
 

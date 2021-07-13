@@ -1,50 +1,72 @@
-﻿@page "{id?}"
-@using AthenaWebApp.Models.ClaimModels
-@model AthenaWebApp.Areas.Identity.Pages.ClaimsModel
+﻿@model IEnumerable<System.Security.Claims.Claim>
+@using AthenaWebApp.Data
 @{
-    int FormId = 0;
+    ViewData["Title"] = "Index";
+    bool active = false;
+
 }
 
-<div asp-validation-summary="All" class="text-danger m-2"></div>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
 
-<table class="table table-sm table-striped table-bordered">
-    <thead><tr><th>Type</th><th>Value</th><th>Modify</th></tr></thead>
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color:yellow;}
+</style>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            <th>Activated</th>
+        </tr>
+    </thead>
     <tbody>
 
-        @foreach (var c in Model.Claims)
-        {
-            FormId++;
+@foreach (var item in Model) {
+        <tr>
+            
+                @for(var i = 0; i < ClaimData.ClaimTypes.Count; i++)
+                {
+                    for (var j = 0; j < ClaimData.ClaimValues.Count; j++)
+                    {
+                        <td>@ClaimData.ClaimTypes[i]</td>
+                    }
+                }
+            
+            
+                @for(var i = 0; i < ClaimData.ClaimTypes.Count; i++)
+                {
+                    for (var j = 0; j < ClaimData.ClaimValues.Count; j++)
+                    {
+                        <td>@ClaimData.ClaimValues[j]</td>
+                    }
+                }
+            
+            <td>
+            </td>
 
-            <tr>
-                <td>@c.Type</td>
-                <td>@c.Value</td>
-                <td>
-                    <form method="post" id=@("editForm"+FormId)>
-                        <input type="hidden" name="type" value="@c.Type" />
-                        <input type="hidden" name="oldValue" value="@c.Value" />
-                        <input class="form-control" name="value" value="@c.Value" />
-                    </form>
-                </td>
-                <td>
-
-                <button type="submit" form=@("editForm"+FormId)
-                        class="btn btn-sm btn-warning"
-                        asp-page-handler="editClaim">
-                    Edit
-                </button>
-
-                <button type="submit" form=@("editForm"+FormId)
-                        class="btn btn-sm btn-danger"
-                        asp-page-handler="DeleteClaim">
-                    Delete
-                </button>
-
-                </td>
-            </tr>
-        }
+        </tr>
+}
     </tbody>
 </table>
-
 
 <h1>Add New Claim</h1>
 <form method="post" id="addForm">
@@ -59,17 +81,4 @@
                     </option>
                 }
             </select>
-        </div>
-
-        <div class="col">
-            <input class="form-control" name="value" />
-        </div>
-
-        <div class="col">
-            <button asp-page-handler="AddClaim" type="submit"
-                    class="btn btn-sm btn-success">
-                Add
-            </button>
-        </div>
-    </div>
 </form>

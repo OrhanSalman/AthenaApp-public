@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using AthenaWebApp.Models;
 
+
 namespace AthenaWebApp.Data
 {
     public class Context : IdentityDbContext<UserExtension>
@@ -89,7 +90,6 @@ namespace AthenaWebApp.Data
         public DbSet<AthenaWebApp.Models.Activity> Activity { get; set; }
         public DbSet<AthenaWebApp.Models.UserActivity> UserActivity { get; set; }
         public DbSet<AthenaWebApp.Models.Badge> Badge { get; set; }
-
 
     }
 
