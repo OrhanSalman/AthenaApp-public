@@ -10,7 +10,7 @@
         <tr>
 
             <td>@role.Name</td>
-            <td><a class="btn btn-sm btn-primary" asp-action="OnGetAsync" asp-route-id="@role.Id">Claims</a></td>
+            <td><a asp-page="/Claims" asp-route-id="@role.Id">Manage Claims</a></td>
             <td><a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@role.Id">Update</a></td>
             <td>
                 <form asp-action="Delete" asp-route-id="@role.Id" method="post">

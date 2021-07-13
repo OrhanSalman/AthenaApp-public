@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AthenaWebApp.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210705175615_InitialCreate")]
+    [Migration("20210713104419_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,6 +129,37 @@ namespace AthenaWebApp.Migrations
                     b.ToTable("Activity");
                 });
 
+            modelBuilder.Entity("AthenaWebApp.Models.Badge", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ActivityId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BadgeDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("BadgeImage")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("BadgeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("DistanceIntervallBegin")
+                        .HasColumnType("float");
+
+                    b.Property<double>("DistanceIntervallEnd")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
+
+                    b.ToTable("Badge");
+                });
+
             modelBuilder.Entity("AthenaWebApp.Models.Company", b =>
                 {
                     b.Property<string>("Id")
@@ -166,9 +197,11 @@ namespace AthenaWebApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TemplateId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Template");
                 });
@@ -347,6 +380,24 @@ namespace AthenaWebApp.Migrations
                         .HasForeignKey("CompanyId");
 
                     b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Models.Badge", b =>
+                {
+                    b.HasOne("AthenaWebApp.Models.Activity", "Activity")
+                        .WithMany()
+                        .HasForeignKey("ActivityId");
+
+                    b.Navigation("Activity");
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Models.Template", b =>
+                {
+                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", "UserExtension")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("UserExtension");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

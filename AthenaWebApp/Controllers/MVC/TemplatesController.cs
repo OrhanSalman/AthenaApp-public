@@ -113,7 +113,7 @@ namespace AthenaWebApp.Controllers.MVC
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", template.UserId);
+            ViewData["UserId"] = new SelectList(_context.Set<UserExtension>(), "Id", "Id", template.UserId);
             return View(template);
         }
 
@@ -149,7 +149,7 @@ namespace AthenaWebApp.Controllers.MVC
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", template.UserId);
+            ViewData["UserId"] = new SelectList(_context.Set<UserExtension>(), "Id", "Id", template.UserId);
             return View(template);
         }
 
