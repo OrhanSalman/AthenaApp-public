@@ -1,10 +1,11 @@
-﻿using AthenaWebApp.Areas.Identity.IdentityModels;
-using AthenaWebApp.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using AthenaWebApp.Data;
 using System;
 using System.Linq;
+using AthenaWebApp.Areas.Identity.IdentityModels;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace AthenaWebApp.Models
 {
@@ -16,7 +17,7 @@ namespace AthenaWebApp.Models
                 serviceProvider.GetRequiredService<DbContextOptions<Context>>()))
             {
 
-                if (context.Users.Any())
+                if (context.Users.Any() && context.Roles.Any())
                 {
                     return;
                 }
@@ -81,61 +82,32 @@ namespace AthenaWebApp.Models
                         RoleId = "9d5107d5-5edd-49ae-adee-240acf8c9af1"
                     });
                 context.SaveChanges();
-                /*
-                context.Users.AddRange(
-                    new UserExtension
+
+                context.Activity.AddRange(
+                    new Activity
                     {
-                        Email = "lena@student.uni-siegen.de",
-                        EmailConfirmed = true,
-                        UserName = "Lena",
-                        CompanyName = "Universität Siegen"
-                    },
-                    new UserExtension
-                    {
-                        Email = "jasmin@student.uni-siegen.de",
-                        EmailConfirmed = true,
-                        UserName = "Jasmin",
-                        CompanyName = "Universität Siegen"
-                    },
-                    new UserExtension
-                    {
-                        Email = "domenik@student.uni-siegen.de",
-                        EmailConfirmed = true,
-                        UserName = "Domenik",
-                        CompanyName = "Universität Siegen"
-                    },
-                    new UserExtension
-                    {
-                        Email = "alex@student.uni-siegen.de",
-                        EmailConfirmed = true,
-                        UserName = "Alex",
-                        CompanyName = "Universität Siegen"
-                    },
-                    new UserExtension
-                    {
-                        Email = "raphael@student.uni-siegen.de",
-                        EmailConfirmed = true,
-                        UserName = "Raphael",
-                        CompanyName = "Universität Siegen"
-                    },
-                    new UserExtension
-                    {
-                        Email = "orhan@student.uni-siegen.de",
-                        EmailConfirmed = true,
-                        UserName = "Orhan",
-                        CompanyName = "Universität Siegen"
-                    },
-                    new UserExtension
-                    {
-                        Email = "supervisor@uni-siegen.de",
-                        EmailConfirmed = true,
-                        PasswordHash = "Test_123",
-                        UserName = "Supervisor",
-                        CompanyName = "Universität Siegen"
+                        Id = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
+                        ActivityType = "Swimming",
+                        Description = "Go swimming",
+                        MaxSpeed = 10,
+                        SetManualyByUser = true
                     });
                 context.SaveChanges();
-                */
 
+
+                context.UserActivity.AddRange(
+                    new UserActivity
+                    {
+                        Id = "b51f4e8e-5b86-4279-82d1-749b67b99a98",
+                        UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
+                        ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
+                        CompanyId = "d33df339-1c29-42e3-bb45-6d7e6c990f1e",
+                        StartTime = new DateTime(2021, 07, 13, 15, 02, 05),    //year, month, day, hour, min, seconds
+                        StopTime = new DateTime(2021, 07, 13, 15, 02, 20),     
+                        SumTime = new TimeSpan(0, 0, 15),                      // hours, minutes, seconds, milliseconds.
+                        SumDistance = 119.89286339442317
+                    });
+                context.SaveChanges();
             }
         }
     }
