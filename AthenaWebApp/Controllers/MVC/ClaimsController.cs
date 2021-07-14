@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Linq;
-using System.Diagnostics;
 
 namespace AthenaWebApp.Controllers.MVC
 {
@@ -23,7 +20,7 @@ namespace AthenaWebApp.Controllers.MVC
         public RoleManager<IdentityRole> RoleManager { get; set; }
 
         [BindProperty(SupportsGet = true)]
-//        public string Id { get; set; }
+        //        public string Id { get; set; }
 
         public IEnumerable<Claim> Claims { get; set; }
 

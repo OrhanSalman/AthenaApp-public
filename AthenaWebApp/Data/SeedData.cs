@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
-using AthenaWebApp.Areas.Identity.IdentityModels;
-using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
 
 namespace AthenaWebApp.Models
 {
@@ -961,7 +960,7 @@ namespace AthenaWebApp.Models
                         ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
                         CompanyId = "d33df339-1c29-42e3-bb45-6d7e6c990f1e",
                         StartTime = new DateTime(2021, 07, 13, 15, 02, 05),    //year, month, day, hour, min, seconds
-                        StopTime = new DateTime(2021, 07, 13, 15, 22, 05),     
+                        StopTime = new DateTime(2021, 07, 13, 15, 22, 05),
                         SumTime = new TimeSpan(0, 20, 0, 0),                   // StopTime - StartTime // hours, minutes, seconds, milliseconds.
                         SumDistance = 5125                                     // Meters
                     });

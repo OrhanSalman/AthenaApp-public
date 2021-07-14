@@ -1,11 +1,26 @@
 ﻿@model IEnumerable<System.Security.Claims.Claim>
 @using AthenaWebApp.Data
+
 @{
     ViewData["Title"] = "Index";
     bool active = false;
 
 }
 
+<script>
+    
+function markRow(el) {
+    if(!el) return;
+    var clr = el.checked ? '#7fff00' : ''
+    while(el) {
+        if(el.tagName.toLowerCase() == 'tr') {
+            el.style.backgroundColor = clr;
+            return;
+        }
+        el = el.parentNode;
+    }
+} 
+</script>
 <style>
 table {
   border-collapse: collapse;
@@ -18,6 +33,11 @@ td {
   border-bottom: 1px solid #ddd;
 }
 
+.linie {
+  border-top:1px solid black;
+  width:150px;
+}
+
 tr:hover {background-color:yellow;}
 </style>
 
@@ -26,6 +46,8 @@ tr:hover {background-color:yellow;}
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<div style="height:350px;overflow:auto;">
+
 <table class="table">
     <thead>
         <tr>
@@ -39,46 +61,21 @@ tr:hover {background-color:yellow;}
         </tr>
     </thead>
     <tbody>
+        @for(var i = 0; i < ClaimData.ClaimTypes.Count; i++)
+        {
+            @for(var z = 0; z < ClaimData.ClaimValues.Count; z++)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => ClaimData.ClaimTypes[i])</td>
+                    <td>@Html.DisplayFor(modelItem => ClaimData.ClaimValues[z])</td>
+                    <td><input type="checkbox" onclick="markRow(this)"></td>
+                </tr>
+            }
+            <tr class="linie"></tr>
+        }
 
-@foreach (var item in Model) {
-        <tr>
-            
-                @for(var i = 0; i < ClaimData.ClaimTypes.Count; i++)
-                {
-                    for (var j = 0; j < ClaimData.ClaimValues.Count; j++)
-                    {
-                        <td>@ClaimData.ClaimTypes[i]</td>
-                    }
-                }
-            
-            
-                @for(var i = 0; i < ClaimData.ClaimTypes.Count; i++)
-                {
-                    for (var j = 0; j < ClaimData.ClaimValues.Count; j++)
-                    {
-                        <td>@ClaimData.ClaimValues[j]</td>
-                    }
-                }
-            
-            <td>
-            </td>
-
-        </tr>
-}
     </tbody>
 </table>
 
-<h1>Add New Claim</h1>
-<form method="post" id="addForm">
-    <div class="row">
-        <div class="col">
-            <select class="form-control" name="type">
-                @foreach (var claimType in
-                           ClaimData.ClaimTypes)
-                {
-                    <option value="@claimType">
-                        @claimType
-                    </option>
-                }
-            </select>
-</form>
+
+</div>

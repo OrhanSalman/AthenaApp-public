@@ -1,20 +1,16 @@
 ﻿using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
 {
-//    [Authorize(Roles = "Admin")]
+    //    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         private readonly Context _context;
@@ -26,6 +22,9 @@ namespace AthenaWebApp.Controllers.MVC
             roleManager = roleMgr;
             userManager = userMrg;
         }
+
+        public bool IsChecked { get; set; }
+
 
         public ViewResult Index() => View(roleManager.Roles);
 
@@ -142,11 +141,13 @@ namespace AthenaWebApp.Controllers.MVC
 
             var role = await roleManager.Roles.FirstOrDefaultAsync(m => m.Id == id);
             var roleClaims = await roleManager.GetClaimsAsync(role);
-//                .FirstOrDefaultAsync(m => m.RoleId == id);
+            //                .FirstOrDefaultAsync(m => m.RoleId == id);
             if (roleClaims == null)
             {
                 return NotFound();
             }
+
+
 
             return View(roleClaims);
             /*
