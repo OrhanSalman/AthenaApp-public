@@ -1,9 +1,10 @@
-﻿@model IEnumerable<System.Security.Claims.Claim>
+﻿@model IEnumerable<IdentityRoleClaim<string>>
 @using AthenaWebApp.Data
 
 @{
     ViewData["Title"] = "Index";
     bool active = false;
+    var b = 0;
 
 }
 
@@ -26,18 +27,15 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
-
 td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
-
 .linie {
   border-top:1px solid black;
   width:150px;
 }
-
 tr:hover {background-color:yellow;}
 </style>
 
@@ -48,34 +46,38 @@ tr:hover {background-color:yellow;}
 </p>
 <div style="height:350px;overflow:auto;">
 
-<table class="table">
+
+@using (Html.BeginForm())
+    {
+        <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                @Html.DisplayNameFor(model => model.ClaimType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Value)
+                @Html.DisplayNameFor(model => model.ClaimValue)
             </th>
-            <th>Activated</th>
         </tr>
     </thead>
     <tbody>
-        @for(var i = 0; i < ClaimData.ClaimTypes.Count; i++)
-        {
-            @for(var z = 0; z < ClaimData.ClaimValues.Count; z++)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => ClaimData.ClaimTypes[i])</td>
-                    <td>@Html.DisplayFor(modelItem => ClaimData.ClaimValues[z])</td>
-                    <td><input type="checkbox" onclick="markRow(this)"></td>
-                </tr>
-            }
-            <tr class="linie"></tr>
-        }
-
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClaimType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClaimValue)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+            </td>
+        </tr>
+}
     </tbody>
 </table>
-
+<input type="submit" value="submit" />
+    }
 
 </div>

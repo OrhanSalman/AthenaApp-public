@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AthenaWebApp.Migrations
 {
@@ -48,24 +48,6 @@ namespace AthenaWebApp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Role", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserActivity",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ActivityId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CompanyId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StopTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SumTime = table.Column<TimeSpan>(type: "time", nullable: false),
-                    SumDistance = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserActivity", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -165,6 +147,30 @@ namespace AthenaWebApp.Migrations
                     table.PrimaryKey("PK_Template", x => x.TemplateId);
                     table.ForeignKey(
                         name: "FK_Template_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserActivity",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ActivityId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StopTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SumTime = table.Column<TimeSpan>(type: "time", nullable: false),
+                    SumDistance = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserActivity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserActivity_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -293,6 +299,11 @@ namespace AthenaWebApp.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Template_UserId",
                 table: "Template",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserActivity_UserId",
+                table: "UserActivity",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(

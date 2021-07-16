@@ -229,9 +229,11 @@ namespace AthenaWebApp.Migrations
                         .HasColumnType("time");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserActivity");
                 });
@@ -390,6 +392,15 @@ namespace AthenaWebApp.Migrations
                 });
 
             modelBuilder.Entity("AthenaWebApp.Models.Template", b =>
+                {
+                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", "UserExtension")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("UserExtension");
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Models.UserActivity", b =>
                 {
                     b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", "UserExtension")
                         .WithMany()

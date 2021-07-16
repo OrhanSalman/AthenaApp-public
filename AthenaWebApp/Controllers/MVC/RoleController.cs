@@ -4,8 +4,12 @@ using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Security.Claims;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
@@ -17,14 +21,15 @@ namespace AthenaWebApp.Controllers.MVC
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<UserExtension> userManager;
 
-        public RoleController(RoleManager<IdentityRole> roleMgr, UserManager<UserExtension> userMrg)
+        public RoleController(Context context, RoleManager<IdentityRole> roleMgr, UserManager<UserExtension> userMrg)
         {
+            _context = context;
             roleManager = roleMgr;
             userManager = userMrg;
         }
 
         public bool IsChecked { get; set; }
-
+        public string Id { get; set; }
 
         public ViewResult Index() => View(roleManager.Roles);
 
@@ -129,45 +134,123 @@ namespace AthenaWebApp.Controllers.MVC
         public IEnumerable<Claim> Claims { get; set; }
         */
 
-
+        /*
         public async Task<IActionResult> Claims(string id)
         {
-
+            // if-Break
             if (id == null)
             {
                 return NotFound();
             }
 
+            // 1. Get all possible Sections * Claims [User Create; User Edit;... Company Create;...]
+            var model = new List<IdentityRoleClaim<string>>();
+            for (var i = 0; i < ClaimData.ClaimTypes.Count; i++)
+            {
+                for (var z = 0; z < ClaimData.ClaimValues.Count; z++)
+                {
+                    model.Add(new IdentityRoleClaim<string>() { ClaimType = ClaimData.ClaimTypes[i], ClaimValue = ClaimData.ClaimValues[z] });
+                }
+            }
 
-            var role = await roleManager.Roles.FirstOrDefaultAsync(m => m.Id == id);
-            var roleClaims = await roleManager.GetClaimsAsync(role);
-            //                .FirstOrDefaultAsync(m => m.RoleId == id);
-            if (roleClaims == null)
+
+            // 2. Get the Role
+//            var role = await roleManager.Roles.FirstOrDefaultAsync(m => m.Id == id);
+
+            // 2. Search RoleId in table RoleClaim and get existing claims
+
+            var getExistingRoleClaims = _context.RoleClaims.Where(s => s.RoleId == id).ToList();
+
+//            IEnumerable<IdentityRoleClaim<string>> differenceQuery = getExistingRoleClaims.Except(model);
+
+            // 3. Check if there are any duplicates in both models
+            for (int i = 0; i < getExistingRoleClaims.Count; i++)
+            {
+                if(model.Contains(getExistingRoleClaims[i]))
+                {
+                    model.Remove(getExistingRoleClaims[i]);
+                }
+            }
+            // Cleaned list with possible claims to add to the specific role
+
+            return View(model);
+
+//            return View(getExistingRoleClaims);
+        }
+        */
+
+        [HttpPost]
+        [ActionName("SaveChanges")]
+        public async Task<IActionResult> SaveChanges([FromBody] Claim claim)
+        {
+            /*
+            public ActionResult Index(int[] selectedObjects)
+            {
+                //get the id from each selected checkbox
+                foreach (int item in selectedObjects)
+                {
+                    //update your row here using the item you get
+                }
+            }
+            */
+            IdentityRole role = await roleManager.FindByIdAsync(Id);
+
+//            var claim = new Claim(type, value);
+            var result = await roleManager.AddClaimAsync(role, claim);
+            if (result.Succeeded)
+                return RedirectToAction("Claims");
+            else
+                Errors(result);
+            return View();
+            /*
+            if (ModelState.IsValid)
+            {
+
+
+
+            }
+            */
+
+            /*
+            var role = await _context.Roles.FindAsync(Id);
+            Claim claim = new Claim(claimType, claimValue, ClaimValueTypes.String);
+            IdentityResult result = await roleManager.AddClaimAsync(role, claim);
+
+            if (result.Succeeded)
+                return RedirectToAction("Claims");
+            else
+                Errors(result);
+            return View();
+            */
+        }
+        /*
+        public async Task<IActionResult> SaveSelectedClaimssss([Bind("Id,CompanyName,Country,EmailContext")] Role company)
+        {
+            // RoleId
+            if (id == null)
             {
                 return NotFound();
             }
 
+            var saveClaim = await roleManager.CreateAsync()
 
-
-            return View(roleClaims);
-            /*
-            IdentityRole role = await roleManager.FindByIdAsync(id);
-            foreach (UserExtension user in userManager.Users)
+                            if (ModelState.IsValid)
             {
-                var list = await userManager.IsInRoleAsync(user, role.Name) ? members : nonMembers;
-                list.Add(user);
+                _context.Add(company);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            return View(new RoleEdit
+            return View(company);
+
+
+
+            var company = await _context.Company.FindAsync(id);
+            if (company == null)
             {
-                Role = role,
-                Members = members,
-                NonMembers = nonMembers
-            });
-            */
-        }
-        /*
-        public async Task<IActionResult> OnGetAsync()
-        {
+                return NotFound();
+            }
+            return View(company);
+
             if (string.IsNullOrEmpty(Id))
             {
                 //Redirect to NotFound
@@ -177,7 +260,8 @@ namespace AthenaWebApp.Controllers.MVC
             Claims = await RoleManager.GetClaimsAsync(role);
             return View();
         }
-
+        */
+        /*
         public async Task<IActionResult> OnPostAddClaimAsync([Required] string type,
                                                              [Required] string value)
         {

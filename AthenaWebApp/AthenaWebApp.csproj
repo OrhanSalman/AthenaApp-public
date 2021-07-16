@@ -6,12 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Claims\**" />
     <Compile Remove="Views\Distances\**" />
     <Compile Remove="Views\Roles\**" />
+    <Content Remove="Views\Claims\**" />
     <Content Remove="Views\Distances\**" />
     <Content Remove="Views\Roles\**" />
+    <EmbeddedResource Remove="Views\Claims\**" />
     <EmbeddedResource Remove="Views\Distances\**" />
     <EmbeddedResource Remove="Views\Roles\**" />
+    <None Remove="Views\Claims\**" />
     <None Remove="Views\Distances\**" />
     <None Remove="Views\Roles\**" />
   </ItemGroup>
@@ -21,6 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Role\Claims.cshtml" />
+    <None Include="Views\Role\Create.cshtml" />
+    <None Include="Views\Role\Index.cshtml" />
+    <None Include="Views\Role\Update.cshtml" />
     <None Include="wwwroot\js\ckeditor\adapters\jquery.js" />
     <None Include="wwwroot\js\ckeditor\lang\af.js" />
     <None Include="wwwroot\js\ckeditor\lang\ar.js" />
@@ -393,10 +401,6 @@
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2012" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Claims\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

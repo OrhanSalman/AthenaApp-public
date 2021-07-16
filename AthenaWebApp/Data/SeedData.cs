@@ -1,10 +1,11 @@
-﻿using AthenaWebApp.Areas.Identity.IdentityModels;
-using AthenaWebApp.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using AthenaWebApp.Data;
 using System;
 using System.Linq;
+using AthenaWebApp.Areas.Identity.IdentityModels;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace AthenaWebApp.Models
 {
@@ -105,7 +106,7 @@ namespace AthenaWebApp.Models
                     );
                 context.SaveChanges();
 
-                // Später löschen
+
                 context.Users.AddRange(
                     new UserExtension
                     {
@@ -117,32 +118,6 @@ namespace AthenaWebApp.Models
                         UserName = "Admin",
                         NormalizedUserName = "ADMIN",
                         CompanyId = "fca9a2af-1ed2-430c-b9ae-e5476d36ca77"
-                    });
-                context.SaveChanges();
-
-                context.UserRoles.AddRange(
-                    new IdentityUserRole<string>
-                    {
-                        UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
-                        RoleId = "9d5107d5-5edd-49ae-adee-240acf8c9af1"
-                    });
-                context.SaveChanges();
-                // Später löschen
-
-
-
-                /*
-                context.Users.AddRange(
-                    new UserExtension
-                    {
-                        Id = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
-                        Email = "admin@athena.com",
-                        NormalizedEmail = "ADMIN@ATHENA.COM",
-                        EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "Admin",
-                        NormalizedUserName = "ADMIN",
-                        CompanyId = "d33df339-1c29-42e3-bb45-6d7e6c990f1e"
                     },
                     new UserExtension
                     {
@@ -151,8 +126,8 @@ namespace AthenaWebApp.Models
                         NormalizedEmail = "SUPERVISOR@UM.SI",
                         EmailConfirmed = true,
                         PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "Supervisor",
-                        NormalizedUserName = "SUPERVISOR",
+                        UserName = "Supervisor_Maribor",
+                        NormalizedUserName = "SUPERVISOR_MARIBOR",
                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78"
                     },
                     new UserExtension
@@ -162,8 +137,8 @@ namespace AthenaWebApp.Models
                         NormalizedEmail = "SUPERVISOR@UNI-SIEGEN.DE",
                         EmailConfirmed = true,
                         PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "Supervisor",
-                        NormalizedUserName = "SUPERVISOR",
+                        UserName = "Supervisor_Siegen",
+                        NormalizedUserName = "SUPERVISOR_SIEGEN",
                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76"
                     },
                     new UserExtension
@@ -173,8 +148,8 @@ namespace AthenaWebApp.Models
                         NormalizedEmail = "SUPERVISOR@IPP.PT",
                         EmailConfirmed = true,
                         PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "Supervisor",
-                        NormalizedUserName = "SUPERVISOR",
+                        UserName = "Supervisor_Porto",
+                        NormalizedUserName = "SUPERVISOR_PORTO",
                         CompanyId = "hca9a2af-1ed2-430c-b9ae-e5476d36ca79"
                     },
                     new UserExtension
@@ -184,8 +159,8 @@ namespace AthenaWebApp.Models
                         NormalizedEmail = "SUPERVISOR@HMU.GR",
                         EmailConfirmed = true,
                         PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "Supervisor",
-                        NormalizedUserName = "SUPERVISOR",
+                        UserName = "Supervisor_Hellenic",
+                        NormalizedUserName = "SUPERVISOR_HELLENIC",
                         CompanyId = "ica9a2af-1ed2-430c-b9ae-e5476d36ca80"
                     },
                     new UserExtension
@@ -195,8 +170,8 @@ namespace AthenaWebApp.Models
                         NormalizedEmail = "SUPERVISOR@PEC.IT",
                         EmailConfirmed = true,
                         PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "Supervisor",
-                        NormalizedUserName = "SUPERVISOR",
+                        UserName = "Supervisor_Unicusano",
+                        NormalizedUserName = "SUPERVISOR_UNICUSANO",
                         CompanyId = "jca9a2af-1ed2-430c-b9ae-e5476d36ca81"
                     },
                     new UserExtension
@@ -206,8 +181,8 @@ namespace AthenaWebApp.Models
                         NormalizedEmail = "SUPERVISOR@UNIV-ORLEANS.FR",
                         EmailConfirmed = true,
                         PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "Supervisor",
-                        NormalizedUserName = "SUPERVISOR",
+                        UserName = "Supervisor_Orleans",
+                        NormalizedUserName = "SUPERVISOR_ORLEANS",
                         CompanyId = "kca9a2af-1ed2-430c-b9ae-e5476d36ca82"
                     },
                     new UserExtension
@@ -217,8 +192,8 @@ namespace AthenaWebApp.Models
                         NormalizedEmail = "SUPERVISOR@VILNIUSTECH.IT",
                         EmailConfirmed = true,
                         PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "Supervisor",
-                        NormalizedUserName = "SUPERVISOR",
+                        UserName = "Supervisor_Vilnius",
+                        NormalizedUserName = "SUPERVISOR_VILNIUS",
                         CompanyId = "lca9a2af-1ed2-430c-b9ae-e5476d36ca83"
                     },
                     new UserExtension
@@ -227,7 +202,6 @@ namespace AthenaWebApp.Models
                         Email = "hans.peter@um.si",
                         NormalizedEmail = "HANS.PETER@UM.SI",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
                         UserName = "HansPeter",
                         NormalizedUserName = "HANSPETER",
                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78"
@@ -235,457 +209,415 @@ namespace AthenaWebApp.Models
                     new UserExtension
                     {
                         Id = "m52f4e8e-7a86-4279-82d1-749b67b99a101",
-                        Email = "mobileUser@um.si",
-                        NormalizedEmail = "MOBILEUSER@UM.SI",
+                        Email = "Klaus.Hein@um.si",
+                        NormalizedEmail = "KLAUS.HEIN@UM.SI",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "KlausHein",
+                        NormalizedUserName = "KLAUSHEIN",
                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78"
                     },
                     new UserExtension
                     {
                         Id = "n52f4e8e-7a86-4279-82d1-749b67b99a102",
-                        Email = "mobileUser@um.si",
-                        NormalizedEmail = "MOBILEUSER@UM.SI",
+                        Email = "Hans@um.si",
+                        NormalizedEmail = "HANS@UM.SI",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Hans12",
+                        NormalizedUserName = "HANS12",
                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78"
                     },
                     new UserExtension
                     {
                         Id = "o52f4e8e-7a86-4279-82d1-749b67b99a103",
-                        Email = "mobileUser@um.si",
-                        NormalizedEmail = "MOBILEUSER@UM.SI",
+                        Email = "Bernd.K@um.si",
+                        NormalizedEmail = "BERND.K@UM.SI",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Bernd45",
+                        NormalizedUserName = "BERND45",
                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78"
                     },
                     new UserExtension
                     {
                         Id = "p52f4e8e-7a86-4279-82d1-749b67b99a104",
-                        Email = "mobileUser@um.si",
-                        NormalizedEmail = "MOBILEUSER@UM.SI",
+                        Email = "MarkusKlum@um.si",
+                        NormalizedEmail = "MARKUSKLUM@UM.SI",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "MarkusK",
+                        NormalizedUserName = "MARKUSK",
                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78"
                     },
                     new UserExtension
                     {
                         Id = "q52f4e8e-7a86-4279-82d1-749b67b99a105",
-                        Email = "mobileUser@um.si",
-                        NormalizedEmail = "MOBILEUSER@UM.SI",
+                        Email = "MohammedBeirut@um.si",
+                        NormalizedEmail = "MOHAMMEDBEIRUT@UM.SI",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Mohi23",
+                        NormalizedUserName = "MOHI23",
                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78"
                     },
                     new UserExtension
                     {
                         Id = "r52f4e8e-7a86-4279-82d1-749b67b99a106",
-                        Email = "mobileUser@uni-siegen.de",
-                        NormalizedEmail = "MOBILEUSER@UNI-SIEGEN.DE",
+                        Email = "FranzMü@uni-siegen.de",
+                        NormalizedEmail = "FRANZMÜ@UNI-SIEGEN.DE",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "FranzM",
+                        NormalizedUserName = "FRANZM",
                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76"
                     },
                     new UserExtension
                     {
                         Id = "s52f4e8e-7a86-4279-82d1-749b67b99a107",
-                        Email = "mobileUser@uni-siegen.de",
-                        NormalizedEmail = "MOBILEUSER@UNI-SIEGEN.DE",
+                        Email = "Herbert@uni-siegen.de",
+                        NormalizedEmail = "HERBERT@UNI-SIEGEN.DE",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Herbi",
+                        NormalizedUserName = "HERBI",
                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76"
                     },
                     new UserExtension
                     {
                         Id = "t52f4e8e-7a86-4279-82d1-749b67b99a108",
                         Email = "orhan.salman@student.uni-siegen.de",
-                        NormalizedEmail = "MOBILEUSER@UNI-SIEGEN.DE",
+                        NormalizedEmail = "ORHAN.SALMAN@STUDENT.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "OrhanS",
+                        NormalizedUserName = "ORHANS",
                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76"
                     },
                     new UserExtension
                     {
                         Id = "u52f4e8e-7a86-4279-82d1-749b67b99a109",
-                        Email = "mobileUser@uni-siegen.de",
-                        NormalizedEmail = "MOBILEUSER@UNI-SIEGEN.DE",
+                        Email = "Alexander.Eickelmann@student.uni-siegen.de",
+                        NormalizedEmail = "ALEXANDER.EICKELMANN@STUDENT.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Alex",
+                        NormalizedUserName = "ALEX",
                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76"
                     },
                     new UserExtension
                     {
                         Id = "v52f4e8e-7a86-4279-82d1-749b67b99a110",
-                        Email = "mobileUser@uni-siegen.de",
-                        NormalizedEmail = "MOBILEUSER@UNI-SIEGEN.DE",
+                        Email = "Lena.Falkenberg@student.uni-siegen.de",
+                        NormalizedEmail = "LENA.FALKENBERG@STUDENT.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "LenaF",
+                        NormalizedUserName = "LENAF",
                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76"
                     },
                     new UserExtension
                     {
                         Id = "w52f4e8e-7a86-4279-82d1-749b67b99a111",
-                        Email = "mobileUser@uni-siegen.de",
-                        NormalizedEmail = "MOBILEUSER@UNI-SIEGEN.DE",
+                        Email = "Raphael.Palombo@student.uni-siegen.de",
+                        NormalizedEmail = "RAPHAEL.PALOMBO@STUDENT.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "RaphaelP",
+                        NormalizedUserName = "RAPHAELP",
                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76"
                     },
                     new UserExtension
                     {
                         Id = "x52f4e8e-7a86-4279-82d1-749b67b99a112",
-                        Email = "mobileUser@uni-siegen.de",
-                        NormalizedEmail = "MOBILEUSER@UNI-SIEGEN.DE",
+                        Email = "Dominik.Korzak@student.uni-siegen.de",
+                        NormalizedEmail = "DOMIK.KORZAK@STUDENT.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Dome",
+                        NormalizedUserName = "DOME",
                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76"
                     },
                     new UserExtension
                     {
                         Id = "y52f4e8e-7a86-4279-82d1-749b67b99a113",
-                        Email = "mobileUser@uni-siegen.de",
-                        NormalizedEmail = "MOBILEUSER@UNI-SIEGEN.DE",
+                        Email = "Jasmin.Freudenberg@student.uni-siegen.de",
+                        NormalizedEmail = "JASMIN.FREUDENBERG@STUDENT.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Mini",
+                        NormalizedUserName = "MINI",
                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76"
                     },
                     new UserExtension
                     {
                         Id = "z52f4e8e-7a86-4279-82d1-749b67b99a114",
-                        Email = "mobileUser@uni-siegen.de",
-                        NormalizedEmail = "MOBILEUSER@UNI-SIEGEN.DE",
+                        Email = "CyraK@uni-siegen.de",
+                        NormalizedEmail = "CYRAK@UNI-SIEGEN.DE",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Cyra",
+                        NormalizedUserName = "CYRA",
                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76"
                     },
                     new UserExtension
                     {
                         Id = "a52f4e8e-7a86-4279-82d1-749b67b99a115",
-                        Email = "mobileUser@ipp.it",
-                        NormalizedEmail = "MOBILEUSER@IPP.IT",
+                        Email = "Estephanio@ipp.it",
+                        NormalizedEmail = "ESTEPHANIO@IPP.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Estee",
+                        NormalizedUserName = "ESTEE",
                         CompanyId = "hca9a2af-1ed2-430c-b9ae-e5476d36ca79"
                     },
                     new UserExtension
                     {
                         Id = "b52f4e8e-7a86-4279-82d1-749b67b99a116",
-                        Email = "mobileUser@ipp.it",
-                        NormalizedEmail = "MOBILEUSER@IPP.IT",
+                        Email = "MariaH@ipp.it",
+                        NormalizedEmail = "MARIAH@IPP.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Marii",
+                        NormalizedUserName = "MARII",
                         CompanyId = "hca9a2af-1ed2-430c-b9ae-e5476d36ca79"
                     },
                     new UserExtension
                     {
                         Id = "c52f4e8e-7a86-4279-82d1-749b67b99a117",
-                        Email = "mobileUser@ipp.it",
-                        NormalizedEmail = "MOBILEUSER@IPP.IT",
+                        Email = "Rosee@ipp.it",
+                        NormalizedEmail = "ROSEE@IPP.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Rosi",
+                        NormalizedUserName = "ROSI",
                         CompanyId = "hca9a2af-1ed2-430c-b9ae-e5476d36ca79"
                     },
                     new UserExtension
                     {
-                        Id = "d52f4e8e-7a86-4279-82d1-749b67b99a23",
-                        Email = "mobileUser@ipp.it",
-                        NormalizedEmail = "MOBILEUSER@IPP.IT",
+                        Id = "d52f4e8e-7a86-4279-82d1-749b67b99a118",
+                        Email = "Irena@ipp.it",
+                        NormalizedEmail = "IRENA@IPP.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Iri75",
+                        NormalizedUserName = "IRI75",
                         CompanyId = "hca9a2af-1ed2-430c-b9ae-e5476d36ca79"
                     },
                     new UserExtension
                     {
                         Id = "e52f4e8e-7a86-4279-82d1-749b67b99a25",
-                        Email = "mobileUser@hmu.gr",
-                        NormalizedEmail = "MOBILEUSER@HMU.GR",
+                        Email = "TomMustermann@hmu.gr",
+                        NormalizedEmail = "TOMMUSTERMANN@HMU.GR",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Tommy",
+                        NormalizedUserName = "TOMMY",
                         CompanyId = "ica9a2af-1ed2-430c-b9ae-e5476d36ca80"
                     },
                     new UserExtension
                     {
                         Id = "f52f4e8e-7a86-4279-82d1-749b67b99a20",
-                        Email = "mobileUser@hmu.gr",
-                        NormalizedEmail = "MOBILEUSER@HMU.GR",
+                        Email = "TinaTurner@hmu.gr",
+                        NormalizedEmail = "TINATURNER@HMU.GR",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Tini",
+                        NormalizedUserName = "TINI",
                         CompanyId = "ica9a2af-1ed2-430c-b9ae-e5476d36ca80"
                     },
                     new UserExtension
                     {
                         Id = "g52f4e8e-7a86-4279-82d1-749b67b99a11",
-                        Email = "mobileUser@hmu.gr",
-                        NormalizedEmail = "MOBILEUSER@HMU.GR",
+                        Email = "MichelK@hmu.gr",
+                        NormalizedEmail = "MICHELK@HMU.GR",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Mimi",
+                        NormalizedUserName = "MIMI",
                         CompanyId = "ica9a2af-1ed2-430c-b9ae-e5476d36ca80"
                     },
                     new UserExtension
                     {
                         Id = "h52f4e8e-7a86-4279-82d1-749b67b99a22",
-                        Email = "mobileUser@hmu.gr",
-                        NormalizedEmail = "MOBILEUSER@HMU.GR",
+                        Email = "KurtWalter@hmu.gr",
+                        NormalizedEmail = "KURTWALTER@HMU.GR",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "KurtW",
+                        NormalizedUserName = "KURTW",
                         CompanyId = "ica9a2af-1ed2-430c-b9ae-e5476d36ca80"
                     },
                     new UserExtension
                     {
                         Id = "i52f4e8e-7a86-4279-82d1-749b67b99a23",
-                        Email = "mobileUser@hmu.gr",
-                        NormalizedEmail = "MOBILEUSER@HMU.GR",
+                        Email = "ElisabethNewton@hmu.gr",
+                        NormalizedEmail = "ELISABETHNEWTON@HMU.GR",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Elli",
+                        NormalizedUserName = "ELLI",
                         CompanyId = "ica9a2af-1ed2-430c-b9ae-e5476d36ca80"
                     },
                     new UserExtension
                     {
                         Id = "j52f4e8e-7a86-4279-82d1-749b67b99a24",
-                        Email = "mobileUser@hmu.gr",
-                        NormalizedEmail = "MOBILEUSER@HMU.GR",
+                        Email = "AlbertEinstein@hmu.gr",
+                        NormalizedEmail = "ALBERTEINSTEIN@HMU.GR",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "AlbertE",
+                        NormalizedUserName = "ALBERTE",
                         CompanyId = "ica9a2af-1ed2-430c-b9ae-e5476d36ca80"
                     },
                     new UserExtension
                     {
                         Id = "k52f4e8e-7a86-4279-82d1-749b67b99a25",
-                        Email = "mobileUser@pec.it",
-                        NormalizedEmail = "MOBILEUSER@PEC.IT",
+                        Email = "WilhelmRöntgen@pec.it",
+                        NormalizedEmail = "WILHELMRÖNTGEN@PEC.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Willi",
+                        NormalizedUserName = "WILLI",
                         CompanyId = "jca9a2af-1ed2-430c-b9ae-e5476d36ca81"
                     },
                     new UserExtension
                     {
                         Id = "l52f4e8e-7a86-4279-82d1-749b67b99a26",
-                        Email = "mobileUser@pec.it",
-                        NormalizedEmail = "MOBILEUSER@PEC.IT",
+                        Email = "FridaMozart@pec.it",
+                        NormalizedEmail = "FRIDAMOZART@PEC.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Frida23",
+                        NormalizedUserName = "FRIDA23",
                         CompanyId = "jca9a2af-1ed2-430c-b9ae-e5476d36ca81"
                     },
                     new UserExtension
                     {
                         Id = "m52f4e8e-7a86-4279-82d1-749b67b99a27",
-                        Email = "mobileUser@pec.it",
-                        NormalizedEmail = "MOBILEUSER@PEC.IT",
+                        Email = "AntoniaS@pec.it",
+                        NormalizedEmail = "ANTONIAS@PEC.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Anto",
+                        NormalizedUserName = "ANTO",
                         CompanyId = "jca9a2af-1ed2-430c-b9ae-e5476d36ca81"
                     },
                     new UserExtension
                     {
                         Id = "n52f4e8e-7a86-4279-82d1-749b67b99a28",
-                        Email = "mobileUser@pec.it",
-                        NormalizedEmail = "MOBILEUSER@PEC.IT",
+                        Email = "HeinrichHeine@pec.it",
+                        NormalizedEmail = "HEINRICHHEINE@PEC.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "HeinrichH",
+                        NormalizedUserName = "HEINRICHH",
                         CompanyId = "jca9a2af-1ed2-430c-b9ae-e5476d36ca81"
                     },
                     new UserExtension
                     {
                         Id = "o52f4e8e-7a86-4279-82d1-749b67b99a29",
-                        Email = "mobileUser@pec.it",
-                        NormalizedEmail = "MOBILEUSER@PEC.IT",
+                        Email = "WolfgangGoethe@pec.it",
+                        NormalizedEmail = "WOLFGANGGOETHE@PEC.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Wolli",
+                        NormalizedUserName = "WOLLI",
                         CompanyId = "jca9a2af-1ed2-430c-b9ae-e5476d36ca81"
                     },
                     new UserExtension
                     {
                         Id = "p52f4e8e-7a86-4279-82d1-749b67b99a30",
-                        Email = "mobileUser@pec.it",
-                        NormalizedEmail = "MOBILEUSER@PEC.IT",
+                        Email = "HectorG@pec.it",
+                        NormalizedEmail = "HECTORG@PEC.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Hector12",
+                        NormalizedUserName = "HECTOR12",
                         CompanyId = "jca9a2af-1ed2-430c-b9ae-e5476d36ca81"
                     },
                     new UserExtension
                     {
                         Id = "q52f4e8e-7a86-4279-82d1-749b67b99a31",
-                        Email = "mobileUser@univ-orleans.fr",
-                        NormalizedEmail = "MOBILEUSER@UNIV-ORLEANS.FR",
+                        Email = "KaiPflaume@univ-orleans.fr",
+                        NormalizedEmail = "KAIPFLAUME@UNIV-ORLEANS.FR",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "KaiP",
+                        NormalizedUserName = "KAIP",
                         CompanyId = "kca9a2af-1ed2-430c-b9ae-e5476d36ca82"
                     },
                     new UserExtension
                     {
                         Id = "r52f4e8e-7a86-4279-82d1-749b67b99a32",
-                        Email = "mobileUser@univ-orleans.fr",
-                        NormalizedEmail = "MOBILEUSER@UNIV-ORLEANS.FR",
+                        Email = "Viki@univ-orleans.fr",
+                        NormalizedEmail = "VIKI@UNIV-ORLEANS.FR",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Vika",
+                        NormalizedUserName = "VIKA",
                         CompanyId = "kca9a2af-1ed2-430c-b9ae-e5476d36ca82"
                     },
                     new UserExtension
                     {
                         Id = "s52f4e8e-7a86-4279-82d1-749b67b99a33",
-                        Email = "mobileUser@univ-orleans.fr",
-                        NormalizedEmail = "MOBILEUSER@UNIV-ORLEANS.FR",
+                        Email = "Sero@univ-orleans.fr",
+                        NormalizedEmail = "SERO@UNIV-ORLEANS.FR",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Sero12",
+                        NormalizedUserName = "SERO12",
                         CompanyId = "kca9a2af-1ed2-430c-b9ae-e5476d36ca82"
                     },
                     new UserExtension
                     {
                         Id = "t52f4e8e-7a86-4279-82d1-749b67b99a34",
-                        Email = "mobileUser@univ-orleans.fr",
-                        NormalizedEmail = "MOBILEUSER@UNIV-ORLEANS.FR",
+                        Email = "HeikeU@univ-orleans.fr",
+                        NormalizedEmail = "HEIKEU@UNIV-ORLEANS.FR",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Heike78",
+                        NormalizedUserName = "HEIKE78",
                         CompanyId = "kca9a2af-1ed2-430c-b9ae-e5476d36ca82"
                     },
                     new UserExtension
                     {
-                        Id = "u42f4e8e-7a86-4279-82d1-749b67b99a35",
-                        Email = "mobileUser@univ-orleans.fr",
-                        NormalizedEmail = "MOBILEUSER@UNIV-ORLEANS.FR",
+                        Id = "u52f4e8e-7a86-4279-82d1-749b67b99a35",
+                        Email = "KatieG@univ-orleans.fr",
+                        NormalizedEmail = "KATIEG@UNIV-ORLEANS.FR",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Katie",
+                        NormalizedUserName = "KATIE",
                         CompanyId = "kca9a2af-1ed2-430c-b9ae-e5476d36ca82"
                     },
                     new UserExtension
                     {
                         Id = "u52f4e8e-7a86-4279-82d1-749b67b99a13",
-                        Email = "mobileUser@vilniustech.it",
-                        NormalizedEmail = "MOBILEUSER@VILNIUSTECH.IT",
+                        Email = "AlperR@vilniustech.it",
+                        NormalizedEmail = "ALPERR@VILNIUSTECH.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Alper34",
+                        NormalizedUserName = "ALPER34",
                         CompanyId = "lca9a2af-1ed2-430c-b9ae-e5476d36ca83"
                     },
                     new UserExtension
                     {
                         Id = "v52f4e8e-7a86-4279-82d1-749b67b99a136",
-                        Email = "mobileUser@vilniustech.it",
-                        NormalizedEmail = "MOBILEUSER@VILNIUSTECH.IT",
+                        Email = "MertBeirut@vilniustech.it",
+                        NormalizedEmail = "MERTBEIRUT@VILNIUSTECH.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Mert",
+                        NormalizedUserName = "MERT",
                         CompanyId = "lca9a2af-1ed2-430c-b9ae-e5476d36ca83"
                     },
                     new UserExtension
                     {
                         Id = "w52f4e8e-7a86-4279-82d1-749b67b99a37",
-                        Email = "mobileUser@vilniustech.it",
-                        NormalizedEmail = "MOBILEUSER@VILNIUSTECH.IT",
+                        Email = "MarcelJ@vilniustech.it",
+                        NormalizedEmail = "MARCELJ@VILNIUSTECH.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Marci",
+                        NormalizedUserName = "MARCI",
                         CompanyId = "lca9a2af-1ed2-430c-b9ae-e5476d36ca83"
                     },
                     new UserExtension
                     {
                         Id = "x52f4e8e-7a86-4279-82d1-749b67b99a38",
-                        Email = "mobileUser@vilniustech.it",
-                        NormalizedEmail = "MOBILEUSER@VILNIUSTECH.IT",
+                        Email = "Angi@vilniustech.it",
+                        NormalizedEmail = "ANGI@VILNIUSTECH.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Angie",
+                        NormalizedUserName = "ANGIE",
                         CompanyId = "lca9a2af-1ed2-430c-b9ae-e5476d36ca83"
                     },
                     new UserExtension
                     {
                         Id = "y52f4e8e-7a86-4279-82d1-749b67b99a39",
-                        Email = "mobileUser@vilniustech.it",
-                        NormalizedEmail = "MOBILEUSER@VILNIUSTECH.IT",
+                        Email = "PaulPeter@vilniustech.it",
+                        NormalizedEmail = "PAULPETER@VILNIUSTECH.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Pauli",
+                        NormalizedUserName = "PAULI",
                         CompanyId = "lca9a2af-1ed2-430c-b9ae-e5476d36ca83"
                     },
                     new UserExtension
                     {
                         Id = "z52f4e8e-7a86-4279-82d1-749b67b99a40",
-                        Email = "mobileUser@vilniustech.it",
-                        NormalizedEmail = "MOBILEUSER@VILNIUSTECH.IT",
+                        Email = "NewtonRoman@vilniustech.it",
+                        NormalizedEmail = "NEWTONROMAN@VILNIUSTECH.IT",
                         EmailConfirmed = true,
-                        PasswordHash = "AQAAAAEAACcQAAAAENf84y15l279kb1SlN0OMFgdR6qf3ne15Ny4y2rQP+RtnLSBu1OYngVDaIvHcYdCBg==",
-                        UserName = "mobileUser",
-                        NormalizedUserName = "MOBILEUSER",
+                        UserName = "Roman45",
+                        NormalizedUserName = "ROMAN45",
                         CompanyId = "lca9a2af-1ed2-430c-b9ae-e5476d36ca83"
                     }
                     );
                 context.SaveChanges();
-
 
                 context.UserRoles.AddRange(
                     new IdentityUserRole<string>
@@ -823,119 +755,124 @@ namespace AthenaWebApp.Models
                         UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a118",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
-                    new IdentityUserRole<string>
+                    new IdentityUserRole<string>                            // @Jasmin: Ab hier bitte die UserId oben bei User und unten bei UserRole vergleichen
                     {
-                        UserId = "e52f4e8e-7a86-4279-82d1-749b67b99a119", // MobileUser Hellenic Mediterranean University
+                        UserId = "e52f4e8e-7a86-4279-82d1-749b67b99a25", // MobileUser Hellenic Mediterranean University
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "f52f4e8e-7a86-4279-82d1-749b67b99a120",
+                        UserId = "f52f4e8e-7a86-4279-82d1-749b67b99a20",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "g52f4e8e-7a86-4279-82d1-749b67b99a121",
+                        UserId = "g52f4e8e-7a86-4279-82d1-749b67b99a11",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "h52f4e8e-7a86-4279-82d1-749b67b99a122",
+                        UserId = "h52f4e8e-7a86-4279-82d1-749b67b99a22",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "i52f4e8e-7a86-4279-82d1-749b67b99a123",
+                        UserId = "i52f4e8e-7a86-4279-82d1-749b67b99a23",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "j52f4e8e-7a86-4279-82d1-749b67b99a124", // MobileUser Unicusano
+                        UserId = "j52f4e8e-7a86-4279-82d1-749b67b99a24", // MobileUser Unicusano
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "k52f4e8e-7a86-4279-82d1-749b67b99a125",
+                        UserId = "k52f4e8e-7a86-4279-82d1-749b67b99a25",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "l52f4e8e-7a86-4279-82d1-749b67b99a126",
+                        UserId = "l52f4e8e-7a86-4279-82d1-749b67b99a26",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "m52f4e8e-7a86-4279-82d1-749b67b99a127",
+                        UserId = "m52f4e8e-7a86-4279-82d1-749b67b99a27", // Nur 2 mal
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "n52f4e8e-7a86-4279-82d1-749b67b99a128",
+                        UserId = "n52f4e8e-7a86-4279-82d1-749b67b99a28",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "o52f4e8e-7a86-4279-82d1-749b67b99a129",
+                        UserId = "o52f4e8e-7a86-4279-82d1-749b67b99a29",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "p52f4e8e-7a86-4279-82d1-749b67b99a130",
+                        UserId = "p52f4e8e-7a86-4279-82d1-749b67b99a30",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "q52f4e8e-7a86-4279-82d1-749b67b99a131", // Mobile User University of Orléans
+                        UserId = "q52f4e8e-7a86-4279-82d1-749b67b99a31", // Mobile User University of Orléans
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "r52f4e8e-7a86-4279-82d1-749b67b99a132",
+                        UserId = "r52f4e8e-7a86-4279-82d1-749b67b99a32",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "s52f4e8e-7a86-4279-82d1-749b67b99a133",
+                        UserId = "s52f4e8e-7a86-4279-82d1-749b67b99a33",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "t52f4e8e-7a86-4279-82d1-749b67b99a134",
+                        UserId = "t52f4e8e-7a86-4279-82d1-749b67b99a34",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "u52f4e8e-7a86-4279-82d1-749b67b99a135",
+                        UserId = "u52f4e8e-7a86-4279-82d1-749b67b99a35",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "v52f4e8e-7a86-4279-82d1-749b67b99a136", // Vilnius Tech MobileUser
+                        UserId = "u52f4e8e-7a86-4279-82d1-749b67b99a13", // Vilnius Tech MobileUser
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "w52f4e8e-7a86-4279-82d1-749b67b99a137",
+                        UserId = "v52f4e8e-7a86-4279-82d1-749b67b99a136",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "x52f4e8e-7a86-4279-82d1-749b67b99a138",
+                        UserId = "w52f4e8e-7a86-4279-82d1-749b67b99a37",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "y52f4e8e-7a86-4279-82d1-749b67b99a139",
+                        UserId = "x52f4e8e-7a86-4279-82d1-749b67b99a38",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     },
                     new IdentityUserRole<string>
                     {
-                        UserId = "z52f4e8e-7a86-4279-82d1-749b67b99a140",
+                        UserId = "y52f4e8e-7a86-4279-82d1-749b67b99a39",
+                        RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
+                    },
+                    new IdentityUserRole<string>
+                    {
+                        UserId = "z52f4e8e-7a86-4279-82d1-749b67b99a40",
                         RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2"
                     }
                     );
                 context.SaveChanges();
-                */
+
 
 
                 // Activites 
@@ -948,22 +885,375 @@ namespace AthenaWebApp.Models
                         Description = "Go swimming",
                         MaxSpeed = 10,
                         SetManualyByUser = true
+                    },
+                    new Activity
+                    {
+                        Id = "u33df349-1c29-42e3-bf45-6d7e6c990f1i",
+                        ActivityType = "Biking",
+                        Description = "Ride a bike",
+                        MaxSpeed = 40,
+                        SetManualyByUser = false
+                    },
+                    new Activity
+                    {
+                        Id = "v33df349-1c29-42e3-bf45-6d7e6c990f1j",
+                        ActivityType = "Hiking",
+                        Description = "Go hiking.",
+                        MaxSpeed = 10,
+                        SetManualyByUser = false
+                    },
+                    new Activity
+                    {
+                        Id = "w33df349-1c29-42e3-bf45-6d7e6c990f1k",
+                        ActivityType = "Jogging",
+                        Description = "Go jogging",
+                        MaxSpeed = 25,
+                        SetManualyByUser = false
+                    },
+                    new Activity
+                    {
+                        Id = "x33df349-1c29-42e3-bf45-6d7e6c990f1l",
+                        ActivityType = "Walking",
+                        Description = "Go for a walk",
+                        MaxSpeed = 15,
+                        SetManualyByUser = false
                     });
                 context.SaveChanges();
 
 
                 context.UserActivity.AddRange(
-                    new UserActivity
-                    {
-                        Id = "b51f4e8e-5b86-4279-82d1-749b67b99a98",
-                        UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
-                        ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
-                        CompanyId = "d33df339-1c29-42e3-bb45-6d7e6c990f1e",
-                        StartTime = new DateTime(2021, 07, 13, 15, 02, 05),    //year, month, day, hour, min, seconds
-                        StopTime = new DateTime(2021, 07, 13, 15, 22, 05),
-                        SumTime = new TimeSpan(0, 20, 0, 0),                   // StopTime - StartTime // hours, minutes, seconds, milliseconds.
-                        SumDistance = 5125                                     // Meters
-                    });
+                     new UserActivity
+                     {
+                         Id = "ä51f4e8e-5b86-4279-82d1-749b67b99a98",
+                         UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
+                         ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
+                         CompanyId = "d33df339-1c29-42e3-bb45-6d7e6c990f1e",
+                         StartTime = new DateTime(2021, 07, 13, 15, 02, 05),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 13, 15, 22, 05),
+                         SumTime = new TimeSpan(hours: 0, minutes: 20, seconds: 0),
+                         SumDistance = 5125                                     // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "ö51f4e8e-5b86-4279-82d1-749b67b99a99",
+                         UserId = "l52f4e8e-7a86-4279-82d1-749b67b99a100", // Zwei mal eingetragen
+                         ActivityId = "u33df349-1c29-42e3-bf45-6d7e6c990f1i",
+                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78",
+                         StartTime = new DateTime(2021, 07, 14, 15, 00, 05),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 14, 15, 30, 05),
+                         SumTime = new TimeSpan(hours: 0, minutes: 30, seconds: 0),
+                         SumDistance = 1000                                    // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "p51f4e8e-5b86-4279-82d1-749b67b99a112",
+                         UserId = "x52f4e8e-7a86-4279-82d1-749b67b99a112", // Richtig
+                         ActivityId = "u33df349-1c29-42e3-bf45-6d7e6c990f1i",
+                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76",
+                         StartTime = new DateTime(2021, 07, 14, 15, 00, 05),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 14, 15, 30, 05),
+                         SumTime = new TimeSpan(hours: 0, minutes: 30, seconds: 0),
+                         SumDistance = 1000                                    // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "q51f4e8e-5b86-4279-82d1-749b67b99a113",
+                         UserId = "y52f4e8e-7a86-4279-82d1-749b67b99a113",
+                         ActivityId = "w33df349-1c29-42e3-bf45-6d7e6c990f1k",
+                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76",
+                         StartTime = new DateTime(2021, 07, 14, 16, 00, 05),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 14, 16, 25, 05),
+                         SumTime = new TimeSpan(hours: 0, minutes: 25, seconds: 0),
+                         SumDistance = 4500                                    // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "r51f4e8e-5b86-4279-82d1-749b67b99a114",
+                         UserId = "z52f4e8e-7a86-4279-82d1-749b67b99a114",
+                         ActivityId = "x33df349-1c29-42e3-bf45-6d7e6c990f1l",
+                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76",
+                         StartTime = new DateTime(2021, 07, 14, 16, 00, 05),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
+                         SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
+                         SumDistance = 5025                                    // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "s51f4e8e-5b86-4279-82d1-749b67b99a115",
+                         UserId = "a52f4e8e-7a86-4279-82d1-749b67b99a115",
+                         ActivityId = "x33df349-1c29-42e3-bf45-6d7e6c990f1l",
+                         CompanyId = "hca9a2af-1ed2-430c-b9ae-e5476d36ca79",
+                         StartTime = new DateTime(2021, 07, 14, 16, 00, 05),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
+                         SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
+                         SumDistance = 5005                                    // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "t51f4e8e-5b86-4279-82d1-749b67b99a116",
+                         UserId = "b52f4e8e-7a86-4279-82d1-749b67b99a116",
+                         ActivityId = "v33df349-1c29-42e3-bf45-6d7e6c990f1j",
+                         CompanyId = "hca9a2af-1ed2-430c-b9ae-e5476d36ca79",
+                         StartTime = new DateTime(2021, 07, 14, 16, 00, 05),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
+                         SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
+                         SumDistance = 3000                                    // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "u51f4e8e-5b86-4279-82d1-749b67b99a117",
+                         UserId = "c52f4e8e-7a86-4279-82d1-749b67b99a117",
+                         ActivityId = "v33df349-1c29-42e3-bf45-6d7e6c990f1j",
+                         CompanyId = "hca9a2af-1ed2-430c-b9ae-e5476d36ca79",
+                         StartTime = new DateTime(2021, 07, 14, 16, 00, 05),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
+                         SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
+                         SumDistance = 3000                                    // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "v51f4e8e-5b86-4279-82d1-749b67b99a118",
+                         UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a118",
+                         ActivityId = "v33df349-1c29-42e3-bf45-6d7e6c990f1j",
+                         CompanyId = "hca9a2af-1ed2-430c-b9ae-e5476d36ca79",
+                         StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
+                         StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
+                         SumTime = new TimeSpan(hours: 2, minutes: 0, seconds: 0),
+                         SumDistance = 6000
+                     },
+                     new UserActivity
+                     {
+                         Id = "w51f4e8e-5b86-4279-82d1-749b67b99a119",
+                         UserId = "e52f4e8e-7a86-4279-82d1-749b67b99a25",
+                         ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
+                         CompanyId = "ica9a2af-1ed2-430c-b9ae-e5476d36ca80",
+                         StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
+                         StopTime = new DateTime(2021, 07, 14, 16, 00, 05),
+                         SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
+                         SumDistance = 3500
+                     },
+                     new UserActivity
+                     {
+                         Id = "x51f4e8e-5b86-4279-82d1-749b67b99a120",
+                         UserId = "f52f4e8e-7a86-4279-82d1-749b67b99a20",
+                         ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
+                         CompanyId = "ica9a2af-1ed2-430c-b9ae-e5476d36ca80",
+                         StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
+                         StopTime = new DateTime(2021, 07, 14, 15, 30, 05),
+                         SumTime = new TimeSpan(hours: 0, minutes: 30, seconds: 0),
+                         SumDistance = 1500
+                     },
+                     new UserActivity
+                     {
+                         Id = "y51f4e8e-5b86-4279-82d1-749b67b99a121",
+                         UserId = "g52f4e8e-7a86-4279-82d1-749b67b99a11",
+                         ActivityId = "u33df349-1c29-42e3-bf45-6d7e6c990f1i",
+                         CompanyId = "ica9a2af-1ed2-430c-b9ae-e5476d36ca80",
+                         StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
+                         StopTime = new DateTime(2021, 07, 14, 15, 30, 05),
+                         SumTime = new TimeSpan(hours: 0, minutes: 30, seconds: 0),
+                         SumDistance = 1000
+                     },
+                     new UserActivity
+                     {
+                         Id = "z51f4e8e-5b86-4279-82d1-749b67b99a122",
+                         UserId = "h52f4e8e-7a86-4279-82d1-749b67b99a22",
+                         ActivityId = "u33df349-1c29-42e3-bf45-6d7e6c990f1i",
+                         CompanyId = "ica9a2af-1ed2-430c-b9ae-e5476d36ca80",
+                         StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
+                         StopTime = new DateTime(2021, 07, 14, 15, 40, 05),
+                         SumTime = new TimeSpan(hours: 0, minutes: 40, seconds: 0),
+                         SumDistance = 1010
+                     },
+                     new UserActivity
+                     {
+                         Id = "a51f4e8e-5b86-4279-82d1-749b67b99a123",
+                         UserId = "i52f4e8e-7a86-4279-82d1-749b67b99a23",
+                         ActivityId = "w33df349-1c29-42e3-bf45-6d7e6c990f1k",
+                         CompanyId = "ica9a2af-1ed2-430c-b9ae-e5476d36ca80",
+                         StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
+                         StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
+                         SumTime = new TimeSpan(hours: 2, minutes: 0, seconds: 0),
+                         SumDistance = 20000
+                     },
+                     new UserActivity
+                     {
+                         Id = "b51f4e8e-5b86-4279-82d1-749b67b99a124",
+                         UserId = "j52f4e8e-7a86-4279-82d1-749b67b99a24",
+                         ActivityId = "w33df349-1c29-42e3-bf45-6d7e6c990f1k",
+                         CompanyId = "ica9a2af-1ed2-430c-b9ae-e5476d36ca80",
+                         StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
+                         StopTime = new DateTime(2021, 07, 14, 16, 00, 05),
+                         SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
+                         SumDistance = 10000
+                     },
+                     new UserActivity
+                     {
+                         Id = "c51f4e8e-5b86-4279-82d1-749b67b99a125",
+                         UserId = "k52f4e8e-7a86-4279-82d1-749b67b99a25",
+                         ActivityId = "x33df349-1c29-42e3-bf45-6d7e6c990f1l",
+                         CompanyId = "jca9a2af-1ed2-430c-b9ae-e5476d36ca81",
+                         StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
+                         StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
+                         SumTime = new TimeSpan(hours: 2, minutes: 0, seconds: 0),
+                         SumDistance = 10000
+                     },
+                     new UserActivity
+                     {
+                         Id = "d51f4e8e-5b86-4279-82d1-749b67b99a126",
+                         UserId = "l52f4e8e-7a86-4279-82d1-749b67b99a26",
+                         ActivityId = "x33df349-1c29-42e3-bf45-6d7e6c990f1l",
+                         CompanyId = "jca9a2af-1ed2-430c-b9ae-e5476d36ca81",
+                         StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
+                         StopTime = new DateTime(2021, 07, 14, 15, 40, 05),
+                         SumTime = new TimeSpan(hours: 0, minutes: 40, seconds: 0),
+                         SumDistance = 5000
+                     },
+                     new UserActivity
+                     {
+                         Id = "b51f4e8e-5b86-4279-82d1-749b67b99a98",
+                         UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92", // Zwei mal eingetragen
+                         ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
+                         CompanyId = "d33df339-1c29-42e3-bb45-6d7e6c990f1e",
+                         StartTime = new DateTime(2021, 07, 14, 15, 15, 05),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 14, 15, 30, 05),
+                         SumTime = new TimeSpan(hours: 0, minutes: 15, seconds: 0),
+                         SumDistance = 512                                     // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "c51f4e8e-5b86-4279-82d1-749b67b99a99",
+                         UserId = "l52f4e8e-7a86-4279-82d1-749b67b99a100",
+                         ActivityId = "u33df349-1c29-42e3-bf45-6d7e6c990f1i",
+                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78",
+                         StartTime = new DateTime(2021, 07, 13, 16, 10, 15),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 13, 17, 22, 25),
+                         SumTime = new TimeSpan(hours: 1, minutes: 12, seconds: 10),
+                         SumDistance = 15215                                     // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "d51f4e8e-5b86-4279-82d1-749b67b99a100",
+                         UserId = "m52f4e8e-7a86-4279-82d1-749b67b99a101",
+                         ActivityId = "v33df349-1c29-42e3-bf45-6d7e6c990f1j",
+                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78",
+                         StartTime = new DateTime(2021, 07, 15, 12, 32, 38),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 15, 14, 37, 39),
+                         SumTime = new TimeSpan(hours: 2, minutes: 5, seconds: 1),
+                         SumDistance = 920                                     // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "e51f4e8e-5b86-4279-82d1-749b67b99a101",
+                         UserId = "n52f4e8e-7a86-4279-82d1-749b67b99a102",
+                         ActivityId = "w33df349-1c29-42e3-bf45-6d7e6c990f1k",
+                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78",
+                         StartTime = new DateTime(2021, 07, 15, 20, 07, 21),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 15, 20, 37, 21),
+                         SumTime = new TimeSpan( hours: 0, minutes: 30, seconds: 0),
+                         SumDistance = 5232                                     // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "f51f4e8e-5b86-4279-82d1-749b67b99a102",
+                         UserId = "o52f4e8e-7a86-4279-82d1-749b67b99a103",
+                         ActivityId = "x33df349-1c29-42e3-bf45-6d7e6c990f1l",
+                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78",
+                         StartTime = new DateTime(2021, 07, 15, 14, 10, 05),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 15, 16, 22, 05),
+                         SumTime = new TimeSpan(hours: 2, minutes: 12, seconds: 0),
+                         SumDistance = 9321                                     // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "g51f4e8e-5b86-4279-82d1-749b67b99a103",
+                         UserId = "p52f4e8e-7a86-4279-82d1-749b67b99a104",
+                         ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
+                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78",
+                         StartTime = new DateTime(2021, 07, 15, 15, 02, 05),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 15, 15, 22, 05),
+                         SumTime = new TimeSpan(hours: 0, minutes: 20, seconds: 0),
+                         SumDistance = 5125                                     // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "h51f4e8e-5b86-4279-82d1-749b67b99a104",
+                         UserId = "q52f4e8e-7a86-4279-82d1-749b67b99a105",
+                         ActivityId = "w33df349-1c29-42e3-bf45-6d7e6c990f1k",
+                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78",
+                         StartTime = new DateTime(2021, 07, 15, 11, 02, 05),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 15, 12, 22, 05),
+                         SumTime = new TimeSpan(hours: 1, minutes: 20, seconds: 0),
+                         SumDistance = 1300                                     // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "x33df349-1c29-42e3-bf45-6d7e6c990f1l",
+                         UserId = "r52f4e8e-7a86-4279-82d1-749b67b99a106",
+                         ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
+                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76",
+                         StartTime = new DateTime(2021, 07, 15, 19, 00, 00),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 15, 20, 00, 00),
+                         SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
+                         SumDistance = 5005                                     // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "j51f4e8e-5b86-4279-82d1-749b67b99a106",
+                         UserId = "s52f4e8e-7a86-4279-82d1-749b67b99a107",
+                         ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
+                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76",
+                         StartTime = new DateTime(2021, 07, 15, 13, 12, 00),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 15, 13, 32, 00),
+                         SumTime = new TimeSpan(hours: 0, minutes: 20, seconds: 0),
+                         SumDistance = 510                                     // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "k51f4e8e-5b86-4279-82d1-749b67b99a107",
+                         UserId = "t52f4e8e-7a86-4279-82d1-749b67b99a108",
+                         ActivityId = "u33df349-1c29-42e3-bf45-6d7e6c990f1i",
+                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76",
+                         StartTime = new DateTime(2021, 07, 15, 15, 47, 00),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 16, 17, 47, 00),
+                         SumTime = new TimeSpan(hours: 2, minutes: 0, seconds: 0),
+                         SumDistance = 30726                                     // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "l51f4e8e-5b86-4279-82d1-749b67b99a108",
+                         UserId = "u52f4e8e-7a86-4279-82d1-749b67b99a109",
+                         ActivityId = "w33df349-1c29-42e3-bf45-6d7e6c990f1k",
+                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76",
+                         StartTime = new DateTime(2021, 07, 15, 14, 02, 01),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 15, 14, 22, 01),
+                         SumTime = new TimeSpan(hours: 0, minutes: 20, seconds: 0),
+                         SumDistance = 3825                                     // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "m51f4e8e-5b86-4279-82d1-749b67b99a109",
+                         UserId = "v52f4e8e-7a86-4279-82d1-749b67b99a110",
+                         ActivityId = "x33df349-1c29-42e3-bf45-6d7e6c990f1l",
+                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76",
+                         StartTime = new DateTime(2021, 07, 15, 15, 05, 35),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 15, 16, 05, 35),
+                         SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
+                         SumDistance = 5025                                     // Meters
+                     },
+                     new UserActivity
+                     {
+                         Id = "n51f4e8e-5b86-4279-82d1-749b67b99a110",
+                         UserId = "w52f4e8e-7a86-4279-82d1-749b67b99a111",
+                         ActivityId = "u33df349-1c29-42e3-bf45-6d7e6c990f1i",
+                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76",
+                         StartTime = new DateTime(2021, 07, 15, 12, 14, 32),    //year, month, day, hour, min, seconds
+                         StopTime = new DateTime(2021, 07, 15, 15, 32, 32),
+                         SumTime = new TimeSpan(hours: 3, minutes: 18, seconds: 0),                   // StopTime - StartTime // hours, minutes, seconds, milliseconds.
+                         SumDistance = 45269                                     // Meters
+                     }
+
+                    );
                 context.SaveChanges();
             }
         }
