@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using AthenaWebApp.Data;
 using System;
@@ -1706,7 +1706,6 @@ namespace AthenaWebApp.Models
                      }
 
                     );
-
                 context.SaveChanges();
             }
         }
