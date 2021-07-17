@@ -38,13 +38,41 @@ namespace AthenaWebApp.Controllers.MVC
         [HttpPost]
         public async Task<IActionResult> Create([Required] string name)
         {
+            // 1. Create the new Role
             if (ModelState.IsValid)
             {
                 IdentityResult result = await roleManager.CreateAsync(new IdentityRole(name));
                 if (result.Succeeded)
+                {
+                    // Add default claims to role
+                    var createdRole = await roleManager.FindByNameAsync(name);
+                    foreach (var claim in ClaimData.ClaimTypes)
+                    {
+                        /*
+                        var claimsToRole = new IdentityRoleClaim<string>()
+                        { 
+                            ClaimType = claim,
+                            ClaimValue = "false"
+                        };
+                        */
+                        await _context.RoleClaims.AddAsync(
+                            new IdentityRoleClaim<string>
+                            {
+                                RoleId = createdRole.Id,
+                                ClaimType = claim,
+                                ClaimValue = "false"
+                            });
+                        _context.SaveChanges();
+
+//                        var aclaimResult = await roleManager.AddClaimAsync(createdRole, claim);
+                    }
+
                     return RedirectToAction("Index");
+                }
                 else
+                {
                     Errors(result);
+                }
             }
             return View(name);
         }
@@ -134,7 +162,7 @@ namespace AthenaWebApp.Controllers.MVC
         public IEnumerable<Claim> Claims { get; set; }
         */
 
-        /*
+        
         public async Task<IActionResult> Claims(string id)
         {
             // if-Break
@@ -143,8 +171,27 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
+            var roleClaimStringValues = await _context.RoleClaims.Where(c => c.RoleId == id).ToListAsync());
+            var roleClaimBoolValues = new List<IdentityRoleClaim<string>>(
+                foreach(var item in roleClaimBoolValues)
+            {
+
+            });
+            {
+                foreach(var item in roleClaimBoolValues)
+                {
+
+
+                }
+            };
+
+            return View(await _context.RoleClaims.Where(c => c.RoleId == id).ToListAsync());
+
+
             // 1. Get all possible Sections * Claims [User Create; User Edit;... Company Create;...]
-            var model = new List<IdentityRoleClaim<string>>();
+//            var model = new List<IdentityRoleClaim<string>>();
+
+            /*
             for (var i = 0; i < ClaimData.ClaimTypes.Count; i++)
             {
                 for (var z = 0; z < ClaimData.ClaimValues.Count; z++)
@@ -152,18 +199,19 @@ namespace AthenaWebApp.Controllers.MVC
                     model.Add(new IdentityRoleClaim<string>() { ClaimType = ClaimData.ClaimTypes[i], ClaimValue = ClaimData.ClaimValues[z] });
                 }
             }
-
+            */
 
             // 2. Get the Role
 //            var role = await roleManager.Roles.FirstOrDefaultAsync(m => m.Id == id);
 
             // 2. Search RoleId in table RoleClaim and get existing claims
 
-            var getExistingRoleClaims = _context.RoleClaims.Where(s => s.RoleId == id).ToList();
+//            var getExistingRoleClaims = _context.RoleClaims.Where(s => s.RoleId == id).ToList();
 
 //            IEnumerable<IdentityRoleClaim<string>> differenceQuery = getExistingRoleClaims.Except(model);
 
             // 3. Check if there are any duplicates in both models
+            /*
             for (int i = 0; i < getExistingRoleClaims.Count; i++)
             {
                 if(model.Contains(getExistingRoleClaims[i]))
@@ -171,13 +219,14 @@ namespace AthenaWebApp.Controllers.MVC
                     model.Remove(getExistingRoleClaims[i]);
                 }
             }
+            */
             // Cleaned list with possible claims to add to the specific role
 
-            return View(model);
+//            return View(model);
 
 //            return View(getExistingRoleClaims);
         }
-        */
+        
 
         [HttpPost]
         [ActionName("SaveChanges")]
