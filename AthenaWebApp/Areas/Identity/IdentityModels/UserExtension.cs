@@ -28,5 +28,6 @@ namespace AthenaWebApp.Areas.Identity.IdentityModels
         [Display(Name = "Picture")]
         public byte[] ProfilePicture { get; set; }
         public int UsernameChangeLimit { get; set; } = 10;
+
     }
 }

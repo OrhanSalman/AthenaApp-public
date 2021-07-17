@@ -1,8 +1,9 @@
 ﻿using AthenaWebApp.Areas.Identity.IdentityModels;
+using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using AthenaWebApp.Models;
+
 
 namespace AthenaWebApp.Data
 {
@@ -51,7 +52,7 @@ namespace AthenaWebApp.Data
                 entity.ToTable("UserTokens");
             });
 
-            
+
             builder.Entity<Template>(entity =>
             {
                 entity.ToTable("Template");
@@ -81,7 +82,7 @@ namespace AthenaWebApp.Data
                     .HasConstraintName("UserTemplate_fk_User");
                 */
             });
-            
+
         }
 
         public DbSet<AthenaWebApp.Models.Company> Company { get; set; }
@@ -89,7 +90,6 @@ namespace AthenaWebApp.Data
         public DbSet<AthenaWebApp.Models.Activity> Activity { get; set; }
         public DbSet<AthenaWebApp.Models.UserActivity> UserActivity { get; set; }
         public DbSet<AthenaWebApp.Models.Badge> Badge { get; set; }
-
 
     }
 

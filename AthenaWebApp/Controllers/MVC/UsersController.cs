@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 namespace AthenaWebApp.Controllers.MVC
 {
     [Authorize(Roles = "Admin")]
+//    [Authorize(Policy = "EmployeeOnly")]
     public class UsersController : Controller
     {
         private readonly Context _context;
