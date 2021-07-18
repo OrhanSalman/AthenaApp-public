@@ -57,8 +57,7 @@ tr:hover {background-color:yellow;}
 </p>
 <div style="height:350px;overflow:auto;">
 
-
-@using (Html.BeginForm())
+@using (Html.BeginForm(FormMethod.Post))
     {
         <table class="table">
     <thead>
@@ -67,41 +66,35 @@ tr:hover {background-color:yellow;}
             <th>
                 @Html.DisplayNameFor(model => model.ClaimType)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClaimValue)
-            </th>
         </tr>
     </thead>
     <tbody>
+        @using (Html.BeginForm("Role", "Add", FormMethod.Post)){
 @foreach (var item in Model) {
     @if (item.ClaimValue.Contains("true"))
     {
-        <tr class="dataset">
+        <tr class="dataset" style="background-color:#7fff00">
             <td>
-                <input type="checkbox" asp-action="Change" asp-route-id="@item.Id" onclick="markRow(el)">
+                <button class="btn btn-sm btn-danger" asp-action="Remove" asp-route-id="@item.Id">Remove</button>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ClaimType)
-            </td>
-            <td>
-                @Html.CheckBoxFor(modelItem => item.ClaimValue)
             </td>
         </tr>
     }
     else
     {
-        <tr class="label label-warning">
+        <tr class="label label-warning" style="background-color:red">
             <td>
-                <input type="checkbox" asp-action="Change" asp-route-id="@item.Id" onclick="markRow(el)">
+                <input type="submit" value="Submit"/>
+                <button class="btn btn-sm btn-primary" type="submit" asp-action="Add" asp-route-id="@item.Id">Add</button>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ClaimType)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClaimValue)
-            </td>
         </tr>    
     }
+}
 }
     </tbody>
 </table>

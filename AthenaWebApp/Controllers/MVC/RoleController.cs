@@ -31,6 +31,8 @@ namespace AthenaWebApp.Controllers.MVC
         public bool IsChecked { get; set; }
         public string Id { get; set; }
 
+        string usedRoleId = "";
+
         public ViewResult Index() => View(roleManager.Roles);
 
         public IActionResult Create() => View();
@@ -96,7 +98,6 @@ namespace AthenaWebApp.Controllers.MVC
 
         public async Task<IActionResult> Update(string id)
         {
-
             IdentityRole role = await roleManager.FindByIdAsync(id);
             List<UserExtension> members = new List<UserExtension>();
             List<UserExtension> nonMembers = new List<UserExtension>();
@@ -171,50 +172,70 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
-//            var roleClaimStringValues = await _context.RoleClaims.Where(c => c.RoleId == id).ToListAsync();
 
-            return View(await _context.RoleClaims.Where(c => c.RoleId == id).ToListAsync());
-
-
-            // 1. Get all possible Sections * Claims [User Create; User Edit;... Company Create;...]
-//            var model = new List<IdentityRoleClaim<string>>();
-
-            /*
-            for (var i = 0; i < ClaimData.ClaimTypes.Count; i++)
-            {
-                for (var z = 0; z < ClaimData.ClaimValues.Count; z++)
-                {
-                    model.Add(new IdentityRoleClaim<string>() { ClaimType = ClaimData.ClaimTypes[i], ClaimValue = ClaimData.ClaimValues[z] });
-                }
-            }
-            */
-
-            // 2. Get the Role
-//            var role = await roleManager.Roles.FirstOrDefaultAsync(m => m.Id == id);
-
-            // 2. Search RoleId in table RoleClaim and get existing claims
-
-//            var getExistingRoleClaims = _context.RoleClaims.Where(s => s.RoleId == id).ToList();
-
-//            IEnumerable<IdentityRoleClaim<string>> differenceQuery = getExistingRoleClaims.Except(model);
-
-            // 3. Check if there are any duplicates in both models
-            /*
-            for (int i = 0; i < getExistingRoleClaims.Count; i++)
-            {
-                if(model.Contains(getExistingRoleClaims[i]))
-                {
-                    model.Remove(getExistingRoleClaims[i]);
-                }
-            }
-            */
-            // Cleaned list with possible claims to add to the specific role
-
-//            return View(model);
-
-//            return View(getExistingRoleClaims);
+            var roleClaimValues = await _context.RoleClaims.Where(c => c.RoleId == id).ToListAsync();
+            usedRoleId = roleClaimValues.Select(c => c.RoleId).ToString();
+            return View(roleClaimValues);
         }
-        
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add(int id)
+        {
+
+            // Search for ClaimId
+            IdentityRoleClaim<string> roleClaimData = new IdentityRoleClaim<string>();
+            roleClaimData = _context.RoleClaims.SingleOrDefault(e => e.Id == id);
+            roleClaimData.ClaimValue = "true";
+            _context.SaveChanges();
+            /*
+//            identityRoleClaim.RoleId = usedRoleId;
+            if (id != roleClaimData.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _context.Update(identityRoleClaim);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Claims));
+            }
+            */
+            await Claims (roleClaimData.RoleId.ToString());
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Remove(int id, [Bind("Id,RoleId,ClaimType,ClaimValue")] IdentityRoleClaim<string> identityRoleClaim)
+        {
+            identityRoleClaim.ClaimValue = "false";
+            identityRoleClaim.RoleId = usedRoleId;
+
+            if (id != identityRoleClaim.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _context.Update(identityRoleClaim);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Claims));
+            }
+            return View(identityRoleClaim);
+        }
+
+
+
+
+
 
         [HttpPost]
         [ActionName("SaveChanges")]
@@ -360,10 +381,6 @@ namespace AthenaWebApp.Controllers.MVC
             foreach (IdentityError error in result.Errors)
                 ModelState.AddModelError("", error.Description);
         }
-
-
-
-
 
     }
 }
