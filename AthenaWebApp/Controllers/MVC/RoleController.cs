@@ -1,4 +1,4 @@
-﻿using AthenaWebApp.Areas.Identity.IdentityModels;
+using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Identity;
@@ -172,10 +172,12 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
+
             var roleClaimValues = await _context.RoleClaims.Where(c => c.RoleId == id).ToListAsync();
             usedRoleId = roleClaimValues.Select(c => c.RoleId).ToString();
             return View(roleClaimValues);
         }
+
 
 
 
