@@ -1,4 +1,5 @@
-﻿using Microcharts;
+﻿using AthenaApp.Services;
+using Microcharts;
 using SkiaSharp;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -14,6 +15,7 @@ namespace AthenaApp.Views
     {
         // Raphael: Creates a Entry List with entries for Chart2, a Bar Chart with monthly kilometers
         List<Entry> entries = new List<Entry>
+        
         {
             new Entry (200)
             {
@@ -161,7 +163,8 @@ namespace AthenaApp.Views
             // Raphael: With start of app Charts are created with the implemented Lists. The Background is transparent for the coloured frame -> Additional Options for the appearance are made
             Chart1.Chart = new LineChart() { Entries = entriesAccumulated, BackgroundColor = SKColors.Transparent, LineSize = 20, PointSize = 20, LabelOrientation = Orientation.Horizontal, IsAnimated = true };
             Chart2.Chart = new BarChart() { Entries = entries, BackgroundColor = SKColors.Transparent, BarAreaAlpha = 30, IsAnimated = true, LabelOrientation = Orientation.Horizontal };
-
+            
+           
 
         }
     }
