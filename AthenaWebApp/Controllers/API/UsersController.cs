@@ -56,26 +56,6 @@ namespace AthenaWebApp.Controllers.API
             {
                 return NotFound("Unfortunately you are blocked. Please contact your administrator: admin@athena.com");
             }
-
-            /*
-                        var user_LoginData = new MobileUser_LoginData()
-                        {
-                            Id = user.Id,
-                            UserName = user.UserName,
-                            Email = user.Email,
-                            CompanyName = user.CompanyName,
-                            SecurityStamp = user.SecurityStamp,
-                            ProfilePicture = user.ProfilePicture
-                        };
-             */
-            //            string JsonUserObject = JsonSerializer.Serialize<MobileUser_LoginData>(user_LoginData);
-            // ToDo: return Token, Id, UserName, Email, SecurityStamp
-
-            //           var userSerialize = new JsonSerializer();
-            //           userSerialize.Serialize(UserExtension);
-            //           return JsonString(user.SecurityStamp);
-
-            // ToDo: Return CompanyId
             return user;
         }
 

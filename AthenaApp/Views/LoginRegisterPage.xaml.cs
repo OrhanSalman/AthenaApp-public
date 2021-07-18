@@ -78,7 +78,6 @@ namespace AthenaApp.Views
             {
                 await DisplayAlert("Error", "An error has occured. Please try again later.", "Okay");
             }
-            
         }
 
         private async void RegisterButton(object sender, EventArgs e)
@@ -158,5 +157,3 @@ namespace AthenaApp.Views
         }
     }
 }
-
-
