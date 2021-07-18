@@ -94,7 +94,7 @@
                                 <Button
                                     BackgroundColor="MidnightBlue"
                                     Clicked="LoginButton"
-                                    Command="{Binding LoginComand}"
+                                    Command="{Binding LoginButton}"
                                     CornerRadius="30"
                                     Text="Send Login Mail"
                                     TextColor="White" />

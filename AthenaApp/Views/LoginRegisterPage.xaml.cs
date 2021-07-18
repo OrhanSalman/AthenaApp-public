@@ -1,6 +1,8 @@
 ﻿using AthenaApp.Models;
+using AthenaApp.Services;
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -41,6 +43,12 @@ namespace AthenaApp.Views
             else if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
+                // Here User is saved to the Apllication
+               XamarinManager manager = new XamarinManager();
+                manager.Set_post_data(jsonString);
+                String json = manager.Get_post_data();
+                Debug.WriteLine("Hier ist das Apllication Output von user:" + json);
+                Debug.WriteLine("Hier ist das json von user:" + jsonString); 
                 var data = JsonConvert.DeserializeObject<User>(jsonString);
 
                 User user = new User()
@@ -52,6 +60,13 @@ namespace AthenaApp.Views
                     ProfilePicture = data.ProfilePicture
                 };
 
+         /*       // Here User is saved to the Apllication
+                XamarinManager manager = new XamarinManager();
+                manager.Set_post_data(jsonString);
+                String json = manager.Get_post_data();
+                Console.WriteLine("Hier ist das json von user:" + json);
+         */
+               
                 // ToDo: Check if user is blocked
                 await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
             }
