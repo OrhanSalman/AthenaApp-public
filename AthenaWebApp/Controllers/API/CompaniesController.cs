@@ -1,5 +1,6 @@
 ﻿using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.API
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class CompaniesController : ControllerBase
