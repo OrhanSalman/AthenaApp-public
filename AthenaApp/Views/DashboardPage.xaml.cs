@@ -27,43 +27,11 @@ namespace AthenaApp.Views
 
         List<Entry> entries = new List<Entry>();
 
-        IEnumerable<double> JanUserDistanceEnum;
-        IEnumerable<double> FebUserDistanceEnum;
-        IEnumerable<double> MarUserDistanceEnum;
-        IEnumerable<double> AprUserDistanceEnum;
-        IEnumerable<double> MayUserDistanceEnum;
-        IEnumerable<double> JunUserDistanceEnum;
-        IEnumerable<double> JulUserDistanceEnum;
-        IEnumerable<double> AugUserDistanceEnum;
-        IEnumerable<double> SepUserDistanceEnum;
-        IEnumerable<double> OctUserDistanceEnum;
-        IEnumerable<double> NovUserDistanceEnum;
-        IEnumerable<double> DecUserDistanceEnum;
+        
 
-        double JanUserDistanceTotal;
-        double FebUserDistanceTotal;
-        double MarUserDistanceTotal;
-        double AprUserDistanceTotal;
-        double MayUserDistanceTotal;
-        double JunUserDistanceTotal;
-        double JulUserDistanceTotal;
-        double AugUserDistanceTotal;
-        double SepUserDistanceTotal;
-        double OctUserDistanceTotal;
-        double NovUserDistanceTotal;
-        double DecUserDistanceTotal;
+        
 
-        double FebUserDistanceAccumulated;
-        double MarUserDistanceAccumulated;
-        double AprUserDistanceAccumulated;
-        double MayUserDistanceAccumulated;
-        double JunUserDistanceAccumulated;
-        double JulUserDistanceAccumulated;
-        double AugUserDistanceAccumulated;
-        double SepUserDistanceAccumulated;
-        double OctUserDistanceAccumulated;
-        double NovUserDistanceAccumulated;
-        double DecUserDistanceAccumulated;
+       
 
         readonly string January = "1";
         readonly string February = "2";
@@ -82,6 +50,44 @@ namespace AthenaApp.Views
 
         async void DataRefreshButton_Clicked(System.Object sender, System.EventArgs e)
         {
+            IEnumerable<double> JanUserDistanceEnum;
+            IEnumerable<double> FebUserDistanceEnum;
+            IEnumerable<double> MarUserDistanceEnum;
+            IEnumerable<double> AprUserDistanceEnum;
+            IEnumerable<double> MayUserDistanceEnum;
+            IEnumerable<double> JunUserDistanceEnum;
+            IEnumerable<double> JulUserDistanceEnum;
+            IEnumerable<double> AugUserDistanceEnum;
+            IEnumerable<double> SepUserDistanceEnum;
+            IEnumerable<double> OctUserDistanceEnum;
+            IEnumerable<double> NovUserDistanceEnum;
+            IEnumerable<double> DecUserDistanceEnum;
+
+            double JanUserDistanceTotal = 0;
+            double FebUserDistanceTotal = 0;
+            double MarUserDistanceTotal = 0;
+            double AprUserDistanceTotal = 0;
+            double MayUserDistanceTotal = 0;
+            double JunUserDistanceTotal = 0;
+            double JulUserDistanceTotal = 0;
+            double AugUserDistanceTotal = 0;
+            double SepUserDistanceTotal = 0;
+            double OctUserDistanceTotal = 0;
+            double NovUserDistanceTotal = 0;
+            double DecUserDistanceTotal = 0;
+
+            double FebUserDistanceAccumulated;
+            double MarUserDistanceAccumulated;
+            double AprUserDistanceAccumulated;
+            double MayUserDistanceAccumulated;
+            double JunUserDistanceAccumulated;
+            double JulUserDistanceAccumulated;
+            double AugUserDistanceAccumulated;
+            double SepUserDistanceAccumulated;
+            double OctUserDistanceAccumulated;
+            double NovUserDistanceAccumulated;
+            double DecUserDistanceAccumulated;
+
             string Api = "https://10.0.2.2:5001/api/UserActivities/GetUserActivitiesOfUserId";
 
             HttpClientHandler handler = new HttpClientHandler();
