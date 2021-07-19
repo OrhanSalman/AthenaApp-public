@@ -179,7 +179,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
 
-
+        //
         [HttpPost]
 //        [ValidateAntiForgeryToken]
         public ActionResult SetClaim(IdentityRoleClaim<string> identityRoleClaim)
