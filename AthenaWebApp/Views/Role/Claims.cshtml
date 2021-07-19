@@ -7,47 +7,81 @@
     var b = 0;
 
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $("#ChangeClaim").click(function () {
+        console.log("ChangeClaim Triggered!");
+
+        var identityRoleClaim = new Array();
+        $("#claimTable tbody tr").each(function () {
+            var row = $(this);
+            var claimDataSet = {};
+            claimDataSet.Id = row.find("td").eq(0).html();
+            claimDataSet.RoleId = "";
+            claimDataSet.ClaimType = "";
+            claimDataSet.ClaimValue = row.find("td").eq(1).html();
+            identityRoleClaim.push(claimDataSet);
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Role/SetClaim",
+            data: JSON.stringify(identityRoleClaim),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                alert(data);
+            }
+        });
+    });
+</script>
 
 <script type='text/javascript'>
-    $(document).ready(function(){
+    $(document).ready(function () {
         //Iterates through each of the rows in your customers <table>
-        $('#dataset tr').each(function(){
-          //Checks the value and sets the color accordingly
-          if($(this).find('td:last').text().trim() === "1"){
-              $(this).css('background','green');
-          }
+        $('#dataset tr').each(function () {
+            //Checks the value and sets the color accordingly
+            if ($(this).find('td:last').text().trim() === "1") {
+                $(this).css('background', 'green');
+            }
         });
     });
 </script>
 
 <script>
-function markRow(el) {
-    if(!el) return;
-    var clr = el.checked ? '#7fff00' : ''
-    while(el) {
-        if(el.tagName.toLowerCase() == 'tr') {
-            el.style.backgroundColor = clr;
-            return;
+    function markRow(el) {
+        if (!el) return;
+        var clr = el.checked ? '#7fff00' : ''
+        while (el) {
+            if (el.tagName.toLowerCase() == 'tr') {
+                el.style.backgroundColor = clr;
+                return;
+            }
+            el = el.parentNode;
         }
-        el = el.parentNode;
     }
-} 
 </script>
+
 <style>
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-.linie {
-  border-top:1px solid black;
-  width:150px;
-}
-tr:hover {background-color:yellow;}
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .linie {
+        border-top: 1px solid black;
+        width: 150px;
+    }
+
+    tr:hover {
+        background-color: yellow;
+    }
 </style>
 
 <h1>Index</h1>
@@ -57,49 +91,61 @@ tr:hover {background-color:yellow;}
 </p>
 <div style="height:350px;overflow:auto;">
 
-@using (Html.BeginForm(FormMethod.Post))
+    @using (Html.BeginForm(FormMethod.Post))
     {
-        <table class="table">
-    <thead>
-        <tr>
-            <th></th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClaimType)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @using (Html.BeginForm("Role", "Add", FormMethod.Post)){
-@foreach (var item in Model) {
-    @if (item.ClaimValue.Contains("true"))
-    {
-        <tr class="dataset" style="background-color:#7fff00">
-            <td>
-                <button class="btn btn-sm btn-danger" asp-action="Remove" asp-route-id="@item.Id">Remove</button>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClaimType)
-            </td>
-        </tr>
-    }
-    else
-    {
-        <tr class="label label-warning" style="background-color:red">
-            <td>
-                <input type="submit" value="Submit"/>
-                <button class="btn btn-sm btn-primary" type="submit" asp-action="Add" asp-route-id="@item.Id">Add</button>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClaimType)
-            </td>
-        </tr>    
-    }
-}
-}
-    </tbody>
-</table>
+        <table class="claimTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClaimType)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    @if (item.ClaimValue.Contains("true"))
+                    {
+                        <tr class="dataset" style="background-color:#7fff00">
+                            <td>
+                                <input type="hidden" id="ClaimdId" value="modelItem => item.Id" />
+                                <input type="hidden" id="ClaimBool" value="modelItem => item.ClaimType" />
+                                <input type="button" id="ChangeClaim" name="Remove" value="Remove" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClaimType)
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr class="label label-warning" style="background-color:red">
+                            <td>
+                                <input type="hidden" id="ClaimdId" value="modelItem => item.Id" />
+                                <input type="hidden" id="ClaimBool" value="modelItem => item.ClaimValue" />
+                                <input type="button" id="ChangeClaim" name="Add" value="Add" />
+                            </td>
+                            <td>
+                                @Html.HiddenFor(modelItem => item.ClaimType)
+                                @Html.DisplayFor(modelItem => item.ClaimType)
+
+                            </td>
+                        </tr>
+
+                    }
+                }
+
+
+
+                @using (Html.BeginForm("Role", "Add", FormMethod.Post))
+                {
+
+                }
+            </tbody>
+        </table>
     }
 
 </div>
-
-<input type="submit" value="Save" />

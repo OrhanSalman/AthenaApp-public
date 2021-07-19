@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header> 
+    <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3" style="background-color: #46a5e5">
             <div class="container">
-             
+
                 <a class="navbar-brand " asp-controller="" asp-action="Index">
                     <img src="~/lib/img/WhatsApp Image 2021-05-23 at 18.02.48.jpeg" />
                 </a>
@@ -69,5 +69,34 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $("#ChangeClaim").click(function () {
+            console.log("ChangeClaim Triggered!");
+
+            var identityRoleClaim = new Array();
+            $("#claimTable tbody tr").each(function () {
+                var row = $(this);
+                var claimDataSet = {};
+                claimDataSet.Id = row.find("td").eq(0).html();
+                claimDataSet.RoleId = "";
+                claimDataSet.ClaimType = "";
+                claimDataSet.ClaimValue = row.find("td").eq(1).html();
+                identityRoleClaim.push(claimDataSet);
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "/Role/SetClaim",
+                data: JSON.stringify(identityRoleClaim),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        });
+    </script>
+
 </body>
-</html>
+</html >

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -180,14 +181,15 @@ namespace AthenaWebApp.Controllers.MVC
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(int id)
+//        [ValidateAntiForgeryToken]
+        public ActionResult SetClaim(IdentityRoleClaim<string> identityRoleClaim)
         {
-
             // Search for ClaimId
             IdentityRoleClaim<string> roleClaimData = new IdentityRoleClaim<string>();
+            int id = identityRoleClaim.Id;
+            string claimValue = identityRoleClaim.ClaimValue.ToString();
             roleClaimData = _context.RoleClaims.SingleOrDefault(e => e.Id == id);
-            roleClaimData.ClaimValue = "true";
+            roleClaimData.ClaimValue = claimValue;
             _context.SaveChanges();
             /*
 //            identityRoleClaim.RoleId = usedRoleId;
@@ -204,8 +206,16 @@ namespace AthenaWebApp.Controllers.MVC
                 return RedirectToAction(nameof(Claims));
             }
             */
-            await Claims (roleClaimData.RoleId.ToString());
-            return View();
+            //            return RedirectToActionResult();
+            /*
+            string redirectId = roleClaimData.RoleId.ToString();
+
+            string redirect = RedirectToPage("Role", "Claims", redirectId).ToString();
+            redirect.Replace("#", "/");
+            return Redirect(redirect);
+            */
+
+            return Ok();
         }
 
         [HttpPost]
