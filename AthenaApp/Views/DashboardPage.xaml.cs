@@ -135,17 +135,7 @@ namespace AthenaApp.Views
             var distanceList = (listOfAllUserActivities.Select(c => c.SumDistance));
             var totalDistance = distanceList.Sum(item => (float)item);
 
-            FebUserDistanceAccumulated = JanUserDistanceTotal + FebUserDistanceTotal;
-            MarUserDistanceAccumulated = FebUserDistanceAccumulated + MarUserDistanceTotal;
-            AprUserDistanceAccumulated = MarUserDistanceAccumulated + AprUserDistanceTotal;
-            MayUserDistanceAccumulated = AprUserDistanceAccumulated + MayUserDistanceTotal;
-            JunUserDistanceAccumulated = MayUserDistanceAccumulated + JunUserDistanceTotal;
-            JulUserDistanceAccumulated = JunUserDistanceAccumulated + JulUserDistanceTotal;
-            AugUserDistanceAccumulated = JulUserDistanceAccumulated + AugUserDistanceTotal;
-            SepUserDistanceAccumulated = AugUserDistanceAccumulated + SepUserDistanceTotal;
-            OctUserDistanceAccumulated = SepUserDistanceAccumulated + OctUserDistanceTotal;
-            NovUserDistanceAccumulated = OctUserDistanceAccumulated + NovUserDistanceTotal;
-            DecUserDistanceAccumulated = NovUserDistanceAccumulated + DecUserDistanceTotal;
+            
 
             XamarinManager manager = new XamarinManager();
             string jsonData = manager.Get_post_data();
@@ -224,7 +214,17 @@ namespace AthenaApp.Views
                 DecUserDistanceEnum = listOfAllUserActivities.Where(c => (c.StopTime.Month.ToString() == December) && (c.UserId == UserCurrentId)).Select(d => d.SumDistance);
                 DecUserDistanceTotal = DecUserDistanceEnum.Sum((item => (float)item));
             }
-
+            FebUserDistanceAccumulated = JanUserDistanceTotal + FebUserDistanceTotal;
+            MarUserDistanceAccumulated = FebUserDistanceAccumulated + MarUserDistanceTotal;
+            AprUserDistanceAccumulated = MarUserDistanceAccumulated + AprUserDistanceTotal;
+            MayUserDistanceAccumulated = AprUserDistanceAccumulated + MayUserDistanceTotal;
+            JunUserDistanceAccumulated = MayUserDistanceAccumulated + JunUserDistanceTotal;
+            JulUserDistanceAccumulated = JunUserDistanceAccumulated + JulUserDistanceTotal;
+            AugUserDistanceAccumulated = JulUserDistanceAccumulated + AugUserDistanceTotal;
+            SepUserDistanceAccumulated = AugUserDistanceAccumulated + SepUserDistanceTotal;
+            OctUserDistanceAccumulated = SepUserDistanceAccumulated + OctUserDistanceTotal;
+            NovUserDistanceAccumulated = OctUserDistanceAccumulated + NovUserDistanceTotal;
+            DecUserDistanceAccumulated = NovUserDistanceAccumulated + DecUserDistanceTotal;
             List<Entry> entries = new List<Entry>()
             {
             new Entry(float.Parse(JanUserDistanceTotal.ToString())) //float.Parse(total.ToString())
