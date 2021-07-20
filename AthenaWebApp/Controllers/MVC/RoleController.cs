@@ -1,6 +1,7 @@
 ﻿using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
 {
-    //    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         private readonly Context _context;
@@ -151,20 +152,9 @@ namespace AthenaWebApp.Controllers.MVC
 
 
 
-        /*
-        public void ClaimsModel(RoleManager<IdentityRole> mgr)
-        {
-            RoleManager = mgr;
-        }
-        public RoleManager<IdentityRole> RoleManager { get; set; }
+        /* ----------------------------------- Claim section -----------------------------------*/
 
-        [BindProperty(SupportsGet = true)]
-        public string Id { get; set; }
 
-        public IEnumerable<Claim> Claims { get; set; }
-        */
-
-        
         public async Task<IActionResult> Claims(string id)
         {
             // if-Break
@@ -182,15 +172,34 @@ namespace AthenaWebApp.Controllers.MVC
         //
         [HttpPost]
 //        [ValidateAntiForgeryToken]
-        public ActionResult SetClaim(IdentityRoleClaim<string> identityRoleClaim)
+        public ActionResult SetClaim(string id, string claimValue, string roleId)
         {
             // Search for ClaimId
             IdentityRoleClaim<string> roleClaimData = new IdentityRoleClaim<string>();
-            int id = identityRoleClaim.Id;
-            string claimValue = identityRoleClaim.ClaimValue.ToString();
-            roleClaimData = _context.RoleClaims.SingleOrDefault(e => e.Id == id);
-            roleClaimData.ClaimValue = claimValue;
+
+            string cleanId = String.Concat(id.Where(c => !Char.IsWhiteSpace(c)));
+            cleanId = id.Replace(" ", "");
+            string cleanClaimValue = String.Concat(claimValue.Where(c => !Char.IsWhiteSpace(c)));
+            cleanClaimValue = claimValue.Replace(" ", "");
+
+            Console.WriteLine(cleanId);
+            Console.WriteLine(cleanClaimValue);
+            // change true or false
+            if (cleanClaimValue.Contains("true"))
+            {
+                cleanClaimValue = "false";
+            }
+            else if (cleanClaimValue.Contains("false"))
+            {
+                cleanClaimValue = "true";
+            }
+            Console.WriteLine("Changed to: " + cleanClaimValue);
+
+            int intId = int.Parse(cleanId);
+            roleClaimData = _context.RoleClaims.SingleOrDefault(e => e.Id == intId);
+            roleClaimData.ClaimValue = cleanClaimValue;
             _context.SaveChanges();
+            
             /*
 //            identityRoleClaim.RoleId = usedRoleId;
             if (id != roleClaimData.Id)

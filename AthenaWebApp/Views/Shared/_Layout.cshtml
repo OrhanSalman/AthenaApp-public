@@ -72,31 +72,46 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript">
         $("#ChangeClaim").click(function () {
-            console.log("ChangeClaim Triggered!");
+            console.log("Layout Triggered!");
 
-            var identityRoleClaim = new Array();
-            $("#claimTable tbody tr").each(function () {
-                var row = $(this);
-                var claimDataSet = {};
-                claimDataSet.Id = row.find("td").eq(0).html();
-                claimDataSet.RoleId = "";
-                claimDataSet.ClaimType = "";
-                claimDataSet.ClaimValue = row.find("td").eq(1).html();
-                identityRoleClaim.push(claimDataSet);
-            });
+            
+            // get the current row
+            var currentRow = $(this).closest("tr");
 
-            $.ajax({
-                type: "POST",
-                url: "/Role/SetClaim",
-                data: JSON.stringify(identityRoleClaim),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    alert(data);
-                }
-            });
+            var FirstCell = currentRow.find("td:eq(2)").text();
+            var SecondCell = currentRow.find("td:eq(3)").text();
+//            var FirstCell = cells[1].textContent;
+//            var SecondCell = cells[2].textContent;
+
+            var ID = $("#ID").text();
+            var CV = $("#CV").text();
+            console.log(ID + " AND " + CV);
+
+            // Get the roleId
+            var url = window.location.href;
+            var array = url.split('/');
+
+            var lastSegmentOfUrl = array[array.length - 1];
+            console.log(lastSegmentOfUrl);
+
+            $.post("/Role/SetClaim",
+                { id: FirstCell, claimValue: SecondCell, roleId: lastSegmentOfUrl },
+                function (data, textStatus, jqXHR) {
+                    location.reload();
+                    //data - response from server
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert(textStatus);
+                });
+
+
         });
     </script>
 
+    <script>
+        window.onload = function () {
+            $('.hide').hide();
+            console.log("Hide activ");
+        }
+    </script>
 </body>
 </html >
