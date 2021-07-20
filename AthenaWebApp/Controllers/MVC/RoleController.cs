@@ -172,10 +172,12 @@ namespace AthenaWebApp.Controllers.MVC
         //
         [HttpPost]
 //        [ValidateAntiForgeryToken]
-        public ActionResult SetClaim(string id, string claimValue, string roleId)
+        public ActionResult SetClaim(string id, string claimValue)
         {
             // Search for ClaimId
             IdentityRoleClaim<string> roleClaimData = new IdentityRoleClaim<string>();
+
+
 
             string cleanId = String.Concat(id.Where(c => !Char.IsWhiteSpace(c)));
             cleanId = id.Replace(" ", "");
@@ -184,6 +186,9 @@ namespace AthenaWebApp.Controllers.MVC
 
             Console.WriteLine(cleanId);
             Console.WriteLine(cleanClaimValue);
+
+
+
             // change true or false
             if (cleanClaimValue.Contains("true"))
             {
