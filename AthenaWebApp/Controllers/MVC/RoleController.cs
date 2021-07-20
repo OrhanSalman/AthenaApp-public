@@ -178,11 +178,11 @@ namespace AthenaWebApp.Controllers.MVC
             IdentityRoleClaim<string> roleClaimData = new IdentityRoleClaim<string>();
 
 
-
+            // clear strings
             string cleanId = String.Concat(id.Where(c => !Char.IsWhiteSpace(c)));
-            cleanId = id.Replace(" ", "");
+            cleanId = id.Replace(" ", "").Replace("\n", "").Replace("\r", "");
             string cleanClaimValue = String.Concat(claimValue.Where(c => !Char.IsWhiteSpace(c)));
-            cleanClaimValue = claimValue.Replace(" ", "");
+            cleanClaimValue = claimValue.Replace(" ", "").Replace("\n", "").Replace("\r", "");
 
             Console.WriteLine(cleanId);
             Console.WriteLine(cleanClaimValue);
