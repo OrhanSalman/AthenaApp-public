@@ -58,7 +58,7 @@
                 </StackLayout>
             </Frame>
             <!--  Map  -->
-            <mymap:Map Grid.Row="2" Grid.ColumnSpan="2">
+            <mymap:Map Grid.Row="2" Grid.ColumnSpan="2" x:Name="myMap">
                 <mymap:Map.ItemTemplate>
                     <DataTemplate>
                         <mymap:Pin Position="{Binding Position}" />
