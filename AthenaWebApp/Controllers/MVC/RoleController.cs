@@ -1,10 +1,12 @@
-using AthenaWebApp.Areas.Identity.IdentityModels;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
 {
-    //    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         private readonly Context _context;
@@ -150,20 +152,9 @@ namespace AthenaWebApp.Controllers.MVC
 
 
 
-        /*
-        public void ClaimsModel(RoleManager<IdentityRole> mgr)
-        {
-            RoleManager = mgr;
-        }
-        public RoleManager<IdentityRole> RoleManager { get; set; }
+        /* ----------------------------------- Claim section -----------------------------------*/
 
-        [BindProperty(SupportsGet = true)]
-        public string Id { get; set; }
 
-        public IEnumerable<Claim> Claims { get; set; }
-        */
-
-        
         public async Task<IActionResult> Claims(string id)
         {
             // if-Break
@@ -172,25 +163,48 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
-
             var roleClaimValues = await _context.RoleClaims.Where(c => c.RoleId == id).ToListAsync();
             usedRoleId = roleClaimValues.Select(c => c.RoleId).ToString();
             return View(roleClaimValues);
         }
 
 
-
-
+        //
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(int id)
+//        [ValidateAntiForgeryToken]
+        public ActionResult SetClaim(string id, string claimValue)
         {
-
             // Search for ClaimId
             IdentityRoleClaim<string> roleClaimData = new IdentityRoleClaim<string>();
-            roleClaimData = _context.RoleClaims.SingleOrDefault(e => e.Id == id);
-            roleClaimData.ClaimValue = "true";
+
+
+
+            string cleanId = String.Concat(id.Where(c => !Char.IsWhiteSpace(c)));
+            cleanId = id.Replace(" ", "");
+            string cleanClaimValue = String.Concat(claimValue.Where(c => !Char.IsWhiteSpace(c)));
+            cleanClaimValue = claimValue.Replace(" ", "");
+
+            Console.WriteLine(cleanId);
+            Console.WriteLine(cleanClaimValue);
+
+
+
+            // change true or false
+            if (cleanClaimValue.Contains("true"))
+            {
+                cleanClaimValue = "false";
+            }
+            else if (cleanClaimValue.Contains("false"))
+            {
+                cleanClaimValue = "true";
+            }
+            Console.WriteLine("Changed to: " + cleanClaimValue);
+
+            int intId = int.Parse(cleanId);
+            roleClaimData = _context.RoleClaims.SingleOrDefault(e => e.Id == intId);
+            roleClaimData.ClaimValue = cleanClaimValue;
             _context.SaveChanges();
+            
             /*
 //            identityRoleClaim.RoleId = usedRoleId;
             if (id != roleClaimData.Id)
@@ -206,8 +220,16 @@ namespace AthenaWebApp.Controllers.MVC
                 return RedirectToAction(nameof(Claims));
             }
             */
-            await Claims (roleClaimData.RoleId.ToString());
-            return View();
+            //            return RedirectToActionResult();
+            /*
+            string redirectId = roleClaimData.RoleId.ToString();
+
+            string redirect = RedirectToPage("Role", "Claims", redirectId).ToString();
+            redirect.Replace("#", "/");
+            return Redirect(redirect);
+            */
+
+            return Ok();
         }
 
         [HttpPost]

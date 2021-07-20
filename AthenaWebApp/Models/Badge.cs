@@ -10,6 +10,8 @@ namespace AthenaWebApp.Models
 
         [ForeignKey("ActivityId")]
         public Activity Activity { get; set; }
+
+        [Display(Name = "Activity")]
         public string ActivityId { get; set; } // One Activitiy, lot of Badges // A badge is in relation with a activity
         public string BadgeName { get; set; }
         public double DistanceIntervallBegin { get; set; }

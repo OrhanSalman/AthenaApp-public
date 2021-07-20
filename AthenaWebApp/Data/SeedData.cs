@@ -289,7 +289,7 @@ namespace AthenaWebApp.Models
                     new UserExtension
                     {
                         Id = "u52f4e8e-7a86-4279-82d1-749b67b99a109",
-                        Email = "Alexander.Eickelmann@student.uni-siegen.de",
+                        Email = "alexander.eickelmann@student.uni-siegen.de",
                         NormalizedEmail = "ALEXANDER.EICKELMANN@STUDENT.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
                         UserName = "Alex",
@@ -299,7 +299,7 @@ namespace AthenaWebApp.Models
                     new UserExtension
                     {
                         Id = "v52f4e8e-7a86-4279-82d1-749b67b99a110",
-                        Email = "Lena.Falkenberg@student.uni-siegen.de",
+                        Email = "lena.falkenberg@student.uni-siegen.de",
                         NormalizedEmail = "LENA.FALKENBERG@STUDENT.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
                         UserName = "LenaF",
@@ -309,7 +309,7 @@ namespace AthenaWebApp.Models
                     new UserExtension
                     {
                         Id = "w52f4e8e-7a86-4279-82d1-749b67b99a111",
-                        Email = "Raphael.Palombo@student.uni-siegen.de",
+                        Email = "raphael.palombo@student.uni-siegen.de",
                         NormalizedEmail = "RAPHAEL.PALOMBO@STUDENT.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
                         UserName = "RaphaelP",
@@ -319,11 +319,11 @@ namespace AthenaWebApp.Models
                     new UserExtension
                     {
                         Id = "x52f4e8e-7a86-4279-82d1-749b67b99a112",
-                        Email = "Dominik.Korzak@student.uni-siegen.de",
-                        NormalizedEmail = "DOMIK.KORZAK@STUDENT.UNI-SIEGEN.DE",
+                        Email = "manuel.neuer@torwart.uni-siegen.de",
+                        NormalizedEmail = "MANUEL.NEUER@TORWART.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
-                        UserName = "Dome",
-                        NormalizedUserName = "DOME",
+                        UserName = "Manu",
+                        NormalizedUserName = "MANU",
                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76"
                     },
                     new UserExtension
@@ -1568,140 +1568,140 @@ namespace AthenaWebApp.Models
                      {
 //                         Id = 44,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Edit User",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 45,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Delete User",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 46,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Create Company",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 47,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Edit Company",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 48,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Delete Company",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 49,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Create Template",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                        Id = 50,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Edit Template",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 51,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Delete Template",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
  //                        Id = 52,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Create Activites",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 53,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Edit Activites",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 54,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Delete Activites",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 55,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Create UserActivites",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 56,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Edit UserActivites",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 57,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Delete UserActivites",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 58,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Create Roles",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 59,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Edit Roles",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                        Id = 60,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Delete Roles",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
                          //                         Id = 61,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Create Claims",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
                          //                         Id = 62,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Edit Claims",
                          ClaimValue = "false"
                      },
                      new IdentityRoleClaim<string>
                      {
 //                         Id = 63,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create User",
+                         ClaimType = "Delete Claims",
                          ClaimValue = "false"
                      }
 

@@ -20,7 +20,8 @@ namespace AthenaWebApp.Controllers.MVC
         // GET: Badges
         public async Task<IActionResult> Index()
         {
-            var context = _context.Badge.Include(b => b.Activity);
+
+            var context = _context.Badge.Include(b => b.Activity.ActivityType);
             return View(await context.ToListAsync());
         }
 
