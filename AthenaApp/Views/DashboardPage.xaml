@@ -144,6 +144,18 @@
                        
                         />
                     </Frame>
+                    
+                    
+                    
+                    <Button
+                Margin="0,5,0,0"
+                BackgroundColor="#203984"
+                Clicked="DataRefreshButton_Clicked"
+                CornerRadius="30"
+                Text="Refresh!" />
+                   
+                    
+                    
                     <Frame 
                         Padding="0"
                         CornerRadius="10"
