@@ -22,7 +22,6 @@ namespace AthenaApp.Views
     {
         public DashboardPage()
         {
-            DataRefreshButton_Clicked();
             InitializeComponent();
         }
 
@@ -44,9 +43,7 @@ namespace AthenaApp.Views
         
         string year = DateTime.Now.Year.ToString();
 
-        //        async void DataRefreshButton_Clicked(System.Object sender, System.EventArgs e)
-        public async void DataRefreshButton_Clicked()
-
+        async void DataRefreshButton_Clicked(System.Object sender, System.EventArgs e)
         {
             IEnumerable<double> JanUserDistanceEnum;
             IEnumerable<double> FebUserDistanceEnum;
