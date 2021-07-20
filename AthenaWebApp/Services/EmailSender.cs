@@ -22,7 +22,7 @@ namespace AthenaWebApp.Services
 
         public Task Execute(string apiKey, string subject, string message, string email)
         {
-            var client = new SendGridClient("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");       // key is not permitted in the code, like this everybody can send E-mails with this Adress
+            var client = new SendGridClient("SG.8hMdCKrwSSCyjMv_MXtk-A.iaFzSMIMRjU-65y8YvyvXzMENWzCS57_M1_6uIetTMU");       // key is not permitted in the code, like this everybody can send E-mails with this Adress
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress("athenaservicesiegen@gmail.com", Options.SendGridUser),
