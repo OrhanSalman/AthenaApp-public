@@ -132,7 +132,7 @@ namespace AthenaWebApp.Controllers.API
                 {
                     throw;
                 }
-                /*
+                
                 string returnUrl = null;
                 returnUrl ??= Url.Content("~/");
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -150,7 +150,7 @@ namespace AthenaWebApp.Controllers.API
                 // ToDo: Set UserRole + UserClaims
 
                 // Gives Code 200 + Company-Data + the hole User data (but return user give's the same return) 
-                */
+                
                 return Ok(user);
 
             }
