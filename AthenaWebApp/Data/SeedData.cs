@@ -289,7 +289,7 @@ namespace AthenaWebApp.Models
                     new UserExtension
                     {
                         Id = "u52f4e8e-7a86-4279-82d1-749b67b99a109",
-                        Email = "Alexander.Eickelmann@student.uni-siegen.de",
+                        Email = "alexander.eickelmann@student.uni-siegen.de",
                         NormalizedEmail = "ALEXANDER.EICKELMANN@STUDENT.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
                         UserName = "Alex",
@@ -299,7 +299,7 @@ namespace AthenaWebApp.Models
                     new UserExtension
                     {
                         Id = "v52f4e8e-7a86-4279-82d1-749b67b99a110",
-                        Email = "Lena.Falkenberg@student.uni-siegen.de",
+                        Email = "lena.falkenberg@student.uni-siegen.de",
                         NormalizedEmail = "LENA.FALKENBERG@STUDENT.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
                         UserName = "LenaF",
@@ -309,7 +309,7 @@ namespace AthenaWebApp.Models
                     new UserExtension
                     {
                         Id = "w52f4e8e-7a86-4279-82d1-749b67b99a111",
-                        Email = "Raphael.Palombo@student.uni-siegen.de",
+                        Email = "raphael.palombo@student.uni-siegen.de",
                         NormalizedEmail = "RAPHAEL.PALOMBO@STUDENT.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
                         UserName = "RaphaelP",
@@ -319,11 +319,11 @@ namespace AthenaWebApp.Models
                     new UserExtension
                     {
                         Id = "x52f4e8e-7a86-4279-82d1-749b67b99a112",
-                        Email = "Dominik.Korzak@student.uni-siegen.de",
-                        NormalizedEmail = "DOMIK.KORZAK@STUDENT.UNI-SIEGEN.DE",
+                        Email = "manuel.neuer@torwart.uni-siegen.de",
+                        NormalizedEmail = "MANUEL.NEUER@TORWART.UNI-SIEGEN.DE",
                         EmailConfirmed = true,
-                        UserName = "Dome",
-                        NormalizedUserName = "DOME",
+                        UserName = "Manu",
+                        NormalizedUserName = "MANU",
                         CompanyId = "eca9a2af-1ed2-430c-b9ae-e5476d36ca76"
                     },
                     new UserExtension
