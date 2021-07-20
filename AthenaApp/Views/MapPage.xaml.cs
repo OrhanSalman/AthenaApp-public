@@ -1,15 +1,20 @@
-﻿using AthenaApp.Models;
-using Newtonsoft.Json;
+﻿using Plugin.Geolocator;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Text;
-using Xamarin.Essentials;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
+using System.Threading;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Timers;
+using System.Diagnostics;
+using AthenaApp.Models;
+using System.Collections.Generic;
+using System.Net;
+using Xamarin.Forms.Maps;
 
 namespace AthenaApp.Views
 {
@@ -23,11 +28,14 @@ namespace AthenaApp.Views
         double DistanceStart;
         double DistanceEnd;
         string FinalTime;
+        double Velocity;
+
 
         // From Login procedure
         //        string UserId = "sadafdsagfsfg";    // from LoginRegister
         //        string CompanyId = "Uni_Siegen";    // from LoginRegister 
         string action = "";
+
 
         public DateTime StartAt { get; set; }
         public DateTime EndAt { get; set; }
@@ -39,7 +47,13 @@ namespace AthenaApp.Views
         public MapPage()
         {
             InitializeComponent();
+            myMap.Pins.Add(pinRunner);
         }
+
+        public Pin pinRunner = new Pin
+        {
+            Label = "Runner's Position"
+        };
 
         async void StartLocationTrackingButton_Clicked(System.Object sender, System.EventArgs e)
         {
@@ -53,6 +67,8 @@ namespace AthenaApp.Views
             bool Activity = false;
 
 
+
+            // ToDo: Load from Database
             string Api = "https://10.0.2.2:5001/api/Activities/GetActivities";
 
 
@@ -108,9 +124,11 @@ namespace AthenaApp.Views
                 }
             }
 
+            //Activity = true;  //für test später löschen
 
             if (Activity == true)
             {
+
                 Activity_Id.Text = action;
                 AcvtivityTime.Start();                              // Start Stopwatch
                 StartAt = DateTime.Now;
@@ -131,9 +149,18 @@ namespace AthenaApp.Views
                     FinalTime = elapsedHours.ToString() + ":" + elapsedMinutes.ToString() + ":" + elapsedSeconds.ToString() + ":" + elapsedMilliseconds.ToString();
                     DistanceStart = DistanceEnd;                    // Setting Start Distance to End Distance to sum Distance up afterwards, in first loop round DistanceStart == 0
                                                                     // Get Latitude and Longitude through Geolocation
-                    var result1 = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(2)));
-                    var result2 = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(10)));
-                    // Visualization of Latitude and Longitude -> delete in final version
+
+
+                    var result1 = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(0)));
+                    pinRunner.Position = new Position(result1.Latitude, result1.Longitude);
+                    myMap.MoveToRegion(MapSpan.FromCenterAndRadius(pinRunner.Position, Distance.FromMeters(500)));
+
+                    await Task.Delay(1000);
+                    var result2 = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(5)));
+                    pinRunner.Position = new Position(result2.Latitude, result2.Longitude);
+                    myMap.MoveToRegion(MapSpan.FromCenterAndRadius(pinRunner.Position, Distance.FromMeters(500)));
+
+
 
                     // Calculate Distance between two measurement Points of Latitude and Longitude
                     double distanceCalc = Location.CalculateDistance(result1.Latitude, result1.Longitude, result2.Latitude, result2.Longitude, DistanceUnits.Kilometers);
@@ -142,6 +169,9 @@ namespace AthenaApp.Views
                     DistanceSum = DistanceStart + DistanceEnd;      // summing up Distances
                     DistanceEnd = DistanceSum;                      // setting Distance End as the Sum of Start and End Distance
                     DistanceInfo.Text = DistanceEnd.ToString("0.00") + " KM";
+                    Velocity = DistanceSum / elapsedSeconds;
+
+
                 }
             }
         }
@@ -161,12 +191,14 @@ namespace AthenaApp.Views
             Debug.WriteLine("Answer: " + answer);
             if (answer == true)
             {
+                // ToDo: Send Data to Server
+
 
                 var rawData = new UserActivity
                 {
-                    UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92", // ToDo
-                    ActivityId = "49f7fee1-01e1-4911-b2a0-ad5fdc0b4ab4", // ToDo
-                    CompanyId = "42ed7e99-7941-4c17-9b3e-1afbb5bd65fe", // ToDo
+                    UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
+                    ActivityId = "49f7fee1-01e1-4911-b2a0-ad5fdc0b4ab4",
+                    CompanyId = "42ed7e99-7941-4c17-9b3e-1afbb5bd65fe",
                     StartTime = StartAt,
                     StopTime = EndAt,
                     SumTime = timeTaken,
@@ -176,7 +208,7 @@ namespace AthenaApp.Views
 
                 var serializedRawData = JsonConvert.SerializeObject(rawData);
                 var requestContent = new StringContent(serializedRawData, Encoding.UTF8, "application/json");
-
+                AcvtivityTime.Reset();
                 HttpClientHandler handler = new HttpClientHandler
                 {
                     ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
@@ -198,14 +230,9 @@ namespace AthenaApp.Views
                 }
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
-                    Debug.WriteLine("An Error occured.");
+                    Debug.WriteLine("nöö");
                 }
-
-
                 // ToDo: Some more handlers
-
-                // ToDo: Check if User gets new Badge
-
 
             }
             AcvtivityTime.Reset();
