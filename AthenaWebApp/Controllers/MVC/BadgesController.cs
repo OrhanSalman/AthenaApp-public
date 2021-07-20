@@ -21,7 +21,7 @@ namespace AthenaWebApp.Controllers.MVC
         public async Task<IActionResult> Index()
         {
 
-            var context = _context.Badge.Include(b => b.Activity.ActivityType);
+            var context = _context.Badge.Include(b => b.Activity);
             return View(await context.ToListAsync());
         }
 

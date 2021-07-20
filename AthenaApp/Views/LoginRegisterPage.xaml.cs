@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,9 +18,40 @@ namespace AthenaApp.Views
         private const string Api = "https://10.0.2.2:5001/api/Users/AppLoginRequest";
         public LoginRegisterPage()
         {
+            // ToDo: Check if concurrencyStamp is the same, if yes, autologin, else go to login
+
+//            CheckForAutoLogin();
+
+            /*
+
+            if ()
+            {
+            }
+            else
+            {
+                await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");   // Testversion, später entfernen
+            }
+            */
             InitializeComponent();
+
         }
 
+
+        public async Task<string> CheckForAutoLogin()
+        {
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+            {
+                if (cert.Issuer.Equals("CN=localhost"))
+                    return true;
+                return errors == System.Net.Security.SslPolicyErrors.None;
+            };
+            HttpClient client = client = new HttpClient(handler);
+            Uri uri = new Uri(string.Format(Api + "?Email=" + UserInputMail.Text));
+            HttpResponseMessage response = await client.GetAsync(uri);
+
+            return "null";
+        }
 
         private async void LoginButton(object sender, EventArgs e)
         {
@@ -44,9 +76,9 @@ namespace AthenaApp.Views
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
                 // Here User is saved to the Apllication
-               XamarinManager manager = new XamarinManager();
+                XamarinManager manager = new XamarinManager();
                 manager.Set_post_data(jsonString);
-                String json = manager.Get_post_data();
+                string json = manager.Get_post_data();
                 Debug.WriteLine("Hier ist das Apllication Output von user:" + json);
                 Debug.WriteLine("Hier ist das json von user:" + jsonString); 
                 var data = JsonConvert.DeserializeObject<User>(jsonString);

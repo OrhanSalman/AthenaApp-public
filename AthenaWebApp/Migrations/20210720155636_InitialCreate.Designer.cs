@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AthenaWebApp.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210719154325_Initial-Create")]
+    [Migration("20210720155636_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
