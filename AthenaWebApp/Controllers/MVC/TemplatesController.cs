@@ -172,6 +172,21 @@ namespace AthenaWebApp.Controllers.MVC
             return View(template);
         }
 
+        public async Task<IActionResult> Send(int id)
+        {
+            // Get CompanyId of logged user
+
+            // Loop in user table for all users with companyId = oben
+
+            // List
+
+            // E-Mail
+
+            return Ok();        // Return display message
+        }
+
+
+
         // POST: Templates/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
