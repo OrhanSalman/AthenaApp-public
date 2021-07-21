@@ -59,13 +59,13 @@ namespace AthenaWebApp
                 options.AddPolicy("Edit Company", policy => policy.RequireClaim("Edit Company", "true")); ;
                 options.AddPolicy("Delete Company", policy => policy.RequireClaim("Delete Company", "true"));
                 // Activities claim-section
-                options.AddPolicy("Create Activities", policy => policy.RequireClaim("Create Activities", "true"));
-                options.AddPolicy("Edit Activities", policy => policy.RequireClaim("Edit Activities", "true")); ;
-                options.AddPolicy("Delete Activities", policy => policy.RequireClaim("Delete Activities", "true"));
+                options.AddPolicy("Create Activity", policy => policy.RequireClaim("Create Activity", "true"));
+                options.AddPolicy("Edit Activity", policy => policy.RequireClaim("Edit Activity", "true")); ;
+                options.AddPolicy("Delete Activity", policy => policy.RequireClaim("Delete Activity", "true"));
                 // UserActivities claim-section
-                options.AddPolicy("Create UserActivities", policy => policy.RequireClaim("Create UserActivities", "true"));
-                options.AddPolicy("Edit UserActivities", policy => policy.RequireClaim("Edit UserActivities", "true")); ;
-                options.AddPolicy("Delete UserActivities", policy => policy.RequireClaim("Delete UserActivities", "true"));
+                options.AddPolicy("Create UserActivity", policy => policy.RequireClaim("Create UserActivity", "true"));
+                options.AddPolicy("Edit UserActivity", policy => policy.RequireClaim("Edit UserActivity", "true")); ;
+                options.AddPolicy("Delete UserActivity", policy => policy.RequireClaim("Delete UserActivity", "true"));
                 // Badge claim-section
                 options.AddPolicy("Create Badge", policy => policy.RequireClaim("Create Badge", "true"));
                 options.AddPolicy("Edit Badge", policy => policy.RequireClaim("Edit Badge", "true")); ;
@@ -75,13 +75,13 @@ namespace AthenaWebApp
                 options.AddPolicy("Edit Template", policy => policy.RequireClaim("Edit Template", "true")); ;
                 options.AddPolicy("Delete Template", policy => policy.RequireClaim("Delete Template", "true"));
                 // Roles claim-section
-                options.AddPolicy("Create Roles", policy => policy.RequireClaim("Create Roles", "true"));
-                options.AddPolicy("Edit Roles", policy => policy.RequireClaim("Edit Roles", "true")); ;
-                options.AddPolicy("Delete Roles", policy => policy.RequireClaim("Delete Roles", "true"));
+                options.AddPolicy("Create Role", policy => policy.RequireClaim("Create Role", "true"));
+                options.AddPolicy("Edit Role", policy => policy.RequireClaim("Edit Role", "true")); ;
+                options.AddPolicy("Delete Role", policy => policy.RequireClaim("Delete Role", "true"));
                 // Claims claim-section
-                options.AddPolicy("Create Claims", policy => policy.RequireClaim("Create Claims", "true"));
-                options.AddPolicy("Edit Claims", policy => policy.RequireClaim("Edit Claims", "true")); ;
-                options.AddPolicy("Delete Claims", policy => policy.RequireClaim("Delete Claims", "true"));
+                options.AddPolicy("Create Claim", policy => policy.RequireClaim("Create Claim", "true"));
+                options.AddPolicy("Edit Claim", policy => policy.RequireClaim("Edit Claim", "true")); ;
+                options.AddPolicy("Delete Claim", policy => policy.RequireClaim("Delete Claim", "true"));
 
 
             });
