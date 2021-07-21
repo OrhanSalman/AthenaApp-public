@@ -1,5 +1,6 @@
 ﻿using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -41,6 +42,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Companies/Create
+        [Authorize(Policy = "Create Company")]
         public IActionResult Create()
         {
             return View();
@@ -63,6 +65,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Companies/Edit/5
+        [Authorize(Policy = "Edit Company")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -83,6 +86,7 @@ namespace AthenaWebApp.Controllers.MVC
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Edit Company")]
         public async Task<IActionResult> Edit(string id, [Bind("Id,CompanyName,Country,EmailContext")] Company company)
         {
             if (id != company.Id)
@@ -114,6 +118,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Companies/Delete/5
+        [Authorize(Policy = "Delete Company")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -134,6 +139,7 @@ namespace AthenaWebApp.Controllers.MVC
         // POST: Companies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Delete Company")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var company = await _context.Company.FindAsync(id);

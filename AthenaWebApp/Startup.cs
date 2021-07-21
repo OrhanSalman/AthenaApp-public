@@ -48,6 +48,44 @@ namespace AthenaWebApp
                 });
             });
             */
+            services.AddAuthorization(options =>
+            {
+                // User claim-section
+                options.AddPolicy("Create User", policy => policy.RequireClaim("Create User", "true"));
+                options.AddPolicy("Edit User", policy => policy.RequireClaim("Edit User", "true")); ;
+                options.AddPolicy("Delete User", policy => policy.RequireClaim("Delete User", "true"));
+                // Company claim-section
+                options.AddPolicy("Create Company", policy => policy.RequireClaim("Create Company", "true"));
+                options.AddPolicy("Edit Company", policy => policy.RequireClaim("Edit Company", "true")); ;
+                options.AddPolicy("Delete Company", policy => policy.RequireClaim("Delete Company", "true"));
+                // Activities claim-section
+                options.AddPolicy("Create Activity", policy => policy.RequireClaim("Create Activity", "true"));
+                options.AddPolicy("Edit Activity", policy => policy.RequireClaim("Edit Activity", "true")); ;
+                options.AddPolicy("Delete Activity", policy => policy.RequireClaim("Delete Activity", "true"));
+                // UserActivities claim-section
+                options.AddPolicy("Create UserActivity", policy => policy.RequireClaim("Create UserActivity", "true"));
+                options.AddPolicy("Edit UserActivity", policy => policy.RequireClaim("Edit UserActivity", "true")); ;
+                options.AddPolicy("Delete UserActivity", policy => policy.RequireClaim("Delete UserActivity", "true"));
+                // Badge claim-section
+                options.AddPolicy("Create Badge", policy => policy.RequireClaim("Create Badge", "true"));
+                options.AddPolicy("Edit Badge", policy => policy.RequireClaim("Edit Badge", "true")); ;
+                options.AddPolicy("Delete Badge", policy => policy.RequireClaim("Delete Badge", "true"));
+                // Template claim-section
+                options.AddPolicy("Create Template", policy => policy.RequireClaim("Create Template", "true"));
+                options.AddPolicy("Edit Template", policy => policy.RequireClaim("Edit Template", "true")); ;
+                options.AddPolicy("Delete Template", policy => policy.RequireClaim("Delete Template", "true"));
+                // Roles claim-section
+                options.AddPolicy("Create Role", policy => policy.RequireClaim("Create Role", "true"));
+                options.AddPolicy("Edit Role", policy => policy.RequireClaim("Edit Role", "true")); ;
+                options.AddPolicy("Delete Role", policy => policy.RequireClaim("Delete Role", "true"));
+                // Claims claim-section
+                options.AddPolicy("Create Claim", policy => policy.RequireClaim("Create Claim", "true"));
+                options.AddPolicy("Edit Claim", policy => policy.RequireClaim("Edit Claim", "true")); ;
+                options.AddPolicy("Delete Claim", policy => policy.RequireClaim("Delete Claim", "true"));
+
+
+            });
+
             services.AddMvc(options =>
             {
                 // This pushes users to login if not authenticated

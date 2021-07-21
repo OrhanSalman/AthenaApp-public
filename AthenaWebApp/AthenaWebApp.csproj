@@ -29,6 +29,17 @@
     <None Include="Views\Role\Create.cshtml" />
     <None Include="Views\Role\Index.cshtml" />
     <None Include="Views\Role\Update.cshtml" />
+    <None Include="wwwroot\assets\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\assets\fonts\fa-brands-400.svg" />
+    <None Include="wwwroot\assets\fonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\assets\fonts\fa-regular-400.svg" />
+    <None Include="wwwroot\assets\fonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\assets\fonts\fa-solid-900.svg" />
+    <None Include="wwwroot\assets\fonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\assets\fonts\ionicons.svg" />
+    <None Include="wwwroot\assets\js\bs-init.js" />
+    <None Include="wwwroot\assets\js\chart.min.js" />
+    <None Include="wwwroot\assets\js\theme.js" />
     <None Include="wwwroot\js\ckeditor\adapters\jquery.js" />
     <None Include="wwwroot\js\ckeditor\lang\af.js" />
     <None Include="wwwroot\js\ckeditor\lang\ar.js" />

@@ -1,6 +1,7 @@
 ﻿using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,12 +17,6 @@ namespace AthenaWebApp.Controllers.MVC
     {
         private readonly Context _context;
         private readonly UserManager<UserExtension> _userManager;
-
-        /*      public IActionResult Index
-               ()
-           {
-               return View();
-           } */
 
         public TemplatesController(Context context, UserManager<UserExtension> userManager)
         {
@@ -64,6 +59,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Templates/Create
+        [Authorize(Policy = "Create Template")]
         public ActionResult<Template> Create(int? id)
         {
             if (id == null)
@@ -84,6 +80,7 @@ namespace AthenaWebApp.Controllers.MVC
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Create Template")]
         public async Task<IActionResult> Create(Template template)
         {
             string loggedInUserId = _userManager.GetUserId(User);
@@ -101,6 +98,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Templates/Edit/5
+        [Authorize(Policy = "Edit Template")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -122,6 +120,7 @@ namespace AthenaWebApp.Controllers.MVC
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Edit Template")]
         public async Task<IActionResult> Edit(int id, [Bind("TemplateId,UserId,TemplateTitle,Description,DateTimeCreated")] Template template)
         {
             if (id != template.TemplateId)
@@ -153,6 +152,7 @@ namespace AthenaWebApp.Controllers.MVC
             return View(template);
         }
 
+        /*
         // GET: Templates/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -171,7 +171,9 @@ namespace AthenaWebApp.Controllers.MVC
 
             return View(template);
         }
+        */
 
+        [Authorize(Policy = "Send Template")]
         public async Task<IActionResult> Send(int id)
         {
             // Get CompanyId of logged user
@@ -190,6 +192,7 @@ namespace AthenaWebApp.Controllers.MVC
         // POST: Templates/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Delete Template")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var template = await _context.Template.FindAsync(id);
@@ -206,6 +209,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         //Method to create the template
+        [Authorize(Policy = "Create Template")]
         public void CreateTemplate(Template template)
         {
             if (template == null)
@@ -216,13 +220,14 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         //Method to update the template
+        [Authorize(Policy = "Edit Template")]
         public void UpdateTemplate(Template template)
         {
             _context.Template.Update(template);
         }
 
 
-        /************************************************************************************/
+        /************************************************************************************
         ////Display all Templates
         //Method to display all Templates which is received from 'GetAllTemplates' method
         public IActionResult AllTemplates()
@@ -236,11 +241,12 @@ namespace AthenaWebApp.Controllers.MVC
         {
             return _context.Template.ToList();
         }
-
+        */
 
         /************************************************************************************/
         ////Display single template
         //Method to view a single template on SingleTemplateView
+        [Authorize(Policy = "Edit Template")]
         public IActionResult SingleTemplate(int id)
         {
             var template = GetTemplateById(id);
@@ -252,29 +258,27 @@ namespace AthenaWebApp.Controllers.MVC
         /************************************************************************************/
         ////Delete template
         //Method called by the view to delete the template
-        public async Task<IActionResult> RemoveTemplate(int id)
-        {
-            DeleteTemplate(id);
-            await SaveChanges();
-            return RedirectToAction("AllTemplates");
-        }
-
-        //Method to delete the template from the database
-        public void DeleteTemplate(int id)
+        [Authorize(Policy = "Delete Template")]
+        public async Task<IActionResult> Delete(int id)
         {
             _context.Template.Remove(GetTemplateById(id));
+            await SaveChanges();
+            return RedirectToAction("Index");
         }
+
 
 
         /************************************************************************************/
         ////Supportive methods
         //To get Templates by TemplateID
+        [Authorize(Policy = "Edit Template")]
         public Template GetTemplateById(int id)
         {
             return _context.Template.FirstOrDefault(a => a.TemplateId == id);
         }
 
         //Method to save the changes in the database
+        [Authorize(Policy = "Edit Template")]
         public Task<bool> SaveChanges()
         {
             return Task.FromResult(_context.SaveChanges() >= 0);
