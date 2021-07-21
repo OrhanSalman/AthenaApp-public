@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
 {
+    [Authorize(Roles = "Admin")]
     public class ClaimsModel : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;

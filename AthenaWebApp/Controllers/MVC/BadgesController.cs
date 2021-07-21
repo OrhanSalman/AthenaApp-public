@@ -1,5 +1,6 @@
 ﻿using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Badges/Create
+        [Authorize(Policy = "Create Badge")]
         public IActionResult Create()
         {
             ViewData["ActivityId"] = new SelectList(_context.Activity, "Id", "Id");
@@ -69,6 +71,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Badges/Edit/5
+        [Authorize(Policy = "Edit Badge")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -90,6 +93,7 @@ namespace AthenaWebApp.Controllers.MVC
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Edit Badge")]
         public async Task<IActionResult> Edit(string id, [Bind("Id,ActivityId,BadgeName,DistanceIntervallBegin,DistanceIntervallEnd,BadgeImage,BadgeDescription")] Badge badge)
         {
             if (id != badge.Id)
@@ -122,6 +126,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Badges/Delete/5
+        [Authorize(Policy = "Delete Badge")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -143,6 +148,7 @@ namespace AthenaWebApp.Controllers.MVC
         // POST: Badges/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Delete Badge")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var badge = await _context.Badge.FindAsync(id);

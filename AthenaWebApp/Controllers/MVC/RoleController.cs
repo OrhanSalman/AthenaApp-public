@@ -35,7 +35,17 @@ namespace AthenaWebApp.Controllers.MVC
 
         string usedRoleId = "";
 
-        public ViewResult Index() => View(roleManager.Roles);
+        public async Task<IActionResult> Index()
+        {
+            /* Remove admin from view. In delete methode there is a second security construct */
+            var roles = new List<IdentityRole>();
+            roles = await _context.Roles.ToListAsync();
+            var removeAdmin = roles.SingleOrDefault(s => s.NormalizedName == "ADMIN");
+            roles.Remove(removeAdmin);
+            /* Bye admin */
+
+            return View(roles);
+        }
 
         public IActionResult Create() => View();
 
@@ -85,7 +95,13 @@ namespace AthenaWebApp.Controllers.MVC
         public async Task<IActionResult> Delete(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);
-            if (role != null)
+
+            // Do not delete Admin
+            if (role.Name == "Admin")
+            {
+                return BadRequest(error: "The only thing that an admin can't do is delete itself.");
+            }
+            else if (role != null)
             {
                 IdentityResult result = await roleManager.DeleteAsync(role);
                 if (result.Succeeded)
@@ -186,8 +202,6 @@ namespace AthenaWebApp.Controllers.MVC
 
             Console.WriteLine(cleanId);
             Console.WriteLine(cleanClaimValue);
-
-
 
             // change true or false
             if (cleanClaimValue.Contains("true"))

@@ -1408,147 +1408,147 @@ namespace AthenaWebApp.Models
                     ClaimType = "Delete Claims",
                     ClaimValue = "true"
                 },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 22,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Create User",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 23,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Edit User",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 24,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Delete User",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 25,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Create Company",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 26,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Edit Company",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 27,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Delete Company",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 28,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Create Template",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 29,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Edit Template",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 30,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Delete Template",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 31,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Create Activities",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 32,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Edit Activities",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 33,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Delete Activities",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 34,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Create UserActivity",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 35,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Edit UserActivity",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 36,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Delete UserActivity",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 37,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Create Roles",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 38,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Edit Roles",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 39,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Delete Roles",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 40,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Create Claims",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 41,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                          ClaimType = "Edit Claims",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 42,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
@@ -1557,155 +1557,174 @@ namespace AthenaWebApp.Models
                      },
                 // For MobileUser ClaimValue = false
                 // For Supervisor ClaimValue vorerst freilassen
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 43,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Create User",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 44,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Edit User",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 45,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Delete User",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 46,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Create Company",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 47,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Edit Company",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 48,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Delete Company",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 49,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Create Template",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                        Id = 50,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Edit Template",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 51,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Delete Template",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
  //                        Id = 52,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Create Activites",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 53,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Edit Activites",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 54,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Delete Activites",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 55,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Create UserActivites",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 56,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Edit UserActivites",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 57,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Delete UserActivites",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 58,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Create Roles",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                         Id = 59,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Edit Roles",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
 //                        Id = 60,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Delete Roles",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
+                new IdentityRoleClaim<string>
                      {
                          //                         Id = 61,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                          ClaimType = "Create Claims",
                          ClaimValue = "false"
                      },
-                     new IdentityRoleClaim<string>
-                     {
-                         //                         Id = 62,
-                         RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Edit Claims",
-                         ClaimValue = "false"
-                     },
-                     new IdentityRoleClaim<string>
-                     {
-//                         Id = 63,
-                         RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Delete Claims",
-                         ClaimValue = "false"
-                     }
-
-                    );
+                new IdentityRoleClaim<string>
+                {
+                    //                         Id = 62,
+                    RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
+                    ClaimType = "Edit Claims",
+                    ClaimValue = "false"
+                },
+                new IdentityRoleClaim<string>
+                {
+                    //                         Id = 63,
+                    RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
+                    ClaimType = "Delete Claims",
+                    ClaimValue = "false"
+                },
+                new IdentityRoleClaim<string>
+                {
+                    //                         Id = 64,
+                    RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
+                    ClaimType = "Send Template",
+                    ClaimValue = "false"
+                },
+                new IdentityRoleClaim<string>
+                {
+                    //                         Id = 65,
+                    RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
+                    ClaimType = "Send Template",
+                    ClaimValue = "false"
+                },
+                new IdentityRoleClaim<string>
+                {
+                    //                         Id = 66,
+                    RoleId = "9d5107d5-5edd-49ae-adee-240acf8c9af1",
+                    ClaimType = "Send Template",
+                    ClaimValue = "true"
+                });
                 context.SaveChanges();
             }
         }

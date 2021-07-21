@@ -48,6 +48,44 @@ namespace AthenaWebApp
                 });
             });
             */
+            services.AddAuthorization(options =>
+            {
+                // User claim-section
+                options.AddPolicy("Create User", policy => policy.RequireClaim("Create User", "true"));
+                options.AddPolicy("Edit User", policy => policy.RequireClaim("Edit User", "true")); ;
+                options.AddPolicy("Delete User", policy => policy.RequireClaim("Delete User", "true"));
+                // Company claim-section
+                options.AddPolicy("Create Company", policy => policy.RequireClaim("Create Company", "true"));
+                options.AddPolicy("Edit Company", policy => policy.RequireClaim("Edit Company", "true")); ;
+                options.AddPolicy("Delete Company", policy => policy.RequireClaim("Delete Company", "true"));
+                // Activities claim-section
+                options.AddPolicy("Create Activities", policy => policy.RequireClaim("Create Activities", "true"));
+                options.AddPolicy("Edit Activities", policy => policy.RequireClaim("Edit Activities", "true")); ;
+                options.AddPolicy("Delete Activities", policy => policy.RequireClaim("Delete Activities", "true"));
+                // UserActivities claim-section
+                options.AddPolicy("Create UserActivities", policy => policy.RequireClaim("Create UserActivities", "true"));
+                options.AddPolicy("Edit UserActivities", policy => policy.RequireClaim("Edit UserActivities", "true")); ;
+                options.AddPolicy("Delete UserActivities", policy => policy.RequireClaim("Delete UserActivities", "true"));
+                // Badge claim-section
+                options.AddPolicy("Create Badge", policy => policy.RequireClaim("Create Badge", "true"));
+                options.AddPolicy("Edit Badge", policy => policy.RequireClaim("Edit Badge", "true")); ;
+                options.AddPolicy("Delete Badge", policy => policy.RequireClaim("Delete Badge", "true"));
+                // Template claim-section
+                options.AddPolicy("Create Template", policy => policy.RequireClaim("Create Template", "true"));
+                options.AddPolicy("Edit Template", policy => policy.RequireClaim("Edit Template", "true")); ;
+                options.AddPolicy("Delete Template", policy => policy.RequireClaim("Delete Template", "true"));
+                // Roles claim-section
+                options.AddPolicy("Create Roles", policy => policy.RequireClaim("Create Roles", "true"));
+                options.AddPolicy("Edit Roles", policy => policy.RequireClaim("Edit Roles", "true")); ;
+                options.AddPolicy("Delete Roles", policy => policy.RequireClaim("Delete Roles", "true"));
+                // Claims claim-section
+                options.AddPolicy("Create Claims", policy => policy.RequireClaim("Create Claims", "true"));
+                options.AddPolicy("Edit Claims", policy => policy.RequireClaim("Edit Claims", "true")); ;
+                options.AddPolicy("Delete Claims", policy => policy.RequireClaim("Delete Claims", "true"));
+
+
+            });
+
             services.AddMvc(options =>
             {
                 // This pushes users to login if not authenticated

@@ -12,6 +12,7 @@ namespace AthenaWebApp.Controllers.API
     [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
+//    [Authorize(Roles = "MobileUser")]
     public class ActivitiesController : ControllerBase
     {
         private readonly Context _context;
