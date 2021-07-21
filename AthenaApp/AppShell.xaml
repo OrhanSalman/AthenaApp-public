@@ -40,6 +40,7 @@
     <ShellItem Route="LoginRegisterPage">
         <ShellContent ContentTemplate="{DataTemplate local:LoginRegisterPage}"/>
     </ShellItem>
+    
 
     <!--
         TabBar Pages
@@ -65,7 +66,13 @@
             ContentTemplate="{DataTemplate local:ActivitiesPage}"
             Icon="icon_about.png"
             Route="ActivitiesPage" />
-        
+        <ShellContent
+            Title="ProfilePage"
+            ContentTemplate="{DataTemplate local:ProfilePage}"
+            Icon="icon_about.png"
+            Route="ProfilePage" />
+
+
     </TabBar>
 
     <!--

@@ -48,7 +48,12 @@ namespace AthenaApp.Views
         
         string year = DateTime.Now.Year.ToString();
 
-        async void DataRefreshButton_Clicked(System.Object sender, System.EventArgs e)
+
+        async void DataRefreshButton_Clicked(System.Object sender, System.EventArgs e) 
+        { 
+            await Shell.Current.GoToAsync($"//{nameof(ProfilePage)}");
+        }
+        async void DataRefreshButton_Clicked1(System.Object sender, System.EventArgs e)
         {
             IEnumerable<double> JanUserDistanceEnum;
             IEnumerable<double> FebUserDistanceEnum;
