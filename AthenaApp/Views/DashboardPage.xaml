@@ -102,69 +102,16 @@
                     <BoxView Color="#00063C" Grid.Column="1" Grid.Row="1" CornerRadius="10" />
                     <BoxView Color="#00063C" Grid.Column="2" Grid.Row="1" CornerRadius="10" />
                     <BoxView Color="#00063C" Grid.Column="2" Grid.Row="0" CornerRadius="10" />
-                    <Frame  Grid.Row="0"
-                        Grid.Column="0"
-                        
-
-                        
-                        CornerRadius="10"
-                        Padding="0"
-                            Margin="16"
-                        HeightRequest="30"
-                            WidthRequest="35"
-                        VerticalOptions="Start">
-                        
-                <Image
-                        
-                       
-                        BackgroundColor="#0076B9"
-                        Aspect="Fill"
-                        Source="awesome_running.png" 
-                      
-                        />
-                   </Frame >
-                    <Frame  
-                        Padding="0"
-                        CornerRadius="10"
-                        Grid.Row="0"
-                        Margin="16"
-                        HeightRequest="30"
-                        Grid.Column="1"
-                        VerticalOptions="StartAndExpand"
-                        
-                        >
-                       
-                    <Image
-
-                   
-                        BackgroundColor="#0076B9"
-                        Source="awesome_swimmer.png"
-                        
-                       
-                        />
-                    </Frame>
-                    
+       
+          
                     
                     
                    
                    
                     
                     
-                    <Frame 
-                        Padding="0"
-                        CornerRadius="10"
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Margin="17"
-                        HeightRequest="30"
-                        
-                        VerticalOptions="Start">
-                        <Image
-
-                        BackgroundColor="#0076B9"
-                        Source="material_directions_bike.png"
-                        />
-                    </Frame>
+                  
+                    
                    
                 <Image
                         Margin="25"
@@ -200,22 +147,23 @@
                         
                         Source="ionic_ios_person.png" />
 
-                    <Label Text="Jogging" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
+                    <Label Text="" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center" FontSize="16"/>
 
-                <Label Grid.Column="1"
-           Text="Swimming" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
-                <Label Grid.Column="2"
-             Grid.Row="0"
-           Text="Biking" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
-                    <Label Grid.Row="1"
-           Text="Members" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center" FontSize="16"/>
-                <Label Grid.Column="1"
-             Grid.Row="1"
-           Text="Km/Day" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center" FontSize="16"/>
-                
-                <Label Grid.Column="2"
-             Grid.Row="1"
-           Text="Km Personal" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center" FontSize="16"/>
+                    
+                <Label Grid.Column="1" Text="University" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
+                    <Label Grid.Column="1" x:Name="UniversityInfo" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
+                    
+                <Label Grid.Column="2" Grid.Row="0" Text="Monthly KM" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
+                    <Label Grid.Column="2" Grid.Row="0" x:Name="MonthlyKmInfo" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
+
+                <Label Grid.Row="1" Text="Members" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
+                    <Label Grid.Row="1" x:Name="MembersInfo" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
+
+                <Label Grid.Column="1" Grid.Row="1" Text="Daily KM" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
+                    <Label Grid.Column="1" Grid.Row="1" x:Name="DailyKmInfo" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
+
+                <Label Grid.Column="2" Grid.Row="1" Text="Personal KM" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
+                    <Label Grid.Column="2" Grid.Row="1" x:Name="PersonalKmInfo" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
 
 
             </Grid>

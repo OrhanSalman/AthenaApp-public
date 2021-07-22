@@ -63,9 +63,9 @@
             Route="DashboardPage" />
         <ShellContent
             Title="Activities"
-            ContentTemplate="{DataTemplate local:ActivitiesPage}"
+            ContentTemplate="{DataTemplate local:UserActivitiesPage}"
             Icon="icon_about.png"
-            Route="ActivitiesPage" />
+            Route="UserActivitiesPage" />
         <ShellContent
             Title="ProfilePage"
             ContentTemplate="{DataTemplate local:ProfilePage}"

@@ -26,7 +26,8 @@ namespace AthenaApp.Views
             ProfileData();
         }
 
-         
+
+        
         public async void ProfileData()
         {
             
@@ -217,7 +218,10 @@ namespace AthenaApp.Views
 
             */
         }
-
+        public async void ChangeUserName_Clicked()
+        {
+            
+        }
 
 
     }

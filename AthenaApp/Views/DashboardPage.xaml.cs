@@ -11,8 +11,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Entry = Microcharts.ChartEntry;
 using AthenaApp.Services;
-
-
+using AthenaWebApp.Models;
 
 namespace AthenaApp.Views
 {
@@ -26,8 +25,7 @@ namespace AthenaApp.Views
             DashboardData();
         }
 
-        List<Entry> entries = new List<Entry>();
-
+        
         
 
         
@@ -47,12 +45,17 @@ namespace AthenaApp.Views
         readonly string November = "11";
         readonly string December = "12";
         
-        string year = DateTime.Now.Year.ToString();
-
-
         
+
+
+
         async void DashboardData()
         {
+
+            string year = DateTime.Now.Year.ToString();
+            string month = DateTime.Now.Month.ToString();
+            string day = DateTime.Now.Day.ToString();
+
             IEnumerable<double> JanUserDistanceEnum;
             IEnumerable<double> FebUserDistanceEnum;
             IEnumerable<double> MarUserDistanceEnum;
@@ -91,6 +94,8 @@ namespace AthenaApp.Views
             double NovUserDistanceAccumulated;
             double DecUserDistanceAccumulated;
 
+            //Useractivities data request
+
             string Api = "https://10.0.2.2:5001/api/UserActivities/GetUserActivitiesOfUserId";
 
             HttpClientHandler handler = new HttpClientHandler();
@@ -106,7 +111,7 @@ namespace AthenaApp.Views
             HttpResponseMessage response = await client.GetAsync(uri);
 
 
-             var jsonString = await response.Content.ReadAsStringAsync();
+            var jsonString = await response.Content.ReadAsStringAsync();
 
             var data = JsonConvert.DeserializeObject<UserActivity[]>(jsonString);
             List<UserActivity> listOfAllUserActivities = new List<UserActivity>();
@@ -129,16 +134,50 @@ namespace AthenaApp.Views
                     });
             }
 
+            // Universities data request
+            string ApiCom = "https://10.0.2.2:5001/api/Companies/GetCompanies";
+
+            HttpClientHandler handlerCom = new HttpClientHandler();
+            handlerCom.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+            {
+                if (cert.Issuer.Equals("CN=localhost"))
+                    return true;
+                return errors == System.Net.Security.SslPolicyErrors.None;
+            };
+            HttpClient clientCom = clientCom = new HttpClient(handlerCom);
+
+            Uri uriCom = new Uri(string.Format(ApiCom));
+            HttpResponseMessage responseCom = await client.GetAsync(uriCom);
+
+
+            var jsonStringCom = await responseCom.Content.ReadAsStringAsync();
+
+            var dataCom = JsonConvert.DeserializeObject<Company[]>(jsonStringCom);
+            List<Company> listOfCompanies = new List<Company>();
+
+            foreach (var company in dataCom)
+            {
+                listOfCompanies.Add(
+                    new Company
+                    {
+                        Id = company.Id,
+                        CompanyName = company.CompanyName,
+                        Country = company.Country,
+                        EmailContext = company.EmailContext
+                    });
+            }
+
+            
+
 
             //            int actCount = listOfAllActivities.Count;
             // ToDo: filter Month var StopTimeList = (listOfAllUserActivities.Select(c => c.StopTime));
 
 
 
-            var distanceList = (listOfAllUserActivities.Select(c => c.SumDistance));
-            var totalDistance = distanceList.Sum(item => (float)item);
 
-            
+
+
 
             XamarinManager manager = new XamarinManager();
             string jsonData = manager.Get_post_data();
@@ -156,6 +195,24 @@ namespace AthenaApp.Views
             };
 
             var UserCurrentId = user.Id;
+
+            var UserUniversity = listOfCompanies.Where(company => company.Id == user.CompanyId).Select(company => company.CompanyName).FirstOrDefault();
+            UniversityInfo.Text = UserUniversity;
+
+            var EnumMonthlyUniKm = listOfAllUserActivities.Where(useract => (useract.CompanyId == user.CompanyId) && (useract.StopTime.Month.ToString() == month)).Select(useract => useract.SumDistance);
+            var CurrentMonthUniDistance = EnumMonthlyUniKm.Sum();
+
+            var EnumDailyUniKm = listOfAllUserActivities.Where(useract => (useract.CompanyId == user.CompanyId) && (useract.StopTime.Day.ToString() == day)).Select(useract => useract.SumDistance);
+            var CurrentDayUniDistance = EnumDailyUniKm.Sum();
+
+            var EnumUserKm = listOfAllUserActivities.Where(useract => useract.UserId == user.Id).Select(useract => useract.SumDistance);
+            var totalUserKm = EnumUserKm.Sum();
+
+            MonthlyKmInfo.Text = CurrentMonthUniDistance.ToString("0.00") + " KM";
+            DailyKmInfo.Text = CurrentDayUniDistance.ToString("0.00") + " KM";
+            //MembersInfo.Text = 
+            PersonalKmInfo.Text = totalUserKm.ToString("0.00") + " KM";
+
 
             foreach (var json in listOfAllUserActivities) 
             {
@@ -217,17 +274,58 @@ namespace AthenaApp.Views
                 DecUserDistanceEnum = listOfAllUserActivities.Where(c => (c.StopTime.Month.ToString() == December) && (c.UserId == UserCurrentId)).Select(d => d.SumDistance);
                 DecUserDistanceTotal = DecUserDistanceEnum.Sum((item => (float)item));
             }
-            FebUserDistanceAccumulated = JanUserDistanceTotal + FebUserDistanceTotal;
-            MarUserDistanceAccumulated = FebUserDistanceAccumulated + MarUserDistanceTotal;
-            AprUserDistanceAccumulated = MarUserDistanceAccumulated + AprUserDistanceTotal;
-            MayUserDistanceAccumulated = AprUserDistanceAccumulated + MayUserDistanceTotal;
-            JunUserDistanceAccumulated = MayUserDistanceAccumulated + JunUserDistanceTotal;
-            JulUserDistanceAccumulated = JunUserDistanceAccumulated + JulUserDistanceTotal;
-            AugUserDistanceAccumulated = JulUserDistanceAccumulated + AugUserDistanceTotal;
-            SepUserDistanceAccumulated = AugUserDistanceAccumulated + SepUserDistanceTotal;
-            OctUserDistanceAccumulated = SepUserDistanceAccumulated + OctUserDistanceTotal;
-            NovUserDistanceAccumulated = OctUserDistanceAccumulated + NovUserDistanceTotal;
-            DecUserDistanceAccumulated = NovUserDistanceAccumulated + DecUserDistanceTotal;
+
+
+            var distanceListJan = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == January).Select(c => c.SumDistance));
+            var totalDistanceJan = distanceListJan.Sum(item => (float)item);
+
+            var distanceListFeb = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == February).Select(c => c.SumDistance));
+            var totalDistanceFeb = distanceListFeb.Sum(item => (float)item);
+
+            var distanceListMar = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == March).Select(c => c.SumDistance));
+            var totalDistanceMar = distanceListMar.Sum(item => (float)item);
+
+            var distanceListApr = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == April).Select(c => c.SumDistance));
+            var totalDistanceApr = distanceListApr.Sum(item => (float)item);
+
+            var distanceListMay = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == May).Select(c => c.SumDistance));
+            var totalDistanceMay = distanceListMay.Sum(item => (float)item);
+
+            var distanceListJun = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == June).Select(c => c.SumDistance));
+            var totalDistanceJun = distanceListJun.Sum(item => (float)item);
+
+            var distanceListJul = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == July).Select(c => c.SumDistance));
+            var totalDistanceJul = distanceListJul.Sum(item => (float)item);
+
+            var distanceListAug = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == August).Select(c => c.SumDistance));
+            var totalDistanceAug = distanceListAug.Sum(item => (float)item);
+
+            var distanceListSep = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == September).Select(c => c.SumDistance));
+            var totalDistanceSep = distanceListSep.Sum(item => (float)item);
+
+            var distanceListOct = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == October).Select(c => c.SumDistance));
+            var totalDistanceOct = distanceListOct.Sum(item => (float)item);
+
+            var distanceListNov = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == November).Select(c => c.SumDistance));
+            var totalDistanceNov = distanceListNov.Sum(item => (float)item);
+
+            var distanceListDec = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == December).Select(c => c.SumDistance));
+            var totalDistanceDec = distanceListDec.Sum(item => (float)item);
+
+            FebUserDistanceAccumulated = totalDistanceJan + totalDistanceFeb;
+            MarUserDistanceAccumulated = FebUserDistanceAccumulated + totalDistanceMar;
+            AprUserDistanceAccumulated = MarUserDistanceAccumulated + totalDistanceApr;
+            MayUserDistanceAccumulated = AprUserDistanceAccumulated + totalDistanceMay;
+            JunUserDistanceAccumulated = MayUserDistanceAccumulated + totalDistanceJun;
+            JulUserDistanceAccumulated = JunUserDistanceAccumulated + totalDistanceJul;
+            AugUserDistanceAccumulated = JulUserDistanceAccumulated + totalDistanceAug;
+            SepUserDistanceAccumulated = AugUserDistanceAccumulated + totalDistanceSep;
+            OctUserDistanceAccumulated = SepUserDistanceAccumulated + totalDistanceOct;
+            NovUserDistanceAccumulated = OctUserDistanceAccumulated + totalDistanceNov;
+            DecUserDistanceAccumulated = NovUserDistanceAccumulated + totalDistanceDec;
+
+            
+
             List<Entry> entries = new List<Entry>()
             {
             new Entry(float.Parse(JanUserDistanceTotal.ToString())) //float.Parse(total.ToString())
@@ -311,11 +409,11 @@ namespace AthenaApp.Views
             List<Entry> entriesAccumulated = new List<Entry>
         {
             
-            new Entry (float.Parse(JanUserDistanceTotal.ToString()))
+            new Entry (float.Parse(totalDistanceJan.ToString()))
             {
                 Color = SKColor.Parse("#FFFFFF"),
                 Label = "January",
-                ValueLabel = JanUserDistanceTotal.ToString("0.00")
+                ValueLabel = totalDistanceJan.ToString("0.00")
             },
             new Entry (float.Parse(FebUserDistanceAccumulated.ToString()))
             {
