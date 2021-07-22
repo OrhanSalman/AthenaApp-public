@@ -142,8 +142,11 @@ namespace AthenaWebApp.Controllers.API
                     pageHandler: null,
                     values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                     protocol: Request.Scheme);
+
+                // ToDo: Email confirmation load template
                 await _emailSender.SendEmailAsync(user.Email, "Confirm your registration",
                 $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(returnUrl)}'>clicking here</a>.");
+
                 // ToDo: return Token
                 // ToDo: Send E-Mail-Verification + automaticly login (maybe AppLoginRequest method?)
                 // ToDo: Check + Set Company in UserTable, but also FK in CompanyTable

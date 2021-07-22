@@ -10,11 +10,13 @@ namespace AthenaWebApp.Data
         public static List<String> ClaimTypes = new List<String>() {
             "Create User",          "Edit User",            "Delete User",
             "Create Company",       "Edit Company",         "Delete Company",
-            "Create Template",      "Edit Template",        "Delete Template",
-            "Create Activities",    "Edit Activites",       "Delete Activites",
+            "Create Template",      "Edit Template",        "Delete Template",       "Send Template",
+            "Create Activity",      "Edit Activity",        "Delete Activity",
             "Create UserActivity",  "Edit UserActivity",    "Delete UserActivity",
-            "Create Roles",         "Edit Roles",           "Delete Roles",
-            "Create Claims",        "Edit Claims",          "Delete Claims"
+            "Create Role",          "Edit Role",            "Delete Role",
+            "Create Badge",         "Edit Badge",           "Delete Badge",
+            "Create Claim",         "Edit Claim",           "Delete Claim"
+
         };
 
         // Default Values

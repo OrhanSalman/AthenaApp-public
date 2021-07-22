@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -34,14 +34,24 @@
                 <span asp-validation-for="DistanceIntervallEnd" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BadgeImage" class="control-label"></label>
-                <input asp-for="BadgeImage" class="form-control" />
-                <span asp-validation-for="BadgeImage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="BadgeDescription" class="control-label"></label>
                 <input asp-for="BadgeDescription" class="form-control" />
                 <span asp-validation-for="BadgeDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    @if (Model.BadgeImage != null)
+                    {
+                        <img id="profilePicture" style="width:100px;height:100px; object-fit:cover" src="data:image/*;base64,@(Convert.ToBase64String(Model.BadgeImage))">
+                    }
+                    else
+                    {
+                        <img id="profilePicture" style="width: 80px; height: 80px; object-fit: cover " src="">
+                    }
+                </div>
+
+                <input type="file" name="Image" id="ImageInput" asp-for="BadgeImage" class="form-control" />
+                <span asp-validation-for="BadgeImage" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
