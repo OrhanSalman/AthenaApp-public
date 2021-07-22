@@ -13,13 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UserId)
+                User
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ActivityId)
+                Activity
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CompanyId)
+                Belongs to
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.StartTime)
@@ -40,13 +40,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.UserId)
+                @Html.DisplayFor(modelItem => item.UserExtension.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ActivityId)
+                @Html.DisplayFor(modelItem => item.Activity.ActivityType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CompanyId)
+                @Html.DisplayFor(modelItem => item.Company.CompanyName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartTime)

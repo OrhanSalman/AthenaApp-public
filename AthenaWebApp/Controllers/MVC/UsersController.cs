@@ -4,6 +4,7 @@ using AthenaWebApp.Pagings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -13,10 +14,11 @@ namespace AthenaWebApp.Controllers.MVC
 {
     public class UsersController : Controller
     {
+
         private readonly Context _context;
         private readonly UserManager<UserExtension> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-
+        
         public UsersController(Context context, UserManager<UserExtension> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
@@ -87,6 +89,7 @@ namespace AthenaWebApp.Controllers.MVC
 
 
             var users = from s in _context.Users
+                .Include(b => b.Company)
                         select s;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -102,7 +105,7 @@ namespace AthenaWebApp.Controllers.MVC
                     users = users.OrderByDescending(s => s.UserName);
                     break;
                 case "company_desc":
-                    users = users.OrderByDescending(s => s.CompanyId);
+                    users = users.OrderByDescending(s => s.Company.CompanyName);
                     break;
                 case "Date":
                     users = users.OrderBy(s => s.LastActivity);
@@ -133,6 +136,7 @@ namespace AthenaWebApp.Controllers.MVC
             }
 
             var user = await _context.Users
+                .Include(b => b.Company)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
@@ -146,6 +150,7 @@ namespace AthenaWebApp.Controllers.MVC
         [Authorize(Policy = "Create User")]
         public IActionResult Create()
         {
+            ViewData["CompanyId"] = new SelectList(_context.Company, "CompanyName", "CompanyName");
             return View();
         }
 
@@ -155,13 +160,44 @@ namespace AthenaWebApp.Controllers.MVC
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Create User")]
-        public async Task<IActionResult> Create([Bind("UserName,Email,EmailConfirmed,CompanyName,RegisteredSince")] UserExtension user)
+        public async Task<IActionResult> Create([Bind("Id,CompanyId,RegisteredSince,UserName,Email,EmailConfirmed,PasswordHash")] UserExtension user)
         {
+            // Get the CompanyId from Company of the new created User
+            string compId = _context.Company.Where(x => x.CompanyName == user.CompanyId).Select(x => x.Id).FirstOrDefault();
+            // Here we have to set the variables, because of the SelectedList in the View, UserId will include an UserName
+            user.CompanyId = compId;
+
             // Create User
             if (ModelState.IsValid)
             {
+                user.NormalizedEmail = user.Email.ToUpper();
+                user.NormalizedUserName = user.UserName.ToUpper();
                 _context.Add(user);
                 await _context.SaveChangesAsync();
+
+                /*
+                // ToDo ?
+                if (user.EmailConfirmed == false)
+                {
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = Url.Page(
+                        "/Account/ConfirmEmail",
+                        pageHandler: null,
+                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                        protocol: Request.Scheme);
+
+
+                    // ToDo: Implement "E-Mail-Provider-Send-Mail-Logic"
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                }
+                */
+
+                // Hash Password
+                string pwToHash = user.PasswordHash.ToString();
+                await _userManager.CreateAsync(user, pwToHash);
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -236,6 +272,7 @@ namespace AthenaWebApp.Controllers.MVC
             }
 
             var user = await _context.Users
+                .Include(b => b.Company)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
