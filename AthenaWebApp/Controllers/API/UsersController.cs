@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -66,15 +67,35 @@ namespace AthenaWebApp.Controllers.API
         {
             // Split E-Mail 
             string splittedMail = recievedUserData.Email.Split('@').Last();
+            var companyMailContexts = _context.Company.Select(a => a.EmailContext).ToList();
 
-            // ToDo: Check if Email contains the EmailContext of an Company (Unterscheidung zw. @uni-siegen / @student.uni-siegen
-            string companyName = _context.Company
-                                .Where(a => a.EmailContext == splittedMail)
-                                .Select(a => a.CompanyName)
-                                .FirstOrDefault();
+            string correctMailContext = null;
+            string companyId = null;
 
-            // Check if the company exists (it has to be a valid University-Domain
-            if (companyName == null)
+            // Check if Email is allowed [in DB @uni-siegen.de -> XYZ.uni-siegen.de is allowed]
+            bool found = false;
+            for (int c = 0; c <= companyMailContexts.Count - 1; c++)
+            {
+                if (splittedMail.Contains(companyMailContexts[c]))
+                {
+                    Console.WriteLine("c: " + c + " : " + companyMailContexts[c]);
+                    correctMailContext = companyMailContexts[c];
+                    found = true;
+                    // If there is a match, get the CompanyId
+                    if (found)
+                    {
+                        companyId = _context.Company
+                                        .Where(a => a.EmailContext.Contains(correctMailContext))
+                                        .Select(a => a.Id)
+                                        .FirstOrDefault();
+                        break;
+                    }
+                }
+            }
+
+
+            // Check if the company exists (it has to be a valid University-Domain)
+            if (String.IsNullOrEmpty(companyId))
             {
                 return BadRequest("Registration failed. Please register with an accepted Company E-Mail");
             }
@@ -84,7 +105,7 @@ namespace AthenaWebApp.Controllers.API
                 {
                     Email = recievedUserData.Email,
                     UserName = recievedUserData.UserName,
-                    CompanyId = companyName.ToString()
+                    CompanyId = companyId.ToString()
                 };
                 _context.Users.Add(user);
 
@@ -111,7 +132,7 @@ namespace AthenaWebApp.Controllers.API
                 {
                     throw;
                 }
-
+                
                 string returnUrl = null;
                 returnUrl ??= Url.Content("~/");
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -121,14 +142,18 @@ namespace AthenaWebApp.Controllers.API
                     pageHandler: null,
                     values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                     protocol: Request.Scheme);
+
+                // ToDo: Email confirmation load template
                 await _emailSender.SendEmailAsync(user.Email, "Confirm your registration",
                 $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(returnUrl)}'>clicking here</a>.");
+
                 // ToDo: return Token
                 // ToDo: Send E-Mail-Verification + automaticly login (maybe AppLoginRequest method?)
                 // ToDo: Check + Set Company in UserTable, but also FK in CompanyTable
                 // ToDo: Set UserRole + UserClaims
 
                 // Gives Code 200 + Company-Data + the hole User data (but return user give's the same return) 
+                
                 return Ok(user);
 
             }

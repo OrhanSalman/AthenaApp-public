@@ -1,4 +1,4 @@
-﻿using Plugin.Geolocator;
+using Plugin.Geolocator;
 using System;
 using System.Linq;
 using System.Text;

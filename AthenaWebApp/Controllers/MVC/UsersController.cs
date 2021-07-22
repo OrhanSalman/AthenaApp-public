@@ -4,6 +4,7 @@ using AthenaWebApp.Pagings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -11,17 +12,13 @@ using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
 {
-//    [Authorize(Roles = "Admin")]
-//    [Authorize(Policy = "EmployeeOnly")]
     public class UsersController : Controller
     {
+
         private readonly Context _context;
         private readonly UserManager<UserExtension> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-
-
-
-
+        
         public UsersController(Context context, UserManager<UserExtension> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
@@ -92,6 +89,7 @@ namespace AthenaWebApp.Controllers.MVC
 
 
             var users = from s in _context.Users
+                .Include(b => b.Company)
                         select s;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -107,7 +105,7 @@ namespace AthenaWebApp.Controllers.MVC
                     users = users.OrderByDescending(s => s.UserName);
                     break;
                 case "company_desc":
-                    users = users.OrderByDescending(s => s.CompanyId);
+                    users = users.OrderByDescending(s => s.Company.CompanyName);
                     break;
                 case "Date":
                     users = users.OrderBy(s => s.LastActivity);
@@ -138,6 +136,7 @@ namespace AthenaWebApp.Controllers.MVC
             }
 
             var user = await _context.Users
+                .Include(b => b.Company)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
@@ -148,8 +147,10 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Users/Create
+        [Authorize(Policy = "Create User")]
         public IActionResult Create()
         {
+            ViewData["CompanyId"] = new SelectList(_context.Company, "CompanyName", "CompanyName");
             return View();
         }
 
@@ -158,13 +159,45 @@ namespace AthenaWebApp.Controllers.MVC
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserName,Email,EmailConfirmed,CompanyName,RegisteredSince")] UserExtension user)
+        [Authorize(Policy = "Create User")]
+        public async Task<IActionResult> Create([Bind("Id,CompanyId,RegisteredSince,UserName,Email,EmailConfirmed,PasswordHash")] UserExtension user)
         {
+            // Get the CompanyId from Company of the new created User
+            string compId = _context.Company.Where(x => x.CompanyName == user.CompanyId).Select(x => x.Id).FirstOrDefault();
+            // Here we have to set the variables, because of the SelectedList in the View, UserId will include an UserName
+            user.CompanyId = compId;
+
             // Create User
             if (ModelState.IsValid)
             {
+                user.NormalizedEmail = user.Email.ToUpper();
+                user.NormalizedUserName = user.UserName.ToUpper();
                 _context.Add(user);
                 await _context.SaveChangesAsync();
+
+                /*
+                // ToDo ?
+                if (user.EmailConfirmed == false)
+                {
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = Url.Page(
+                        "/Account/ConfirmEmail",
+                        pageHandler: null,
+                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                        protocol: Request.Scheme);
+
+
+                    // ToDo: Implement "E-Mail-Provider-Send-Mail-Logic"
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                }
+                */
+
+                // Hash Password
+                string pwToHash = user.PasswordHash.ToString();
+                await _userManager.CreateAsync(user, pwToHash);
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -175,6 +208,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Users/Edit/5
+        [Authorize(Policy = "Edit User")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -195,6 +229,7 @@ namespace AthenaWebApp.Controllers.MVC
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Edit User")]
         public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,Email,EmailConfirmed,Company")] UserExtension user)
         {
             if (id != user.Id)
@@ -226,6 +261,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Users/Delete/5
+        [Authorize(Policy = "Delete User")]
         public async Task<IActionResult> Delete(string id)
         {
 
@@ -236,6 +272,7 @@ namespace AthenaWebApp.Controllers.MVC
             }
 
             var user = await _context.Users
+                .Include(b => b.Company)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
@@ -248,6 +285,7 @@ namespace AthenaWebApp.Controllers.MVC
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Delete User")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var user = await _context.Users.FindAsync(id);
@@ -260,87 +298,5 @@ namespace AthenaWebApp.Controllers.MVC
         {
             return _context.Users.Any(e => e.Id == id);
         }
-
-        /*
-                // Claims
-                [HttpGet]
-                [Route("Users/ManageUserClaims/{userId}")]
-                public async Task<IActionResult> ManageUserClaims(string userId)
-                {
-                    var user = await _userManager.FindByIdAsync(userId);
-
-                    if (user == null)
-                    {
-                        ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
-                        return View("NotFound");
-                    }
-
-                    // UserManager service GetClaimsAsync method gets all the current claims of the user
-                    var existingUserClaims = await _userManager.GetClaimsAsync(user);
-
-                    var model = new UserClaimsViewModel
-                    {
-                        UserId = userId
-                    };
-
-                    // Loop through each claim we have in our application
-                    foreach (Claim claim in ClaimsStore.AllClaims)
-                    {
-                        UserClaim userClaim = new UserClaim
-                        {
-                            ClaimType = claim.Type
-                        };
-
-                        // If the user has the claim, set IsSelected property to true, so the checkbox
-                        // next to the claim is checked on the UI
-                        if (existingUserClaims.Any(c => c.Type == claim.Type))
-                        {
-                            userClaim.IsSelected = true;
-                        }
-
-                        model.Claims.Add(userClaim);
-                    }
-
-                    return View(model);
-
-                }
-
-                [HttpPost]
-                [Route("Users/ManageUserClaims/{userId}")]
-                public async Task<IActionResult> ManageUserClaims(UserClaimsViewModel model)
-                {
-                    var user = await _userManager.FindByIdAsync(model.UserId);
-
-                    if (user == null)
-                    {
-                        ViewBag.ErrorMessage = $"User with Id = {model.UserId} cannot be found";
-                        return View("NotFound");
-                    }
-
-                    // Get all the user existing claims and delete them
-                    var claims = await _userManager.GetClaimsAsync(user);
-                    var result = await _userManager.RemoveClaimsAsync(user, claims);
-
-                    if (!result.Succeeded)
-                    {
-                        ModelState.AddModelError("", "Cannot remove user existing claims");
-                        return View(model);
-                    }
-
-                    // Add all the claims that are selected on the UI
-                    result = await _userManager.AddClaimsAsync(user,
-                        model.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.ClaimType)));
-
-                    if (!result.Succeeded)
-                    {
-                        ModelState.AddModelError("", "Cannot add selected claims to user");
-                        return View(model);
-                    }
-
-                    return RedirectToAction("EditUser", new { Id = model.UserId });
-
-                }
-        */
-
     }
 }

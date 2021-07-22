@@ -1,5 +1,6 @@
 ﻿using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -41,6 +42,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Activities/Create
+        [Authorize(Policy = "Create Activitiy")]
         public IActionResult Create()
         {
             return View();
@@ -51,6 +53,7 @@ namespace AthenaWebApp.Controllers.MVC
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Create Activitiy")]
         public async Task<IActionResult> Create([Bind("Id,ActivityType,MaxSpeed,Description,SetManualyByUser")] Activity activity)
         {
             if (ModelState.IsValid)
@@ -63,6 +66,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Activities/Edit/5
+        [Authorize(Policy = "Edit Activitiy")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -83,6 +87,7 @@ namespace AthenaWebApp.Controllers.MVC
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Edit Activitiy")]
         public async Task<IActionResult> Edit(string id, [Bind("Id,ActivityType,MaxSpeed,Description,SetManualyByUser")] Activity activity)
         {
             if (id != activity.Id)
@@ -114,6 +119,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Activities/Delete/5
+        [Authorize(Policy = "Delete Activitiy")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -134,6 +140,7 @@ namespace AthenaWebApp.Controllers.MVC
         // POST: Activities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Delete Activitiy")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var activity = await _context.Activity.FindAsync(id);

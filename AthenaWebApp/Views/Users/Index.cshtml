@@ -13,7 +13,7 @@
     <div class="form-actions no-color">
         <p style="margin-top:20px">
             <input type="text" name="SearchString" placeholder="Name | Email | Company" value="@ViewData["currentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <input type="submit" value="Search" class="btn btn-primary" />
             <a asp-action="Index">Back to Full List</a>
         </p>
     </div>
@@ -77,7 +77,7 @@ else
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CompanyId)
+                        @Html.DisplayFor(modelItem => item.Company.CompanyName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.LastActivity)
@@ -97,7 +97,7 @@ else
                         </a>
                         <a asp-action="Details" asp-route-id="@item.Id">
                             <input type="submit" value="Details" class="btn btn-primary" />
-                        </a> |
+                        </a>
                         <a asp-action="Delete" asp-route-id="@item.Id">
                             <input type="submit" value="Delete" class="btn btn-danger" />
                         </a>

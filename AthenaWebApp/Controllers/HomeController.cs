@@ -22,7 +22,13 @@ namespace AthenaWebApp.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Privacy()
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult AdPage()
         {
             return View();
         }

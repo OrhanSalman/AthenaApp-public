@@ -1,8 +1,13 @@
 ﻿using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,8 +25,7 @@ namespace AthenaWebApp.Controllers.MVC
         // GET: Badges
         public async Task<IActionResult> Index()
         {
-
-            var context = _context.Badge.Include(b => b.Activity.ActivityType);
+            var context = _context.Badge.Include(b => b.Activity);
             return View(await context.ToListAsync());
         }
 
@@ -44,10 +48,13 @@ namespace AthenaWebApp.Controllers.MVC
             return View(badge);
         }
 
+
+
         // GET: Badges/Create
+        [Authorize(Policy = "Create Badge")]
         public IActionResult Create()
         {
-            ViewData["ActivityId"] = new SelectList(_context.Activity, "Id", "Id");
+            ViewData["ActivityId"] = new SelectList(_context.Activity, "ActivityType", "ActivityType");
             return View();
         }
 
@@ -56,19 +63,43 @@ namespace AthenaWebApp.Controllers.MVC
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ActivityId,BadgeName,DistanceIntervallBegin,DistanceIntervallEnd,BadgeImage,BadgeDescription")] Badge badge)
+        [Authorize(Policy = "Create Badge")]
+        public async Task<IActionResult> Create([Bind("Id,ActivityId,BadgeName,DistanceIntervallBegin,DistanceIntervallEnd,BadgeImage,BadgeDescription")] Badge badge, IFormFile Image)
         {
             if (ModelState.IsValid)
             {
+                // Image Upload
+                if (Image != null)
+                {
+                    if (Image.Length > 0)
+                    //Convert Image to byte and save to database
+                    {
+                        byte[] p1 = null;
+                        using (var fs1 = Image.OpenReadStream())
+                        using (var ms1 = new MemoryStream())
+                        {
+                            fs1.CopyTo(ms1);
+                            p1 = ms1.ToArray();
+                        }
+                        badge.BadgeImage = p1;
+                    }
+                }
+
+                // Attention: ActivityId is NOT the real Id of Activity, it is the ActivityType
+                // Search for the Id of selected ActivityType
+                string searchId = _context.Activity.Where(x => x.ActivityType == badge.ActivityId).Select(x => x.Id).FirstOrDefault();
+                badge.ActivityId = searchId;
+
                 _context.Add(badge);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ActivityId"] = new SelectList(_context.Activity, "Id", "Id", badge.ActivityId);
+            ViewData["ActivityId"] = new SelectList(_context.Activity, "ActivityType", "ActivityType", badge.ActivityId);
             return View(badge);
         }
 
         // GET: Badges/Edit/5
+        [Authorize(Policy = "Edit Badge")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -81,7 +112,7 @@ namespace AthenaWebApp.Controllers.MVC
             {
                 return NotFound();
             }
-            ViewData["ActivityId"] = new SelectList(_context.Activity, "Id", "Id", badge.ActivityId);
+            ViewData["ActivityId"] = new SelectList(_context.Activity, "ActivityType", "ActivityType", badge.ActivityId);
             return View(badge);
         }
 
@@ -90,17 +121,44 @@ namespace AthenaWebApp.Controllers.MVC
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,ActivityId,BadgeName,DistanceIntervallBegin,DistanceIntervallEnd,BadgeImage,BadgeDescription")] Badge badge)
+        [Authorize(Policy = "Edit Badge")]
+        public async Task<IActionResult> Edit(string id, [Bind("Id,ActivityId,BadgeName,DistanceIntervallBegin,DistanceIntervallEnd,BadgeImage,BadgeDescription")] Badge badge, IFormFile Image)
         {
             if (id != badge.Id)
             {
                 return NotFound();
             }
+            // To change the ActivityId in the table
+            string actType = _context.Activity.Where(x => x.ActivityType == badge.ActivityId).Select(x => x.Id).FirstOrDefault();
+            badge.ActivityId = actType;
+            // If the image shouldn't be edited, backup the actual image
+            byte[] img = badge.BadgeImage;          // ToDo: This doesn't work
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    // Image Upload
+                    if (Image != null)
+                    {
+                        if (Image.Length > 0)
+                        //Convert Image to byte and save to database
+                        {
+                            byte[] p1 = null;
+                            using (var fs1 = Image.OpenReadStream())
+                            using (var ms1 = new MemoryStream())
+                            {
+                                fs1.CopyTo(ms1);
+                                p1 = ms1.ToArray();
+                            }
+                            badge.BadgeImage = p1;
+                        }
+                    }
+                    else
+                    {
+                        badge.BadgeImage = img;
+                    }
+
                     _context.Update(badge);
                     await _context.SaveChangesAsync();
                 }
@@ -122,6 +180,7 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: Badges/Delete/5
+        [Authorize(Policy = "Delete Badge")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -143,6 +202,7 @@ namespace AthenaWebApp.Controllers.MVC
         // POST: Badges/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Delete Badge")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var badge = await _context.Badge.FindAsync(id);

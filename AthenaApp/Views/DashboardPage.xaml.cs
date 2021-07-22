@@ -27,11 +27,6 @@ namespace AthenaApp.Views
 
         
         
-
-        
-
-       
-
         readonly string January = "1";
         readonly string February = "2";
         readonly string March = "3";
