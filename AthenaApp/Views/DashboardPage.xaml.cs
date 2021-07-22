@@ -23,6 +23,7 @@ namespace AthenaApp.Views
         public DashboardPage()
         {
             InitializeComponent();
+            DashboardData();
         }
 
         List<Entry> entries = new List<Entry>();
@@ -49,11 +50,8 @@ namespace AthenaApp.Views
         string year = DateTime.Now.Year.ToString();
 
 
-        async void DataRefreshButton_Clicked(System.Object sender, System.EventArgs e) 
-        { 
-            await Shell.Current.GoToAsync($"//{nameof(ProfilePage)}");
-        }
-        async void DataRefreshButton_Clicked1(System.Object sender, System.EventArgs e)
+        
+        async void DashboardData()
         {
             IEnumerable<double> JanUserDistanceEnum;
             IEnumerable<double> FebUserDistanceEnum;

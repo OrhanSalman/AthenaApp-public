@@ -23,10 +23,11 @@ namespace AthenaApp.Views
         public ProfilePage()
         {
             InitializeComponent();
+            ProfileData();
         }
 
-        Array Email; 
-        public async void BadgeButton_Clicked(object sender, EventArgs e)
+         
+        public async void ProfileData()
         {
             
             string Api = "https://10.0.2.2:5001/api/UserActivities/GetUserActivitiesOfUserId";
@@ -179,7 +180,7 @@ namespace AthenaApp.Views
                  };
             }
 
-            var actTypes = listOfAllActivities.Select(c => c.ActivityType).ToArray();
+            /*var actTypes = listOfAllActivities.Select(c => c.ActivityType).ToArray();
 
             // Change
             var action = await DisplayActionSheet("For which Activity would you like to see your Badges?", "Cancel", null, actTypes);
@@ -187,7 +188,7 @@ namespace AthenaApp.Views
             bool ActivityStatus = false;
             var idOfActType = listOfAllActivities.Where(d => d.ActivityType == action ).Select(d => d.Id.ToString()).FirstOrDefault();
             var idOfUserActivity = listOfAllUserActivities.Where(c => c.ActivityId == idOfActType).Select(c => c.SumDistance);
-            var EachActTotalDistance = idOfUserActivity.Sum();
+            var EachActTotalDistance = idOfUserActivity.Sum(); 
 
             
             var ActivityString = action.ToString();
@@ -202,10 +203,10 @@ namespace AthenaApp.Views
 
                 Debug.WriteLine(idOfActType);
             }
-
-
-
             
+
+
+
 
             double DistanceIntervallStart = 0;          //Echte Intervalle abfragen API
             double DistanceIntervallEnd = 100;
@@ -214,8 +215,9 @@ namespace AthenaApp.Views
                 // give Badge, show pic etc.
             }
 
-
+            */
         }
+
 
 
     }
