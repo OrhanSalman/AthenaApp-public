@@ -1,13 +1,16 @@
 ﻿using AthenaWebApp.Areas.Identity.IdentityModels;
 using AthenaWebApp.Data;
 using AthenaWebApp.Models;
+using AthenaWebApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,11 +20,14 @@ namespace AthenaWebApp.Controllers.MVC
     {
         private readonly Context _context;
         private readonly UserManager<UserExtension> _userManager;
+        private readonly EmailSender _emailSender;
 
-        public TemplatesController(Context context, UserManager<UserExtension> userManager)
+        public TemplatesController(Context context, UserManager<UserExtension> userManager, IEmailSender emailSender)
+
         {
             _context = context;
             _userManager = userManager;
+            _emailSender = (EmailSender)emailSender;
 
         }
 
@@ -35,7 +41,6 @@ namespace AthenaWebApp.Controllers.MVC
             System.Security.Claims.ClaimsPrincipal currentUser = this.User;
 
             string theUser = "";
-
             
             if (currentUser.IsInRole("Admin") == false)
             {
@@ -187,21 +192,27 @@ namespace AthenaWebApp.Controllers.MVC
         }
         */
 
+
+
+        // POST: Templates/Send
+        // Filters the Users with the same companyID and sends them the newsletter -> e.g. uni.siegen.de students
         [Authorize(Policy = "Send Template")]
-        public async Task<IActionResult> Send(int id)
+        public async Task<ActionResult> Send(int id, string userId)
         {
-            // Get CompanyId of logged user
-
-            // Loop in user table for all users with companyId = oben
-
-            // List
-
-            // E-Mail
-
-            return Ok();        // Return display message
+            var template = await _context.Template.FindAsync(id);
+            var users = _context.Users.ToList();
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.Id == userId);
+            var emailusers = await _context.Users.ToListAsync();
+            foreach (var element in emailusers)
+            {
+                if (user.CompanyId == element.CompanyId)
+                {
+                    await _emailSender.SendEmailAsync(element.Email, template.TemplateTitle, template.Description);
+                }
+            }
+            return RedirectToAction("Index");
         }
-
-
 
         // POST: Templates/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -214,6 +225,8 @@ namespace AthenaWebApp.Controllers.MVC
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        
 
         // Here start Template Methods -> Raphael
 

@@ -12,6 +12,7 @@ namespace AthenaWebApp.Models
 {
     public static class SeedData
     {
+
         public static void Initialize(IServiceProvider serviceProvider)
         {
             using (var context = new Context(
@@ -45,6 +46,28 @@ namespace AthenaWebApp.Models
                 );
                 context.SaveChanges();
                 // ToDo: Set Users to Roles
+
+
+                context.Template.AddRange(
+                      new Template
+                      {
+                          UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
+                          TemplateTitle = "Introduction",
+                          Description = new StreamReader(@"wwwroot/html/Introduction.html").ReadToEnd(),
+                          DateTimeCreated = new DateTime(2021, 03, 8, 15, 07, 08)
+
+                      },
+                    new Template
+                    {
+                        UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
+                        TemplateTitle = "Summer Event 2021",
+                        Description = new StreamReader(@"wwwroot/html/Event_invitation.html").ReadToEnd(),
+                        DateTimeCreated = new DateTime(2021, 07, 14, 15, 07, 05)
+
+                    }
+
+                    );
+                context.SaveChanges();
 
                 context.Company.AddRange(
                     new Company
@@ -93,7 +116,7 @@ namespace AthenaWebApp.Models
                     {
                         Id = "kca9a2af-1ed2-430c-b9ae-e5476d36ca82",
                         CompanyName = "University Orléans",
-                        Country = "Italy",
+                        Country = "France",
                         EmailContext = "univ-orleans.fr"
                     },
                     new Company
