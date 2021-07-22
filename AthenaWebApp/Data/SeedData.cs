@@ -1328,21 +1328,21 @@ namespace AthenaWebApp.Models
                 {
 //                    Id = 10,
                     RoleId = "9d5107d5-5edd-49ae-adee-240acf8c9af1",
-                    ClaimType = "Create Activitiy",
+                    ClaimType = "Create Activity",
                     ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
 //                    Id = 11,
                     RoleId = "9d5107d5-5edd-49ae-adee-240acf8c9af1",
-                    ClaimType = "Edit Activitiy",
+                    ClaimType = "Edit Activity",
                     ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
 //                    Id = 12,
                     RoleId = "9d5107d5-5edd-49ae-adee-240acf8c9af1",
-                    ClaimType = "Delete Activitiy",
+                    ClaimType = "Delete Activity",
                     ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
@@ -1475,21 +1475,21 @@ namespace AthenaWebApp.Models
                      {
 //                         Id = 31,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
-                         ClaimType = "Create Activitiy",
+                         ClaimType = "Create Activity",
                          ClaimValue = "false"
                      },
                 new IdentityRoleClaim<string>
                      {
 //                         Id = 32,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
-                         ClaimType = "Edit Activitiy",
+                         ClaimType = "Edit Activity",
                          ClaimValue = "false"
                      },
                 new IdentityRoleClaim<string>
                      {
 //                         Id = 33,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
-                         ClaimType = "Delete Activitiy",
+                         ClaimType = "Delete Activity",
                          ClaimValue = "false"
                      },
                 new IdentityRoleClaim<string>
