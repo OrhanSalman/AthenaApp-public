@@ -12,7 +12,6 @@ namespace AthenaWebApp.Models
 {
     public static class SeedData
     {
-
         public static void Initialize(IServiceProvider serviceProvider)
         {
             using (var context = new Context(
@@ -46,28 +45,6 @@ namespace AthenaWebApp.Models
                 );
                 context.SaveChanges();
                 // ToDo: Set Users to Roles
-
-
-                context.Template.AddRange(
-                      new Template
-                      {
-                          UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
-                          TemplateTitle = "Introduction",
-                          Description = new StreamReader(@"wwwroot/html/Introduction.html").ReadToEnd(),
-                          DateTimeCreated = new DateTime(2021, 03, 8, 15, 07, 08)
-
-                      },
-                    new Template
-                    {
-                        UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
-                        TemplateTitle = "Summer Event 2021",
-                        Description = new StreamReader(@"wwwroot/html/Event_invitation.html").ReadToEnd(),
-                        DateTimeCreated = new DateTime(2021, 07, 14, 15, 07, 05)
-
-                    }
-
-                    );
-                context.SaveChanges();
 
                 context.Company.AddRange(
                     new Company
@@ -116,7 +93,7 @@ namespace AthenaWebApp.Models
                     {
                         Id = "kca9a2af-1ed2-430c-b9ae-e5476d36ca82",
                         CompanyName = "University Orléans",
-                        Country = "France",
+                        Country = "Italy",
                         EmailContext = "univ-orleans.fr"
                     },
                     new Company
@@ -951,7 +928,7 @@ namespace AthenaWebApp.Models
                          Id = "ä51f4e8e-5b86-4279-82d1-749b67b99a98",
                          UserId = "m52f4e8e-7a86-4279-82d1-749b67b99a101",
                          ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
-                         CompanyId = "d33df339-1c29-42e3-bb45-6d7e6c990f1e",
+                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78",
                          StartTime = new DateTime(2021, 07, 13, 15, 02, 05),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 13, 15, 22, 05),
                          SumTime = new TimeSpan(hours: 0, minutes: 20, seconds: 0),
@@ -1132,17 +1109,6 @@ namespace AthenaWebApp.Models
                          StopTime = new DateTime(2021, 07, 14, 15, 40, 05),
                          SumTime = new TimeSpan(hours: 0, minutes: 40, seconds: 0),
                          SumDistance = 5000
-                     },
-                     new UserActivity
-                     {
-                         Id = "b51f4e8e-5b86-4279-82d1-749b67b99a98",
-                         UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92", // Zwei mal eingetragen
-                         ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
-                         CompanyId = "d33df339-1c29-42e3-bb45-6d7e6c990f1e",
-                         StartTime = new DateTime(2021, 07, 14, 15, 15, 05),    //year, month, day, hour, min, seconds
-                         StopTime = new DateTime(2021, 07, 14, 15, 30, 05),
-                         SumTime = new TimeSpan(hours: 0, minutes: 15, seconds: 0),
-                         SumDistance = 512                                     // Meters
                      },
                      new UserActivity
                      {
@@ -1817,6 +1783,26 @@ namespace AthenaWebApp.Models
                     ClaimType = "Delete Badge",
                     ClaimValue = "false"
                 });
+                context.SaveChanges();
+
+                context.Template.AddRange(
+                    new Template
+                    {
+                        UserId = "f52f4e8e-7a86-4279-82d1-749b67b99a94",
+                        TemplateTitle = "Introduction",
+                        Description = new StreamReader(@"wwwroot/html/Introduction.html").ReadToEnd(),
+                        DateTimeCreated = new DateTime(2021, 03, 8, 15, 07, 08)
+                    },
+                    new Template
+                    {
+                        UserId = "f52f4e8e-7a86-4279-82d1-749b67b99a94",
+                        TemplateTitle = "Summer Event 2021",
+                        Description = new StreamReader(@"wwwroot/html/Event_invitation.html").ReadToEnd(),
+                        DateTimeCreated = new DateTime(2021, 07, 14, 15, 07, 05)
+
+                    }
+
+                    );
                 context.SaveChanges();
             }
         }
