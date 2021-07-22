@@ -1,4 +1,4 @@
-﻿using Plugin.Geolocator;
+using Plugin.Geolocator;
 using System;
 using System.Linq;
 using System.Text;
@@ -22,9 +22,9 @@ namespace AthenaApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MapPage : ContentPage
     {
-        // IEnumerable<string> idOfActType;
+       // IEnumerable<string> idOfActType;
         string idOfActType;
-
+        
 
         bool isGettingLocation;
         double DistanceSum;
@@ -94,25 +94,25 @@ namespace AthenaApp.Views
 
             var dataAct = JsonConvert.DeserializeObject<Activity[]>(jsonString);
 
-            List<Activity> listOfAllActivities = new List<Activity>();
+            var listOfAllActivities = new List<Activity>();
 
             foreach (var json in dataAct)
             {
                 listOfAllActivities.Add(json);
 
-                /* new Activity
-                 {
-                     Id = json.Id,
-                     ActivityType = json.ActivityType,
-                     MaxSpeed = json.MaxSpeed,
-                     Description = json.Description,
-                     SetManualyByUser = json.SetManualyByUser
-                 });*/
+                   /* new Activity
+                    {
+                        Id = json.Id,
+                        ActivityType = json.ActivityType,
+                        MaxSpeed = json.MaxSpeed,
+                        Description = json.Description,
+                        SetManualyByUser = json.SetManualyByUser
+                    });*/
             }
-
+            
             //            int actCount = listOfAllActivities.Count;
             var actTypes = listOfAllActivities.Select(c => c.ActivityType).ToArray();
-
+            
             if (listOfAllActivities != null)
             {
                 action = await DisplayActionSheet("Which Activity do you prefer today?", "Cancel", null, actTypes);
@@ -125,12 +125,12 @@ namespace AthenaApp.Views
                 else
                 {
                     Activity = true;
-                    idOfActType = listOfAllActivities.Where(c => c.ActivityType == ActivityString).ToString();
-                    ActIdString = idOfActType.ToString();
+                    idOfActType = listOfAllActivities.Where(c => c.ActivityType.ToString() == ActivityString).Select(d => d.Id.ToString()).FirstOrDefault();
+                    
                     Debug.WriteLine(idOfActType);
                 }
             }
-
+            
             //Activity = true;  //für test später löschen
 
             if (Activity == true)
@@ -200,12 +200,12 @@ namespace AthenaApp.Views
             {
                 // ToDo: Send Data to Server
 
-
+                
                 XamarinManager manager = new XamarinManager();
                 string jsonData = manager.Get_post_data();
                 var jsonUser = JsonConvert.DeserializeObject<User>(jsonData);
 
-
+                
 
                 User user = new User()
                 {
@@ -218,14 +218,14 @@ namespace AthenaApp.Views
 
                 var UserCurrentId = user.Id;
                 var CompanyId = user.CompanyId;
-
+                
 
 
 
                 var rawData = new UserActivity
                 {
                     UserId = UserCurrentId,
-                    ActivityId = idOfActType.ToString(),
+                    ActivityId = idOfActType,
                     CompanyId = CompanyId,
                     StartTime = StartAt,
                     StopTime = EndAt,

@@ -24,6 +24,7 @@ namespace AthenaWebApp.Controllers.API
 
         // GET: api/Companies
         [HttpGet]
+        [Route("GetCompanies")]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompany()
         {
             return await _context.Company.ToListAsync();
