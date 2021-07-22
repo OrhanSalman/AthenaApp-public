@@ -925,7 +925,7 @@ namespace AthenaWebApp.Models
                      new UserActivity
                      {
                          Id = "ä51f4e8e-5b86-4279-82d1-749b67b99a98",
-                         UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
+                         UserId = "m52f4e8e-7a86-4279-82d1-749b67b99a101",
                          ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
                          CompanyId = "d33df339-1c29-42e3-bb45-6d7e6c990f1e",
                          StartTime = new DateTime(2021, 07, 13, 15, 02, 05),    //year, month, day, hour, min, seconds
@@ -936,7 +936,7 @@ namespace AthenaWebApp.Models
                      new UserActivity
                      {
                          Id = "ö51f4e8e-5b86-4279-82d1-749b67b99a99",
-                         UserId = "l52f4e8e-7a86-4279-82d1-749b67b99a100", // Zwei mal eingetragen
+                         UserId = "p52f4e8e-7a86-4279-82d1-749b67b99a104", // Zwei mal eingetragen
                          ActivityId = "u33df349-1c29-42e3-bf45-6d7e6c990f1i",
                          CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78",
                          StartTime = new DateTime(2021, 07, 14, 15, 00, 05),    //year, month, day, hour, min, seconds
@@ -1328,21 +1328,21 @@ namespace AthenaWebApp.Models
                 {
 //                    Id = 10,
                     RoleId = "9d5107d5-5edd-49ae-adee-240acf8c9af1",
-                    ClaimType = "Create Activitiy",
+                    ClaimType = "Create Activity",
                     ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
 //                    Id = 11,
                     RoleId = "9d5107d5-5edd-49ae-adee-240acf8c9af1",
-                    ClaimType = "Edit Activitiy",
+                    ClaimType = "Edit Activity",
                     ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
 //                    Id = 12,
                     RoleId = "9d5107d5-5edd-49ae-adee-240acf8c9af1",
-                    ClaimType = "Delete Activitiy",
+                    ClaimType = "Delete Activity",
                     ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
@@ -1475,21 +1475,21 @@ namespace AthenaWebApp.Models
                      {
 //                         Id = 31,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
-                         ClaimType = "Create Activitiy",
+                         ClaimType = "Create Activity",
                          ClaimValue = "false"
                      },
                 new IdentityRoleClaim<string>
                      {
 //                         Id = 32,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
-                         ClaimType = "Edit Activitiy",
+                         ClaimType = "Edit Activity",
                          ClaimValue = "false"
                      },
                 new IdentityRoleClaim<string>
                      {
 //                         Id = 33,
                          RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
-                         ClaimType = "Delete Activitiy",
+                         ClaimType = "Delete Activity",
                          ClaimValue = "false"
                      },
                 new IdentityRoleClaim<string>

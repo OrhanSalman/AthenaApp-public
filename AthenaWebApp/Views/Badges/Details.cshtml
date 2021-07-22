@@ -10,41 +10,51 @@
     <h4>Badge</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Activity)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Activity.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Activity.ActivityType)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BadgeName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.BadgeName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DistanceIntervallBegin)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DistanceIntervallBegin)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DistanceIntervallEnd)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DistanceIntervallEnd)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BadgeImage)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BadgeImage)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BadgeDescription)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BadgeDescription)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BadgeDescription)
+        <dd class="col-sm-10">
+            <div class="form-group">
+                @if (Model.BadgeImage != null)
+                {
+                    <img id="profilePicture" style="width:100px;height:100px; object-fit:cover" src="data:image/*;base64,@(Convert.ToBase64String(Model.BadgeImage))">
+                }
+                else
+                {
+                    <img id="profilePicture" style="width: 80px; height: 80px; object-fit: cover " src="">
+                }
+                <span asp-validation-for="@Model.BadgeImage" class="text-danger"></span>
+            </div>
         </dd>
     </dl>
 </div>

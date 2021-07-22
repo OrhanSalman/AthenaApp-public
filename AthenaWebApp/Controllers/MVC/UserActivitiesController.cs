@@ -2,7 +2,9 @@
 using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,7 +22,11 @@ namespace AthenaWebApp.Controllers.MVC
         // GET: UserActivities
         public async Task<IActionResult> Index()
         {
-            return View(await _context.UserActivity.ToListAsync());
+            return View(await _context.UserActivity
+                .Include(b => b.Activity)
+                .Include(b => b.Company)
+                .Include(b => b.UserExtension)
+                .ToListAsync());
         }
 
         // GET: UserActivities/Details/5
@@ -32,6 +38,9 @@ namespace AthenaWebApp.Controllers.MVC
             }
 
             var userActivity = await _context.UserActivity
+                .Include(b => b.Activity)
+                .Include(b => b.Company)
+                .Include(b => b.UserExtension)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (userActivity == null)
             {
@@ -42,9 +51,12 @@ namespace AthenaWebApp.Controllers.MVC
         }
 
         // GET: UserActivities/Create
-        [Authorize(Policy = "Create UserActivitie")]
+        [Authorize(Policy = "Create UserActivity")]
         public IActionResult Create()
         {
+
+            ViewData["UserId"] = new SelectList(_context.Users, "UserName", "UserName");
+            ViewData["ActivityId"] = new SelectList(_context.Activity, "ActivityType", "ActivityType");
             return View();
         }
 
@@ -54,8 +66,22 @@ namespace AthenaWebApp.Controllers.MVC
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Create UserActivity")]
-        public async Task<IActionResult> Create([Bind("Id,UserId,ActivityId,CompanyId,StartTime,StopTime,SumTime,SumDistance")] UserActivity userActivity)
+        public async Task<IActionResult> Create([Bind("Id,UserId,ActivityId,StartTime,StopTime,SumDistance")] UserActivity userActivity)
         {
+            // Get the CompanyId of the new created UserActivity
+            string userId = _context.Users.Where(x => x.UserName == userActivity.UserId).Select(x => x.Id).FirstOrDefault(); ;
+            string compId = _context.Users.Where(x => x.Id == userId).Select(x => x.CompanyId).FirstOrDefault();
+            string actId = _context.Activity.Where(x => x.ActivityType == userActivity.ActivityId).Select(x => x.Id).FirstOrDefault();
+            // Here we have to set the variables, because of the SelectedList in the View, UserId will include an UserName
+            userActivity.CompanyId = compId;
+            userActivity.UserId = userId;
+            userActivity.ActivityId = actId;
+
+
+            //  Auto SumTime
+            TimeSpan diff = userActivity.StopTime.Subtract(userActivity.StartTime);
+            userActivity.SumTime = diff;
+
             if (ModelState.IsValid)
             {
                 _context.Add(userActivity);
@@ -74,11 +100,13 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
+            // ToDo
             var userActivity = await _context.UserActivity.FindAsync(id);
             if (userActivity == null)
             {
                 return NotFound();
             }
+            ViewData["ActivityId"] = new SelectList(_context.Activity, "ActivityType", "ActivityType", userActivity.ActivityId);
             return View(userActivity);
         }
 
@@ -88,7 +116,7 @@ namespace AthenaWebApp.Controllers.MVC
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Edit UserActivity")]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserId,ActivityId,CompanyId,StartTime,StopTime,SumTime,SumDistance")] UserActivity userActivity)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,ActivityId,StartTime,StopTime,SumTime,SumDistance")] UserActivity userActivity)
         {
             if (id != userActivity.Id)
             {
@@ -128,6 +156,9 @@ namespace AthenaWebApp.Controllers.MVC
             }
 
             var userActivity = await _context.UserActivity
+                .Include(b => b.Activity)
+                .Include(b => b.Company)
+                .Include(b => b.UserExtension)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (userActivity == null)
             {
