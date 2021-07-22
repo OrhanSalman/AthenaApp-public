@@ -94,7 +94,7 @@ namespace AthenaApp.Views
 
             var dataAct = JsonConvert.DeserializeObject<Activity[]>(jsonString);
 
-            List<Activity> listOfAllActivities = new List<Activity>();
+            var listOfAllActivities = new List<Activity>();
 
             foreach (var json in dataAct)
             {
@@ -125,8 +125,8 @@ namespace AthenaApp.Views
                 else
                 {
                     Activity = true;
-                    idOfActType = listOfAllActivities.Where(c => c.ActivityType == ActivityString).ToString();
-                    ActIdString = idOfActType.ToString();
+                    idOfActType = listOfAllActivities.Where(c => c.ActivityType.ToString() == ActivityString).Select(d => d.Id.ToString()).FirstOrDefault();
+
                     Debug.WriteLine(idOfActType);
                 }
             }
@@ -225,7 +225,7 @@ namespace AthenaApp.Views
                 var rawData = new UserActivity
                 {
                     UserId = UserCurrentId,
-                    ActivityId = idOfActType.ToString(),
+                    ActivityId = idOfActType,
                     CompanyId = CompanyId,
                     StartTime = StartAt,
                     StopTime = EndAt,
