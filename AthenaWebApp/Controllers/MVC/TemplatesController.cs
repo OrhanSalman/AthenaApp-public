@@ -32,11 +32,25 @@ namespace AthenaWebApp.Controllers.MVC
             var athenaWebAppContext = _context.Template.Include(t => t.UserId);
             return View(await athenaWebAppContext.ToListAsync());
             */
+            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
 
-            var theUser = _userManager.GetUserId(User);
-            return View(await _context.Template
+            string theUser = "";
+
+            
+            if (currentUser.IsInRole("Admin") == false)
+            {
+                theUser = _userManager.GetUserId(User);
+                return View(await _context.Template
+                .Include(i => i.UserExtension)
                 .Where(i => i.UserId == theUser)
                 .ToListAsync());
+            }
+            else // Admin can see all templates
+            {
+                return View(await _context.Template
+                .Include(i => i.UserExtension)
+                .ToListAsync());
+            }
         }
 
         // GET: Templates/Details/5
