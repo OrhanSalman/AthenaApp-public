@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static System.Net.Mime.MediaTypeNames;
+using AthenaApp.Models;
+using AthenaWebApp.Models;
 
 namespace AthenaApp.Views
 {
@@ -23,6 +25,7 @@ namespace AthenaApp.Views
             InitializeComponent();
         }
 
+        Array Email; 
         public async void BadgeButton_Clicked(object sender, EventArgs e)
         {
             
@@ -63,7 +66,48 @@ namespace AthenaApp.Views
 
                     });
             }
-            
+
+
+
+            string ApiCom = "https://10.0.2.2:5001/api/Companies/GetCompanies";
+
+            HttpClientHandler handlerCom = new HttpClientHandler();
+            handlerCom.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+            {
+                if (cert.Issuer.Equals("CN=localhost"))
+                    return true;
+                return errors == System.Net.Security.SslPolicyErrors.None;
+            };
+            HttpClient clientCom = clientCom = new HttpClient(handlerCom);
+
+            Uri uriCom = new Uri(string.Format(ApiCom));
+            HttpResponseMessage responseCom = await client.GetAsync(uriCom);
+
+
+            var jsonStringCom = await responseCom.Content.ReadAsStringAsync();
+
+            var dataCom = JsonConvert.DeserializeObject<Company[]>(jsonStringCom);
+            List<Company> listOfCompanies = new List<Company>();
+
+            foreach (var company in dataCom)
+            {
+                listOfCompanies.Add(
+                    new Company
+                    {
+                        Id = company.Id,
+                        CompanyName = company.CompanyName,
+                        Country =company.Country,
+                        EmailContext = company.EmailContext
+                    });
+            }
+
+
+
+
+
+
+
+
             XamarinManager manager = new XamarinManager();
             string jsonData = manager.Get_post_data();
             var jsonUser = JsonConvert.DeserializeObject<User>(jsonData);
@@ -81,10 +125,19 @@ namespace AthenaApp.Views
             };
 
 
+
+
+
+
+
+
+
+            var UserCompany = listOfCompanies.Where(c => c.Id == user.CompanyId).Select(c => c.CompanyName.ToString()).FirstOrDefault();
+            ProfileUserCompanyInfo.Text = UserCompany;  
+
             var ProfileUserName = user.UserName;
             ProfileUserNameInfo.Text = ProfileUserName;
-            var ProfileUserCompany = user.CompanyName;
-            ProfileUserCompanyInfo.Text = ProfileUserCompany;  // Datenbankabfrage nach CompanyName
+            
             var ProfileUserEmail = user.Email;
             ProfileUserEmailInfo.Text = ProfileUserEmail;
             var ProfileUserPicture = user.ProfilePicture;
