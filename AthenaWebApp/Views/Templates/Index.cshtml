@@ -5,6 +5,24 @@
 }
 
 <h1>Index</h1>
+<script type="text/javascript">
+    function Confirm() {
+        var confirm_value = document.createElement("INPUT");
+
+        confirm_value.type = "hidden";
+        confirm_value.name = "confirm_value";
+
+        if (confirm("Do you want to send an E-mail to all members?")) {
+            confirm_value.value = "Yes";
+        }
+        else {
+            confirm_value.value = "No";
+        }
+
+        document.forms[0].appendChild(confirm_value);
+
+    }
+</script>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -25,26 +43,29 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TemplateTitle)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TemplateTitle)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.UserExtension.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateTimeCreated)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TemplateId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TemplateId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TemplateId">Delete</a> |
-                <a asp-action="Send" asp-route-id="@item.TemplateId" asp-route-userId="@item.UserId">Send</a>
-
-            </td>
-        </tr>
-}
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserExtension.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTimeCreated)
+                </td>
+                <td>
+                    <form asp-action="Send" asp-route-id="@item.TemplateId" asp-route-userId="@item.UserId">
+                        <a asp-action="Edit" asp-route-id="@item.TemplateId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.TemplateId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.TemplateId">Delete</a> |
+                        <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Are you sure to send the Template to every User?')">Send</button>
+                    </form>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

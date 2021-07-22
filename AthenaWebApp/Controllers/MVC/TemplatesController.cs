@@ -199,8 +199,7 @@ namespace AthenaWebApp.Controllers.MVC
         [Authorize(Policy = "Send Template")]
         public async Task<ActionResult> Send(int id, string userId)
         {
-            bool send = true;   // default auf false setzen
-
+            
             /*
             // Display "To you really want to send this template to all User of the specific Company?
             if ("yes.gedrückt")
@@ -209,6 +208,7 @@ namespace AthenaWebApp.Controllers.MVC
             }
             */
 
+            /*
             if (send == true)
             {
                 var template = await _context.Template.FindAsync(id);
@@ -229,6 +229,7 @@ namespace AthenaWebApp.Controllers.MVC
                 }
                 return RedirectToAction("Index");
             }
+            */
             return RedirectToAction("Index");
         }
 
