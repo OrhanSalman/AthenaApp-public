@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,10 +43,15 @@ namespace AthenaWebApp.Controllers.MVC
             return View(await athenaWebAppContext.ToListAsync());
             */
 
+           TextReader tr = new StreamReader(@"wwwroot/html/Event_invitation.html");
+            string html = tr.ReadLine(); 
+            Console.WriteLine("Das HTML:" + html);
             var theUser = _userManager.GetUserId(User);
+
             return View(await _context.Template
                 .Where(i => i.UserId == theUser)
                 .ToListAsync());
+           
         }
 
         // GET: Templates/Details/5
@@ -189,28 +195,7 @@ namespace AthenaWebApp.Controllers.MVC
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: Templates/Send
-        // Filters the Users with the same companyID and sends them the newsletter -> e.g. uni.siegen.de students
-        public async Task<ActionResult> Send(int id, string userId)
-        {
-            var template = await _context.Template.FindAsync(id);
-            var users = _context.Users.ToList();
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == userId);
-            var emailusers = await _context.Users.ToListAsync();
-            foreach (var element in emailusers)
-            {
-                if (user.CompanyId == element.CompanyId)
-                {
-
-                    await _emailSender.SendEmailAsync(element.Email, template.TemplateTitle, template.Description);
-                }
-            }
-            return RedirectToAction("Index");
-
-
-
-        }
+        
 
         // Here start Template Methods -> Raphael
 
