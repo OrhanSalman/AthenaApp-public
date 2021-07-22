@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage Title="Dashboard"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -9,8 +9,8 @@
     <!-- Raphael: Here starts the Scrollview of the App. Makes the App Scrolable from one End to another -->
     <ScrollView>
         <Frame CornerRadius="20">
-            <StackLayout>
-                <!-- Raphael: Here starts the Main Title and the first Subtitle-->
+    <StackLayout>
+                <!-- Raphael: Here starts the Main Title and the first Subtitle-->             
                 <Label FontSize= "25" TextColor="#002563" >Start Activity</Label>
                 <!-- Raphael: Here starts an imageButton in a coloured Frame with Linear Gradient-->
                 <Frame CornerRadius="10"  Padding="0" HeightRequest="100" WidthRequest="50" >
@@ -30,15 +30,15 @@
                 <!-- Raphael:Here starts a Chart1 from the DashboardPage.cs that is linked here. The Chart shows the total amount of run Kilometer of one University Again with a coloured Background-->
                 <Frame CornerRadius="10"  Padding="0">
                     <forms:ChartView x:Name="Chart1" HeightRequest="150"  />
-                    <Frame.Background>
+                <Frame.Background>
                         <LinearGradientBrush EndPoint="0,1">
                             <GradientStop Color="#D2E5F5"
                           Offset="0.01" />
                             <GradientStop Color="#0076B9"
                           Offset="1.0" />
-                        </LinearGradientBrush>
-                    </Frame.Background>
-                </Frame>
+                    </LinearGradientBrush>
+                </Frame.Background>
+            </Frame>
                 <!-- Raphael:Here starts the second Chart with the KM values for seperate months-->
                 <Label FontSize="25" TextColor="#002563">Personal Activity</Label>
                 <Frame CornerRadius="10"  Padding="0">
@@ -83,18 +83,18 @@
                 <!-- Raphael: Shows a grid with 6 fields to show stats to running, cycling, swimming and personal, group, daily-->
                 <Label FontSize="25" TextColor="MidnightBlue">Overview</Label>
 
-
+            
                 <Grid Margin="5,5,5,5" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.3*" />
-                        <ColumnDefinition Width="0.3*" />
-                        <ColumnDefinition Width="0.3*" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="0.3*" />
 
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="120" />
-                        <RowDefinition Height="120" />
-                    </Grid.RowDefinitions>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="120" />
+                </Grid.RowDefinitions>
 
                     <BoxView Color="#00063C" CornerRadius="10" />
                     <BoxView Color="#00063C" Grid.Column="0" Grid.Row="1" CornerRadius="10" />
@@ -102,26 +102,26 @@
                     <BoxView Color="#00063C" Grid.Column="1" Grid.Row="1" CornerRadius="10" />
                     <BoxView Color="#00063C" Grid.Column="2" Grid.Row="1" CornerRadius="10" />
                     <BoxView Color="#00063C" Grid.Column="2" Grid.Row="0" CornerRadius="10" />
-
-
-
-
-
-
-
-
-
-
-
-                    <Image
+       
+          
+                    
+                    
+                   
+                   
+                    
+                    
+                  
+                    
+                   
+                <Image
                         Margin="25"
                         HeightRequest="60"
                          Grid.Row="1"
                         Grid.Column="0"
                         Source="peoplegroup.png"
                         VerticalOptions="Start"/>
-
-                    <Image
+                
+                <Image
                         Margin="25"
                         HeightRequest="10"
                          Grid.Row="1"
@@ -130,15 +130,15 @@
                         BackgroundColor="#00063C"
                         Source="peoplegroup.png" 
                         VerticalOptions="Start"/>
-                    <Image
+                <Image
                         Margin="25"
                         HeightRequest="50"
                          Grid.Row="1"
                         Grid.Column="1"
                         Source="awesome_tachometer_alt.png"
                         VerticalOptions="Start"/>
-
-                    <Image
+            
+                <Image
                         Margin="25"
                         HeightRequest="50"
                          Grid.Row="1"
@@ -149,28 +149,28 @@
 
                     <Label Text="" TextColor="White" VerticalOptions="End" HorizontalTextAlignment="Center" FontSize="16"/>
 
-
-                    <Label Grid.Column="1" Text="University" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
+                    
+                <Label Grid.Column="1" Text="University" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
                     <Label Grid.Column="1" x:Name="UniversityInfo" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
-
-                    <Label Grid.Column="2" Grid.Row="0" Text="Monthly KM" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
+                    
+                <Label Grid.Column="2" Grid.Row="0" Text="Monthly KM" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
                     <Label Grid.Column="2" Grid.Row="0" x:Name="MonthlyKmInfo" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
 
-                    <Label Grid.Row="1" Text="Members" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
+                <Label Grid.Row="1" Text="Members" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
                     <Label Grid.Row="1" x:Name="MembersInfo" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
 
-                    <Label Grid.Column="1" Grid.Row="1" Text="Daily KM" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
+                <Label Grid.Column="1" Grid.Row="1" Text="Daily KM" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
                     <Label Grid.Column="1" Grid.Row="1" x:Name="DailyKmInfo" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
 
-                    <Label Grid.Column="2" Grid.Row="1" Text="Personal KM" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
+                <Label Grid.Column="2" Grid.Row="1" Text="Personal KM" TextColor="White" VerticalOptions="Start" HorizontalTextAlignment="Center" FontSize="16"/>
                     <Label Grid.Column="2" Grid.Row="1" x:Name="PersonalKmInfo" TextColor="White" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16"/>
 
 
-                </Grid>
+            </Grid>
 
-
-            </StackLayout>
+            
+        </StackLayout>
         </Frame>
     </ScrollView>
-
+     
 </ContentPage>
