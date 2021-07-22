@@ -121,8 +121,6 @@
                 }).fail(function (jqXHR, textStatus, errorThrown) {
                     alert(textStatus);
                 });
-
-
         });
     </script>
 
@@ -132,5 +130,17 @@
             console.log("Hide activ");
         }
     </script>
+
+    <script>
+        $(function () {
+            $('#chkDestination').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#DestPlantId').attr('disabled', 'disabled');
+                } else {
+                    $('#DestPlantId').removeAttr('disabled');
+                }
+            });
+        });
+    </script>
 </body>
-</html >
+</html>

@@ -57,8 +57,8 @@ namespace AthenaWebApp.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ActivityId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     BadgeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DistanceIntervallBegin = table.Column<double>(type: "float", nullable: false),
-                    DistanceIntervallEnd = table.Column<double>(type: "float", nullable: false),
+                    GeneralBadge = table.Column<bool>(type: "bit", nullable: false),
+                    DistanceForBadge = table.Column<double>(type: "float", nullable: false),
                     BadgeImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     BadgeDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -185,6 +185,31 @@ namespace AthenaWebApp.Migrations
                         name: "FK_UserActivity_Company_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Company",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserBadge",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BadgeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserBadge", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserBadge_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserBadge_Badge_BadgeId",
+                        column: x => x.BadgeId,
+                        principalTable: "Badge",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -329,6 +354,16 @@ namespace AthenaWebApp.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserBadge_BadgeId",
+                table: "UserBadge",
+                column: "BadgeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserBadge_UserId",
+                table: "UserBadge",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
                 table: "UserClaims",
                 column: "UserId");
@@ -347,9 +382,6 @@ namespace AthenaWebApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Badge");
-
-            migrationBuilder.DropTable(
                 name: "RoleClaims");
 
             migrationBuilder.DropTable(
@@ -357,6 +389,9 @@ namespace AthenaWebApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserActivity");
+
+            migrationBuilder.DropTable(
+                name: "UserBadge");
 
             migrationBuilder.DropTable(
                 name: "UserClaims");
@@ -371,13 +406,16 @@ namespace AthenaWebApp.Migrations
                 name: "UserTokens");
 
             migrationBuilder.DropTable(
-                name: "Activity");
+                name: "Badge");
 
             migrationBuilder.DropTable(
                 name: "Role");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Activity");
 
             migrationBuilder.DropTable(
                 name: "Company");

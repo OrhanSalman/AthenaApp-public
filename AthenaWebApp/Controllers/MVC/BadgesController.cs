@@ -64,8 +64,10 @@ namespace AthenaWebApp.Controllers.MVC
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Create Badge")]
-        public async Task<IActionResult> Create([Bind("Id,ActivityId,BadgeName,DistanceIntervallBegin,DistanceIntervallEnd,BadgeImage,BadgeDescription")] Badge badge, IFormFile Image)
+        public async Task<IActionResult> Create([Bind("Id,ActivityId,BadgeName,GeneralBadge,DistanceForBadge,BadgeImage,BadgeDescription")] Badge badge, IFormFile Image)
         {
+            bool isGeneral = false;
+
             if (ModelState.IsValid)
             {
                 // Image Upload
@@ -87,11 +89,21 @@ namespace AthenaWebApp.Controllers.MVC
 
                 // Attention: ActivityId is NOT the real Id of Activity, it is the ActivityType
                 // Search for the Id of selected ActivityType
-                string searchId = _context.Activity.Where(x => x.ActivityType == badge.ActivityId).Select(x => x.Id).FirstOrDefault();
-                badge.ActivityId = searchId;
 
-                _context.Add(badge);
-                await _context.SaveChangesAsync();
+
+                if (isGeneral == true)
+                {
+                    _context.Add(badge);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    string searchId = _context.Activity.Where(x => x.ActivityType == badge.ActivityId).Select(x => x.Id).FirstOrDefault();
+                    badge.ActivityId = searchId;
+
+                    _context.Add(badge);
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ActivityId"] = new SelectList(_context.Activity, "ActivityType", "ActivityType", badge.ActivityId);
@@ -122,8 +134,9 @@ namespace AthenaWebApp.Controllers.MVC
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Edit Badge")]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,ActivityId,BadgeName,DistanceIntervallBegin,DistanceIntervallEnd,BadgeImage,BadgeDescription")] Badge badge, IFormFile Image)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,ActivityId,BadgeName,GeneralBadge,DistanceForBadge,BadgeImage,BadgeDescription")] Badge badge, IFormFile Image)
         {
+            // ToDo: if general badge is set to false, display message that a ActivityId has to set
             if (id != badge.Id)
             {
                 return NotFound();

@@ -1,4 +1,5 @@
-﻿using AthenaWebApp.Data;
+﻿using AthenaWebApp.Controllers.BadgeDistributor;
+using AthenaWebApp.Data;
 using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -54,6 +55,59 @@ namespace AthenaWebApp.Controllers.API
         {
             _context.UserActivity.Add(userActivity);
             await _context.SaveChangesAsync();
+
+            string activityId = userActivity.ActivityId;
+            string userId = userActivity.UserId;
+
+            /* Section - Possible Badges */
+
+            // Count the distances for the selected User (Badge based on Activity)
+            var sumDistanceForActivity = await _context.UserActivity
+                .Where(u => u.UserId == userId && u.ActivityId == activityId)
+                .Select(u => u.SumTime)
+                .CountAsync();
+
+            // Count the distances for all Activites of the User (Overall Badges)
+            var sumOfAllDistances = await _context.UserActivity
+                .Where(u => u.UserId == userId)
+                .Select(u => u.SumTime)
+                .CountAsync();
+
+            // Get all possible Badges for the ActivityId for the newly posted UserActivity
+            var badgeIntervalls = await _context.Badge
+                .Where(u => u.ActivityId == activityId)
+                .ToListAsync();
+
+            // Get all possible GeneralBadges for the newly posted UserActivity
+            var generalBadgeIntervalls = await _context.Badge
+                .Where(u => u.GeneralBadge == true)
+                .ToListAsync();
+
+            string badgeFor = "";
+            List<string> newBadge = new List<string>();
+            UserBadgesController userBadgesController = new UserBadgesController(_context);
+
+            // Check if User gets a Badge (based on an Activity)
+            foreach (var distance in badgeIntervalls)
+            {
+                if (sumDistanceForActivity >= distance.DistanceForBadge)
+                {
+                    badgeFor = userActivity.UserId.ToString();
+                    newBadge.Add(distance.Id.ToString());
+                }
+            }
+            // Check if User gets a general Badge
+            foreach (var distance in generalBadgeIntervalls)
+            {
+                if (sumOfAllDistances >= distance.DistanceForBadge)
+                {
+                    badgeFor = userActivity.UserId.ToString();
+                    newBadge.Add(distance.Id.ToString());
+                }
+            }
+
+            // Send data to Distribution-Controller
+            await userBadgesController.PostUserBadge(badgeFor, newBadge);
 
             return CreatedAtAction("GetUserActivity", new { id = userActivity.Id }, userActivity);
         }

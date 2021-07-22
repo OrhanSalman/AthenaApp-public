@@ -145,11 +145,11 @@ namespace AthenaWebApp.Migrations
                     b.Property<string>("BadgeName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("DistanceIntervallBegin")
+                    b.Property<double>("DistanceForBadge")
                         .HasColumnType("float");
 
-                    b.Property<double>("DistanceIntervallEnd")
-                        .HasColumnType("float");
+                    b.Property<bool>("GeneralBadge")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -240,6 +240,27 @@ namespace AthenaWebApp.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserActivity");
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Models.UserBadge", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BadgeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BadgeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserBadge");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -421,6 +442,21 @@ namespace AthenaWebApp.Migrations
                     b.Navigation("Activity");
 
                     b.Navigation("Company");
+
+                    b.Navigation("UserExtension");
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Models.UserBadge", b =>
+                {
+                    b.HasOne("AthenaWebApp.Models.Badge", "Badge")
+                        .WithMany()
+                        .HasForeignKey("BadgeId");
+
+                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", "UserExtension")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Badge");
 
                     b.Navigation("UserExtension");
                 });

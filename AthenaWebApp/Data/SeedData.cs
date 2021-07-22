@@ -12,7 +12,6 @@ namespace AthenaWebApp.Models
 {
     public static class SeedData
     {
-
         public static void Initialize(IServiceProvider serviceProvider)
         {
             using (var context = new Context(
@@ -46,28 +45,6 @@ namespace AthenaWebApp.Models
                 );
                 context.SaveChanges();
                 // ToDo: Set Users to Roles
-
-
-                context.Template.AddRange(
-                      new Template
-                      {
-                          UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
-                          TemplateTitle = "Introduction",
-                          Description = new StreamReader(@"wwwroot/html/Introduction.html").ReadToEnd(),
-                          DateTimeCreated = new DateTime(2021, 03, 8, 15, 07, 08)
-
-                      },
-                    new Template
-                    {
-                        UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92",
-                        TemplateTitle = "Summer Event 2021",
-                        Description = new StreamReader(@"wwwroot/html/Event_invitation.html").ReadToEnd(),
-                        DateTimeCreated = new DateTime(2021, 07, 14, 15, 07, 05)
-
-                    }
-
-                    );
-                context.SaveChanges();
 
                 context.Company.AddRange(
                     new Company
@@ -116,7 +93,7 @@ namespace AthenaWebApp.Models
                     {
                         Id = "kca9a2af-1ed2-430c-b9ae-e5476d36ca82",
                         CompanyName = "University Orléans",
-                        Country = "France",
+                        Country = "Italy",
                         EmailContext = "univ-orleans.fr"
                     },
                     new Company
@@ -951,11 +928,11 @@ namespace AthenaWebApp.Models
                          Id = "ä51f4e8e-5b86-4279-82d1-749b67b99a98",
                          UserId = "m52f4e8e-7a86-4279-82d1-749b67b99a101",
                          ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
-                         CompanyId = "d33df339-1c29-42e3-bb45-6d7e6c990f1e",
+                         CompanyId = "gca9a2af-1ed2-430c-b9ae-e5476d36ca78",
                          StartTime = new DateTime(2021, 07, 13, 15, 02, 05),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 13, 15, 22, 05),
                          SumTime = new TimeSpan(hours: 0, minutes: 20, seconds: 0),
-                         SumDistance = 5125                                     // Meters
+                         SumDistance = 5125 / 1000                                     // Meters
                      },
                      new UserActivity
                      {
@@ -966,7 +943,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 15, 00, 05),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 14, 15, 30, 05),
                          SumTime = new TimeSpan(hours: 0, minutes: 30, seconds: 0),
-                         SumDistance = 1000                                    // Meters
+                         SumDistance = 1000 / 1000                                 // Meters
                      },
                      new UserActivity
                      {
@@ -977,7 +954,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 15, 00, 05),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 14, 15, 30, 05),
                          SumTime = new TimeSpan(hours: 0, minutes: 30, seconds: 0),
-                         SumDistance = 1000                                    // Meters
+                         SumDistance = 1000 / 1000                                   // Meters
                      },
                      new UserActivity
                      {
@@ -988,7 +965,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 16, 00, 05),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 14, 16, 25, 05),
                          SumTime = new TimeSpan(hours: 0, minutes: 25, seconds: 0),
-                         SumDistance = 4500                                    // Meters
+                         SumDistance = 4500 / 1000                                   // Meters
                      },
                      new UserActivity
                      {
@@ -999,7 +976,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 16, 00, 05),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
                          SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
-                         SumDistance = 5025                                    // Meters
+                         SumDistance = 5025 / 1000                                   // Meters
                      },
                      new UserActivity
                      {
@@ -1010,7 +987,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 16, 00, 05),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
                          SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
-                         SumDistance = 5005                                    // Meters
+                         SumDistance = 5005 / 1000                                   // Meters
                      },
                      new UserActivity
                      {
@@ -1021,7 +998,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 16, 00, 05),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
                          SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
-                         SumDistance = 3000                                    // Meters
+                         SumDistance = 3000 / 1000                                   // Meters
                      },
                      new UserActivity
                      {
@@ -1032,7 +1009,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 16, 00, 05),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
                          SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
-                         SumDistance = 3000                                    // Meters
+                         SumDistance = 3000 / 1000                                   // Meters
                      },
                      new UserActivity
                      {
@@ -1043,7 +1020,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
                          StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
                          SumTime = new TimeSpan(hours: 2, minutes: 0, seconds: 0),
-                         SumDistance = 6000
+                         SumDistance = 6000 / 1000
                      },
                      new UserActivity
                      {
@@ -1054,7 +1031,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
                          StopTime = new DateTime(2021, 07, 14, 16, 00, 05),
                          SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
-                         SumDistance = 3500
+                         SumDistance = 3500 / 1000
                      },
                      new UserActivity
                      {
@@ -1065,7 +1042,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
                          StopTime = new DateTime(2021, 07, 14, 15, 30, 05),
                          SumTime = new TimeSpan(hours: 0, minutes: 30, seconds: 0),
-                         SumDistance = 1500
+                         SumDistance = 1500 / 1000
                      },
                      new UserActivity
                      {
@@ -1076,7 +1053,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
                          StopTime = new DateTime(2021, 07, 14, 15, 30, 05),
                          SumTime = new TimeSpan(hours: 0, minutes: 30, seconds: 0),
-                         SumDistance = 1000
+                         SumDistance = 12000 / 1000
                      },
                      new UserActivity
                      {
@@ -1087,7 +1064,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
                          StopTime = new DateTime(2021, 07, 14, 15, 40, 05),
                          SumTime = new TimeSpan(hours: 0, minutes: 40, seconds: 0),
-                         SumDistance = 1010
+                         SumDistance = 10100 / 1000
                      },
                      new UserActivity
                      {
@@ -1098,7 +1075,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
                          StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
                          SumTime = new TimeSpan(hours: 2, minutes: 0, seconds: 0),
-                         SumDistance = 20000
+                         SumDistance = 20000 / 1000
                      },
                      new UserActivity
                      {
@@ -1109,7 +1086,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
                          StopTime = new DateTime(2021, 07, 14, 16, 00, 05),
                          SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
-                         SumDistance = 10000
+                         SumDistance = 10000 / 1000
                      },
                      new UserActivity
                      {
@@ -1120,7 +1097,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
                          StopTime = new DateTime(2021, 07, 14, 17, 00, 05),
                          SumTime = new TimeSpan(hours: 2, minutes: 0, seconds: 0),
-                         SumDistance = 10000
+                         SumDistance = 10000 / 1000
                      },
                      new UserActivity
                      {
@@ -1131,18 +1108,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 14, 15, 00, 05),
                          StopTime = new DateTime(2021, 07, 14, 15, 40, 05),
                          SumTime = new TimeSpan(hours: 0, minutes: 40, seconds: 0),
-                         SumDistance = 5000
-                     },
-                     new UserActivity
-                     {
-                         Id = "b51f4e8e-5b86-4279-82d1-749b67b99a98",
-                         UserId = "d52f4e8e-7a86-4279-82d1-749b67b99a92", // Zwei mal eingetragen
-                         ActivityId = "t33df349-1c29-42e3-bf45-6d7e6c990f1h",
-                         CompanyId = "d33df339-1c29-42e3-bb45-6d7e6c990f1e",
-                         StartTime = new DateTime(2021, 07, 14, 15, 15, 05),    //year, month, day, hour, min, seconds
-                         StopTime = new DateTime(2021, 07, 14, 15, 30, 05),
-                         SumTime = new TimeSpan(hours: 0, minutes: 15, seconds: 0),
-                         SumDistance = 512                                     // Meters
+                         SumDistance = 5000 / 1000
                      },
                      new UserActivity
                      {
@@ -1153,7 +1119,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 13, 16, 10, 15),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 13, 17, 22, 25),
                          SumTime = new TimeSpan(hours: 1, minutes: 12, seconds: 10),
-                         SumDistance = 15215                                     // Meters
+                         SumDistance = 15215 / 1000                                     // Meters
                      },
                      new UserActivity
                      {
@@ -1164,7 +1130,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 15, 12, 32, 38),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 15, 14, 37, 39),
                          SumTime = new TimeSpan(hours: 2, minutes: 5, seconds: 1),
-                         SumDistance = 920                                     // Meters
+                         SumDistance = 920 / 1000                                     // Meters
                      },
                      new UserActivity
                      {
@@ -1175,7 +1141,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 15, 20, 07, 21),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 15, 20, 37, 21),
                          SumTime = new TimeSpan(hours: 0, minutes: 30, seconds: 0),
-                         SumDistance = 5232                                     // Meters
+                         SumDistance = 5232 / 1000                                     // Meters
                      },
                      new UserActivity
                      {
@@ -1186,7 +1152,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 15, 14, 10, 05),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 15, 16, 22, 05),
                          SumTime = new TimeSpan(hours: 2, minutes: 12, seconds: 0),
-                         SumDistance = 9321                                     // Meters
+                         SumDistance = 9321 / 1000                                     // Meters
                      },
                      new UserActivity
                      {
@@ -1197,7 +1163,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 15, 15, 02, 05),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 15, 15, 22, 05),
                          SumTime = new TimeSpan(hours: 0, minutes: 20, seconds: 0),
-                         SumDistance = 5125                                     // Meters
+                         SumDistance = 5125 / 1000                                     // Meters
                      },
                      new UserActivity
                      {
@@ -1208,7 +1174,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 15, 11, 02, 05),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 15, 12, 22, 05),
                          SumTime = new TimeSpan(hours: 1, minutes: 20, seconds: 0),
-                         SumDistance = 1300                                     // Meters
+                         SumDistance = 1300 / 1000                                     // Meters
                      },
                      new UserActivity
                      {
@@ -1219,7 +1185,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 15, 19, 00, 00),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 15, 20, 00, 00),
                          SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
-                         SumDistance = 5005                                     // Meters
+                         SumDistance = 5005 / 1000                                     // Meters
                      },
                      new UserActivity
                      {
@@ -1230,7 +1196,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 15, 13, 12, 00),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 15, 13, 32, 00),
                          SumTime = new TimeSpan(hours: 0, minutes: 20, seconds: 0),
-                         SumDistance = 510                                     // Meters
+                         SumDistance = 510 / 1000                                     // Meters
                      },
                      new UserActivity
                      {
@@ -1241,7 +1207,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 15, 15, 47, 00),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 16, 17, 47, 00),
                          SumTime = new TimeSpan(hours: 2, minutes: 0, seconds: 0),
-                         SumDistance = 30726                                     // Meters
+                         SumDistance = 30726 / 1000                                     // Meters
                      },
                      new UserActivity
                      {
@@ -1252,7 +1218,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 15, 14, 02, 01),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 15, 14, 22, 01),
                          SumTime = new TimeSpan(hours: 0, minutes: 20, seconds: 0),
-                         SumDistance = 3825                                     // Meters
+                         SumDistance = 3825 / 1000                                     // Meters
                      },
                      new UserActivity
                      {
@@ -1263,7 +1229,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 15, 15, 05, 35),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 15, 16, 05, 35),
                          SumTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
-                         SumDistance = 5025                                     // Meters
+                         SumDistance = 5025 / 1000                                     // Meters
                      },
                      new UserActivity
                      {
@@ -1274,7 +1240,7 @@ namespace AthenaWebApp.Models
                          StartTime = new DateTime(2021, 07, 15, 12, 14, 32),    //year, month, day, hour, min, seconds
                          StopTime = new DateTime(2021, 07, 15, 15, 32, 32),
                          SumTime = new TimeSpan(hours: 3, minutes: 18, seconds: 0),                   // StopTime - StartTime // hours, minutes, seconds, milliseconds.
-                         SumDistance = 45269                                     // Meters
+                         SumDistance = 6269 / 1000                                     // Meters
                      }
 
                     );
@@ -1817,6 +1783,26 @@ namespace AthenaWebApp.Models
                     ClaimType = "Delete Badge",
                     ClaimValue = "false"
                 });
+                context.SaveChanges();
+
+                context.Template.AddRange(
+                    new Template
+                    {
+                        UserId = "f52f4e8e-7a86-4279-82d1-749b67b99a94",
+                        TemplateTitle = "Introduction",
+                        Description = new StreamReader(@"wwwroot/html/Introduction.html").ReadToEnd(),
+                        DateTimeCreated = new DateTime(2021, 03, 8, 15, 07, 08)
+                    },
+                    new Template
+                    {
+                        UserId = "f52f4e8e-7a86-4279-82d1-749b67b99a94",
+                        TemplateTitle = "Summer Event 2021",
+                        Description = new StreamReader(@"wwwroot/html/Event_invitation.html").ReadToEnd(),
+                        DateTimeCreated = new DateTime(2021, 07, 14, 15, 07, 05)
+
+                    }
+
+                    );
                 context.SaveChanges();
             }
         }

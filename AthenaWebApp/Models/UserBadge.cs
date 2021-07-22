@@ -9,11 +9,6 @@ namespace AthenaWebApp.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
-
-        [ForeignKey("ActivityId")]
-        public Activity Activity { get; set; }
-        public string ActivityId { get; set; }
-
         [ForeignKey("BadgeId")]
         public Badge Badge { get; set; }
         public string BadgeId { get; set; }

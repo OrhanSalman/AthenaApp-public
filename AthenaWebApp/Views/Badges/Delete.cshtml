@@ -12,6 +12,12 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GeneralBadge)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GeneralBadge)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Activity)
         </dt>
         <dd class = "col-sm-10">
@@ -24,16 +30,10 @@
             @Html.DisplayFor(model => model.BadgeName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DistanceIntervallBegin)
+            @Html.DisplayNameFor(model => model.DistanceForBadge)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DistanceIntervallBegin)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DistanceIntervallEnd)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DistanceIntervallEnd)
+            @Html.DisplayFor(model => model.DistanceForBadge)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.BadgeImage)
