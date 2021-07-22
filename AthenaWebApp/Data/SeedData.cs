@@ -875,7 +875,7 @@ namespace AthenaWebApp.Models
 
 
 
-                // Activites 
+                // Activity 
 
                 context.Activity.AddRange(
                     new Activity
@@ -1624,42 +1624,42 @@ namespace AthenaWebApp.Models
                      {
  //                        Id = 52,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create Activite",
+                         ClaimType = "Create Activity",
                          ClaimValue = "false"
                      },
                 new IdentityRoleClaim<string>
                      {
 //                         Id = 53,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Edit Activite",
+                         ClaimType = "Edit Activity",
                          ClaimValue = "false"
                      },
                 new IdentityRoleClaim<string>
                      {
 //                         Id = 54,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Delete Activite",
+                         ClaimType = "Delete Activity",
                          ClaimValue = "false"
                      },
                 new IdentityRoleClaim<string>
                      {
 //                         Id = 55,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Create UserActivite",
+                         ClaimType = "Create UserActivity",
                          ClaimValue = "false"
                      },
                 new IdentityRoleClaim<string>
                      {
 //                         Id = 56,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Edit UserActivite",
+                         ClaimType = "Edit UserActivity",
                          ClaimValue = "false"
                      },
                 new IdentityRoleClaim<string>
                      {
 //                         Id = 57,
                          RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
-                         ClaimType = "Delete UserActivite",
+                         ClaimType = "Delete UserActivity",
                          ClaimValue = "false"
                      },
                 new IdentityRoleClaim<string>
