@@ -74,6 +74,7 @@ namespace AthenaWebApp
                 options.AddPolicy("Create Template", policy => policy.RequireClaim("Create Template", "true"));
                 options.AddPolicy("Edit Template", policy => policy.RequireClaim("Edit Template", "true")); ;
                 options.AddPolicy("Delete Template", policy => policy.RequireClaim("Delete Template", "true"));
+                options.AddPolicy("Send Template", policy => policy.RequireClaim("Send Template", "true")); ;
                 // Roles claim-section
                 options.AddPolicy("Create Role", policy => policy.RequireClaim("Create Role", "true"));
                 options.AddPolicy("Edit Role", policy => policy.RequireClaim("Edit Role", "true")); ;

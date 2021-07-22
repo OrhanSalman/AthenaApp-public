@@ -211,10 +211,10 @@ namespace AthenaWebApp.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ActivityId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CompanyId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
@@ -229,9 +229,15 @@ namespace AthenaWebApp.Migrations
                         .HasColumnType("time");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserActivity");
                 });
@@ -394,6 +400,27 @@ namespace AthenaWebApp.Migrations
                     b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", "UserExtension")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("UserExtension");
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Models.UserActivity", b =>
+                {
+                    b.HasOne("AthenaWebApp.Models.Activity", "Activity")
+                        .WithMany()
+                        .HasForeignKey("ActivityId");
+
+                    b.HasOne("AthenaWebApp.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId");
+
+                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", "UserExtension")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Activity");
+
+                    b.Navigation("Company");
 
                     b.Navigation("UserExtension");
                 });

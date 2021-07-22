@@ -199,17 +199,35 @@ namespace AthenaWebApp.Controllers.MVC
         [Authorize(Policy = "Send Template")]
         public async Task<ActionResult> Send(int id, string userId)
         {
-            var template = await _context.Template.FindAsync(id);
-            var users = _context.Users.ToList();
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == userId);
-            var emailusers = await _context.Users.ToListAsync();
-            foreach (var element in emailusers)
+            bool send = true;   // default auf false setzen
+
+            /*
+            // Display "To you really want to send this template to all User of the specific Company?
+            if ("yes.gedrückt")
             {
-                if (user.CompanyId == element.CompanyId)
+                send = true;
+            }
+            */
+
+            if (send == true)
+            {
+                var template = await _context.Template.FindAsync(id);
+                var getCompanyIdFromUserId = _context.Users.Where(i => i.Id == userId)
+                .Select(i => i.CompanyId)
+                .FirstOrDefault()
+                .ToString();
+
+                var getUsersOfCompany = _context.Users.Where(i => i.CompanyId == getCompanyIdFromUserId)
+                    .Select(i => i.Email)
+                    .ToList();
+
+                var emailusers = await _context.Users.ToListAsync();
+
+                foreach (var userMail in getUsersOfCompany)
                 {
-                    await _emailSender.SendEmailAsync(element.Email, template.TemplateTitle, template.Description);
+                    await _emailSender.SendEmailAsync(userMail, template.TemplateTitle = "", template.Description);
                 }
+                return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
         }

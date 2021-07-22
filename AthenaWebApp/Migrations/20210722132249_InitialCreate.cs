@@ -51,24 +51,6 @@ namespace AthenaWebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserActivity",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ActivityId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CompanyId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StopTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SumTime = table.Column<TimeSpan>(type: "time", nullable: false),
-                    SumDistance = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserActivity", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Badge",
                 columns: table => new
                 {
@@ -167,6 +149,42 @@ namespace AthenaWebApp.Migrations
                         name: "FK_Template_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserActivity",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ActivityId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CompanyId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StopTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SumTime = table.Column<TimeSpan>(type: "time", nullable: false),
+                    SumDistance = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserActivity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserActivity_Activity_ActivityId",
+                        column: x => x.ActivityId,
+                        principalTable: "Activity",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserActivity_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserActivity_Company_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Company",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -293,6 +311,21 @@ namespace AthenaWebApp.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Template_UserId",
                 table: "Template",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserActivity_ActivityId",
+                table: "UserActivity",
+                column: "ActivityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserActivity_CompanyId",
+                table: "UserActivity",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserActivity_UserId",
+                table: "UserActivity",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
