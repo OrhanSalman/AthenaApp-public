@@ -51,7 +51,7 @@ namespace AthenaWebApp.Controllers.API
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [Route("PostUserActivity")]
-        public async Task<ActionResult<UserActivity>> PostUserActivity([FromBody] UserActivity userActivity)
+        public async void PostUserActivity([FromBody] UserActivity userActivity)
         {
             _context.UserActivity.Add(userActivity);
             await _context.SaveChangesAsync();
@@ -62,16 +62,14 @@ namespace AthenaWebApp.Controllers.API
             /* Section - Possible Badges */
 
             // Count the distances for the selected User (Badge based on Activity)
-            var sumDistanceForActivity = await _context.UserActivity
+            var sumDistanceForActivity = _context.UserActivity
                 .Where(u => u.UserId == userId && u.ActivityId == activityId)
-                .Select(u => u.SumTime)
-                .CountAsync();
+                .Sum(u => u.SumDistance);
 
             // Count the distances for all Activites of the User (Overall Badges)
-            var sumOfAllDistances = await _context.UserActivity
+            var sumOfAllDistances = _context.UserActivity
                 .Where(u => u.UserId == userId)
-                .Select(u => u.SumTime)
-                .CountAsync();
+                .Sum(u => u.SumDistance);
 
             // Get all possible Badges for the ActivityId for the newly posted UserActivity
             var badgeIntervalls = await _context.Badge
@@ -106,10 +104,19 @@ namespace AthenaWebApp.Controllers.API
                 }
             }
 
-            // Send data to Distribution-Controller
-            await userBadgesController.PostUserBadge(badgeFor, newBadge);
-
-            return CreatedAtAction("GetUserActivity", new { id = userActivity.Id }, userActivity);
+            // Exclude already forgiven Badges for this User
+            var forgivenBadges = _context.UserBadge.Where(i => i.UserId == userId).ToList();
+            foreach(var badge in forgivenBadges)
+            {
+                newBadge.Remove(badge.ToString());
+            }
+            if(newBadge.Any())
+            {
+                // Send data to Distribution-Controller
+                userBadgesController.PostUserBadge(badgeFor, newBadge);
+            }
+            // No return! The return has to be in userBadgesController.GetMyBadges (from PostUserBadge startetd)
+//            return CreatedAtAction("GetUserActivity", new { id = userActivity.Id }, userActivity);
         }
 
 

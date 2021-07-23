@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Net;
 using Xamarin.Forms.Maps;
 using AthenaApp.Services;
+using System.IO;
 
 namespace AthenaApp.Views
 {
@@ -222,7 +223,7 @@ namespace AthenaApp.Views
 
 
 
-                var rawData = new UserActivity
+                 var rawData = new UserActivity
                 {
                     UserId = UserCurrentId,
                     ActivityId = idOfActType,
@@ -251,22 +252,25 @@ namespace AthenaApp.Views
 
 
                 HttpResponseMessage response = await client.PostAsync(uri, requestContent);
+                var jsonString = await response.Content.ReadAsByteArrayAsync();
+
 
                 if (response.IsSuccessStatusCode)
                 {
+                    if (jsonString is byte[])
+                    {
+                        await DisplayAlert("Congratulations!", "You recieved a new Badge", "Okay!");
+                    }
                     await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
                 }
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
-                    Debug.WriteLine("nöö");
+                    Debug.WriteLine("Error in MapPage.");
                 }
                 // ToDo: Some more handlers
 
             }
             AcvtivityTime.Reset();
-
-
         }
-
     }
 }

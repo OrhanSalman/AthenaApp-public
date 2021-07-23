@@ -79,8 +79,7 @@ namespace AthenaApp.Views
                 XamarinManager manager = new XamarinManager();
                 manager.Set_post_data(jsonString);
                 string json = manager.Get_post_data();
-                Debug.WriteLine("Hier ist das Apllication Output von user:" + json);
-                Debug.WriteLine("Hier ist das json von user:" + jsonString); 
+
                 var data = JsonConvert.DeserializeObject<User>(jsonString);
 
                 User user = new User()

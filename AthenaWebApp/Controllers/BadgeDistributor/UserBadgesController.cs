@@ -27,29 +27,75 @@ namespace AthenaWebApp.Controllers.BadgeDistributor
         // GET: api/GetMyBadges
         [HttpGet]
         [Route("GetMyBadges")]
-        public async Task<ActionResult<IEnumerable<UserBadge>>> GetMyBadges(string id)
+        public async Task<ActionResult<List<byte[]>>> GetMyBadges(string id)
         {
-            return await _context.UserBadge.Where(i => i.UserId == id).ToListAsync();
+            /*
+            var queryToGetImage = from b in _context.Badge
+                        join ub in _context.UserBadge on b.Id equals ub.BadgeId
+                        where ub.UserId == id
+                        select b.BadgeImage;
+            */
+
+            var badgeImage = _context.UserBadge
+                .Include(t => t.Badge)
+                .Where(a => a.UserId == id)
+                .Select(t => t.Badge.BadgeImage)
+                .ToListAsync();
+
+            if(badgeImage != null)
+            {
+                return Ok(await badgeImage);
+            }
+
+            return Ok("No badges");
+
         }
+
+        // GET: api/GetMyBadges
+        [HttpGet]
+        [Route("GetMyNewBadge")]
+        public async Task<ActionResult<byte[]>> GetMyNewBadge(string id)
+        {
+            /*
+            var queryToGetImage = from b in _context.Badge
+                        join ub in _context.UserBadge on b.Id equals ub.BadgeId
+                        where ub.UserId == id
+                        select b.BadgeImage;
+            */
+
+            // ToDo: Only get the new badge/s
+            var badgeImage = _context.UserBadge
+                .Include(t => t.Badge)
+                .Where(a => a.UserId == id)
+                .Select(t => t.Badge.BadgeImage)
+                .FirstOrDefaultAsync();
+
+            return await badgeImage;
+
+        }
+
 
         [HttpPost]
         [Route("PostUserBadge")]
-        public async Task<ActionResult<UserBadge>> PostUserBadge(string userId, List<string> badgeId)
+        public async void PostUserBadge(string userId, List<string> badgeId)
         {
-            for (int i = 0; i <= badgeId.Count; i++)
+            // Only started, if UserActivitiesController (Api) says Yes, there is a new badge (line 116)
+            for (int i = 0; i <= badgeId.Count - 1; i++)
             {
                 var userBadge = new UserBadge
                 {
                     BadgeId = badgeId[i],
                     UserId = userId
                 };
+                // Check if the Badge already exists
                 // Nach jeder Aktivität Get_Activity und Get_UserActivity_Count. IF Staffelung true, diese Methode hier aufrufen
                 _context.UserBadge.Add(userBadge);
                 await _context.SaveChangesAsync();
 
                 CreatedAtAction("GetMyBadges", new { id = userBadge.Id }, userBadge);
+                GetMyNewBadge(userId);    // No await needed here
             }
-            return Ok();
+
         }
 
         private bool BadgeExists(string id)
