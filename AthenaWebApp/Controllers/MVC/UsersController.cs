@@ -190,8 +190,8 @@ namespace AthenaWebApp.Controllers.MVC
             {
                 user.NormalizedEmail = user.Email.ToUpper();
                 user.NormalizedUserName = user.UserName.ToUpper();
-                _context.Add(user);
-                await _context.SaveChangesAsync();
+               // _context.Add(user);
+               // await _context.SaveChangesAsync();
 
                 /*
                 // ToDo ?

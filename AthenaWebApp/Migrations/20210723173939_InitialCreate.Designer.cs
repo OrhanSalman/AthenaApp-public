@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AthenaWebApp.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210723131135_InitialCreate")]
+    [Migration("20210723173939_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -197,6 +197,9 @@ namespace AthenaWebApp.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("Published")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SecondContent")
                         .HasColumnType("nvarchar(max)");

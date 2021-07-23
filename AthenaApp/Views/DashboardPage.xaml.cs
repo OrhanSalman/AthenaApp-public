@@ -14,15 +14,15 @@ using AthenaApp.Services;
 using AthenaWebApp.Models;
 
 namespace AthenaApp.Views
-{
+{       
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    // Raphael: Class that sits behind the HTML and delivers the data
+    
     public partial class DashboardPage : ContentPage
     {
         public DashboardPage()
-        {
-            InitializeComponent();
-            DashboardData();
+        {   
+            InitializeComponent();                                      // defines the whole page
+            DashboardData();                                            // function to load Dashboard Data
         }
 
         

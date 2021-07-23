@@ -27,7 +27,7 @@
                 HorizontalOptions="Center"
                 Orientation="Horizontal"
                 VerticalOptions="Center">
-                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                <ContentView Padding="0,10,0,10" VerticalOptions="FillAndExpand">
                     <Image
                         HeightRequest="65"
                         Source="athena_logo.png"
@@ -42,22 +42,29 @@
                 Padding="30,24,30,24"
                 Orientation="Vertical"
                 Spacing="10">
-                <Label FontSize="Title" Text="Athena Running App" />
+                <Label FontSize="55" Text="News" HorizontalOptions="Start" />
+                <Label x:Name="Today" />
+
                 <Label
                     Padding="0,0,0,0"
                     FontSize="16"
-                    Text="Sign up if you're a Student, Professor or any other Member of your University!" />
-                <Label Padding="0,24,0,0" FontSize="16">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="Learn more at " />
-                                <Span FontAttributes="Bold" Text="https://athena.com/" />
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                     />
+
+                <StackLayout >
+                    <Label FontSize="20" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "/>
+                    <!--:Name="0" -->
+                </StackLayout>
+                <StackLayout>
+                    <Image Source="News.png"/>
+                </StackLayout>
+                <StackLayout >
+                    <Label FontSize="20" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+                </StackLayout>
+                <StackLayout >
+                    <Label FontSize="20" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+                </StackLayout>
             </StackLayout>
+
         </ScrollView>
     </Grid>
 </ContentPage>
