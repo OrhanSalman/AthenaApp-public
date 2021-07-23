@@ -45,10 +45,31 @@ namespace AthenaWebApp.Controllers.MVC
             if (currentUser.IsInRole("Admin") == false)
             {
                 theUser = _userManager.GetUserId(User);
-                return View(await _context.Template
-                .Include(i => i.UserExtension)
-                .Where(i => i.UserId == theUser)
-                .ToListAsync());
+
+                var CompanyID = _context
+                                  .Users
+                                  .Where(u => u.Id == theUser)
+                                  .Select(u => u.CompanyId)
+                                  .SingleOrDefault();
+                
+                 List<UserExtension> Users = await _context
+                                  .Users
+                                  .Where(u => u.CompanyId == CompanyID)
+                                  .ToListAsync();
+
+
+
+                List<Models.Template> templates = await _context.Template
+                                                 .Include(i => i.UserExtension)
+                                                 .ToListAsync();
+
+               var query = from Template in templates
+                            join UserExtension in Users on Template.UserId equals UserExtension.Id
+                           select new Models.Template { TemplateTitle = Template.TemplateTitle, UserExtension = Template.UserExtension, DateTimeCreated = Template.DateTimeCreated };
+
+
+                var output = query.ToList();
+                return View(query);
             }
             else // Admin can see all templates
             {
