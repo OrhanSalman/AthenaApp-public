@@ -1,7 +1,9 @@
-﻿using AthenaWebApp.Data;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
+using AthenaWebApp.Data;
 using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,23 +15,27 @@ using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
 {
-    public class NewssController : Controller
+    public class NewsController : Controller
     {
         private readonly Context _context;
+        private readonly UserManager<UserExtension> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public NewssController(Context context)
+        public NewsController(Context context, UserManager<UserExtension> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
-        // GET: Newss
+        // GET: News
         public async Task<IActionResult> Index()
         {
             var context = _context.News.Include(b => b.Company);
             return View(await context.ToListAsync());
         }
 
-        // GET: Newss/Details/5
+        // GET: News/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -50,14 +56,15 @@ namespace AthenaWebApp.Controllers.MVC
 
 
 
-        // GET: Newss/Create
+        // GET: News/Create
         [Authorize(Policy = "Create News")]
         public IActionResult Create()
         {
+            ViewData["CompanyId"] = new SelectList(_context.Company, "CompanyName", "CompanyName");
             return View();
         }
 
-        // POST: Newss/Create
+        // POST: News/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,6 +72,8 @@ namespace AthenaWebApp.Controllers.MVC
         [Authorize(Policy = "Create News")]
         public async Task<IActionResult> Create([Bind("Id,CompanyId,Title,FirstContent,SecondContent,ThirdContent,Foto,IsActive")] News news, IFormFile Image)
         {
+            UserExtension user = await _userManager.GetUserAsync(User);
+            var compId = user.CompanyId.ToString();
 
             if (ModelState.IsValid)
             {
@@ -89,10 +98,11 @@ namespace AthenaWebApp.Controllers.MVC
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CompanyId"] = new SelectList(_context.Company, "CompanyName", "CompanyName", news.CompanyId);
             return View(news);
         }
 
-        // GET: Newss/Edit/5
+        // GET: News/Edit/5
         [Authorize(Policy = "Edit News")]
         public async Task<IActionResult> Edit(string id)
         {
@@ -109,15 +119,14 @@ namespace AthenaWebApp.Controllers.MVC
             return View(news);
         }
 
-        // POST: Newss/Edit/5
+        // POST: News/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Edit News")]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,CompanyId,Title,FirstContent,SecondContent,ThirdContent,Foto,IsActive")] News news, IFormFile Image)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Title,FirstContent,SecondContent,ThirdContent,Foto,IsActive")] News news, IFormFile Image)
         {
-            // ToDo: if general news is set to false, display message that a CompanyId has to set
             if (id != news.Id)
             {
                 return NotFound();
@@ -167,11 +176,10 @@ namespace AthenaWebApp.Controllers.MVC
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Id", news.CompanyId);
             return View(news);
         }
 
-        // GET: Newss/Delete/5
+        // GET: News/Delete/5
         [Authorize(Policy = "Delete News")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -191,7 +199,7 @@ namespace AthenaWebApp.Controllers.MVC
             return View(news);
         }
 
-        // POST: Newss/Delete/5
+        // POST: News/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Delete News")]
