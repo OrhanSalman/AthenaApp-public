@@ -13,3 +13,4 @@ namespace AthenaWebApp.Models
         public bool SetManualyByUser { get; set; }
     }
 }
+//
