@@ -15,7 +15,8 @@ namespace AthenaWebApp.Data
             "Create UserActivity",  "Edit UserActivity",    "Delete UserActivity",
             "Create Role",          "Edit Role",            "Delete Role",
             "Create Badge",         "Edit Badge",           "Delete Badge",
-            "Create Claim",         "Edit Claim",           "Delete Claim"
+            "Create Claim",         "Edit Claim",           "Delete Claim",
+            "Create News",          "Edit News",            "Delete News"
 
         };
 

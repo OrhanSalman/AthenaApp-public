@@ -80,6 +80,12 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Badges" asp-action="Index">Badges</a>
                             </li>
                         }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Index">News</a>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <div>

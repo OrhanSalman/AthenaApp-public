@@ -66,6 +66,8 @@ namespace AthenaWebApp.Data
         public DbSet<AthenaWebApp.Models.UserActivity> UserActivity { get; set; }
         public DbSet<AthenaWebApp.Models.Badge> Badge { get; set; }
         public DbSet<AthenaWebApp.Models.UserBadge> UserBadge { get; set; }
+        public DbSet<AthenaWebApp.Models.News> News { get; set; }
+
 
 
     }

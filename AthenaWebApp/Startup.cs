@@ -83,8 +83,10 @@ namespace AthenaWebApp
                 options.AddPolicy("Create Claim", policy => policy.RequireClaim("Create Claim", "true"));
                 options.AddPolicy("Edit Claim", policy => policy.RequireClaim("Edit Claim", "true")); ;
                 options.AddPolicy("Delete Claim", policy => policy.RequireClaim("Delete Claim", "true"));
-
-
+                // News claim-section
+                options.AddPolicy("Create News", policy => policy.RequireClaim("Create News", "true"));
+                options.AddPolicy("Edit News", policy => policy.RequireClaim("Edit News", "true")); ;
+                options.AddPolicy("Delete News", policy => policy.RequireClaim("Delete News", "true"));
             });
 
             services.AddMvc(options =>

@@ -97,9 +97,9 @@ namespace AthenaWebApp.Controllers.MVC
             IdentityRole role = await roleManager.FindByIdAsync(id);
 
             // Do not delete Admin
-            if (role.Name == "Admin")
+            if (role.Name == "Admin" || role.Name == "Supervisor" || role.Name == "MobileUser")
             {
-                return BadRequest(error: "The only thing that an admin can't do is delete itself.");
+                return BadRequest(error: "The role's Admin, Supervisor and Mobileuser shouldn't be deleted.");
             }
             else if (role != null)
             {

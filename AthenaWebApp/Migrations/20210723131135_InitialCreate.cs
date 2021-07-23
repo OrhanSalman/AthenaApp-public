@@ -111,6 +111,30 @@ namespace AthenaWebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "News",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CompanyId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecondContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ThirdContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Foto = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_News", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_News_Company_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Company",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RoleClaims",
                 columns: table => new
                 {
@@ -322,6 +346,11 @@ namespace AthenaWebApp.Migrations
                 column: "ActivityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_News_CompanyId",
+                table: "News",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "Role",
                 column: "NormalizedName",
@@ -381,6 +410,9 @@ namespace AthenaWebApp.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "News");
+
             migrationBuilder.DropTable(
                 name: "RoleClaims");
 

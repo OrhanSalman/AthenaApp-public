@@ -178,6 +178,40 @@ namespace AthenaWebApp.Migrations
                     b.ToTable("Company");
                 });
 
+            modelBuilder.Entity("AthenaWebApp.Models.News", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FirstContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Foto")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecondContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ThirdContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("News");
+                });
+
             modelBuilder.Entity("AthenaWebApp.Models.Template", b =>
                 {
                     b.Property<int>("TemplateId")
@@ -414,6 +448,15 @@ namespace AthenaWebApp.Migrations
                         .HasForeignKey("ActivityId");
 
                     b.Navigation("Activity");
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Models.News", b =>
+                {
+                    b.HasOne("AthenaWebApp.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId");
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("AthenaWebApp.Models.Template", b =>
