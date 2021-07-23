@@ -22,6 +22,7 @@ namespace AthenaWebApp.Models
         public string ThirdContent { get; set; }
 
         public byte[] Foto { get; set; }
+        public DateTime Published { get; set; } = DateTime.Now;
         public bool IsActive { get; set; }
 
     }

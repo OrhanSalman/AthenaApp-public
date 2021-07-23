@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
@@ -58,9 +59,8 @@ namespace AthenaWebApp.Controllers.MVC
 
         // GET: News/Create
         [Authorize(Policy = "Create News")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["CompanyId"] = new SelectList(_context.Company, "CompanyName", "CompanyName");
             return View();
         }
 
@@ -70,10 +70,10 @@ namespace AthenaWebApp.Controllers.MVC
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Create News")]
-        public async Task<IActionResult> Create([Bind("Id,CompanyId,Title,FirstContent,SecondContent,ThirdContent,Foto,IsActive")] News news, IFormFile Image)
+        public async Task<IActionResult> Create([Bind("Id,Title,FirstContent,SecondContent,ThirdContent,Foto,IsActive")] News news, IFormFile Image)
         {
             UserExtension user = await _userManager.GetUserAsync(User);
-            var compId = user.CompanyId.ToString();
+            news.CompanyId = user.CompanyId.ToString();
 
             if (ModelState.IsValid)
             {
@@ -98,7 +98,6 @@ namespace AthenaWebApp.Controllers.MVC
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Company, "CompanyName", "CompanyName", news.CompanyId);
             return View(news);
         }
 
