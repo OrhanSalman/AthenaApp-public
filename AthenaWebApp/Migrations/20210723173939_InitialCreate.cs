@@ -121,6 +121,7 @@ namespace AthenaWebApp.Migrations
                     SecondContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ThirdContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Foto = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Published = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

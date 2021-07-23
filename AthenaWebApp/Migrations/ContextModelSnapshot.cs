@@ -196,6 +196,9 @@ namespace AthenaWebApp.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("Published")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("SecondContent")
                         .HasColumnType("nvarchar(max)");
 
