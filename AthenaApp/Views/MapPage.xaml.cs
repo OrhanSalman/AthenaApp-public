@@ -252,19 +252,22 @@ namespace AthenaApp.Views
 
 
                 HttpResponseMessage response = await client.PostAsync(uri, requestContent);
-                Byte[] jsonString = await response.Content.ReadAsByteArrayAsync();
+                var jsonString = await response.Content.ReadAsByteArrayAsync();
 
 
                 if (response.IsSuccessStatusCode)
                 {
-                    if (jsonString is byte[] imageBytes)
+                    if (jsonString != null && jsonString.Length > 0 && jsonString is byte[] imageBytes)
                     {
                         ImageConverter image = new ImageConverter();
                         await image.NewImage(jsonString);
                         await DisplayAlert("Congratulations!", "You recieved a new Badge", "Okay!");
                         await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
                     }
-                    await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
+                    else
+                    {
+                        await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
+                    }
                 }
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
