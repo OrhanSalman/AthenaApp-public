@@ -1,7 +1,9 @@
-﻿using AthenaWebApp.Data;
+﻿using AthenaWebApp.Areas.Identity.IdentityModels;
+using AthenaWebApp.Data;
 using AthenaWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,27 +11,32 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.MVC
 {
-    public class BadgesController : Controller
+    public class NewsController : Controller
     {
         private readonly Context _context;
+        private readonly UserManager<UserExtension> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public BadgesController(Context context)
+        public NewsController(Context context, UserManager<UserExtension> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
-        // GET: Badges
+        // GET: News
         public async Task<IActionResult> Index()
         {
-            var context = _context.Badge.Include(b => b.Activity);
+            var context = _context.News.Include(b => b.Company);
             return View(await context.ToListAsync());
         }
 
-        // GET: Badges/Details/5
+        // GET: News/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -37,36 +44,36 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
-            var badge = await _context.Badge
-                .Include(b => b.Activity)
+            var news = await _context.News
+                .Include(b => b.Company)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (badge == null)
+            if (news == null)
             {
                 return NotFound();
             }
 
-            return View(badge);
+            return View(news);
         }
 
 
 
-        // GET: Badges/Create
-        [Authorize(Policy = "Create Badge")]
-        public IActionResult Create()
+        // GET: News/Create
+        [Authorize(Policy = "Create News")]
+        public async Task<IActionResult> Create()
         {
-            ViewData["ActivityId"] = new SelectList(_context.Activity, "ActivityType", "ActivityType");
             return View();
         }
 
-        // POST: Badges/Create
+        // POST: News/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Create Badge")]
-        public async Task<IActionResult> Create([Bind("Id,ActivityId,BadgeName,GeneralBadge,DistanceForBadge,BadgeImage,BadgeDescription")] Badge badge, IFormFile Image)
+        [Authorize(Policy = "Create News")]
+        public async Task<IActionResult> Create([Bind("Id,Title,FirstContent,SecondContent,ThirdContent,Foto,IsActive")] News news, IFormFile Image)
         {
-            bool isGeneral = false;
+            UserExtension user = await _userManager.GetUserAsync(User);
+            news.CompanyId = user.CompanyId.ToString();
 
             if (ModelState.IsValid)
             {
@@ -83,35 +90,19 @@ namespace AthenaWebApp.Controllers.MVC
                             fs1.CopyTo(ms1);
                             p1 = ms1.ToArray();
                         }
-                        badge.BadgeImage = p1;
+                        news.Foto = p1;
                     }
                 }
 
-                // Attention: ActivityId is NOT the real Id of Activity, it is the ActivityType
-                // Search for the Id of selected ActivityType
-
-
-                if (isGeneral == true)
-                {
-                    _context.Add(badge);
-                    await _context.SaveChangesAsync();
-                }
-                else
-                {
-                    string searchId = _context.Activity.Where(x => x.ActivityType == badge.ActivityId).Select(x => x.Id).FirstOrDefault();
-                    badge.ActivityId = searchId;
-
-                    _context.Add(badge);
-                    await _context.SaveChangesAsync();
-                }
+                _context.Add(news);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ActivityId"] = new SelectList(_context.Activity, "ActivityType", "ActivityType", badge.ActivityId);
-            return View(badge);
+            return View(news);
         }
 
-        // GET: Badges/Edit/5
-        [Authorize(Policy = "Edit Badge")]
+        // GET: News/Edit/5
+        [Authorize(Policy = "Edit News")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -119,33 +110,29 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
-            var badge = await _context.Badge.FindAsync(id);
-            if (badge == null)
+            var news = await _context.News.FindAsync(id);
+            if (news == null)
             {
                 return NotFound();
             }
-            ViewData["ActivityId"] = new SelectList(_context.Activity, "ActivityType", "ActivityType", badge.ActivityId);
-            return View(badge);
+            return View(news);
         }
 
-        // POST: Badges/Edit/5
+        // POST: News/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Edit Badge")]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,ActivityId,BadgeName,GeneralBadge,DistanceForBadge,BadgeImage,BadgeDescription")] Badge badge, IFormFile Image)
+        [Authorize(Policy = "Edit News")]
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Title,FirstContent,SecondContent,ThirdContent,Foto,IsActive")] News news, IFormFile Image)
         {
-            // ToDo: if general badge is set to false, display message that a ActivityId has to set
-            if (id != badge.Id)
+            if (id != news.Id)
             {
                 return NotFound();
             }
-            // To change the ActivityId in the table
-            string actType = _context.Activity.Where(x => x.ActivityType == badge.ActivityId).Select(x => x.Id).FirstOrDefault();
-            badge.ActivityId = actType;
+
             // If the image shouldn't be edited, backup the actual image
-            byte[] img = badge.BadgeImage;          // ToDo: This doesn't work
+            byte[] img = news.Foto;          // ToDo: This doesn't work
 
             if (ModelState.IsValid)
             {
@@ -164,20 +151,20 @@ namespace AthenaWebApp.Controllers.MVC
                                 fs1.CopyTo(ms1);
                                 p1 = ms1.ToArray();
                             }
-                            badge.BadgeImage = p1;
+                            news.Foto = p1;
                         }
                     }
                     else
                     {
-                        badge.BadgeImage = img;
+                        news.Foto = img;
                     }
 
-                    _context.Update(badge);
+                    _context.Update(news);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BadgeExists(badge.Id))
+                    if (!NewsExists(news.Id))
                     {
                         return NotFound();
                     }
@@ -188,12 +175,11 @@ namespace AthenaWebApp.Controllers.MVC
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ActivityId"] = new SelectList(_context.Activity, "Id", "Id", badge.ActivityId);
-            return View(badge);
+            return View(news);
         }
 
-        // GET: Badges/Delete/5
-        [Authorize(Policy = "Delete Badge")]
+        // GET: News/Delete/5
+        [Authorize(Policy = "Delete News")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -201,32 +187,32 @@ namespace AthenaWebApp.Controllers.MVC
                 return NotFound();
             }
 
-            var badge = await _context.Badge
-                .Include(b => b.Activity)
+            var news = await _context.News
+                .Include(b => b.Company)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (badge == null)
+            if (news == null)
             {
                 return NotFound();
             }
 
-            return View(badge);
+            return View(news);
         }
 
-        // POST: Badges/Delete/5
+        // POST: News/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Delete Badge")]
+        [Authorize(Policy = "Delete News")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var badge = await _context.Badge.FindAsync(id);
-            _context.Badge.Remove(badge);
+            var news = await _context.News.FindAsync(id);
+            _context.News.Remove(news);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BadgeExists(string id)
+        private bool NewsExists(string id)
         {
-            return _context.Badge.Any(e => e.Id == id);
+            return _context.News.Any(e => e.Id == id);
         }
     }
 }

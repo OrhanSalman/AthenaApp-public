@@ -13,16 +13,16 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.GeneralBadge)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Activity)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BadgeName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DistanceIntervallBegin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DistanceIntervallEnd)
+                @Html.DisplayNameFor(model => model.DistanceForBadge)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BadgeDescription)
@@ -36,16 +36,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.GeneralBadge)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Activity.ActivityType)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BadgeName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DistanceIntervallBegin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DistanceIntervallEnd)
+                @Html.DisplayFor(modelItem => item.DistanceForBadge)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BadgeDescription)

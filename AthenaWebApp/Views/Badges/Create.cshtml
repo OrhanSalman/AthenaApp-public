@@ -7,10 +7,15 @@
 
 <h4>Badge</h4>
 <hr />
-<div class="row">
+<div class="row" style="width: stretch; height: stretch">
     <div class="col-md-4">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="GeneralBadge" /> @Html.DisplayNameFor(model => model.GeneralBadge)
+                </label>
+            </div>
             <div class="form-group">
                 <label asp-for="ActivityId" class="control-label"></label>
                 <select asp-for="ActivityId" class="form-control" asp-items="ViewBag.ActivityId"></select>
@@ -21,14 +26,9 @@
                 <span asp-validation-for="BadgeName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DistanceIntervallBegin" class="control-label"></label>
-                <input asp-for="DistanceIntervallBegin" class="form-control" />
-                <span asp-validation-for="DistanceIntervallBegin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DistanceIntervallEnd" class="control-label"></label>
-                <input asp-for="DistanceIntervallEnd" class="form-control" />
-                <span asp-validation-for="DistanceIntervallEnd" class="text-danger"></span>
+                <label asp-for="DistanceForBadge" class="control-label"></label>
+                <input asp-for="DistanceForBadge" class="form-control" />
+                <span asp-validation-for="DistanceForBadge" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="BadgeDescription" class="control-label"></label>

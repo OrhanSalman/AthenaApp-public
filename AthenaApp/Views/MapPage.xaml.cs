@@ -22,9 +22,9 @@ namespace AthenaApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MapPage : ContentPage
     {
-       // IEnumerable<string> idOfActType;
+        // IEnumerable<string> idOfActType;
         string idOfActType;
-        
+
 
         bool isGettingLocation;
         double DistanceSum;
@@ -55,12 +55,32 @@ namespace AthenaApp.Views
             myMap.Pins.Add(pinRunner);
         }
 
+
         public Pin pinRunner = new Pin
         {
             Label = "Runner's Position"
         };
 
-        async void StartLocationTrackingButton_Clicked(System.Object sender, System.EventArgs e)
+        /*
+        public void  MapPlotter( Location ResultFirst){
+        Polyline polyline = new Polyline
+        {
+            StrokeColor = Color.Blue,
+            StrokeWidth = 12,
+            Geopath =
+                    {
+                        new Position(ResultFirst.Latitude, ResultFirst.Longitude),
+                        
+
+                     }
+        };
+        myMap.MapElements.Add(polyline);
+       }*/
+
+
+        //readonly List<Polyline> plottedRoutes = new List<Polyline>();
+        //readonly Color[] color = { Color.Red, Color.Blue, Color.Green, Color.Yellow, Color.Orange };
+        public async void StartLocationTrackingButton_Clicked(System.Object sender, System.EventArgs e)
         {
 
 
@@ -73,7 +93,7 @@ namespace AthenaApp.Views
 
 
 
-            // ToDo: Load from Database
+            // Activities data request
             string Api = "https://10.0.2.2:5001/api/Activities/GetActivities";
 
 
@@ -100,19 +120,19 @@ namespace AthenaApp.Views
             {
                 listOfAllActivities.Add(json);
 
-                   /* new Activity
-                    {
-                        Id = json.Id,
-                        ActivityType = json.ActivityType,
-                        MaxSpeed = json.MaxSpeed,
-                        Description = json.Description,
-                        SetManualyByUser = json.SetManualyByUser
-                    });*/
+                /* new Activity
+                 {
+                     Id = json.Id,
+                     ActivityType = json.ActivityType,
+                     MaxSpeed = json.MaxSpeed,
+                     Description = json.Description,
+                     SetManualyByUser = json.SetManualyByUser
+                 });*/
             }
-            
+
             //            int actCount = listOfAllActivities.Count;
             var actTypes = listOfAllActivities.Select(c => c.ActivityType).ToArray();
-            
+
             if (listOfAllActivities != null)
             {
                 action = await DisplayActionSheet("Which Activity do you prefer today?", "Cancel", null, actTypes);
@@ -126,11 +146,11 @@ namespace AthenaApp.Views
                 {
                     Activity = true;
                     idOfActType = listOfAllActivities.Where(c => c.ActivityType.ToString() == ActivityString).Select(d => d.Id.ToString()).FirstOrDefault();
-                    
+
                     Debug.WriteLine(idOfActType);
                 }
             }
-            
+
             //Activity = true;  //für test später löschen
 
             if (Activity == true)
@@ -158,16 +178,22 @@ namespace AthenaApp.Views
                                                                     // Get Latitude and Longitude through Geolocation
 
 
+
                     var result1 = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(0)));
                     pinRunner.Position = new Position(result1.Latitude, result1.Longitude);
                     myMap.MoveToRegion(MapSpan.FromCenterAndRadius(pinRunner.Position, Distance.FromMeters(500)));
+
+
+
+
+
 
                     await Task.Delay(1000);
                     var result2 = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(5)));
                     pinRunner.Position = new Position(result2.Latitude, result2.Longitude);
                     myMap.MoveToRegion(MapSpan.FromCenterAndRadius(pinRunner.Position, Distance.FromMeters(500)));
 
-
+                    
 
                     // Calculate Distance between two measurement Points of Latitude and Longitude
                     double distanceCalc = Location.CalculateDistance(result1.Latitude, result1.Longitude, result2.Latitude, result2.Longitude, DistanceUnits.Kilometers);
@@ -177,6 +203,9 @@ namespace AthenaApp.Views
                     DistanceEnd = DistanceSum;                      // setting Distance End as the Sum of Start and End Distance
                     DistanceInfo.Text = DistanceEnd.ToString("0.00") + " KM";
                     Velocity = DistanceSum / elapsedSeconds;
+
+                    //MapPlotter((Location)locations);
+
 
 
                 }
@@ -200,12 +229,12 @@ namespace AthenaApp.Views
             {
                 // ToDo: Send Data to Server
 
-                
+
                 XamarinManager manager = new XamarinManager();
                 string jsonData = manager.Get_post_data();
                 var jsonUser = JsonConvert.DeserializeObject<User>(jsonData);
 
-                
+
 
                 User user = new User()
                 {
@@ -218,7 +247,7 @@ namespace AthenaApp.Views
 
                 var UserCurrentId = user.Id;
                 var CompanyId = user.CompanyId;
-                
+
 
 
 

@@ -87,10 +87,26 @@ namespace AthenaWebApp.Controllers.MVC
                 searchString = currentFilter;
             }
 
-
-            var users = from s in _context.Users
+            /*
+            var users = _context.Users
+                .Include(b => b.Company)
+                .ToListAsync();
+                */
+               var users = from s in _context.Users
                 .Include(b => b.Company)
                         select s;
+                
+            if (User.IsInRole("Supervisor"))
+            {
+                UserExtension supervisor = await _userManager.GetUserAsync(User);
+                var compId = supervisor.CompanyId.ToString();
+
+                users = null;
+                users = from s in _context.Users
+                        .Include(b => b.Company)
+                        .Where(b => b.CompanyId == compId)
+                        select s;
+            }
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -99,7 +115,9 @@ namespace AthenaWebApp.Controllers.MVC
                                        || s.CompanyId.Contains(searchString));
             }
 
-            switch (sortOrder)
+
+
+                switch (sortOrder)
             {
                 case "name_desc":
                     users = users.OrderByDescending(s => s.UserName);
@@ -172,8 +190,8 @@ namespace AthenaWebApp.Controllers.MVC
             {
                 user.NormalizedEmail = user.Email.ToUpper();
                 user.NormalizedUserName = user.UserName.ToUpper();
-                _context.Add(user);
-                await _context.SaveChangesAsync();
+               // _context.Add(user);
+               // await _context.SaveChangesAsync();
 
                 /*
                 // ToDo ?
@@ -194,7 +212,7 @@ namespace AthenaWebApp.Controllers.MVC
                 }
                 */
 
-                // Hash Password
+                // ToDo: Hash Password
                 string pwToHash = user.PasswordHash.ToString();
                 await _userManager.CreateAsync(user, pwToHash);
 

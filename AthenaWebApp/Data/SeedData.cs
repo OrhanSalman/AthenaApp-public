@@ -1552,14 +1552,14 @@ namespace AthenaWebApp.Models
                     //                         Id = 43,
                     RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                     ClaimType = "Create User",
-                    ClaimValue = "false"
+                    ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
                     //                         Id = 44,
                     RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                     ClaimType = "Edit User",
-                    ClaimValue = "false"
+                    ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
@@ -1580,7 +1580,7 @@ namespace AthenaWebApp.Models
                     //                         Id = 47,
                     RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                     ClaimType = "Edit Company",
-                    ClaimValue = "false"
+                    ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
@@ -1594,21 +1594,21 @@ namespace AthenaWebApp.Models
                     //                         Id = 49,
                     RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                     ClaimType = "Create Template",
-                    ClaimValue = "false"
+                    ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
                     //                        Id = 50,
                     RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                     ClaimType = "Edit Template",
-                    ClaimValue = "false"
+                    ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
                     //                         Id = 51,
                     RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                     ClaimType = "Delete Template",
-                    ClaimValue = "false"
+                    ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
@@ -1636,21 +1636,21 @@ namespace AthenaWebApp.Models
                     //                         Id = 55,
                     RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                     ClaimType = "Create UserActivity",
-                    ClaimValue = "false"
+                    ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
                     //                         Id = 56,
                     RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                     ClaimType = "Edit UserActivity",
-                    ClaimValue = "false"
+                    ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
                     //                         Id = 57,
                     RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                     ClaimType = "Delete UserActivity",
-                    ClaimValue = "false"
+                    ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
@@ -1699,7 +1699,7 @@ namespace AthenaWebApp.Models
                     //                         Id = 64,
                     RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
                     ClaimType = "Send Template",
-                    ClaimValue = "false"
+                    ClaimValue = "true"
                 },
                 new IdentityRoleClaim<string>
                 {
@@ -1782,6 +1782,71 @@ namespace AthenaWebApp.Models
                     RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
                     ClaimType = "Delete Badge",
                     ClaimValue = "false"
+                },
+
+
+                new IdentityRoleClaim<string>
+                {
+                    //                    Id = 1,
+                    RoleId = "9d5107d5-5edd-49ae-adee-240acf8c9af1",
+                    ClaimType = "Create News",
+                    ClaimValue = "true"
+                },
+                new IdentityRoleClaim<string>
+                {
+                    //                    Id = 1,
+                    RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
+                    ClaimType = "Create News",
+                    ClaimValue = "false"
+                },
+                new IdentityRoleClaim<string>
+                {
+                    //                    Id = 1,
+                    RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
+                    ClaimType = "Create News",
+                    ClaimValue = "true"
+                },
+                new IdentityRoleClaim<string>
+                {
+                    //                    Id = 1,
+                    RoleId = "9d5107d5-5edd-49ae-adee-240acf8c9af1",
+                    ClaimType = "Delete News",
+                    ClaimValue = "true"
+                },
+                new IdentityRoleClaim<string>
+                {
+                    //                    Id = 1,
+                    RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
+                    ClaimType = "Delete News",
+                    ClaimValue = "false"
+                },
+                new IdentityRoleClaim<string>
+                {
+                    //                    Id = 1,
+                    RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
+                    ClaimType = "Delete News",
+                    ClaimValue = "true"
+                },
+                new IdentityRoleClaim<string>
+                {
+                    //                    Id = 1,
+                    RoleId = "9d5107d5-5edd-49ae-adee-240acf8c9af1",
+                    ClaimType = "Edit News",
+                    ClaimValue = "true"
+                },
+                new IdentityRoleClaim<string>
+                {
+                    //                    Id = 1,
+                    RoleId = "7d5107d5-5edd-49ae-adee-240acf8c9af2",
+                    ClaimType = "Edit News",
+                    ClaimValue = "false"
+                },
+                new IdentityRoleClaim<string>
+                {
+                    //                    Id = 1,
+                    RoleId = "8d5107d5-5edd-49ae-adee-240acf8c9af0",
+                    ClaimType = "Edit News",
+                    ClaimValue = "true"
                 });
                 context.SaveChanges();
 

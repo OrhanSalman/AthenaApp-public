@@ -1,0 +1,64 @@
+﻿@model AthenaWebApp.Models.News
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>News</h4>
+    <hr />
+    <dl class="row" style="width: stretch; height: stretch">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Company.CompanyName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Company.CompanyName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstContent)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstContent)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SecondContent)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SecondContent)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ThirdContent)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ThirdContent)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Foto)
+        </dt>
+        <dd class="col-sm-10">
+            <div class="form-group">
+                @if (Model.Foto != null)
+                {
+                    <img id="profilePicture" style="width:100px;height:100px; object-fit:cover" src="data:image/*;base64,@(Convert.ToBase64String(Model.Foto))">
+                }
+                else
+                {
+                    <img id="profilePicture" style="width: 80px; height: 80px; object-fit: cover " src="">
+                }
+                <span asp-validation-for="@Model.Foto" class="text-danger"></span>
+            </div>
+        </dd>
+        </dl>
+    </div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

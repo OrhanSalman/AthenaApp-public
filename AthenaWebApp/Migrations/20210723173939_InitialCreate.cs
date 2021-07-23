@@ -51,32 +51,14 @@ namespace AthenaWebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserActivity",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ActivityId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CompanyId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StopTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SumTime = table.Column<TimeSpan>(type: "time", nullable: false),
-                    SumDistance = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserActivity", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Badge",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ActivityId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     BadgeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DistanceIntervallBegin = table.Column<double>(type: "float", nullable: false),
-                    DistanceIntervallEnd = table.Column<double>(type: "float", nullable: false),
+                    GeneralBadge = table.Column<bool>(type: "bit", nullable: false),
+                    DistanceForBadge = table.Column<double>(type: "float", nullable: false),
                     BadgeImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     BadgeDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -129,6 +111,31 @@ namespace AthenaWebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "News",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CompanyId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecondContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ThirdContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Foto = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Published = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_News", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_News_Company_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Company",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RoleClaims",
                 columns: table => new
                 {
@@ -167,6 +174,67 @@ namespace AthenaWebApp.Migrations
                         name: "FK_Template_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserActivity",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ActivityId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CompanyId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StopTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SumTime = table.Column<TimeSpan>(type: "time", nullable: false),
+                    SumDistance = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserActivity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserActivity_Activity_ActivityId",
+                        column: x => x.ActivityId,
+                        principalTable: "Activity",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserActivity_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserActivity_Company_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Company",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserBadge",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BadgeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserBadge", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserBadge_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserBadge_Badge_BadgeId",
+                        column: x => x.BadgeId,
+                        principalTable: "Badge",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -279,6 +347,11 @@ namespace AthenaWebApp.Migrations
                 column: "ActivityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_News_CompanyId",
+                table: "News",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "Role",
                 column: "NormalizedName",
@@ -293,6 +366,31 @@ namespace AthenaWebApp.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Template_UserId",
                 table: "Template",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserActivity_ActivityId",
+                table: "UserActivity",
+                column: "ActivityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserActivity_CompanyId",
+                table: "UserActivity",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserActivity_UserId",
+                table: "UserActivity",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserBadge_BadgeId",
+                table: "UserBadge",
+                column: "BadgeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserBadge_UserId",
+                table: "UserBadge",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -314,7 +412,7 @@ namespace AthenaWebApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Badge");
+                name: "News");
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");
@@ -324,6 +422,9 @@ namespace AthenaWebApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserActivity");
+
+            migrationBuilder.DropTable(
+                name: "UserBadge");
 
             migrationBuilder.DropTable(
                 name: "UserClaims");
@@ -338,13 +439,16 @@ namespace AthenaWebApp.Migrations
                 name: "UserTokens");
 
             migrationBuilder.DropTable(
-                name: "Activity");
+                name: "Badge");
 
             migrationBuilder.DropTable(
                 name: "Role");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Activity");
 
             migrationBuilder.DropTable(
                 name: "Company");

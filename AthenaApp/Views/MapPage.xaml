@@ -14,7 +14,7 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1" />
-                <!-- <RowDefinition Height="60"/>    remove comment after ActivityId Test-->
+                <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
             <!--  Time Display Frame  -->
             <Frame
@@ -49,10 +49,8 @@
                     <Label HorizontalOptions="Center">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span FontSize="25" Text="Distance: " />
-                                <Span x:Name="DistanceInfo" FontSize="25" />
-                                <Span FontSize="25" Text="Activity: " />
-                                <Span x:Name="Activity_Id" FontSize="25" />
+                                <Span Text="Distance: " x:Name="DistanceInfo" FontSize="15" />
+                                <Span  Text=" Activity: " x:Name="Activity_Id" FontSize="15" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

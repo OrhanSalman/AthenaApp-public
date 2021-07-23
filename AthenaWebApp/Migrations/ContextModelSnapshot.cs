@@ -145,11 +145,11 @@ namespace AthenaWebApp.Migrations
                     b.Property<string>("BadgeName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("DistanceIntervallBegin")
+                    b.Property<double>("DistanceForBadge")
                         .HasColumnType("float");
 
-                    b.Property<double>("DistanceIntervallEnd")
-                        .HasColumnType("float");
+                    b.Property<bool>("GeneralBadge")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -176,6 +176,43 @@ namespace AthenaWebApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Company");
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Models.News", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FirstContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Foto")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Published")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SecondContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ThirdContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("News");
                 });
 
             modelBuilder.Entity("AthenaWebApp.Models.Template", b =>
@@ -240,6 +277,27 @@ namespace AthenaWebApp.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserActivity");
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Models.UserBadge", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BadgeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BadgeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserBadge");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -395,6 +453,15 @@ namespace AthenaWebApp.Migrations
                     b.Navigation("Activity");
                 });
 
+            modelBuilder.Entity("AthenaWebApp.Models.News", b =>
+                {
+                    b.HasOne("AthenaWebApp.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId");
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("AthenaWebApp.Models.Template", b =>
                 {
                     b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", "UserExtension")
@@ -421,6 +488,21 @@ namespace AthenaWebApp.Migrations
                     b.Navigation("Activity");
 
                     b.Navigation("Company");
+
+                    b.Navigation("UserExtension");
+                });
+
+            modelBuilder.Entity("AthenaWebApp.Models.UserBadge", b =>
+                {
+                    b.HasOne("AthenaWebApp.Models.Badge", "Badge")
+                        .WithMany()
+                        .HasForeignKey("BadgeId");
+
+                    b.HasOne("AthenaWebApp.Areas.Identity.IdentityModels.UserExtension", "UserExtension")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Badge");
 
                     b.Navigation("UserExtension");
                 });
