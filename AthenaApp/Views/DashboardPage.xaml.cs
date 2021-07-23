@@ -41,9 +41,6 @@ namespace AthenaApp.Views
         readonly string December = "12";
         
         
-
-
-
         async void DashboardData()
         {
 
@@ -480,5 +477,12 @@ namespace AthenaApp.Views
         };
             Chart1.Chart = new LineChart() { Entries = entriesAccumulated, BackgroundColor = SKColors.Transparent, LineSize = 20, PointSize = 20, LabelOrientation = Orientation.Horizontal, IsAnimated = true };
         }
+
+        /*
+        public Image Display()
+        {
+            return image;
+        }
+        */
     }
 }

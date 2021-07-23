@@ -51,7 +51,7 @@ namespace AthenaWebApp.Controllers.API
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [Route("PostUserActivity")]
-        public async Task PostUserActivity([FromBody] UserActivity userActivity)
+        public async Task<IActionResult> PostUserActivity([FromBody] UserActivity userActivity)
         {
             _context.UserActivity.Add(userActivity);
             await _context.SaveChangesAsync();
@@ -104,26 +104,31 @@ namespace AthenaWebApp.Controllers.API
                         newBadge.Add(distance.Id.ToString());
                     }
                 }
-
+                
                 // Exclude already forgiven Badges for this User
                 var forgivenBadges = _context.UserBadge.Where(i => i.UserId == userId).ToList();
                 foreach (var badge in forgivenBadges)
                 {
                     newBadge.Remove(badge.ToString());
                 }
+                
                 if (newBadge.Any())
                 {
                     // Send data to Distribution-Controller
                     foreach(var badge in newBadge)
                     {
-                        userBadgesController.PostUserBadge(userId, badge);
+                        await userBadgesController.PostUserBadge(userId, badge);
                     }
+                }
+                else
+                {
+                    return Ok("No new Badge.");
                 }
             }
 
 
             // No return! The return has to be in userBadgesController.GetMyBadges (from PostUserBadge startetd)
-//            return CreatedAtAction("GetUserActivity", new { id = userActivity.Id }, userActivity);
+            return CreatedAtAction("GetUserActivity", new { id = userActivity.Id }, userActivity);
         }
 
 
