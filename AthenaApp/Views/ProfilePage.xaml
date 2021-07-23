@@ -62,14 +62,7 @@
                             </Label.FormattedText>
                         </Label>
                         <!--4. Contact information: Board inforation-->
-                        <Label Grid.Row="3" Grid.Column="0" Text="Publications" Style="{StaticResource stlBoardTitle}" />
-                        <Label Grid.Row="4" Grid.Column="0" Text="678" Style="{StaticResource stlBoardDesc}"/>
-
-                        <Label Grid.Row="3" Grid.Column="1" Text="Following" Style="{StaticResource stlBoardTitle}"/>
-                        <Label Grid.Row="4" Grid.Column="1" Text="340" Style="{StaticResource stlBoardDesc}"/>
-
-                        <Label Grid.Row="3" Grid.Column="2" Text="Followers" Style="{StaticResource stlBoardTitle}"/>
-                        <Label Grid.Row="4" Grid.Column="2" Text="67k" Style="{StaticResource stlBoardDesc}"/>
+                       
 
                         <!--4. Contact information: Follow button-->
                         <!--  <Button Grid.Row="5" 

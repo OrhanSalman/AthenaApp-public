@@ -26,7 +26,8 @@ namespace AthenaApp.Views
         }
 
         
-        
+        //Months
+
         readonly string January = "1";
         readonly string February = "2";
         readonly string March = "3";
@@ -48,6 +49,8 @@ namespace AthenaApp.Views
             string month = DateTime.Now.Month.ToString();
             string day = DateTime.Now.Day.ToString();
 
+            //Enumerables for Distances
+
             IEnumerable<double> JanUserDistanceEnum;
             IEnumerable<double> FebUserDistanceEnum;
             IEnumerable<double> MarUserDistanceEnum;
@@ -60,6 +63,8 @@ namespace AthenaApp.Views
             IEnumerable<double> OctUserDistanceEnum;
             IEnumerable<double> NovUserDistanceEnum;
             IEnumerable<double> DecUserDistanceEnum;
+
+            // Variables for UserActivityData
 
             double JanUserDistanceTotal = 0;
             double FebUserDistanceTotal = 0;
@@ -159,17 +164,7 @@ namespace AthenaApp.Views
                     });
             }
 
-            
-
-
-            //            int actCount = listOfAllActivities.Count;
-            // ToDo: filter Month var StopTimeList = (listOfAllUserActivities.Select(c => c.StopTime));
-
-
-
-
-
-
+            //User Data request
 
             XamarinManager manager = new XamarinManager();
             string jsonData = manager.Get_post_data();
@@ -185,6 +180,8 @@ namespace AthenaApp.Views
                 SecurityStamp = jsonUser.SecurityStamp,
                 ProfilePicture = jsonUser.ProfilePicture
             };
+
+            //Calculation and Filters for Dashboard Data
 
             var UserCurrentId = user.Id;
 
@@ -205,6 +202,8 @@ namespace AthenaApp.Views
             //MembersInfo.Text = 
             PersonalKmInfo.Text = totalUserKm.ToString("0.00") + " KM";
 
+
+            // Filtering User Distances for Months
 
             foreach (var json in listOfAllUserActivities) 
             {
@@ -267,6 +266,7 @@ namespace AthenaApp.Views
                 DecUserDistanceTotal = DecUserDistanceEnum.Sum((item => (float)item));
             }
 
+            // Summing up monthly Distances for Diagram in type float
 
             var distanceListJan = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == January).Select(c => c.SumDistance));
             var totalDistanceJan = distanceListJan.Sum(item => (float)item);
@@ -304,6 +304,8 @@ namespace AthenaApp.Views
             var distanceListDec = (listOfAllUserActivities.Where(c => c.StopTime.Month.ToString() == December).Select(c => c.SumDistance));
             var totalDistanceDec = distanceListDec.Sum(item => (float)item);
 
+            // Accumulated Data for total Uni Performance
+
             FebUserDistanceAccumulated = totalDistanceJan + totalDistanceFeb;
             MarUserDistanceAccumulated = FebUserDistanceAccumulated + totalDistanceMar;
             AprUserDistanceAccumulated = MarUserDistanceAccumulated + totalDistanceApr;
@@ -316,164 +318,164 @@ namespace AthenaApp.Views
             NovUserDistanceAccumulated = OctUserDistanceAccumulated + totalDistanceNov;
             DecUserDistanceAccumulated = NovUserDistanceAccumulated + totalDistanceDec;
 
-            
+            // Diagram with User Distances per month
 
             List<Entry> entries = new List<Entry>()
             {
-            new Entry(float.Parse(JanUserDistanceTotal.ToString())) //float.Parse(total.ToString())
-            {
-                 Color = SKColor.Parse("#081764"),
-                 Label = "January",
-                 ValueLabel = JanUserDistanceTotal.ToString("0.00")
-            },
-
-            new Entry(float.Parse(FebUserDistanceTotal.ToString()))
-            {
-                Color = SKColor.Parse("#081764"),
-                Label = "February",
-                ValueLabel = FebUserDistanceTotal.ToString("0.00")
+                new Entry(float.Parse(JanUserDistanceTotal.ToString())) //float.Parse(total.ToString())
+                {
+                     Color = SKColor.Parse("#081764"),
+                     Label = "January",
+                     ValueLabel = JanUserDistanceTotal.ToString("0.00")
                 },
-            new Entry(float.Parse(MarUserDistanceTotal.ToString()))
-            {
-                Color = SKColor.Parse("#081764"),
-                Label = "March",
-                ValueLabel = MarUserDistanceTotal.ToString("0.00")
-            },
-            new Entry(float.Parse(AprUserDistanceTotal.ToString()))
-            {
-                Color = SKColor.Parse("#081764"),
-                Label = "April",
-                ValueLabel = AprUserDistanceTotal.ToString("0.00")
-            },
-             new Entry(float.Parse(MayUserDistanceTotal.ToString()))
-             {
-                 Color = SKColor.Parse("#081764"),
-                 Label = "May",
-                 ValueLabel = MayUserDistanceTotal.ToString("0.00")
-             },
-            new Entry(float.Parse(JunUserDistanceTotal.ToString()))
-            {
-                Color = SKColor.Parse("#081764"),
-                Label = "June",
-                ValueLabel = JunUserDistanceTotal.ToString("0.00")
-            },
-            new Entry(float.Parse(JulUserDistanceTotal.ToString()))
-            {
-                Color = SKColor.Parse("#081764"),
-                Label = "July",
-                ValueLabel = JulUserDistanceTotal.ToString("0.00")
-            },
-            new Entry(float.Parse(AugUserDistanceTotal.ToString()))
-            {
-                Color = SKColor.Parse("#081764"),
-                Label = "August",
-                ValueLabel = AugUserDistanceTotal.ToString("0.00")
-            },
-            new Entry(float.Parse(SepUserDistanceTotal.ToString()))
-            {
-                Color = SKColor.Parse("#081764"),
-                Label = "September",
-                ValueLabel = SepUserDistanceTotal.ToString("0.00")
-            },
-             new Entry(float.Parse(OctUserDistanceTotal.ToString()))
-             {
-                 Color = SKColor.Parse("#081764"),
-                 Label = "October",
-                 ValueLabel = OctUserDistanceTotal.ToString("0.00")
-             },
-             new Entry(float.Parse(NovUserDistanceTotal.ToString()))
-             {
-                 Color = SKColor.Parse("#081764"),
-                 Label = "November",
-                 ValueLabel = NovUserDistanceTotal.ToString("0.00")
-             },
-             new Entry(float.Parse(DecUserDistanceTotal.ToString()))
-             {
-                 Color = SKColor.Parse("#081764"),
-                 Label = "December",
-                 ValueLabel = DecUserDistanceTotal.ToString("0.00")
-             },
+
+                new Entry(float.Parse(FebUserDistanceTotal.ToString()))
+                {
+                    Color = SKColor.Parse("#081764"),
+                    Label = "February",
+                    ValueLabel = FebUserDistanceTotal.ToString("0.00")
+                    },
+                new Entry(float.Parse(MarUserDistanceTotal.ToString()))
+                {
+                    Color = SKColor.Parse("#081764"),
+                    Label = "March",
+                    ValueLabel = MarUserDistanceTotal.ToString("0.00")
+                },
+                new Entry(float.Parse(AprUserDistanceTotal.ToString()))
+                {
+                    Color = SKColor.Parse("#081764"),
+                    Label = "April",
+                    ValueLabel = AprUserDistanceTotal.ToString("0.00")
+                },
+                 new Entry(float.Parse(MayUserDistanceTotal.ToString()))
+                 {
+                     Color = SKColor.Parse("#081764"),
+                     Label = "May",
+                     ValueLabel = MayUserDistanceTotal.ToString("0.00")
+                 },
+                new Entry(float.Parse(JunUserDistanceTotal.ToString()))
+                {
+                    Color = SKColor.Parse("#081764"),
+                    Label = "June",
+                    ValueLabel = JunUserDistanceTotal.ToString("0.00")
+                },
+                new Entry(float.Parse(JulUserDistanceTotal.ToString()))
+                {
+                    Color = SKColor.Parse("#081764"),
+                    Label = "July",
+                    ValueLabel = JulUserDistanceTotal.ToString("0.00")
+                },
+                new Entry(float.Parse(AugUserDistanceTotal.ToString()))
+                {
+                    Color = SKColor.Parse("#081764"),
+                    Label = "August",
+                    ValueLabel = AugUserDistanceTotal.ToString("0.00")
+                },
+                new Entry(float.Parse(SepUserDistanceTotal.ToString()))
+                {
+                    Color = SKColor.Parse("#081764"),
+                    Label = "September",
+                    ValueLabel = SepUserDistanceTotal.ToString("0.00")
+                },
+                 new Entry(float.Parse(OctUserDistanceTotal.ToString()))
+                 {
+                     Color = SKColor.Parse("#081764"),
+                     Label = "October",
+                     ValueLabel = OctUserDistanceTotal.ToString("0.00")
+                 },
+                 new Entry(float.Parse(NovUserDistanceTotal.ToString()))
+                 {
+                     Color = SKColor.Parse("#081764"),
+                     Label = "November",
+                     ValueLabel = NovUserDistanceTotal.ToString("0.00")
+                 },
+                 new Entry(float.Parse(DecUserDistanceTotal.ToString()))
+                 {
+                     Color = SKColor.Parse("#081764"),
+                     Label = "December",
+                     ValueLabel = DecUserDistanceTotal.ToString("0.00")
+                 },
             };
             Chart2.Chart = new BarChart() { Entries = (IEnumerable<Entry>)entries, BackgroundColor = SKColors.Transparent, BarAreaAlpha = 30, IsAnimated = true, LabelOrientation = Orientation.Horizontal };
 
-
+            // Diagram with total performance
 
             List<Entry> entriesAccumulated = new List<Entry>
-        {
+            {
             
-            new Entry (float.Parse(totalDistanceJan.ToString()))
-            {
-                Color = SKColor.Parse("#FFFFFF"),
-                Label = "January",
-                ValueLabel = totalDistanceJan.ToString("0.00")
-            },
-            new Entry (float.Parse(FebUserDistanceAccumulated.ToString()))
-            {
-                Color = SKColor.Parse("#FFFFFF"),
-                Label = "February",
-                ValueLabel = FebUserDistanceAccumulated.ToString("0.00")
-            },
-            new Entry (float.Parse(MarUserDistanceAccumulated.ToString()))
-            {
-                Color = SKColor.Parse("#FFFFFF"),
-                Label = "March",
-                ValueLabel = MarUserDistanceAccumulated.ToString("0.00")
-            },
-            new Entry (float.Parse(AprUserDistanceAccumulated.ToString()))
-            {
-                Color = SKColor.Parse("#FFFFFF"),
-                Label = "April",
-                ValueLabel = AprUserDistanceAccumulated.ToString("0.00")
-            },
-             new Entry (float.Parse(MayUserDistanceAccumulated.ToString()))
-            {
-                Color = SKColor.Parse("#FFFFFF"),
-                Label = "May",
-                ValueLabel = MayUserDistanceAccumulated.ToString("0.00")
-            },
-            new Entry (float.Parse(JunUserDistanceAccumulated.ToString()))
-            {
-                Color = SKColor.Parse("#FFFFFF"),
-                Label = "June",
-                ValueLabel = JunUserDistanceAccumulated.ToString("0.00")
-            },
-            new Entry (float.Parse(JulUserDistanceAccumulated.ToString()))
-            {
-                Color = SKColor.Parse("#FFFFFF"),
-                Label = "July",
-                ValueLabel = JulUserDistanceAccumulated.ToString("0.00")
-            },
-            new Entry (float.Parse(AugUserDistanceAccumulated.ToString()))
-            {
-                Color = SKColor.Parse("#FFFFFF"),
-                Label = "August",
-                ValueLabel = AugUserDistanceAccumulated.ToString("0.00")
+                new Entry (float.Parse(totalDistanceJan.ToString()))
+                {
+                    Color = SKColor.Parse("#FFFFFF"),
+                    Label = "January",
+                    ValueLabel = totalDistanceJan.ToString("0.00")
+                },
+                new Entry (float.Parse(FebUserDistanceAccumulated.ToString()))
+                {
+                    Color = SKColor.Parse("#FFFFFF"),
+                    Label = "February",
+                    ValueLabel = FebUserDistanceAccumulated.ToString("0.00")
+                },
+                new Entry (float.Parse(MarUserDistanceAccumulated.ToString()))
+                {
+                    Color = SKColor.Parse("#FFFFFF"),
+                    Label = "March",
+                    ValueLabel = MarUserDistanceAccumulated.ToString("0.00")
+                },
+                new Entry (float.Parse(AprUserDistanceAccumulated.ToString()))
+                {
+                    Color = SKColor.Parse("#FFFFFF"),
+                    Label = "April",
+                    ValueLabel = AprUserDistanceAccumulated.ToString("0.00")
+                },
+                 new Entry (float.Parse(MayUserDistanceAccumulated.ToString()))
+                {
+                    Color = SKColor.Parse("#FFFFFF"),
+                    Label = "May",
+                    ValueLabel = MayUserDistanceAccumulated.ToString("0.00")
+                },
+                new Entry (float.Parse(JunUserDistanceAccumulated.ToString()))
+                {
+                    Color = SKColor.Parse("#FFFFFF"),
+                    Label = "June",
+                    ValueLabel = JunUserDistanceAccumulated.ToString("0.00")
+                },
+                new Entry (float.Parse(JulUserDistanceAccumulated.ToString()))
+                {
+                    Color = SKColor.Parse("#FFFFFF"),
+                    Label = "July",
+                    ValueLabel = JulUserDistanceAccumulated.ToString("0.00")
+                },
+                new Entry (float.Parse(AugUserDistanceAccumulated.ToString()))
+                {
+                    Color = SKColor.Parse("#FFFFFF"),
+                    Label = "August",
+                    ValueLabel = AugUserDistanceAccumulated.ToString("0.00")
 
-            },
-            new Entry (float.Parse(SepUserDistanceAccumulated.ToString()))
-            {
-                Color = SKColor.Parse("#FFFFFF"),
-                Label = "September",
-                ValueLabel = SepUserDistanceAccumulated.ToString("0.00")
-            },
-             new Entry (float.Parse(OctUserDistanceAccumulated.ToString()))
-            {
-                Color = SKColor.Parse("#FFFFFF"),
-                Label = "October",
-                ValueLabel = OctUserDistanceAccumulated.ToString("0.00")
-            },
-             new Entry (float.Parse(NovUserDistanceAccumulated.ToString()))
-            {
-                Color = SKColor.Parse("#FFFFFF"),
-                Label = "November",
-                ValueLabel = NovUserDistanceAccumulated.ToString("0.00")
-            },
-             new Entry (float.Parse(DecUserDistanceAccumulated.ToString()))
-            {
-                Color = SKColor.Parse("#FFFFFF"),
-                Label = "December",
-                ValueLabel = DecUserDistanceAccumulated.ToString("0.00")
-            },
+                },
+                new Entry (float.Parse(SepUserDistanceAccumulated.ToString()))
+                {
+                    Color = SKColor.Parse("#FFFFFF"),
+                    Label = "September",
+                    ValueLabel = SepUserDistanceAccumulated.ToString("0.00")
+                },
+                 new Entry (float.Parse(OctUserDistanceAccumulated.ToString()))
+                {
+                    Color = SKColor.Parse("#FFFFFF"),
+                    Label = "October",
+                    ValueLabel = OctUserDistanceAccumulated.ToString("0.00")
+                },
+                 new Entry (float.Parse(NovUserDistanceAccumulated.ToString()))
+                {
+                    Color = SKColor.Parse("#FFFFFF"),
+                    Label = "November",
+                    ValueLabel = NovUserDistanceAccumulated.ToString("0.00")
+                },
+                 new Entry (float.Parse(DecUserDistanceAccumulated.ToString()))
+                {
+                    Color = SKColor.Parse("#FFFFFF"),
+                    Label = "December",
+                    ValueLabel = DecUserDistanceAccumulated.ToString("0.00")
+                },
         };
             Chart1.Chart = new LineChart() { Entries = entriesAccumulated, BackgroundColor = SKColors.Transparent, LineSize = 20, PointSize = 20, LabelOrientation = Orientation.Horizontal, IsAnimated = true };
         }
