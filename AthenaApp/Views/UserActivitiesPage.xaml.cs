@@ -5,9 +5,9 @@ using Xamarin.Forms.Xaml;
 namespace AthenaApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ActivitiesPage : ContentPage
+    public partial class UserActivitiesPage : ContentPage
     {
-        public ActivitiesPage()
+        public UserActivitiesPage()
         {
             InitializeComponent();
         }
