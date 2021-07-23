@@ -23,20 +23,27 @@ namespace AthenaWebApp.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            /*
+            var news = _context.News.SingleAsync();
+            return View(news);
+            */
+            
             return View();
+            
         }
 
         [AllowAnonymous]
-        public  IActionResult Dashboard(Context context)
+        public  IActionResult Dashboard()
         {
-           
-            return View( _context.UserActivity
-                .Include(b => b.Activity)
-                .Include(b => b.Company)
-                .Include(b => b.UserExtension)
-                .ToListAsync());
-            
-        
+            /*
+             return View( _context.UserActivity
+                 .Include(b => b.Activity)
+                 .Include(b => b.Company)
+                 .Include(b => b.UserExtension)
+                 .ToListAsync());
+             */
+
+            return View();
         }
 
 

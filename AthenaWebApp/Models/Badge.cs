@@ -20,7 +20,7 @@ namespace AthenaWebApp.Models
         [Display(Name = "General Badge?")]
         public bool GeneralBadge { get; set; }
 
-        [Display(Name = "Meters for Badge")]
+        [Display(Name = "Km for Badge")]
         public double DistanceForBadge { get; set; }
 
         [Display(Name = "Picture")]
