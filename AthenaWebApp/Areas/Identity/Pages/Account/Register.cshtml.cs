@@ -13,6 +13,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 //using AthenaWebApp.Repositories.PatternInterfaces;
 
@@ -137,10 +138,12 @@ namespace AthenaWebApp.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-
+                    Regex regex = new Regex("LINK");
+                    string html = new System.IO.StreamReader(@"wwwroot/html/confirmation_email.html").ReadToEnd();
+                    html = regex.Replace(html, callbackUrl);
                     // ToDo: Implement "E-Mail-Provider-Send-Mail-Logic"
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        html);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

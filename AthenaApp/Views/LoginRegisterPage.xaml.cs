@@ -91,13 +91,14 @@ namespace AthenaApp.Views
                     ProfilePicture = data.ProfilePicture
                 };
 
-         /*       // Here User is saved to the Apllication
-                XamarinManager manager = new XamarinManager();
-                manager.Set_post_data(jsonString);
-                String json = manager.Get_post_data();
-                Console.WriteLine("Hier ist das json von user:" + json);
-         */
-               
+
+                /*       // Here User is saved to the Apllication
+                       XamarinManager manager = new XamarinManager();
+                       manager.Set_post_data(jsonString);
+                       String json = manager.Get_post_data();
+                       Console.WriteLine("Hier ist das json von user:" + json);
+                */
+
                 // ToDo: Check if user is blocked
                 await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
             }
@@ -153,6 +154,7 @@ namespace AthenaApp.Views
                     //                    var validatedUser = JsonConvert.DeserializeObject(apiResponse);
 
                     await DisplayAlert("Check your Mail's", "Welcome! Just confirm your E-Mail to run for the Athenaton", "Great!");
+                    
 
                     // Lade-PopUp, dass auf Bestätigung wartet, um dann auf nächste Page weiterzuverlinken
                     await Shell.Current.GoToAsync($"//{nameof(LoginRegisterPage)}");

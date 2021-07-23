@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Index</h1
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -25,26 +25,29 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TemplateTitle)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TemplateTitle)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.UserExtension.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateTimeCreated)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TemplateId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TemplateId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TemplateId">Delete</a> |
-                <a asp-action="Send" asp-route-id="@item.TemplateId" asp-route-userId="@item.UserId">Send</a>
-
-            </td>
-        </tr>
-}
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserExtension.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTimeCreated)
+                </td>
+                <td>
+                    <form asp-action="Send" asp-route-id="@item.TemplateId" asp-route-userId="@item.UserId">
+                        <a asp-action="Edit" asp-route-id="@item.TemplateId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.TemplateId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.TemplateId">Delete</a> |
+                        <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Are you sure to send the Template to every User?')">Send</button>
+                    </form>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

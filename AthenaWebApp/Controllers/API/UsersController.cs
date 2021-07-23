@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AthenaWebApp.Controllers.API
@@ -138,14 +139,17 @@ namespace AthenaWebApp.Controllers.API
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 var callbackUrl = Url.Page(
-                    "/Account/ConfirmEmail",
+                    "/Users/ConfirmEmail",
                     pageHandler: null,
                     values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                     protocol: Request.Scheme);
 
+                Regex regex = new Regex("LINK");
+                string html = new System.IO.StreamReader(@"wwwroot/html/confirmation_email.html").ReadToEnd();
+                html = regex.Replace(html, callbackUrl);
                 // ToDo: Email confirmation load template
                 await _emailSender.SendEmailAsync(user.Email, "Confirm your registration",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(returnUrl)}'>clicking here</a>.");
+                html);
 
                 // ToDo: return Token
                 // ToDo: Send E-Mail-Verification + automaticly login (maybe AppLoginRequest method?)
@@ -159,6 +163,24 @@ namespace AthenaWebApp.Controllers.API
             }
         }
 
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        [Route("ConfirmEmail")]
+        public void ConfirmEmail(string userid, string token)
+        {
+            UserExtension user = _userManager.FindByIdAsync(userid).Result;
+            IdentityResult result = _userManager.
+                        ConfirmEmailAsync(user, token).Result;
+      /*      if (result.Succeeded)
+            
+                return View("Success");
+            }
+            else
+            {
+                ViewBag.Message = "Error while confirming your email!";
+                return View("Error");
+            }  */
+        }
 
         // Post: api/Users/AppUpdateAccountRequest/
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -219,4 +241,6 @@ namespace AthenaWebApp.Controllers.API
             return _context.Users.Any(e => e.UserName == UserName);
         }
     }
+
+
 }
