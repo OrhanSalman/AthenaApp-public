@@ -54,7 +54,7 @@ namespace AthenaWebApp.Controllers.BadgeDistributor
         // GET: api/GetMyBadges
         [HttpGet]
         [Route("GetMyNewBadge")]
-        public async Task<ActionResult<byte[]>> GetMyNewBadge(string id)
+        public async Task<IReadOnlyList<Byte[]>> GetMyNewBadge(string id)
         {
             /*
             var queryToGetImage = from b in _context.Badge
@@ -68,33 +68,36 @@ namespace AthenaWebApp.Controllers.BadgeDistributor
                 .Include(t => t.Badge)
                 .Where(a => a.UserId == id)
                 .Select(t => t.Badge.BadgeImage)
-                .FirstOrDefaultAsync();
+                .FirstOrDefault();
 
-            return await badgeImage;
+            List<Byte[]> bgs = new List<byte[]>();
 
+            return (IReadOnlyList<byte[]>)Response.Body.WriteAsync(badgeImage, 0, badgeImage.Length);
         }
 
 
         [HttpPost]
         [Route("PostUserBadge")]
-        public async void PostUserBadge(string userId, List<string> badgeId)
+        public async Task PostUserBadge(string userId, string badgeId)
         {
             // Only started, if UserActivitiesController (Api) says Yes, there is a new badge (line 116)
-            for (int i = 0; i <= badgeId.Count - 1; i++)
-            {
+//            for (int i = 0; i <= badgeId.Count - 1; i++)
+//            {
                 var userBadge = new UserBadge
                 {
-                    BadgeId = badgeId[i],
+//                    BadgeId = badgeId[i],
+                    BadgeId = badgeId,
                     UserId = userId
                 };
                 // Check if the Badge already exists
                 // Nach jeder Aktivität Get_Activity und Get_UserActivity_Count. IF Staffelung true, diese Methode hier aufrufen
                 _context.UserBadge.Add(userBadge);
+                await GetMyNewBadge(userId);    // No await needed here
+
                 await _context.SaveChangesAsync();
 
                 CreatedAtAction("GetMyBadges", new { id = userBadge.Id }, userBadge);
-                GetMyNewBadge(userId);    // No await needed here
-            }
+//            }
 
         }
 

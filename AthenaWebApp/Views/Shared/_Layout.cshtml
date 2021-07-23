@@ -29,7 +29,6 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -37,29 +36,50 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdPage">AdPage</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdPage">App</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Companies" asp-action="Index">Companies</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Role Management</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Activities" asp-action="Index">Activities</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="UserActivities" asp-action="Index">UserActivities</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Templates" asp-action="Index">Templates</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Badges" asp-action="Index">Badges</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Companies" asp-action="Index">Companies</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Activities" asp-action="Index">Activities</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="UserActivities" asp-action="Index">UserActivities</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Templates" asp-action="Index">Templates</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Badges" asp-action="Index">Badges</a>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <div>

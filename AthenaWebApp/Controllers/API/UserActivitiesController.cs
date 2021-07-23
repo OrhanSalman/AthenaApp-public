@@ -51,7 +51,7 @@ namespace AthenaWebApp.Controllers.API
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [Route("PostUserActivity")]
-        public async void PostUserActivity([FromBody] UserActivity userActivity)
+        public async Task PostUserActivity([FromBody] UserActivity userActivity)
         {
             _context.UserActivity.Add(userActivity);
             await _context.SaveChangesAsync();
@@ -81,40 +81,47 @@ namespace AthenaWebApp.Controllers.API
                 .Where(u => u.GeneralBadge == true)
                 .ToListAsync();
 
-            string badgeFor = "";
             List<string> newBadge = new List<string>();
             UserBadgesController userBadgesController = new UserBadgesController(_context);
 
             // Check if User gets a Badge (based on an Activity)
-            foreach (var distance in badgeIntervalls)
+            if(badgeIntervalls.Any() || generalBadgeIntervalls.Any())
             {
-                if (sumDistanceForActivity >= distance.DistanceForBadge)
+                foreach (var distance in badgeIntervalls)
                 {
-                    badgeFor = userActivity.UserId.ToString();
-                    newBadge.Add(distance.Id.ToString());
+                    if (sumDistanceForActivity >= distance.DistanceForBadge)
+                    {
+                        //                    badgeFor = userActivity.UserId.ToString();
+                        newBadge.Add(distance.Id.ToString());
+                    }
                 }
-            }
-            // Check if User gets a general Badge
-            foreach (var distance in generalBadgeIntervalls)
-            {
-                if (sumOfAllDistances >= distance.DistanceForBadge)
+                // Check if User gets a general Badge
+                foreach (var distance in generalBadgeIntervalls)
                 {
-                    badgeFor = userActivity.UserId.ToString();
-                    newBadge.Add(distance.Id.ToString());
+                    if (sumOfAllDistances >= distance.DistanceForBadge)
+                    {
+                        //                    badgeFor = userActivity.UserId.ToString();
+                        newBadge.Add(distance.Id.ToString());
+                    }
+                }
+
+                // Exclude already forgiven Badges for this User
+                var forgivenBadges = _context.UserBadge.Where(i => i.UserId == userId).ToList();
+                foreach (var badge in forgivenBadges)
+                {
+                    newBadge.Remove(badge.ToString());
+                }
+                if (newBadge.Any())
+                {
+                    // Send data to Distribution-Controller
+                    foreach(var badge in newBadge)
+                    {
+                        userBadgesController.PostUserBadge(userId, badge);
+                    }
                 }
             }
 
-            // Exclude already forgiven Badges for this User
-            var forgivenBadges = _context.UserBadge.Where(i => i.UserId == userId).ToList();
-            foreach(var badge in forgivenBadges)
-            {
-                newBadge.Remove(badge.ToString());
-            }
-            if(newBadge.Any())
-            {
-                // Send data to Distribution-Controller
-                userBadgesController.PostUserBadge(badgeFor, newBadge);
-            }
+
             // No return! The return has to be in userBadgesController.GetMyBadges (from PostUserBadge startetd)
 //            return CreatedAtAction("GetUserActivity", new { id = userActivity.Id }, userActivity);
         }
